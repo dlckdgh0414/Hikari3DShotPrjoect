@@ -29,7 +29,7 @@ public class FruitsSO : ScriptableObject
 
     public string Value;
 
-    public FruitsSO(FruitsType thisType = FruitsType.HP,string value = "")
+    public void Init(FruitsType thisType = FruitsType.HP,string value = "")
     {
         soType = thisType;
         Value = value;
@@ -53,7 +53,7 @@ public class FruitsSO : ScriptableObject
 
             if (Value == string.Empty)
             {
-                Debug.Log("³Ê °ª ¾È³ÖÀ½");
+                Debug.Log("ï¿½ï¿½ ï¿½ï¿½ ï¿½È³ï¿½ï¿½ï¿½");
             }
             else if(Value != string.Empty)
             {
@@ -65,7 +65,7 @@ public class FruitsSO : ScriptableObject
             _statType = statType.Skill;
             if (Value == string.Empty)
             {
-                Debug.Log("³Ê °ª ¾È³ÖÀ½");
+                Debug.Log("ï¿½ï¿½ ï¿½ï¿½ ï¿½È³ï¿½ï¿½ï¿½");
             }
             else
             {

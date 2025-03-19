@@ -1,15 +1,15 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <Style src="project://database/Assets/Member/Kmin/Editor/SkillTreeEditor.uss?fileID=7433441132597879392&amp;guid=40b8215d881063f4aa0bd7623d6c538b&amp;type=3#SkillTreeEditor" />
-    <engine:VisualElement name="treeBackground" style="flex-grow: 1; height: 400px;">
-        <engine:VisualElement name="Background" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.39); margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;" />
+    <engine:VisualElement name="treeBackground" style="flex-grow: 1; height: 400px; flex-wrap: nowrap;">
+        <engine:VisualElement name="Background" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.39); margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; flex-wrap: wrap; flex-direction: row; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;" />
     </engine:VisualElement>
     <engine:VisualElement name="optionBackground" style="flex-grow: 1; height: 100px;">
         <engine:Button text="Create&#10;" name="CreateButton" style="flex-direction: column; justify-content: flex-start;" />
     </engine:VisualElement>
     <engine:Label text="SO Info" name="header" />
     <engine:VisualElement name="SOBackground" style="flex-grow: 1; height: 150px;">
-        <engine:DropdownField label="Type" name="TypeDropdown" />
-        <engine:TextField label="IntValue" placeholder-text="filler text" name="IntTextField" />
-        <engine:TextField label="FloatValue" placeholder-text="filler text" name="FloatTextField" />
+        <engine:DropdownField label="Type" name="TypeDropdown" style="width: 400px;" />
+        <engine:TextField label="IntValue" placeholder-text="filler text" name="IntTextField" style="width: 400px;" />
+        <engine:TextField label="FloatValue" placeholder-text="filler text" name="FloatTextField" style="width: 400px;" />
     </engine:VisualElement>
 </engine:UXML>

@@ -1,21 +1,24 @@
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.UIElements;
-using Button = UnityEngine.UIElements.Button;
 
 public class SkillTreeEditor : EditorWindow
 {
-    private readonly int Height = 12;
-    private readonly int Width = 15;   
+    private const int Height = 6;
+    private const int Width = 11;
+    
+    private readonly string _fruitsBtnName = "fruitsButton";
+    
+    private FruitsButtonData[,] fruitsButtonDatas = new FruitsButtonData[Height, Width];
 
+    [SerializeField] private VisualTreeAsset _treeAsset;
     private VisualElement _background;
     private Button _createBtn;
     private TextField _intField; 
     private TextField _floatField; 
     private DropdownField _skillTypeField;
     
-    [MenuItem("Window/UI Toolkit/SkillTreeEditor")]
+    [MenuItem("Window/SkillTreeEditor")]
     public static void ShowExample()
     {
         SkillTreeEditor wnd = GetWindow<SkillTreeEditor>();
@@ -25,7 +28,7 @@ public class SkillTreeEditor : EditorWindow
     public void CreateGUI()
     {
         VisualElement root = rootVisualElement;
-        VisualTreeAsset asset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/SkillTreeEditor.uxml");
+        VisualTreeAsset asset = _treeAsset;
         VisualElement tree = asset.Instantiate();
         root.Add(tree);
 
@@ -42,16 +45,23 @@ public class SkillTreeEditor : EditorWindow
             for (int x = 0; x < Width; x++)
             {
                 Button button = new Button();
-                _datas[y, x] = new SeatData(false, button);
-                _datas[y, x].Position = new Vector2(x, y);
-                
-                button.name = "seat";
-                button.userData = _datas[y, x];
-                button.clicked += () => OnSeatClicked(button);
-                button.RegisterCallback<MouseDownEvent>((e) => OnSeatClicked(button, false));
-                
+                FruitsButtonData fruitsButtonData = new FruitsButtonData(button);
+                fruitsButtonDatas[y, x] = fruitsButtonData;
+
+                button.AddToClassList(_fruitsBtnName);
+                button.clicked += () => OnFruitsSelect(fruitsButtonData);
                 _background.Add(button);
             }
+        }
+    }
+
+    private void OnFruitsSelect(FruitsButtonData data)
+    {
+        if (data.FruitsButtonSO == null)
+        {
+            FruitsSO newSO = ScriptableObject.CreateInstance<FruitsSO>();
+            data.FruitsButtonSO = newSO;
+            data.FruitsButtonSO.Init(FruitsType.Skill, "10");
         }
     }
 }
