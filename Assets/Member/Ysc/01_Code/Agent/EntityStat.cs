@@ -4,18 +4,18 @@ using UnityEngine;
 
 namespace Member.Ysc._01_Code.Agent
 {
-    public class EntityStat : MonoBehaviour
+    public class EntityStat : MonoBehaviour, IEntityComponent
     {
         [SerializeField] private StatOverride[] statOverrideArray;
         private StatSO[] _stat;
         
-        // public Entity Owner { get; private set; }
+        public Entity Owner { get; private set; }
 
-        // public void Initialize(Entity entity)
-        // {
-        //     Owner = entity;
-        //     _stat = statOverrideArray.Select(stat => stat.CreateStat()).ToArray();
-        // }
+        public void Initialize(Entity entity)
+        {
+            Owner = entity;
+            _stat = statOverrideArray.Select(stat => stat.CreateStat()).ToArray();
+        }
 
         public StatSO GetStat(StatSO targetStat)
         {
