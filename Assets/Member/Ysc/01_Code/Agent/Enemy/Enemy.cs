@@ -16,7 +16,7 @@ namespace Member.Ysc._01_Code.Agent.Enemy
 
         protected override void AfterInitialize()
         {
-            
+            Debug.Log("에너미 후 초기화");
             base.AfterInitialize();
         }
     }
