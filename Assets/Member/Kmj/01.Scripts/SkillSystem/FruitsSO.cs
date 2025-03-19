@@ -29,6 +29,12 @@ public class FruitsSO : ScriptableObject
 
     public string Value;
 
+    public FruitsSO(FruitsType thisType = FruitsType.HP,string value = "")
+    {
+        soType = thisType;
+        Value = value;
+    }
+
     private void OnEnable()
     {
     }
@@ -41,21 +47,25 @@ public class FruitsSO : ScriptableObject
 
     private void SeTValue()
     {
-        if(soType == FruitsType.HP || soType == FruitsType.AttackDamage || soType == FruitsType.Speed)
+        if (soType == FruitsType.HP || soType == FruitsType.AttackDamage || soType == FruitsType.Speed)
         {
             _statType = statType.Float;
 
-            if (floatValue < 0.01)
-                return;
-            else
+            if (Value == string.Empty)
+            {
+                Debug.Log("너 값 안넣음");
+            }
+            else if(Value != string.Empty)
+            {
                 floatValue = float.Parse(Value);
+            }
         }
-        else if(soType == FruitsType.Skill)
+        else if (soType == FruitsType.Skill)
         {
             _statType = statType.Skill;
-            if (Value.Length <= 4)
+            if (Value == string.Empty)
             {
-                return;
+                Debug.Log("너 값 안넣음");
             }
             else
             {
