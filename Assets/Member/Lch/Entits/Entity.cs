@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public abstract class Entity : MonoBehaviour
 {
 
-    public delegate void OnDamageHandler(float damage, Vector2 direction, bool isPowerAttack, Entity dealer);
+    public delegate void OnDamageHandler(float damage, Vector2 direction, Entity dealer);
     public event OnDamageHandler OnDamage;
 
     public UnityEvent OnHit;
@@ -68,7 +68,7 @@ public abstract class Entity : MonoBehaviour
         return default(T);
     }
 
-    public void ApplyDamage(float damage, Vector2 direction, Vector2 knockBackPower, bool isPowerAttack, Entity dealer)
-        => OnDamage?.Invoke(damage, direction, knockBackPower, isPowerAttack, dealer);
+    public void ApplyDamage(float damage, Vector2 direction, Entity dealer)
+        => OnDamage?.Invoke(damage, direction, dealer);
 
 }
