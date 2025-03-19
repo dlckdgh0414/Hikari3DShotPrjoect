@@ -6,6 +6,8 @@ namespace Member.Ysc._01_Code.Agent.Enemy.BT
     public class BTEnemy : Enemy
     {
         protected BehaviorGraphAgent btAgent;
+
+        [field: SerializeField] public EntityFinderSO PlayerFinder { get; protected set; }
         
         protected override void AfterInitialize()
         {
