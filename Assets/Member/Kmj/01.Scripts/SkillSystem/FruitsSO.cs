@@ -45,7 +45,7 @@ public class FruitsSO : ScriptableObject
         {
             _statType = statType.Float;
 
-            if (floatValue > 0.01)
+            if (floatValue < 0.01)
                 return;
             else
                 floatValue = float.Parse(Value);
