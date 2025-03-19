@@ -1,26 +1,21 @@
-using System;
 using UnityEngine;
 
 public class SkillTreeOverride : MonoBehaviour
 {
     [SerializeField] private FruitsSO _fruits;
-
-    private void Awake()
-    {
-    }
     public void SetOverrideFruits()
     {
         if(_fruits.soType == FruitsType.HP)
         {
-            //_player.HpStat = type.floatValue;
+            //_player.HpStat = _fruits.floatValue;
         }
         else if (_fruits.soType == FruitsType.AttackDamage)
         {
-            //_player.AttackDamage = type.floatValue;
+            //_player.AttackDamage = _fruits.floatValue;
         }
         else if(_fruits.soType == FruitsType.Speed)
         {
-            //_player.speed = type.floatValue;
+            //_player.speed = _fruits.floatValue;
         }
         else if(_fruits.soType == FruitsType.Skill)
         {
