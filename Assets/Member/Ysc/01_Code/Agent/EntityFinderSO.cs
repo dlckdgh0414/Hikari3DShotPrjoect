@@ -3,14 +3,14 @@
 namespace Member.Ysc._01_Code.Agent
 {
     [CreateAssetMenu(fileName = "EntityFinder", menuName = "SO/Entity/Finder", order = 0)]
-    public class TestPlayerFinderSO : ScriptableObject
+    public class EntityFinderSO : ScriptableObject
     {
         [SerializeField] private string targetTag;
-        public TestPlayer target;
+        public Entity target;
 
-        public void SetPlayer(TestPlayer player)
+        public void SetPlayer(Entity entity)
         {
-            target = player;
+            target = entity;
         }
     }
 }
