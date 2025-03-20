@@ -5,21 +5,21 @@ public class SkillTreeOverride : MonoBehaviour
     [SerializeField] private FruitsSO _fruits;
     public void SetOverrideFruits()
     {
-        if(_fruits.soType == FruitsType.HP)
+        if(_fruits.fruitsType == FruitsType.HP)
         {
             //_player.HpStat = _fruits.floatValue;
         }
-        else if (_fruits.soType == FruitsType.AttackDamage)
+        else if (_fruits.fruitsType == FruitsType.AttackDamage)
         {
             //_player.AttackDamage = _fruits.floatValue;
         }
-        else if(_fruits.soType == FruitsType.Speed)
+        else if(_fruits.fruitsType == FruitsType.Speed)
         {
             //_player.speed = _fruits.floatValue;
         }
-        else if(_fruits.soType == FruitsType.Skill)
+        else if(_fruits.fruitsType == FruitsType.Skill)
         {
-            //½ºÅ³À» ºÒ·¯¿Í¼­ »ç¿ëÇÒ ¼ö ÀÖ°Ú²û ÇÑ´Ù.
+            //ï¿½ï¿½Å³ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö°Ú²ï¿½ ï¿½Ñ´ï¿½.
         }
         Debug.Log($"{_fruits.name}");
     }

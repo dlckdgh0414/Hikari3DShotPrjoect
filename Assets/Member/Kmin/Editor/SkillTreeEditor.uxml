@@ -8,8 +8,8 @@
     </engine:VisualElement>
     <engine:Label text="SO Info" name="header" />
     <engine:VisualElement name="SOBackground" style="flex-grow: 1; height: 150px;">
-        <engine:DropdownField label="Type" name="TypeDropdown" style="width: 400px;" />
-        <engine:TextField label="IntValue" placeholder-text="filler text" name="IntTextField" style="width: 400px;" />
+        <engine:DropdownField label="Type" name="TypeDropdown" binding-path="fruitsType" style="width: 400px;" />
+        <engine:TextField label="IntValue" placeholder-text="filler text" name="IntTextField" style="width: 400px; justify-content: center;" />
         <engine:TextField label="FloatValue" placeholder-text="filler text" name="FloatTextField" style="width: 400px;" />
     </engine:VisualElement>
 </engine:UXML>

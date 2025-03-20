@@ -1,6 +1,10 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Reflection;
+using System.Collections.Generic;
+using System;
+using System.Linq;
 
 public class SkillTreeEditor : EditorWindow
 {
@@ -60,8 +64,16 @@ public class SkillTreeEditor : EditorWindow
         if (data.FruitsButtonSO == null)
         {
             FruitsSO newSO = ScriptableObject.CreateInstance<FruitsSO>();
+            _skillTypeField.choices.Clear();
+            
+            Assembly fruitsAssembly = Assembly.GetExecutingAssembly();
+            List<Type> fruitsTypes = fruitsAssembly.GetTypes()
+                .Where(type => type.IsSubclassOf(typeof(FruitsSO)))
+                .ToList();
+            
+            fruitsTypes.ForEach(type => _skillTypeField.choices.Add(type.FullName));
+
             data.FruitsButtonSO = newSO;
-            data.FruitsButtonSO.Init(FruitsType.Skill, "10");
         }
     }
 }

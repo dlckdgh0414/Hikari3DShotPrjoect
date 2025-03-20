@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 public enum FruitsType
@@ -19,7 +20,7 @@ public class FruitsSO : ScriptableObject
 
     [SerializeField] private string FruitsName;
 
-    public FruitsType soType;
+    public FruitsType fruitsType;
     private statType _statType;
 
     public int intValue { get; set; }
@@ -29,10 +30,12 @@ public class FruitsSO : ScriptableObject
 
     public string Value;
 
-    public void Init(FruitsType thisType = FruitsType.HP,string value = "")
+    public void Init(FruitsType thisType = FruitsType.HP, int intVal = 0, float floatVal = 0f, string stringVal = "")
     {
-        soType = thisType;
-        Value = value;
+        fruitsType = thisType;
+        intValue = intVal;
+        floatValue = floatVal;
+        Value = stringVal;
     }
 
     private void OnEnable()
@@ -47,7 +50,7 @@ public class FruitsSO : ScriptableObject
 
     private void SeTValue()
     {
-        if (soType == FruitsType.HP || soType == FruitsType.AttackDamage || soType == FruitsType.Speed)
+        if (fruitsType == FruitsType.HP || fruitsType == FruitsType.AttackDamage || fruitsType == FruitsType.Speed)
         {
             _statType = statType.Float;
 
@@ -60,7 +63,7 @@ public class FruitsSO : ScriptableObject
                 floatValue = float.Parse(Value);
             }
         }
-        else if (soType == FruitsType.Skill)
+        else if (fruitsType == FruitsType.Skill)
         {
             _statType = statType.Skill;
             if (Value == string.Empty)
