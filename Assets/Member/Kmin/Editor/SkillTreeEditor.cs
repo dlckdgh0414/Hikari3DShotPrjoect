@@ -1,9 +1,8 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using System.Reflection;
 using System.Collections.Generic;
-using System;
 using System.Linq;
 
 public class SkillTreeEditor : EditorWindow
@@ -65,15 +64,14 @@ public class SkillTreeEditor : EditorWindow
         {
             FruitsSO newSO = ScriptableObject.CreateInstance<FruitsSO>();
             _skillTypeField.choices.Clear();
-            
-            Assembly fruitsAssembly = Assembly.GetExecutingAssembly();
-            List<Type> fruitsTypes = fruitsAssembly.GetTypes()
-                .Where(type => type.IsSubclassOf(typeof(FruitsSO)))
-                .ToList();
-            
-            fruitsTypes.ForEach(type => _skillTypeField.choices.Add(type.FullName));
-
             data.FruitsButtonSO = newSO;
+        }
+        
+        _skillTypeField.choices.Clear();
+        
+        foreach (FruitsType value in Enum.GetValues(typeof(FruitsType)))
+        {
+            _skillTypeField.choices.Add(value.ToString());
         }
     }
 }

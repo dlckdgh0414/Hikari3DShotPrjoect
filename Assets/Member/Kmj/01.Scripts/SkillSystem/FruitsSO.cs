@@ -27,28 +27,15 @@ public class FruitsSO : ScriptableObject
     public float floatValue { get; set; }
     public Skill skillValue { get; set; }
 
-
     public string Value;
-
-    public void Init(FruitsType thisType = FruitsType.HP, int intVal = 0, float floatVal = 0f, string stringVal = "")
-    {
-        fruitsType = thisType;
-        intValue = intVal;
-        floatValue = floatVal;
-        Value = stringVal;
-    }
-
-    private void OnEnable()
-    {
-    }
 
     private void OnValidate()
     {
         FruitsName = this.name;
-        SeTValue();
+        SetValue();
     }
 
-    private void SeTValue()
+    private void SetValue()
     {
         if (fruitsType == FruitsType.HP || fruitsType == FruitsType.AttackDamage || fruitsType == FruitsType.Speed)
         {
