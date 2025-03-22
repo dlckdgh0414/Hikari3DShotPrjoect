@@ -4,5 +4,5 @@ using UnityEngine;
     [BlackboardEnum]
     public enum BTEnemyState
     {
-       SPAWN, ATTACK, HIT, DEATH
+       SPAWN, PATOL ,ATTACK, HIT, DEATH
     }
