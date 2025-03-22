@@ -1,9 +1,6 @@
-using TMPro;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEngine.GraphicsBuffer;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovement : MonoBehaviour,IEntityComponent
 {
     [SerializeField] private float speed = 8f;
     [SerializeField] private float playerDistance = 20f;
@@ -82,5 +79,10 @@ public class EnemyMovement : MonoBehaviour
             isArrive = true;
         }
 
+    }
+
+    public void Initialize(Entity entity)
+    {
+        
     }
 }

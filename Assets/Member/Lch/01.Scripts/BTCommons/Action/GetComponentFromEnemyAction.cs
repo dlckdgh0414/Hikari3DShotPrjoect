@@ -15,7 +15,8 @@ public partial class GetComponentFromEnemyAction : Action
     protected override Status OnStart()
     {
         BTEnemy enemy = BtEnemy.Value;
-        SetVariableToBT(enemy, "Mover", enemy.GetComponentInChildren<EnemyMovement>());
+        SetVariableToBT(enemy, "Mover", enemy.GetCompo<EnemyMovement>());
+        SetVariableToBT(enemy, "EnemyAttack", enemy.GetComponentInChildren<Attack>());
 
         return Status.Success;
     }
