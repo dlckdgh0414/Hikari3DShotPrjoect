@@ -1,0 +1,64 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+[CreateAssetMenu(menuName = "SO/InputReader")]
+public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
+{
+    public Action<bool> OnAttackEvent;
+    public Action OnStartChargeAttackEvent;
+    public Action OnEndChargeAttackEvent;
+    public Action<int> OnWingEvent;
+    public Vector2 InputDirection { get; private set; }
+    private InputControlls _controlls;
+
+    private void OnEnable()
+    {
+        if (_controlls == null)
+        {
+            _controlls = new();
+            _controlls.PlayerMap.SetCallbacks(this);
+        }
+        _controlls.PlayerMap.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _controlls.PlayerMap.Disable();
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.started)
+            OnAttackEvent?.Invoke(true);
+        if (context.canceled)
+            OnAttackEvent?.Invoke(false);
+    }
+
+    public void OnLeftWing(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnWingEvent?.Invoke(-1);
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        InputDirection = context.ReadValue<Vector2>();
+    }
+
+    public void OnRightWing(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnWingEvent?.Invoke(1);
+    }
+
+    public void OnChargeAttack(InputAction.CallbackContext context)
+    {
+        if (context.started)
+            OnStartChargeAttackEvent?.Invoke();
+        if (context.canceled)
+            OnEndChargeAttackEvent?.Invoke();
+    }
+}
