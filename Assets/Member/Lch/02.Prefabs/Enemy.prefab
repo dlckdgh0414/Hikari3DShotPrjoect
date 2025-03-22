@@ -46,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   minDistance: 3
-  rb: {fileID: 0}
   cam: {fileID: 0}
+  rb: {fileID: 6776544430331641507}
 --- !u!1 &6785985155981875351
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 8999362906901587695}
   - component: {fileID: 3308374702262520649}
   - component: {fileID: 8299065827990993155}
+  - component: {fileID: 6776544430331641507}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -130,6 +131,33 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 6785985155981875351}
+--- !u!54 &6776544430331641507
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6785985155981875351}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8325209121560126546
 GameObject:
   m_ObjectHideFlags: 0

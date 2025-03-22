@@ -4,6 +4,7 @@ using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
 using Unity.Properties;
+using Unity.VisualScripting;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "GetComponentFromEnemy", story: "Get components from [btEnemy]", category: "Action", id: "fc71b4eb657e03f9c590f6d37a925290")]

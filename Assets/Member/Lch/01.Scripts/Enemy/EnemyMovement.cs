@@ -6,46 +6,81 @@ using static UnityEngine.GraphicsBuffer;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private float speed = 8f;
-    [SerializeField] private float minDistance = 3f;
-    [SerializeField] private Camera cam;
+    [SerializeField] private float playerDistance = 20f;
+    [SerializeField] private Rigidbody rb;
+    public bool isMove = true;
+    public bool isArrive = false;
 
-    public Vector3 GetMovePos()
+    public Vector2 GetMovePos()
     {
-        cam = Camera.main;
-        float x = Random.Range(0.2f, 0.8f);
-        float y = Random.Range(0.2f, 0.8f);
-        float z = cam.nearClipPlane + 10f;
+        Camera cam = Camera.main;
 
-        Vector3 viewPos = new Vector3(x, y, z);
-        return cam.ViewportToWorldPoint(viewPos);
+        Vector3 spawnPos = cam.transform.position + cam.transform.forward * 20f;
+
+        spawnPos += new Vector3(Random.Range(-10f, 10f), Random.Range(-5f, 5f), 0);
+
+        return spawnPos;
     }
     public void Move(Transform player,Vector3 targetPosition)
     {
 
-        Vector3 directionToTarget = (targetPosition - transform.position);
-        float distanceToTarget = directionToTarget.magnitude;
-        if (distanceToTarget < 0.1f)
-        {
-            Debug.Log("목표에 도착! 이동 멈춤");
+        if (!isMove)
             return;
-        }
 
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-        Debug.Log($"현재 위치: {transform.position}, 목표 위치: {targetPosition}");
+        Vector3 direction = new Vector3((targetPosition.x - transform.position.x),
+            (targetPosition.y - transform.position.y),
+            (player.transform.position.z + playerDistance - transform.position.z));
+        rb.linearVelocity = direction * speed;
 
+        float distance = Vector3.Distance(transform.position, new Vector3(targetPosition.x,targetPosition.y,player.transform.position.z + playerDistance));
 
-        if (directionToTarget.magnitude > 0.1f)
+        if (distance < 0.2f) 
         {
-            Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+            rb.linearVelocity = Vector3.zero;
+            isMove = false;
+            isArrive = true;
         }
     }
 
-    public void PatolMove(Vector2 min, Vector2 max)
+    public void StopMover()
     {
-        float x = Random.Range(min.x, max.x);
-        float y = Random.Range(min.y, max.y);
+        rb.linearVelocity = Vector3.zero;
+    }
 
-        //rb.linearVelocity = new Vector2 (x, y) * speed;
+    public Vector3 GetPatolMove()
+    {
+
+        Camera cam = Camera.main;
+
+        float height = 2f * cam.orthographicSize;
+        float width = height * cam.aspect;
+
+        float randomX = cam.transform.position.x + Random.Range(-width / 2f, width / 2f) * 0.9f;
+        float randomY = cam.transform.position.y + Random.Range(-height / 2f, height / 2f) * 0.9f;
+        float randomZ = cam.transform.position.z;
+
+        Vector3 randomPos = new Vector3(randomX, randomY, randomZ);
+        return randomPos;
+    }
+
+    public void PatolMove(Vector3 Dir)
+    {
+
+        if (!isMove)
+            return;
+
+        Vector3 movDir = new Vector3(Dir.x - transform.position.x, Dir.y - transform.position.y , 0);
+
+        rb.linearVelocity = movDir * speed;
+
+        float distance = Vector2.Distance(transform.position, Dir);
+
+        if (distance < 0.2f)
+        {
+            rb.linearVelocity = Vector3.zero;
+            isMove = false;
+            isArrive = true;
+        }
+
     }
 }
