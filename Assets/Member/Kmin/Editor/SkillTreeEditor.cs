@@ -17,9 +17,12 @@ public class SkillTreeEditor : EditorWindow
     [SerializeField] private VisualTreeAsset _treeAsset;
     private VisualElement _background;
     private Button _createBtn;
+    private Button _saveFruitsSOBtn;
     private TextField _intField; 
     private TextField _floatField; 
-    private DropdownField _skillTypeField;
+    private DropdownField _fruitsTypeField;
+
+    private FruitsButtonData _currentData;
     
     [MenuItem("Window/SkillTreeEditor")]
     public static void ShowExample()
@@ -38,7 +41,8 @@ public class SkillTreeEditor : EditorWindow
         #region Assignment
         _background = tree.Q<VisualElement>("Background");
         _createBtn = tree.Q<Button>("CreateButton");
-        _skillTypeField = tree.Q<DropdownField>("TypeDropdown");
+        _saveFruitsSOBtn = tree.Q<Button>("SaveFruitsSOButton");
+        _fruitsTypeField = tree.Q<DropdownField>("TypeDropdown");
         _intField = tree.Q<TextField>("IntTextField");
         _floatField = tree.Q<TextField>("FloatTextField");
         #endregion
@@ -47,31 +51,58 @@ public class SkillTreeEditor : EditorWindow
         {   
             for (int x = 0; x < Width; x++)
             {
+                int localX = x;
+                int localY = y;
                 Button button = new Button();
-                FruitsButtonData fruitsButtonData = new FruitsButtonData(button);
-                fruitsButtonDatas[y, x] = fruitsButtonData;
+                fruitsButtonDatas[localY, localX] = new FruitsButtonData(button);
 
                 button.AddToClassList(_fruitsBtnName);
-                button.clicked += () => OnFruitsSelect(fruitsButtonData);
+                button.style.color = Color.grey;
+                fruitsButtonDatas[localY, localX].Button.clicked += () => OnFruitsSelect(fruitsButtonDatas[localY, localX]);
                 _background.Add(button);
             }
         }
+
+        _saveFruitsSOBtn.clicked += SaveFruitsData;
     }
+
 
     private void OnFruitsSelect(FruitsButtonData data)
     {
-        if (data.FruitsButtonSO == null)
+        _currentData = data;
+        _currentData.isActive = !_currentData.isActive;
+        _currentData.Button.style.color = _currentData.isActive ? Color.white : Color.grey;
+        
+        if (_currentData.FruitsButtonSO == null)
         {
             FruitsSO newSO = ScriptableObject.CreateInstance<FruitsSO>();
-            _skillTypeField.choices.Clear();
-            data.FruitsButtonSO = newSO;
+            _fruitsTypeField.choices.Clear();
+            _currentData.FruitsButtonSO = newSO;
         }
         
-        _skillTypeField.choices.Clear();
+        _fruitsTypeField.choices.Clear();
         
         foreach (FruitsType value in Enum.GetValues(typeof(FruitsType)))
         {
-            _skillTypeField.choices.Add(value.ToString());
+            _fruitsTypeField.choices.Add(value.ToString());
         }
+        
+        LoadFruitsData();
+    }
+
+    private void SaveFruitsData()
+    {
+        _currentData.FruitsButtonSO.fruitsType = Enum.Parse<FruitsType>(_fruitsTypeField.value);
+        _currentData.FruitsButtonSO.intValue = int.Parse(_intField.value);
+        _currentData.FruitsButtonSO.floatValue = float.Parse(_floatField.value);
+    }
+    
+    private void LoadFruitsData()
+    {
+        FruitsButtonData data = _currentData;
+        _fruitsTypeField.value = data.FruitsButtonSO.fruitsType.ToString();
+        _intField.value = data.FruitsButtonSO.intValue.ToString();
+        _floatField.value = data.FruitsButtonSO.floatValue.ToString();
+        
     }
 }
