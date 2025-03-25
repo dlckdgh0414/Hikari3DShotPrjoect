@@ -11,7 +11,11 @@ public partial class PatolMoveAction : Action
 {
     [SerializeReference] public BlackboardVariable<Vector3> Dir;
     [SerializeReference] public BlackboardVariable<EnemyMovement> Mover;
-
+    protected override Status OnStart()
+    {
+        Dir.Value = Mover.Value.GetPatolMove();
+        return Status.Running;
+    }
     protected override Status OnUpdate()
     {
         Mover.Value.PatolMove(Dir);

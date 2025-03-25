@@ -13,7 +13,11 @@ public partial class SpawnEnemyAction : Action
     [SerializeReference] public BlackboardVariable<Transform> Target;
     [SerializeReference] public BlackboardVariable<EnemyMovement> Mover;
     [SerializeReference] public BlackboardVariable<Vector3> Dir;
-
+    protected override Status OnStart()
+    {
+        Dir.Value = Mover.Value.GetMovePos();
+        return Status.Running;
+    }
     protected override Status OnUpdate()
     {
         Mover.Value.Move(Target.Value, Dir);
