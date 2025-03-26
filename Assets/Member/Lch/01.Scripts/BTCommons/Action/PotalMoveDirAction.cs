@@ -13,7 +13,7 @@ public partial class PotalMoveDirAction : Action
 
     protected override Status OnStart()
     {
-        MoveDir.Value = Mover.Value.GetPatolMove();
+        MoveDir.Value = Mover.Value.GetPatrolMove();
         return Status.Running;
     }
 }
