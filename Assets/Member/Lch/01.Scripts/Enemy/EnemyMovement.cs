@@ -44,7 +44,7 @@ public class EnemyMovement : MonoBehaviour,IEntityComponent
         rb.linearVelocity = Vector3.zero;
     }
 
-    public Vector3 GetPatolMove()
+    public Vector3 GetPatrolMove()
     {
 
         Camera cam = Camera.main;
@@ -60,7 +60,7 @@ public class EnemyMovement : MonoBehaviour,IEntityComponent
         return randomPos;
     }
 
-    public void PatolMove(Vector3 Dir)
+    public void PatrolMove(Vector3 Dir)
     {
 
         if (!isMove)
