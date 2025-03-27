@@ -10,8 +10,6 @@ namespace Member.Ysc._01_Code.Agent.Enemy.Combat.Bullet
         {
             BulletInit();
         }
-        
-        protected abstract void BulletSpawn(); // 스폰
 
         protected virtual void BulletInit() { } // 초기화
     }
