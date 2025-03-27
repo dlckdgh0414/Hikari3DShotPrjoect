@@ -1,4 +1,4 @@
-using Member.Ysc._01_Code.Agent.Enemy.Combat.Bullet;
+using Member.Ysc._01_Code.Combat.Bullet;
 using UnityEngine;
 
 public abstract class Attack : MonoBehaviour

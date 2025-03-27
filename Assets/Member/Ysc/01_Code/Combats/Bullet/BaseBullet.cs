@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Member.Ysc._01_Code.Agent.Enemy.Combat.Bullet
+namespace Member.Ysc._01_Code.Combat.Bullet
 {
     public abstract class BaseBullet : MonoBehaviour
     {
