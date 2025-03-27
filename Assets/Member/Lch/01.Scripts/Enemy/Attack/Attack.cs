@@ -1,12 +1,10 @@
+using Member.Ysc._01_Code.Agent.Enemy.Combat.Bullet;
 using UnityEngine;
 
 public abstract class Attack : MonoBehaviour
 {
-    [SerializeField] private BulletSettingSO BulletSO;
-
-    protected float BulletSpeed = 0;
-    protected int BulletCount = 0;
-    protected MeshFilter BulletMeshFilter = null;
+    [SerializeField] private BaseBullet Bullet;
+    
     public abstract void EnemyAttack(Transform target);
 
     protected virtual void Awake()
@@ -17,14 +15,12 @@ public abstract class Attack : MonoBehaviour
 
     private void Init()
     {
-        BulletSpeed = BulletSO.BulletSpeed;
-        BulletCount = BulletSO.BulletCount;
-        BulletMeshFilter = BulletSO.BulletFilter;
+        // 일단 혹시 모르니 비워둘게용
     }
 
     protected virtual void AfterInit()
     {
-
+        // 얘는 재정의 그대로 쓸거에요 :>
     }
 
 }
