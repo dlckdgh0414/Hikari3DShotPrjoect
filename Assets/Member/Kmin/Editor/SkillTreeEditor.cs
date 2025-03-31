@@ -18,14 +18,19 @@ public class SkillTreeEditor : EditorWindow
 
     [SerializeField] private VisualTreeAsset _treeAsset;
     private VisualElement _background;
+    private VisualElement _connectBackground;
     private Button _createBtn;
     private Button _saveFruitsSOBtn;
     private Button _selectFruitsBtn;
     private TextField _intField; 
     private TextField _floatField; 
     private DropdownField _fruitsTypeField;
+    
+    private Color _backgroundColor = new Color(0.15f, 0.15f, 0.15f);
+    private Color _selectModeColor = new Color(0.15f, 0.15f, 0.5f);
 
     private FruitsButtonData _currentData;
+    private FruitsButtonData _prevData;
     
     [MenuItem("Window/SkillTreeEditor")]
     public static void ShowWindow()
@@ -49,6 +54,7 @@ public class SkillTreeEditor : EditorWindow
         _intField = tree.Q<TextField>("IntTextField");
         _floatField = tree.Q<TextField>("FloatTextField");
         _selectFruitsBtn = tree.Q<Button>("SelectFruitsData");
+        _connectBackground = tree.Q<VisualElement>("connectBackground");
         #endregion
         
         for (int y = 0; y < Height; y++) {   
@@ -60,28 +66,40 @@ public class SkillTreeEditor : EditorWindow
 
                 button.AddToClassList(_fruitsBtnName);
                 button.style.backgroundColor = Color.grey;
+                _background.Add(button);
+                
                 fruitsButtonDatas[localY, localX].Button.clicked += () 
                     => OnFruitsSelect(fruitsButtonDatas[localY, localX]);
-                _background.Add(button);
+                
+                fruitsButtonDatas[localY, localX].Button.RegisterCallback<MouseDownEvent>
+                    ((e) => OnFruitsChange(fruitsButtonDatas[localY, localX]));
             }
         }
 
-        _saveFruitsSOBtn.clicked += SaveFruitsData;
         _selectFruitsBtn.clicked += ToggleSelectMode;
     }
 
+    private void OnFruitsChange(FruitsButtonData data)
+    {
+        //if (_currentData.isActive == false) return;
+
+        _currentData = data;
+        _currentData.isActive = !_currentData.isActive;
+        _currentData.Button.style.backgroundColor = _currentData.isActive ? Color.white : Color.grey;
+    }
 
     private void OnFruitsSelect(FruitsButtonData data) //Fruits 버튼을 눌렀을 때
     {
+        if (_currentData != null)
+            _prevData = _currentData;
         _currentData = data;
-        _currentData.isActive = !_currentData.isActive;
 
-        if (!_fruitsSelectMode)
-        {
-            
-        }
+        if (_currentData.isActive == false) return;
         
-        _currentData.Button.style.backgroundColor = _currentData.isActive ? Color.white : Color.grey;
+        if(_fruitsSelectMode) {
+            AddFruitsData(data);
+            return;
+        }
         
         if (_currentData.FruitsButtonSO == null)
             _currentData.FruitsButtonSO = ScriptableObject.CreateInstance<FruitsSO>();
@@ -90,29 +108,41 @@ public class SkillTreeEditor : EditorWindow
             _fruitsTypeField.choices.Add(value.ToString());
         
         _fruitsTypeField.choices.Clear();
-        LoadFruitsData();
+
+
+        SaveFruitsData(_currentData);
     }
 
-    private void SaveFruitsData() //변경된 SO 데이터 저장
+    private void SaveFruitsData(FruitsButtonData data) //변경된 SO 데이터 저장
     {
-        _currentData.FruitsButtonSO.fruitsType = Enum.Parse<FruitsType>(_fruitsTypeField.value);
-        _currentData.FruitsButtonSO.intValue = int.Parse(_intField.value);
-        _currentData.FruitsButtonSO.floatValue = float.Parse(_floatField.value);
+        Debug.Log(data.FruitsButtonSO.intValue);
+        data.FruitsButtonSO.fruitsType = Enum.Parse<FruitsType>(_fruitsTypeField.value);
+        data.FruitsButtonSO.intValue = int.Parse(_intField.value);
+        data.FruitsButtonSO.floatValue = float.Parse(_floatField.value);
     }
     
-    private void LoadFruitsData() //선택된 Fruits에 저장된 SO 데이터 로드
+    private void LoadFruitsData(FruitsButtonData data) //선택된 Fruits에 저장된 SO 데이터 로드
     {
-        FruitsButtonData data = _currentData;
         _fruitsTypeField.value = data.FruitsButtonSO.fruitsType.ToString();
         _intField.value = data.FruitsButtonSO.intValue.ToString();
         _floatField.value = data.FruitsButtonSO.floatValue.ToString();
+        
+        data.FruitsButtonDataList.ForEach(fruits =>  _connectBackground.Add(fruits.Button));
     }
     
     //Tree자식 선택모드로 변환
-    private void ToggleSelectMode() => _fruitsSelectMode = !_fruitsSelectMode;
-
-    private void AddFruitsData() //자식으로 선택된 Fruits를 추가
+    private void ToggleSelectMode()
     {
-        
+        _fruitsSelectMode = !_fruitsSelectMode;
+        _background.style.backgroundColor = _fruitsSelectMode ? _selectModeColor : _backgroundColor;
+    }
+
+    private void AddFruitsData(FruitsButtonData data) //자식으로 선택된 Fruits를 추가
+    {
+        Button newButton = new Button();
+        newButton.style.backgroundColor = data.Button.style.backgroundColor;
+        newButton.clicked += () => OnFruitsSelect(data);
+
+        _connectBackground.Add(newButton);
     }
 }

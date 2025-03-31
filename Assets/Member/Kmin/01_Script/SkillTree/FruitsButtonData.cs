@@ -7,6 +7,8 @@ public class FruitsButtonData : MonoBehaviour
     public FruitsSO FruitsButtonSO { get; set; }
     
     public List<FruitsSO> FruitsDataList = new List<FruitsSO>();
+    
+    public List<FruitsButtonData> FruitsButtonDataList = new List<FruitsButtonData>();
     public Button Button { get; set; }
     public bool isActive { get; set; }
     public FruitsButtonData(Button button)
