@@ -4,6 +4,6 @@ public class BulletAttack : Attack
 {
     public override void EnemyAttack(Transform target)
     {
-        Debug.Log("°ø°Ý");
+        Debug.Log("ê³µê²©");
     }
 }
