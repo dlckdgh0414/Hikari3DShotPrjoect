@@ -17,6 +17,11 @@ public abstract class EntityState
 
     }
 
+    public virtual void FixedUpdate()
+    {
+
+    }
+
     public virtual void Exit()
     {
 

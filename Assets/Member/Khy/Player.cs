@@ -27,6 +27,11 @@ public class Player : Entity
         _stateMachine.UpdateStateMachine();
     }
 
+    private void FixedUpdate()
+    {
+        _stateMachine.FixedUpdateStateMachine();
+    }
+
     protected override void AfterInitialize()
     {
         base.AfterInitialize();
