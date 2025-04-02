@@ -7,9 +7,9 @@ namespace Member.Ysc._01_Code.Agent.Enemy.BT
     {
         protected BehaviorGraphAgent btAgent;
         
-        protected override void AfterInit()
+        protected override void AfterInitialize()
         {
-            base.AfterInit();
+            base.AfterInitialize();
             btAgent = GetComponent<BehaviorGraphAgent>();
             Debug.Assert(btAgent != null, $"{gameObject.name} does not have an BehaviorGraphAgent");
             Debug.Log("BT에너미 후 초기화");
