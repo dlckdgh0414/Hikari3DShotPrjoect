@@ -29,6 +29,11 @@ public class SkillTreeEditor : EditorWindow
     
     private Color _backgroundColor = new Color(0.15f, 0.15f, 0.15f);
     private Color _selectModeColor = new Color(0.15f, 0.15f, 0.5f);
+    private Color hpColor = new Color(0.4f, 0.8f, 0.0f);
+    private Color atkDmgColor = new Color(0.8f, 0f, 0.0f);
+    private Color speedColor = new Color(0.0f, 0.5f, 1f);
+    private Color skillColor = new Color(0.8f, 0.6f, 0.0f);
+    private Color atkSpeedColor = new Color(0f, 0f, 0f);
 
     private FruitsButtonData _currentData;
     private FruitsButtonData _prevData;
@@ -84,13 +89,29 @@ public class SkillTreeEditor : EditorWindow
 
     private void OnFruitsTypeFieldChanged()
     {
-        /*Color buttonCol = Color.white;
+        Color buttonCol = Color.white;
 
-        switch (_fruitsTypeField.value)
+        switch (Enum.Parse(typeof(FruitsType), _fruitsTypeField.value))
         {
             case FruitsType.HP:
-                buttonCol = _selectModeColor;
-        }*/
+                buttonCol = hpColor;
+                break;
+            case FruitsType.AttackDamage:
+                Debug.Log("sdf");
+                buttonCol = atkDmgColor;
+                break;
+            case FruitsType.Speed:
+                buttonCol = speedColor;
+                break;
+            case FruitsType.Skill:
+                buttonCol = skillColor;
+                break;
+            case FruitsType.AttackSpeed:
+                buttonCol = atkSpeedColor;
+                break;
+        }
+        
+        _currentData.Button.style.backgroundColor = buttonCol;
     }
 
     private void OnFruitsChange(FruitsButtonData data)
@@ -158,6 +179,7 @@ public class SkillTreeEditor : EditorWindow
     {
         Button newButton = new Button();
         newButton.AddToClassList(_fruitsBtnName);
+        newButton.style.backgroundColor = button.style.backgroundColor;
         
         return newButton;
     }

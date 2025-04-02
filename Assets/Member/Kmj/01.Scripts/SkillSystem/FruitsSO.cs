@@ -1,11 +1,10 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 
 public enum FruitsType
 {
-    HP, AttackDamage, Speed, Skill
+    HP, AttackDamage, Speed, Skill,AttackSpeed
 }
 
 public enum statType
@@ -27,23 +26,35 @@ public class FruitsSO : ScriptableObject
     public float floatValue { get; set; }
     public Skill skillValue { get; set; }
 
+
     public string Value;
+
+    public FruitsSO(FruitsType thisType = FruitsType.HP,string value = "")
+    {
+        fruitsType = thisType;
+        Value = value;
+    }
+
+    private void OnEnable()
+    {
+    }
 
     private void OnValidate()
     {
         FruitsName = this.name;
-        SetValue();
+        SeTValue();
     }
 
-    private void SetValue()
+    private void SeTValue()
     {
-        if (fruitsType == FruitsType.HP || fruitsType == FruitsType.AttackDamage || fruitsType == FruitsType.Speed)
+        if (fruitsType == FruitsType.HP || fruitsType == FruitsType.AttackDamage 
+                                        || fruitsType == FruitsType.Speed || fruitsType == FruitsType.AttackSpeed)
         {
             _statType = statType.Float;
 
             if (Value == string.Empty)
             {
-                Debug.Log("비었습니다");
+                Debug.Log("³Ê °ª ¾È³ÖÀ½");
             }
             else if(Value != string.Empty)
             {
@@ -55,7 +66,7 @@ public class FruitsSO : ScriptableObject
             _statType = statType.Skill;
             if (Value == string.Empty)
             {
-                Debug.Log("");
+                Debug.Log("³Ê °ª ¾È³ÖÀ½");
             }
             else
             {
