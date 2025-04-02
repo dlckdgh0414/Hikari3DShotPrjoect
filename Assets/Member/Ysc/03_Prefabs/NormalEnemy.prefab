@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 2584894370414177100}
   - component: {fileID: 3915932659560642603}
   - component: {fileID: 8785446702342525568}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NormalEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,6 +122,7 @@ Transform:
   - {fileID: 240890808461149905}
   - {fileID: 8850897071306705646}
   - {fileID: 6235001875386207609}
+  - {fileID: 6057845310971203038}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6335842349142595462
@@ -235,7 +236,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &3308133020281952644
 GameObject:
@@ -286,6 +287,37 @@ MonoBehaviour:
   rb: {fileID: 8785446702342525568}
   isMove: 1
   isArrive: 0
+--- !u!1 &8639254105984595188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6057845310971203038}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6057845310971203038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8639254105984595188}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.735}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7367642138271374160}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9164897666556607404
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,3 +363,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <bulletPrefab>k__BackingField: {fileID: 5150087526597314123, guid: 401eb2c1c488ba840a129be3493393b8, type: 3}
+  <FirePos>k__BackingField: {fileID: 6057845310971203038}
