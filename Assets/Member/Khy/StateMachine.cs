@@ -34,4 +34,9 @@ public class StateMachine
     {
         CurrentState.Update();
     }
+
+    public void FixedUpdateStateMachine()
+    {
+        CurrentState.FixedUpdate();
+    }
 }

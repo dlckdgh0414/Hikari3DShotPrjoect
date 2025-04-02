@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Member.Ysc._01_Code.Combats;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour, IDamageable
 {
 
     public delegate void OnDamageHandler(float damage, Vector2 direction, Entity dealer);

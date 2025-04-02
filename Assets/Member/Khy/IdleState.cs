@@ -9,7 +9,7 @@ public class IdleState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        _mover.StopImmediately();
+        _mover.SetDecrease(0.1f);
     }
 
     public override void Update()

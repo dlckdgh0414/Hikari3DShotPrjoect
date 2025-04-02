@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 public class EntityMover : MonoBehaviour,IEntityComponent
 {
@@ -28,7 +29,10 @@ public class EntityMover : MonoBehaviour,IEntityComponent
     }
 
     public void SetMovement(Vector2 moveDir)
-        => _velocity = new Vector3(moveDir.x, moveDir.y, 0);
+    {
+        if (moveDir.Equals(Vector2.zero)) return;
+        _velocity = new Vector3(moveDir.x, moveDir.y, 0);
+    }
 
 
     private void FixedUpdate()
@@ -38,12 +42,18 @@ public class EntityMover : MonoBehaviour,IEntityComponent
         if (CanManualMove)
             _rbCompo.linearVelocity = _velocity * MoveSpeed * _moveSpeedMultiplier;
         else
-            _rbCompo.linearVelocity = _autoMovement * SpinSpeed* Time.deltaTime;
+            _rbCompo.linearVelocity = _autoMovement * SpinSpeed * Time.fixedDeltaTime;
     }
 
     public void StopImmediately()
     {
+        _velocity = Vector3.zero;
         _rbCompo.linearVelocity = Vector3.zero;
+    }
+
+    public void SetDecrease(float second)
+    {
+        DOTween.To(()=> _rbCompo.linearVelocity , x => _rbCompo.linearVelocity = x, Vector3.zero , second).OnComplete(()=>StopImmediately());
     }
 
     public void SetAutoMovement(Vector3 autoMovement)
