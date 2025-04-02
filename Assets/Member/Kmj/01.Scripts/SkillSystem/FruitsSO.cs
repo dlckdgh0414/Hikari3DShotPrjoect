@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum FruitsType
 {
-    HP, AttackDamage, Speed, Skill
+    HP, AttackDamage, Speed, Skill,AttackSpeed
 }
 
 public enum statType
@@ -47,7 +47,8 @@ public class FruitsSO : ScriptableObject
 
     private void SeTValue()
     {
-        if (soType == FruitsType.HP || soType == FruitsType.AttackDamage || soType == FruitsType.Speed)
+        if (soType == FruitsType.HP || soType == FruitsType.AttackDamage 
+            || soType == FruitsType.Speed || soType == FruitsType.AttackSpeed)
         {
             _statType = statType.Float;
 
