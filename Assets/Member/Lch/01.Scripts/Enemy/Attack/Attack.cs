@@ -27,4 +27,10 @@ public abstract class Attack : MonoBehaviour
         // 얘는 재정의 그대로 쓸거에요 :>
     }
 
+    protected void SpawnBullet(Transform target)
+    {
+       bulletPrefab = Instantiate(bulletPrefab,FirePos.position,Quaternion.identity);
+        bulletPrefab.SetDirection(target.position);
+    }
+
 }

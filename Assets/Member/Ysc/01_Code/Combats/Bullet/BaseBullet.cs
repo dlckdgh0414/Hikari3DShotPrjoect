@@ -13,9 +13,9 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         
         protected Vector3 fireDirection;
         
-        protected void SetDirection(Vector3 direction)
+        public void SetDirection(Vector3 direction)
         {
-            fireDirection = direction;
+            fireDirection = direction - transform.position ;
         }
         
         protected void Awake()
@@ -31,7 +31,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         private void OnCollisionEnter(Collision other)
         {
             Hit();
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
 
         protected virtual void Hit()

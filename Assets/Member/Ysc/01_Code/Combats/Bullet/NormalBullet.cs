@@ -8,7 +8,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         protected override void BulletInit()
         {
             base.BulletInit();
-            SetDirection(transform.forward);
+            
         }
     }
 }
