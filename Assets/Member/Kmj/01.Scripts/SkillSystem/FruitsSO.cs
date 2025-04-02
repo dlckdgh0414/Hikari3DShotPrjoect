@@ -1,11 +1,10 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 
 public enum FruitsType
 {
-    HP, AttackDamage, Speed, Skill
+    HP, AttackDamage, Speed, Skill,AttackSpeed
 }
 
 public enum statType
@@ -20,42 +19,54 @@ public class FruitsSO : ScriptableObject
 
     [SerializeField] private string FruitsName;
 
-    public FruitsType fruitsType;
+    public FruitsType soType;
     private statType _statType;
 
     public int intValue { get; set; }
     public float floatValue { get; set; }
     public Skill skillValue { get; set; }
 
+
     public string Value;
+
+    public FruitsSO(FruitsType thisType = FruitsType.HP,string value = "")
+    {
+        soType = thisType;
+        Value = value;
+    }
+
+    private void OnEnable()
+    {
+    }
 
     private void OnValidate()
     {
         FruitsName = this.name;
-        SetValue();
+        SeTValue();
     }
 
-    private void SetValue()
+    private void SeTValue()
     {
-        if (fruitsType == FruitsType.HP || fruitsType == FruitsType.AttackDamage || fruitsType == FruitsType.Speed)
+        if (soType == FruitsType.HP || soType == FruitsType.AttackDamage 
+            || soType == FruitsType.Speed || soType == FruitsType.AttackSpeed)
         {
             _statType = statType.Float;
 
             if (Value == string.Empty)
             {
-                Debug.Log("ï¿½ï¿½ ï¿½ï¿½ ï¿½È³ï¿½ï¿½ï¿½");
+                Debug.Log("³Ê °ª ¾È³ÖÀ½");
             }
             else if(Value != string.Empty)
             {
                 floatValue = float.Parse(Value);
             }
         }
-        else if (fruitsType == FruitsType.Skill)
+        else if (soType == FruitsType.Skill)
         {
             _statType = statType.Skill;
             if (Value == string.Empty)
             {
-                Debug.Log("ï¿½ï¿½ ï¿½ï¿½ ï¿½È³ï¿½ï¿½ï¿½");
+                Debug.Log("³Ê °ª ¾È³ÖÀ½");
             }
             else
             {
