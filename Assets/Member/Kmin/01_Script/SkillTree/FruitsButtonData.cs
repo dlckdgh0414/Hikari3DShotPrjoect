@@ -15,4 +15,9 @@ public class FruitsButtonData : MonoBehaviour
     {
         Button = button;
     }
+
+    public void AddFruitsButtonData(FruitsButtonData fruitsButtonData)
+    {
+        FruitsButtonDataList.Add(fruitsButtonData);
+    }
 }

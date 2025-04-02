@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 
 public class SkillTreeEditor : EditorWindow
@@ -15,7 +16,7 @@ public class SkillTreeEditor : EditorWindow
     private bool _fruitsSelectMode = false;
     
     private FruitsButtonData[,] fruitsButtonDatas = new FruitsButtonData[Height, Width];
-
+    
     [SerializeField] private VisualTreeAsset _treeAsset;
     private VisualElement _background;
     private VisualElement _connectBackground;
@@ -77,6 +78,19 @@ public class SkillTreeEditor : EditorWindow
         }
 
         _selectFruitsBtn.clicked += ToggleSelectMode;
+        _saveFruitsSOBtn.clicked += SaveFruitsData;
+        _fruitsTypeField.RegisterValueChangedCallback(evt => OnFruitsTypeFieldChanged());
+    }
+
+    private void OnFruitsTypeFieldChanged()
+    {
+        /*Color buttonCol = Color.white;
+
+        switch (_fruitsTypeField.value)
+        {
+            case FruitsType.HP:
+                buttonCol = _selectModeColor;
+        }*/
     }
 
     private void OnFruitsChange(FruitsButtonData data)
@@ -90,35 +104,31 @@ public class SkillTreeEditor : EditorWindow
 
     private void OnFruitsSelect(FruitsButtonData data) //Fruits 버튼을 눌렀을 때
     {
-        if (_currentData != null)
-            _prevData = _currentData;
-        _currentData = data;
-
-        if (_currentData.isActive == false) return;
-        
         if(_fruitsSelectMode) {
             AddFruitsData(data);
             return;
         }
         
+        _currentData = data;
+
+        if (_currentData.isActive == false) return;
+        
         if (_currentData.FruitsButtonSO == null)
             _currentData.FruitsButtonSO = ScriptableObject.CreateInstance<FruitsSO>();
+
+        _fruitsTypeField.choices.Clear();
 
         foreach (FruitsType value in Enum.GetValues(typeof(FruitsType)))
             _fruitsTypeField.choices.Add(value.ToString());
         
-        _fruitsTypeField.choices.Clear();
-
-
-        SaveFruitsData(_currentData);
+        LoadFruitsData(_currentData);
     }
 
-    private void SaveFruitsData(FruitsButtonData data) //변경된 SO 데이터 저장
+    private void SaveFruitsData() //변경된 SO 데이터 저장
     {
-        Debug.Log(data.FruitsButtonSO.intValue);
-        data.FruitsButtonSO.fruitsType = Enum.Parse<FruitsType>(_fruitsTypeField.value);
-        data.FruitsButtonSO.intValue = int.Parse(_intField.value);
-        data.FruitsButtonSO.floatValue = float.Parse(_floatField.value);
+        _currentData.FruitsButtonSO.fruitsType = Enum.Parse<FruitsType>(_fruitsTypeField.value);
+        _currentData.FruitsButtonSO.intValue = int.Parse(_intField.value);
+        _currentData.FruitsButtonSO.floatValue = float.Parse(_floatField.value);
     }
     
     private void LoadFruitsData(FruitsButtonData data) //선택된 Fruits에 저장된 SO 데이터 로드
@@ -127,7 +137,8 @@ public class SkillTreeEditor : EditorWindow
         _intField.value = data.FruitsButtonSO.intValue.ToString();
         _floatField.value = data.FruitsButtonSO.floatValue.ToString();
         
-        data.FruitsButtonDataList.ForEach(fruits =>  _connectBackground.Add(fruits.Button));
+        _connectBackground.Clear();
+        data.FruitsButtonDataList.ForEach(fruits => _connectBackground.Add(CopyFruitsButton(fruits.Button))); // <= 이새끼 일단 문제 있음 농구 갔다와서 고쳐라
     }
     
     //Tree자식 선택모드로 변환
@@ -139,10 +150,15 @@ public class SkillTreeEditor : EditorWindow
 
     private void AddFruitsData(FruitsButtonData data) //자식으로 선택된 Fruits를 추가
     {
-        Button newButton = new Button();
-        newButton.style.backgroundColor = data.Button.style.backgroundColor;
-        newButton.clicked += () => OnFruitsSelect(data);
+        _currentData.AddFruitsButtonData(data);
+        _connectBackground.Add(CopyFruitsButton(data.Button));
+    }
 
-        _connectBackground.Add(newButton);
+    private Button CopyFruitsButton(Button button)
+    {
+        Button newButton = new Button();
+        newButton.AddToClassList(_fruitsBtnName);
+        
+        return newButton;
     }
 }

@@ -43,7 +43,7 @@ public class FruitsSO : ScriptableObject
 
             if (Value == string.Empty)
             {
-                Debug.Log("�� �� �ȳ���");
+                Debug.Log("비었습니다");
             }
             else if(Value != string.Empty)
             {
@@ -55,7 +55,7 @@ public class FruitsSO : ScriptableObject
             _statType = statType.Skill;
             if (Value == string.Empty)
             {
-                Debug.Log("�� �� �ȳ���");
+                Debug.Log("");
             }
             else
             {
