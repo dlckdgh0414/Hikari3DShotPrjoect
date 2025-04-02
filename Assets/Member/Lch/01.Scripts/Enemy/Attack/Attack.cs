@@ -3,7 +3,8 @@ using UnityEngine;
 
 public abstract class Attack : MonoBehaviour
 {
-    [SerializeField] private BaseBullet Bullet;
+    [field: SerializeField] public BaseBullet bulletPrefab { get; protected set; }
+    [field: SerializeField] public Transform FirePos { get; protected set; }
     
     public abstract void EnemyAttack(Transform target);
 
@@ -15,7 +16,10 @@ public abstract class Attack : MonoBehaviour
 
     private void Init()
     {
-        // 일단 혹시 모르니 비워둘게용
+        if (FirePos == null)
+        {
+            Debug.LogWarning("FirePos is not found");
+        }
     }
 
     protected virtual void AfterInit()

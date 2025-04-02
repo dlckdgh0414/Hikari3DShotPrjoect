@@ -9,7 +9,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
     {
         [field: SerializeField] public BulletSettingSO BulletSO { get; protected set; } // 총알 데이터 받기
         
-        public Rigidbody2D RbCompo { get; protected set; }
+        public Rigidbody RbCompo { get; protected set; }
         
         protected Vector3 fireDirection;
         
@@ -25,7 +25,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
 
         protected void FixedUpdate()
         {
-            RbCompo.linearVelocity = fireDirection.normalized * (BulletSO.BulletSpeed * Time.fixedDeltaTime);
+            RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
         }
 
         private void OnCollisionEnter(Collision other)
@@ -41,7 +41,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         protected virtual void BulletInit()
         {
             // 초기화
-            RbCompo = GetComponent<Rigidbody2D>();
+            RbCompo = GetComponent<Rigidbody>();
         }
     }
 }
