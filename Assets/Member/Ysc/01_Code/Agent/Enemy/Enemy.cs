@@ -2,22 +2,22 @@
 
 namespace Member.Ysc._01_Code.Agent.Enemy
 {
-    public abstract class Enemy : MonoBehaviour
+    public class Enemy : Entity
     {
-        protected void Awake()
+        protected override void HandleHit()
         {
-            Initialize();
-            AfterInit();
+            Debug.Log("핸들 힛");
         }
 
-        private void Initialize()
+        protected override void HandleDead()
         {
-            Debug.Log("에너미 초기화");
+            Debug.Log("핸들 데드");
         }
-        
-        protected virtual void AfterInit()
+
+        protected override void AfterInitialize()
         {
             Debug.Log("에너미 후 초기화");
+            base.AfterInitialize();
         }
     }
 }

@@ -3,23 +3,28 @@ using UnityEngine;
 public class SkillTreeOverride : MonoBehaviour
 {
     [SerializeField] private FruitsSO _fruits;
+    private Player _player;
     public void SetOverrideFruits()
     {
-        if(_fruits.fruitsType == FruitsType.HP)
+        if(_fruits.soType == FruitsType.HP)
         {
-            //_player.HpStat = _fruits.floatValue;
+            
         }
-        else if (_fruits.fruitsType == FruitsType.AttackDamage)
+        else if (_fruits.soType == FruitsType.AttackDamage)
         {
-            //_player.AttackDamage = _fruits.floatValue;
+            
         }
-        else if(_fruits.fruitsType == FruitsType.Speed)
+        else if(_fruits.soType == FruitsType.Speed)
         {
-            //_player.speed = _fruits.floatValue;
+            
         }
-        else if(_fruits.fruitsType == FruitsType.Skill)
+        else if(_fruits.soType == FruitsType.AttackSpeed)
         {
-            //��ų�� �ҷ��ͼ� ����� �� �ְڲ� �Ѵ�.
+
+        }
+        else if (_fruits.soType == FruitsType.Skill)
+        {
+
         }
         Debug.Log($"{_fruits.name}");
     }
