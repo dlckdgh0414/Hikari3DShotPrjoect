@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using Member.Ysc._01_Code.Combat.Bullet;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Attack : MonoBehaviour
@@ -7,7 +9,7 @@ public abstract class Attack : MonoBehaviour
     [field: SerializeField] public BaseBullet bulletPrefab { get; protected set; }
     [field: SerializeField] public Transform[] FirePos { get; protected set; }
     
-    public abstract void EnemyAttack(Transform target);
+    public abstract void EnemyAttack(Transform target,float timer);
 
     protected virtual void Awake()
     {
@@ -28,13 +30,31 @@ public abstract class Attack : MonoBehaviour
         // 얘는 재정의 그대로 쓸거에요 :>
     }
 
-    protected void SpawnBullet(Transform target)
+    protected void SpawnBullet(Transform target,float timer)
+    {
+
+        if(bulletPrefab.GetBulletCount <= 1)
+        {
+            bulletPrefab = Instantiate(bulletPrefab, FirePos[0].position, Quaternion.identity);
+            bulletPrefab.SetDirection(target.position);
+        }
+        else
+        {
+            StartCoroutine(ManyBulletAttack(timer,target));
+        }
+
+       
+    }
+
+    private IEnumerator ManyBulletAttack(float timer,Transform target)
     {
         for (int i = 0; i < bulletPrefab.GetBulletCount; i++)
         {
-            bulletPrefab = Instantiate(bulletPrefab,FirePos[i].position,Quaternion.identity);
+            bulletPrefab = Instantiate(bulletPrefab, FirePos[i].position, Quaternion.identity);
             bulletPrefab.SetDirection(target.position);
+            yield return new WaitForSeconds(timer);
         }
-    }
 
+        yield return null;
+    }
 }
