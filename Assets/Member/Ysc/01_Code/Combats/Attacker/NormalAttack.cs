@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Member.Ysc._01_Code.Agent.Enemy.Combat.Attacker
+namespace Member.Ysc._01_Code.Combat.Attacker
 {
     public class NormalAttack : Attack
     {

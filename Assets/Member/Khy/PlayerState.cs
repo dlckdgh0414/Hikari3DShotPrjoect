@@ -39,9 +39,23 @@ public class PlayerState : EntityState
         HorizontalLean();
     }
 
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        ClampPosition();
+    }
+
+    private void ClampPosition()
+    {
+        Vector3 pos = Camera.main.WorldToViewportPoint(_player.transform.position);
+        pos.x = Mathf.Clamp01(pos.x);
+        pos.y = Mathf.Clamp01(pos.y);
+        _player.transform.position = Camera.main.ViewportToWorldPoint(pos);
+    }
+
     void HorizontalLean()
     {
         Vector3 targetEulerAngels = _player.model.transform.localEulerAngles;
-        _player.model.transform.localEulerAngles = new Vector3(targetEulerAngels.x, targetEulerAngels.y, Mathf.LerpAngle(targetEulerAngels.z, _player.InputReader.InputDirection.x * 30, 0.1f));
+        _player.model.transform.localEulerAngles = new Vector3(targetEulerAngels.x, targetEulerAngels.y, Mathf.LerpAngle(targetEulerAngels.z, -_player.InputReader.InputDirection.x * 30, 0.1f));
     }
 }
