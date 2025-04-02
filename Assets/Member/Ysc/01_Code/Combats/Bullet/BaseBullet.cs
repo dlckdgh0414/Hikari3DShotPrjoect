@@ -7,11 +7,12 @@ namespace Member.Ysc._01_Code.Combat.Bullet
 {
     public abstract class BaseBullet : MonoBehaviour
     {
-        [field: SerializeField] public BulletSettingSO BulletSO { get; protected set; } // 총알 데이터 받기
-        
-        public Rigidbody RbCompo { get; protected set; }
+        [field: SerializeField] private BulletSettingSO BulletSO; // 총알 데이터 받기
         
         protected Vector3 fireDirection;
+        
+        public Rigidbody RbCompo { get; protected set; }
+        public int GetBulletCount => BulletSO.BulletCount;
         
         public void SetDirection(Vector3 direction)
         {
@@ -37,6 +38,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         protected virtual void Hit()
         {
         }
+
 
         protected virtual void BulletInit()
         {
