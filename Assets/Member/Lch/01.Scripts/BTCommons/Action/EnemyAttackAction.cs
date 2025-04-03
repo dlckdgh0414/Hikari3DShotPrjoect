@@ -14,7 +14,17 @@ public partial class EnemyAttackAction : Action
     protected override Status OnStart()
     {
         Attack.Value.EnemyAttack(Target.Value,AttackTimer);
-        return Status.Success;
+        return Status.Running;
+    }
+
+    protected override Status OnUpdate()
+    {
+        if(Attack.Value.IsAttackEnd)
+        {
+            return Status.Success;
+        }
+
+        return Status.Running;
     }
 }
 
