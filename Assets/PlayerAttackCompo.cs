@@ -7,7 +7,7 @@ public class PlayerAttackCompo : MonoBehaviour,IEntityComponent
     private bool isAttack;
 
     private float fireRate = 1f;
-    private float fireTimer = 0f;
+    private float fireTimer = 0.8f;
 
     [SerializeField]
     private GameObject _bullet;

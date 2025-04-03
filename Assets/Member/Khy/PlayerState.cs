@@ -48,8 +48,8 @@ public class PlayerState : EntityState
     private void ClampPosition()
     {
         Vector3 pos = Camera.main.WorldToViewportPoint(_player.transform.position);
-        pos.x = Mathf.Clamp(pos.x,0.1f,0.9f);
-        pos.y = Mathf.Clamp(pos.y, 0.1f, 0.9f);
+        pos.x = Mathf.Clamp01(pos.x);
+        pos.y = Mathf.Clamp01(pos.y);
         _player.transform.position = Camera.main.ViewportToWorldPoint(pos);
     }
 
