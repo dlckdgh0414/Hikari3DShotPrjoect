@@ -1,3 +1,4 @@
+using Member.Ysc._01_Code.Combat.Bullet;
 using UnityEngine;
 
 public class PlayerAttackCompo : MonoBehaviour,IEntityComponent
@@ -6,11 +7,15 @@ public class PlayerAttackCompo : MonoBehaviour,IEntityComponent
 
     private bool isAttack;
 
+    [SerializeField]
+    private GameObject muzzle;
+
+    [SerializeField]
     private float fireRate = 1f;
     private float fireTimer = 0.8f;
 
     [SerializeField]
-    private GameObject _bullet;
+    private BaseBullet _bullet;
 
     public void Initialize(Entity entity)
     {
@@ -40,11 +45,8 @@ public class PlayerAttackCompo : MonoBehaviour,IEntityComponent
     {
         Vector3 worldPosition = _player.InputReader.GetWorldPosition(out RaycastHit hitInfo);
 
-
-        Vector3 atkDir = (worldPosition - transform.position).normalized;
-        Quaternion bulletRotation = Quaternion.LookRotation(atkDir);
-
-        Instantiate(_bullet, transform.position, bulletRotation);
+        BaseBullet bullet = Instantiate(_bullet, muzzle.transform.position, Quaternion.identity);
+        bullet.SetDirection(worldPosition);
     }
 
     private void Debug(bool isClick)
