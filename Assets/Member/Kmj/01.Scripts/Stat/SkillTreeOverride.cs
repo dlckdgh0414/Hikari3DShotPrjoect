@@ -1,30 +1,30 @@
-using System;
 using UnityEngine;
 
 public class SkillTreeOverride : MonoBehaviour
 {
     [SerializeField] private FruitsSO _fruits;
-
-    private void Awake()
-    {
-    }
+    private Player _player;
     public void SetOverrideFruits()
     {
-        if(_fruits.soType == FruitsType.HP)
+        if(_fruits.fruitsType == FruitsType.HP)
         {
-            //_player.HpStat = type.floatValue;
+            
         }
-        else if (_fruits.soType == FruitsType.AttackDamage)
+        else if (_fruits.fruitsType == FruitsType.AttackDamage)
         {
-            //_player.AttackDamage = type.floatValue;
+            
         }
-        else if(_fruits.soType == FruitsType.Speed)
+        else if(_fruits.fruitsType == FruitsType.Speed)
         {
-            //_player.speed = type.floatValue;
+            
         }
-        else if(_fruits.soType == FruitsType.Skill)
+        else if(_fruits.fruitsType == FruitsType.AttackSpeed)
         {
-            //스킬을 불러와서 사용할 수 있겠끔 한다.
+
+        }
+        else if (_fruits.fruitsType == FruitsType.Skill)
+        {
+
         }
         Debug.Log($"{_fruits.name}");
     }
