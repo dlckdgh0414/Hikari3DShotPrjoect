@@ -2,14 +2,11 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using System.Collections.Generic;
-using System.Collections;
-using System.Linq;
 
 public class SkillTreeEditor : EditorWindow
 {
-    private const int Height = 6;
-    private const int Width = 11;
+    private const int Height = 5;
+    private const int Width = 7;
 
     private readonly string _fruitsBtnName = "fruitsButton";
 
@@ -20,11 +17,13 @@ public class SkillTreeEditor : EditorWindow
     [SerializeField] private VisualTreeAsset _treeAsset;
     private VisualElement _background;
     private VisualElement _connectBackground;
+    private VisualElement _previewBackground;
     private Button _createBtn;
     private Button _saveFruitsSOBtn;
     private Button _selectFruitsBtn;
     private TextField _intField; 
-    private TextField _floatField; 
+    private TextField _floatField;
+    private TextField _treeNameField; 
     private DropdownField _fruitsTypeField;
     
     private Color _backgroundColor = new Color(0.15f, 0.15f, 0.15f);
@@ -61,6 +60,9 @@ public class SkillTreeEditor : EditorWindow
         _floatField = tree.Q<TextField>("FloatTextField");
         _selectFruitsBtn = tree.Q<Button>("SelectFruitsData");
         _connectBackground = tree.Q<VisualElement>("connectBackground");
+        _treeNameField = tree.Q<TextField>("TreeNameField");
+        _previewBackground = tree.Q<VisualElement>("PreviewBackground");
+        
         #endregion
         
         for (int y = 0; y < Height; y++) {   
@@ -69,7 +71,8 @@ public class SkillTreeEditor : EditorWindow
                 int localY = y;
                 Button button = new Button();
                 fruitsButtonDatas[localY, localX] = new FruitsButtonData(button);
-
+                fruitsButtonDatas[localY, localX].Position = new Vector2(localX, localY);
+                    
                 button.AddToClassList(_fruitsBtnName);
                 button.style.backgroundColor = Color.grey;
                 _background.Add(button);
@@ -84,6 +87,7 @@ public class SkillTreeEditor : EditorWindow
 
         _selectFruitsBtn.clicked += ToggleSelectMode;
         _saveFruitsSOBtn.clicked += SaveFruitsData;
+        _createBtn.clicked += GenerateTree;
         _fruitsTypeField.RegisterValueChangedCallback(evt => OnFruitsTypeFieldChanged());
     }
 
@@ -97,7 +101,6 @@ public class SkillTreeEditor : EditorWindow
                 buttonCol = hpColor;
                 break;
             case FruitsType.AttackDamage:
-                Debug.Log("sdf");
                 buttonCol = atkDmgColor;
                 break;
             case FruitsType.Speed:
@@ -182,5 +185,55 @@ public class SkillTreeEditor : EditorWindow
         newButton.style.backgroundColor = button.style.backgroundColor;
         
         return newButton;
+    }
+
+    private void GenerateTree()
+    {
+        GameObject prefab = new GameObject();
+        prefab.name = _treeNameField.value;
+
+        for (int y = 0; y < Height; y++)
+        {
+            for (int x = 0; x < Width; x++)
+            {
+                if (fruitsButtonDatas[y, x].isActive)
+                {
+                    GenerateUI(fruitsButtonDatas[y, x]);
+                }
+            }
+        }
+        
+        string path = $"Assets/Member/Kmin/TestTree/{_treeNameField.value}.prefab";
+        PrefabUtility.SaveAsPrefabAsset(prefab, path);
+        DestroyImmediate(prefab);
+    }
+
+    private void GenerateUI(FruitsButtonData data)
+    {
+        if (data.FruitsButtonDataList.Count > 0)
+        {
+            data.FruitsButtonDataList.ForEach(fruits => DrawLine(data.Button, fruits.Button));
+        }
+    }
+    
+    private void DrawLine(Button from, Button to)
+    {
+        Vector2 fromPos = from.worldBound.center;
+        Vector2 toPos = to.worldBound.center;
+
+        VisualElement line = new VisualElement();
+        line.style.position = Position.Absolute;
+        line.style.backgroundColor = Color.white;
+        line.style.width = 2;
+        line.style.height = Vector2.Distance(fromPos, toPos);
+
+        float angle = Mathf.Atan2(toPos.y - fromPos.y, toPos.x - fromPos.x) * Mathf.Rad2Deg;
+        //line.style.transformOrigin = new StyleTransformOrigin(Length.Percent(50f), Length.Percent(0));
+        line.style.rotate = new StyleRotate(new Rotate(angle));
+
+        line.style.left = fromPos.x;
+        line.style.top = fromPos.y;
+
+        _connectBackground.Add(line);
     }
 }

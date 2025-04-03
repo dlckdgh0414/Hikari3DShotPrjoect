@@ -1,13 +1,15 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <Style src="project://database/Assets/Member/Kmin/Editor/SkillTreeEditor.uss?fileID=7433441132597879392&amp;guid=40b8215d881063f4aa0bd7623d6c538b&amp;type=3#SkillTreeEditor" />
-    <engine:VisualElement name="treeBackground" style="flex-grow: 1; height: 400px; flex-wrap: nowrap;">
-        <engine:VisualElement name="Background" style="flex-grow: 1; background-color: rgb(38, 38, 38); margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; flex-wrap: wrap; flex-direction: row; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;" />
+    <engine:VisualElement name="treeBackground" style="flex-grow: 1; height: 400px; flex-wrap: nowrap; flex-direction: row;">
+        <engine:VisualElement name="Background" style="flex-grow: 1; background-color: rgb(38, 38, 38); margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; flex-wrap: wrap; flex-direction: row; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; width: 45%;" />
+        <engine:VisualElement name="previewBackground" style="flex-grow: 1; background-color: rgb(38, 38, 38); margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; flex-wrap: wrap; flex-direction: row; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; width: 45%;" />
     </engine:VisualElement>
-    <engine:VisualElement name="optionBackground" style="flex-grow: 1; height: 25px;">
-        <engine:Button text="Create&#10;" name="CreateButton" style="flex-direction: column; justify-content: flex-start; width: 90%; align-self: center;" />
+    <engine:VisualElement name="optionBackground" style="flex-grow: 1; height: 50px; flex-direction: row; flex-wrap: nowrap;">
+        <engine:TextField label="Tree Name" placeholder-text="enter tree name" name="TreeNameField" style="max-width: 45%; justify-content: flex-start; align-self: auto; align-content: flex-start; height: 19px; flex-grow: 0; flex-shrink: 0; width: 294px;" />
+        <engine:Button text="Create&#10;" name="CreateButton" style="flex-direction: column; justify-content: flex-start; width: 50%; align-self: flex-start; margin-left: 7px;" />
     </engine:VisualElement>
     <engine:VisualElement name="Option" style="flex-grow: 1; flex-direction: row;">
-        <engine:VisualElement name="SOBackground" style="flex-grow: 1; height: 150px; width: 200px;">
+        <engine:VisualElement name="SOBackground" style="flex-grow: 0.5; height: 150px; width: 200px;">
             <engine:Label text="SO Info" name="header" />
             <engine:DropdownField label="Type" name="TypeDropdown" binding-path="fruitsType" style="width: 100%;" />
             <engine:TextField label="IntValue" placeholder-text="filler text" name="IntTextField" style="width: 100%; justify-content: center;" />

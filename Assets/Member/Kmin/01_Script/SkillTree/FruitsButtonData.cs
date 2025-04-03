@@ -10,6 +10,7 @@ public class FruitsButtonData : MonoBehaviour
     
     public List<FruitsButtonData> FruitsButtonDataList = new List<FruitsButtonData>();
     public Button Button { get; set; }
+    public Vector2 Position { get; set; }
     public bool isActive { get; set; }
     public FruitsButtonData(Button button)
     {
