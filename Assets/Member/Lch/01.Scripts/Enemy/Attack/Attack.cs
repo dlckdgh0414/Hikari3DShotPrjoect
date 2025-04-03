@@ -9,7 +9,7 @@ public abstract class Attack : MonoBehaviour
     [field: SerializeField] public BaseBullet bulletPrefab { get; protected set; }
     [field: SerializeField] public Transform[] FirePos { get; protected set; }
 
-    public bool IsAttackEnd { get; private set; }
+    public bool IsAttackEnd { get; set; }
 
     private int _shotCount = 0;
     
@@ -52,14 +52,18 @@ public abstract class Attack : MonoBehaviour
 
     private IEnumerator ManyBulletAttack(float timer,Transform target)
     {
-        bulletPrefab = Instantiate(bulletPrefab, FirePos[_shotCount].position, Quaternion.identity);
-        bulletPrefab.SetDirection(target.position);
-        yield return new WaitForSeconds(timer);
-        _shotCount++;
-        if(_shotCount == FirePos.Length)
+        while (!IsAttackEnd)
         {
-            _shotCount = 0;
-            IsAttackEnd = true;
+            if(_shotCount == FirePos.Length)
+            {
+                IsAttackEnd = true;
+                _shotCount = 0;
+            }
+            bulletPrefab = Instantiate(bulletPrefab, FirePos[_shotCount].position, Quaternion.identity);
+            bulletPrefab.SetDirection(target.position);
+            yield return new WaitForSeconds(timer);
+            _shotCount++;
         }
+       
     }
 }

@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1488681833066584254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3847803564727820084}
+  - component: {fileID: 8290623473059645416}
+  m_Layer: 6
+  m_Name: Health
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3847803564727820084
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488681833066584254}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2580647937395077965}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8290623473059645416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488681833066584254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f29f5b815b4b419b578fa8d3dc7b5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpStat: {fileID: 11400000, guid: 606f03b3110d15a4e9bfc5c679420afd, type: 2}
+  maxHealth: 100
 --- !u!1 &1580933909108102943
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,7 +100,7 @@ MonoBehaviour:
   - {fileID: 2429584258906251065}
   - {fileID: 8744597410062577625}
   - {fileID: 8345478993913034410}
---- !u!1 &2472132886315965396
+--- !u!1 &2504654536916321703
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,44 +108,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1825595123776552760}
-  - component: {fileID: 7802001644116169551}
+  - component: {fileID: 2580647937395077965}
+  - component: {fileID: 9089674690140846694}
   m_Layer: 6
-  m_Name: Health
+  m_Name: Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1825595123776552760
+--- !u!4 &2580647937395077965
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2472132886315965396}
+  m_GameObject: {fileID: 2504654536916321703}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3847803564727820084}
   m_Father: {fileID: 3743453118915852371}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7802001644116169551
+--- !u!114 &9089674690140846694
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2472132886315965396}
+  m_GameObject: {fileID: 2504654536916321703}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31f29f5b815b4b419b578fa8d3dc7b5b, type: 3}
+  m_Script: {fileID: 11500000, guid: ba5c25badd9e4553a406494722761891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpStat: {fileID: 11400000, guid: 606f03b3110d15a4e9bfc5c679420afd, type: 2}
-  maxHealth: 100
+  statOverrideArray:
+  - stat: {fileID: 11400000, guid: 606f03b3110d15a4e9bfc5c679420afd, type: 2}
+    isUseOverride: 1
+    overrideValue: 20
+  - stat: {fileID: 11400000, guid: 35a101e5fd548ba40bec64a86fa30457, type: 2}
+    isUseOverride: 1
+    overrideValue: 4
 --- !u!1 &2953256395804014271
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +415,7 @@ Transform:
   m_Children:
   - {fileID: 50700972151304644}
   - {fileID: 5085798291401300138}
-  - {fileID: 1825595123776552760}
+  - {fileID: 2580647937395077965}
   - {fileID: 5094790904632680094}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -403,6 +455,7 @@ MonoBehaviour:
   - rid: 9000330145074249805
   - rid: 2898964706085830730
   - rid: 2898964706085830731
+  - rid: 2898964737453195407
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
@@ -424,6 +477,14 @@ MonoBehaviour:
           m_Value1: 8424441759805297558
         Name: AttackDelayTime
         m_Value: 0.5
+    - rid: 2898964737453195407
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 4997750086116982637
+          m_Value1: 13344511115664401555
+        Name: ShotDelay
+        m_Value: 0.4
     - rid: 9000330145074249805
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:

@@ -21,9 +21,9 @@ public partial class EnemyAttackAction : Action
     {
         if(Attack.Value.IsAttackEnd)
         {
+            Attack.Value.IsAttackEnd = false;
             return Status.Success;
         }
-
         return Status.Running;
     }
 }

@@ -169,8 +169,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4207552378199527235}
-  - {fileID: 8872649387148873328}
   - {fileID: 4968780873452276080}
+  - {fileID: 2815113001883651246}
   - {fileID: 4189954525041188060}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -210,6 +210,7 @@ MonoBehaviour:
   - rid: 9000330145074249805
   - rid: 2898964706085830730
   - rid: 2898964706085830731
+  - rid: 2898964737453195413
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
@@ -231,6 +232,14 @@ MonoBehaviour:
           m_Value1: 8424441759805297558
         Name: AttackDelayTime
         m_Value: 0.8
+    - rid: 2898964737453195413
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 4997750086116982637
+          m_Value1: 13344511115664401555
+        Name: ShotDelay
+        m_Value: 0.3
     - rid: 9000330145074249805
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -287,7 +296,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!1 &5104249255193913423
+--- !u!1 &4408092351045124563
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -295,44 +304,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8872649387148873328}
-  - component: {fileID: 5825940700521864375}
+  - component: {fileID: 2815113001883651246}
+  - component: {fileID: 8622924746308593825}
   m_Layer: 6
-  m_Name: Health
+  m_Name: Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8872649387148873328
+--- !u!4 &2815113001883651246
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5104249255193913423}
+  m_GameObject: {fileID: 4408092351045124563}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2435909317602361638}
   m_Father: {fileID: 1740059853431745964}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5825940700521864375
+--- !u!114 &8622924746308593825
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5104249255193913423}
+  m_GameObject: {fileID: 4408092351045124563}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31f29f5b815b4b419b578fa8d3dc7b5b, type: 3}
+  m_Script: {fileID: 11500000, guid: ba5c25badd9e4553a406494722761891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpStat: {fileID: 11400000, guid: bc53798e3901b154db687c6bbd4e8aab, type: 2}
-  maxHealth: 100
+  statOverrideArray:
+  - stat: {fileID: 11400000, guid: bc53798e3901b154db687c6bbd4e8aab, type: 2}
+    isUseOverride: 1
+    overrideValue: 20
+  - stat: {fileID: 11400000, guid: 14ac20cc4684dec4fb0307db2bf3b96f, type: 2}
+    isUseOverride: 1
+    overrideValue: 8
 --- !u!1 &5257491359533344686
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,6 +396,52 @@ MonoBehaviour:
   <bulletPrefab>k__BackingField: {fileID: 7494715817369220865, guid: 58bde122a39a41a4996ec6018f19f6f7, type: 3}
   <FirePos>k__BackingField:
   - {fileID: 5048100779388919905}
+--- !u!1 &8199043652690364136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2435909317602361638}
+  - component: {fileID: 8892661753111330236}
+  m_Layer: 6
+  m_Name: Health
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2435909317602361638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199043652690364136}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2815113001883651246}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8892661753111330236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199043652690364136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f29f5b815b4b419b578fa8d3dc7b5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpStat: {fileID: 11400000, guid: bc53798e3901b154db687c6bbd4e8aab, type: 2}
+  maxHealth: 100
 --- !u!1 &8978544059595815219
 GameObject:
   m_ObjectHideFlags: 0
