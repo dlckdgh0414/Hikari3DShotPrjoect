@@ -116,14 +116,14 @@ public class SkillTreeEditor : EditorWindow
     private void SaveFruitsData(FruitsButtonData data) //변경된 SO 데이터 저장
     {
         Debug.Log(data.FruitsButtonSO.intValue);
-        data.FruitsButtonSO.fruitsType = Enum.Parse<FruitsType>(_fruitsTypeField.value);
+        //data.FruitsButtonSO.fruitsType = Enum.Parse<FruitsType>(_fruitsTypeField.value);
         data.FruitsButtonSO.intValue = int.Parse(_intField.value);
         data.FruitsButtonSO.floatValue = float.Parse(_floatField.value);
     }
     
     private void LoadFruitsData(FruitsButtonData data) //선택된 Fruits에 저장된 SO 데이터 로드
     {
-        _fruitsTypeField.value = data.FruitsButtonSO.fruitsType.ToString();
+       // _fruitsTypeField.value = data.FruitsButtonSO.fruitsType.ToString();
         _intField.value = data.FruitsButtonSO.intValue.ToString();
         _floatField.value = data.FruitsButtonSO.floatValue.ToString();
         
