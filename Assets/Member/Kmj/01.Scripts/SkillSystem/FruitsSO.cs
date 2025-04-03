@@ -26,7 +26,6 @@ public class FruitsSO : ScriptableObject
     public float floatValue { get; set; }
     public Skill skillValue { get; set; }
 
-
     public string Value;
 
     public FruitsSO(FruitsType thisType = FruitsType.HP,string value = "")
