@@ -28,7 +28,7 @@ public class CurrencySO : MonoBehaviour
         _currencyDic = new Dictionary<CurrencyType, int>();
     }
 
-    public void ModifyValue(CurrencyType currencyType, ModifyType modifyType, int amount)
+    public void ModifyCurrency(CurrencyType currencyType, ModifyType modifyType, int amount)
     {
         switch (modifyType)
         {

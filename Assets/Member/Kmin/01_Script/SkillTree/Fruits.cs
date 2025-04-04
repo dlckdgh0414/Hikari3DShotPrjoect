@@ -15,11 +15,6 @@ public class Fruits : MonoBehaviour
     private void Awake()
     {
         _fruitsBtn = GetComponentInChildren<Button>();
-        
     }
 
-    private void SDFS()
-    {
-        CurrencySO.Instance.ModifyValue(CurrencyType.Eon, ModifyType.Substract, 100);
-    }
 }

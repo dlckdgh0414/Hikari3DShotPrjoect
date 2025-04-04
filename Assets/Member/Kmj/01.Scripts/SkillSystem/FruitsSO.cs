@@ -12,7 +12,6 @@ public enum statType
     Float, Skill
 }
 
-
 [CreateAssetMenu(fileName = "FruitsSO", menuName = "FruitSO")]
 public class FruitsSO : ScriptableObject
 {
@@ -32,10 +31,6 @@ public class FruitsSO : ScriptableObject
     {
         fruitsType = thisType;
         Value = value;
-    }
-
-    private void OnEnable()
-    {
     }
 
     private void OnValidate()
