@@ -43,37 +43,31 @@ public class Fruits : MonoBehaviour
     [ContextMenu("ConnectLine")]
     private void ConnectLine()
     {
-
         foreach(Fruits f in _connectedFruits)
         {
-            GameObject obj1 = new GameObject($"{f}Nod1");
-            GameObject obj2 = new GameObject($"{f}Nod2");
-            GameObject obj3 = new GameObject($"{f}Nod3");
-            Image node1 = obj1.AddComponent<Image>();
-            Image node2 = obj2.AddComponent<Image>();
-            Image node3 = obj3.AddComponent<Image>();
-            node1.transform.SetParent(transform, false);
-            node2.transform.SetParent(transform, false);
-            node3.transform.SetParent(transform, false);
+            GameObject[] obj = new GameObject[3];
+            Image[] nodes = new Image[3];
 
-            Image targetFruits = f.GetComponentInChildren<Image>();
+            for (int i = 0; i < 3; i++) {
+                obj[i] = new GameObject($"{f}Node{i + 1}");
+                nodes[i] = obj[i].AddComponent<Image>();
+                nodes[i].transform.SetParent(transform, false);
+            }
 
             Vector2 node1Pos = Vector2.zero;
             Vector2 selfPos = _fruitsBtn.GetComponent<Image>().rectTransform.position;
-            Vector2 fruitsPos = targetFruits.rectTransform.position;
+            Vector2 fruitsPos = f.GetComponentInChildren<Image>().rectTransform.position;
 
             for (int i = 0; i < 2; i++)
             {
-                if (node1Pos == Vector2.zero)
-                {
+                if (node1Pos == Vector2.zero) {
                     node1Pos = new Vector2(selfPos.x, (fruitsPos.y + selfPos.y) / 2);
-                    ConnectNode(selfPos, node1Pos, node1, true);
+                    ConnectNode(selfPos, node1Pos, nodes[0], true);
                 }
 
                 Vector3 node2Pos = new Vector2(fruitsPos.x, node1Pos.y);
-
-                ConnectNode(node1Pos, node2Pos, node2, false);
-                ConnectNode(node2Pos, fruitsPos, node3, true);
+                ConnectNode(node1Pos, node2Pos, nodes[1], false);
+                ConnectNode(node2Pos, fruitsPos, nodes[2], true);
             }
         }
     }
