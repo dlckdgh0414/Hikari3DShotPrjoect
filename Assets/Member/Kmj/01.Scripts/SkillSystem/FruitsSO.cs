@@ -17,6 +17,7 @@ public class FruitsSO : ScriptableObject
 {
 
     [SerializeField] private string FruitsName;
+    public int price;
 
     public FruitsType fruitsType;
     private statType _statType;

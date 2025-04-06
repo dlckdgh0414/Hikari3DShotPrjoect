@@ -17,16 +17,18 @@ public enum ModifyType
     Divine
 }
 
-public class CurrencySO : MonoBehaviour
+public class CurrencyManager : MonoBehaviour
 {
     private Dictionary<CurrencyType, int> _currencyDic;
     
-    public static CurrencySO Instance;
+    public static CurrencyManager Instance;
 
     private void Awake()
     {
         _currencyDic = new Dictionary<CurrencyType, int>();
     }
+
+    public int GetCurrency(CurrencyType currencyType) => _currencyDic[currencyType];
 
     public void ModifyCurrency(CurrencyType currencyType, ModifyType modifyType, int amount)
     {
