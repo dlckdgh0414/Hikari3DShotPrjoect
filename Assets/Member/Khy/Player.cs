@@ -10,6 +10,8 @@ public class Player : Entity
     [field: SerializeField] public GameObject model { get; private set; }
 
     private StateMachine _stateMachine;
+    [field: SerializeField] public float zPos { get; set; }
+
 
     protected override void Awake()
     {

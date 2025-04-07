@@ -50,6 +50,7 @@ public class PlayerState : EntityState
         Vector3 pos = Camera.main.WorldToViewportPoint(_player.transform.position);
         pos.x = Mathf.Clamp01(pos.x);
         pos.y = Mathf.Clamp01(pos.y);
+        pos.z = _player.zPos;
         _player.transform.position = Camera.main.ViewportToWorldPoint(pos);
     }
 

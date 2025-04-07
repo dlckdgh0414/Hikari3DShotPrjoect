@@ -14,6 +14,8 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
     public Vector2 InputDirection { get; private set; }
     private InputControlls _controlls;
 
+    public LayerMask whatIShootPlace;
+
     public Vector2 MousePosition { get; private set; }
     private Vector3 _beforeMouseWorldPos;
     private Vector3 _worldPosition;
@@ -70,7 +72,7 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
     {
         Camera mainCam = Camera.main;
         Ray camRay = mainCam.ScreenPointToRay(MousePosition);
-        bool isHit = Physics.Raycast(camRay, out hit, mainCam.farClipPlane);
+        bool isHit = Physics.Raycast(camRay, out hit, mainCam.farClipPlane,whatIShootPlace);
         if (isHit)
         {
             _worldPosition = hit.point;
