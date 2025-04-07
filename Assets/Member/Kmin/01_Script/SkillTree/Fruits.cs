@@ -2,37 +2,24 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using System.Linq;
 
 public class Fruits : MonoBehaviour, IFruits
 {
     [SerializeField] private FruitsSO fruitsSO;
     [SerializeField] private List<Fruits> _connectedFruits;
 
-    [field:SerializeField] public List<Image> ConnectedNode { get; private set; }
-
-    public event Action OnFruitsPurchase;
+    public List<Image> ConnectedNode { get; private set; }
 
     public bool IsActive { get; private set; }
 
     public Button FruitsButton { get; private set; }
 
-    public Fruits ParentFruits { get; private set; } = null;
+    public event Action OnPurchase;
 
-    public void Initialize(Fruits parent)
+    public void Initialize()
     {
-        ParentFruits = parent;
         FruitsButton = GetComponentInChildren<Button>();
         FruitsButton.onClick.AddListener(PurchaseFruits);
-
-        OnFruitsPurchase += HandleFruitsPurchase;
-
-        Transform nodeTrm = transform.Find("Nodes");
-
-        for (int i = 0; i < 3; i++)
-        {
-            ConnectedNode.Add(nodeTrm.GetChild(i).GetComponent<Image>());
-        }
     }
 
     private void PurchaseFruits()
@@ -42,18 +29,11 @@ public class Fruits : MonoBehaviour, IFruits
             CurrencyManager.Instance.ModifyCurrency
                 (CurrencyType.Eon, ModifyType.Substract, fruitsSO.price);
 
-            OnFruitsPurchase?.Invoke();
+            OnPurchase?.Invoke();
+
+            IsActive = true;
+            ConnectedNode.ForEach(line => line.color = UnityEngine.Random.ColorHSV());
         }
-    }
-
-    [ContextMenu("TestPurchase")]
-    private void HandleFruitsPurchase()
-    {
-        IsActive = true;
-        ConnectedNode.ForEach(line => Debug.Log(line));
-
-        ConnectedNode.ForEach(line => line.color = Color.red);
-        Debug.Log("±¸¸Å");
     }
 
     #region ConnectLineOnEditor
@@ -92,6 +72,31 @@ public class Fruits : MonoBehaviour, IFruits
                 ConnectNode(node2Pos, fruitsPos, nodes[2], true);
             }
         }
+    }
+
+    [ContextMenu("ClearAllNode")]
+    private void ClearAllNode()
+    {
+        foreach(var fruits in _connectedFruits)
+        {
+            foreach(var node in fruits.ConnectedNode)
+            {
+                DestroyImmediate(node.gameObject);
+            }
+
+            fruits.ConnectedNode.Clear();
+        }
+    }
+
+    [ContextMenu("ClearNode")]
+    private void ClearNode()
+    {
+        foreach (var node in ConnectedNode)
+        {
+            DestroyImmediate(node.gameObject);
+        }
+
+        ConnectedNode.Clear();
     }
 
     private void ConnectNode(Vector3 pos1, Vector3 pos2, Image node, bool isVert)
