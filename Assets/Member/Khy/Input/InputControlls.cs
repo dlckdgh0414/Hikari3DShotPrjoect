@@ -71,6 +71,15 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Value"",
+                    ""id"": ""ec8dc92a-1e3d-467b-9895-22f99be22dc7"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,17 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
                     ""action"": ""ChargeAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""30b8ebaa-547a-4b7a-a3a8-fa810b705704"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -185,6 +205,7 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
         m_PlayerMap_RightWing = m_PlayerMap.FindAction("RightWing", throwIfNotFound: true);
         m_PlayerMap_Move = m_PlayerMap.FindAction("Move", throwIfNotFound: true);
         m_PlayerMap_ChargeAttack = m_PlayerMap.FindAction("ChargeAttack", throwIfNotFound: true);
+        m_PlayerMap_Aim = m_PlayerMap.FindAction("Aim", throwIfNotFound: true);
     }
 
     ~@InputControlls()
@@ -256,6 +277,7 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMap_RightWing;
     private readonly InputAction m_PlayerMap_Move;
     private readonly InputAction m_PlayerMap_ChargeAttack;
+    private readonly InputAction m_PlayerMap_Aim;
     public struct PlayerMapActions
     {
         private @InputControlls m_Wrapper;
@@ -265,6 +287,7 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
         public InputAction @RightWing => m_Wrapper.m_PlayerMap_RightWing;
         public InputAction @Move => m_Wrapper.m_PlayerMap_Move;
         public InputAction @ChargeAttack => m_Wrapper.m_PlayerMap_ChargeAttack;
+        public InputAction @Aim => m_Wrapper.m_PlayerMap_Aim;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -289,6 +312,9 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
             @ChargeAttack.started += instance.OnChargeAttack;
             @ChargeAttack.performed += instance.OnChargeAttack;
             @ChargeAttack.canceled += instance.OnChargeAttack;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
         }
 
         private void UnregisterCallbacks(IPlayerMapActions instance)
@@ -308,6 +334,9 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
             @ChargeAttack.started -= instance.OnChargeAttack;
             @ChargeAttack.performed -= instance.OnChargeAttack;
             @ChargeAttack.canceled -= instance.OnChargeAttack;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
         }
 
         public void RemoveCallbacks(IPlayerMapActions instance)
@@ -332,5 +361,6 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
         void OnRightWing(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnChargeAttack(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
     }
 }
