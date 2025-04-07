@@ -12,12 +12,12 @@ public enum statType
     Float, Skill
 }
 
-
 [CreateAssetMenu(fileName = "FruitsSO", menuName = "FruitSO")]
 public class FruitsSO : ScriptableObject
 {
 
     [SerializeField] private string FruitsName;
+    public int price;
 
     public FruitsType fruitsType;
     private statType _statType;
@@ -26,17 +26,12 @@ public class FruitsSO : ScriptableObject
     public float floatValue { get; set; }
     public Skill skillValue { get; set; }
 
-
     public string Value;
 
     public FruitsSO(FruitsType thisType = FruitsType.HP,string value = "")
     {
         fruitsType = thisType;
         Value = value;
-    }
-
-    private void OnEnable()
-    {
     }
 
     private void OnValidate()
