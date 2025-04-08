@@ -26,8 +26,7 @@ public class Fruits : MonoBehaviour, IFruits
     {
         if(fruitsSO.price < CurrencyManager.Instance.GetCurrency(CurrencyType.Eon) && !IsActive)
         {
-            CurrencyManager.Instance.ModifyCurrency
-                (CurrencyType.Eon, ModifyType.Substract, fruitsSO.price);
+            CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Substract, fruitsSO.price);
 
             OnPurchase?.Invoke();
 
@@ -79,11 +78,7 @@ public class Fruits : MonoBehaviour, IFruits
     {
         foreach(var fruits in _connectedFruits)
         {
-            foreach(var node in fruits.ConnectedNode)
-            {
-                DestroyImmediate(node.gameObject);
-            }
-
+            fruits.ConnectedNode.ForEach(n => DestroyImmediate(n.gameObject));
             fruits.ConnectedNode.Clear();
         }
     }
@@ -91,11 +86,7 @@ public class Fruits : MonoBehaviour, IFruits
     [ContextMenu("ClearNode")]
     private void ClearNode()
     {
-        foreach (var node in ConnectedNode)
-        {
-            DestroyImmediate(node.gameObject);
-        }
-
+        ConnectedNode.ForEach(n => DestroyImmediate(n.gameObject));
         ConnectedNode.Clear();
     }
 
