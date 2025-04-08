@@ -7,31 +7,39 @@ public class Fruits : MonoBehaviour, IFruits
 {
     [SerializeField] private FruitsSO fruitsSO;
     [SerializeField] private List<Fruits> _connectedFruits;
-
+    [SerializeField] private bool isRootFruits;
+    
+    [HideInInspector]
     [field:SerializeField] public List<Image> ConnectedNode { get; private set; }
-
-    public bool IsActive { get; private set; }
 
     public Button FruitsButton { get; private set; } = null;
 
-    public event Action OnPurchase;
+    public bool IsActive { get; set; }
+    public bool CanPurchase { get; private set; } = false;
 
     public void Initialize()
     {
+        CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Set, 10000);
         FruitsButton = GetComponentInChildren<Button>();
         FruitsButton.onClick.AddListener(PurchaseFruits);
+
+        if(isRootFruits)
+        {
+            _connectedFruits.ForEach(f => f.CanPurchase = true);
+        }
     }
 
     private void PurchaseFruits()
     {
-        //if(fruitsSO.price < CurrencyManager.Instance.GetCurrency(CurrencyType.Eon) && !IsActive)
+        if(fruitsSO.price <= CurrencyManager.Instance.GetCurrency(CurrencyType.Eon) || !IsActive)
         {
-            //CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Substract, fruitsSO.price);
+            if (!CanPurchase) return;
 
-            OnPurchase?.Invoke();
+            CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Substract, fruitsSO.price);
 
             IsActive = true;
             ConnectedNode.ForEach(line => line.color = Color.red);
+            _connectedFruits.ForEach(f => f.CanPurchase = true);
         }
     }
 
