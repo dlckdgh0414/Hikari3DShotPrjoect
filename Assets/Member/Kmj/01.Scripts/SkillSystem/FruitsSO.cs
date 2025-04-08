@@ -16,8 +16,9 @@ public enum statType
 public class FruitsSO : ScriptableObject
 {
 
-    [SerializeField] private string FruitsName;
+    public string fruitsName;
     public int price;
+    public Sprite icon;
 
     public FruitsType fruitsType;
     private statType _statType;
@@ -36,7 +37,7 @@ public class FruitsSO : ScriptableObject
 
     private void OnValidate()
     {
-        FruitsName = this.name;
+        fruitsName = this.name;
         SeTValue();
     }
 

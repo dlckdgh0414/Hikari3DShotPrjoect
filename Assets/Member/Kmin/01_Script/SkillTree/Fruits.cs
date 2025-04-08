@@ -8,11 +8,11 @@ public class Fruits : MonoBehaviour, IFruits
     [SerializeField] private FruitsSO fruitsSO;
     [SerializeField] private List<Fruits> _connectedFruits;
 
-    public List<Image> ConnectedNode { get; private set; }
+    [field:SerializeField] public List<Image> ConnectedNode { get; private set; }
 
     public bool IsActive { get; private set; }
 
-    public Button FruitsButton { get; private set; }
+    public Button FruitsButton { get; private set; } = null;
 
     public event Action OnPurchase;
 
@@ -24,14 +24,14 @@ public class Fruits : MonoBehaviour, IFruits
 
     private void PurchaseFruits()
     {
-        if(fruitsSO.price < CurrencyManager.Instance.GetCurrency(CurrencyType.Eon) && !IsActive)
+        //if(fruitsSO.price < CurrencyManager.Instance.GetCurrency(CurrencyType.Eon) && !IsActive)
         {
-            CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Substract, fruitsSO.price);
+            //CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Substract, fruitsSO.price);
 
             OnPurchase?.Invoke();
 
             IsActive = true;
-            ConnectedNode.ForEach(line => line.color = UnityEngine.Random.ColorHSV());
+            ConnectedNode.ForEach(line => line.color = Color.red);
         }
     }
 
@@ -41,7 +41,9 @@ public class Fruits : MonoBehaviour, IFruits
     {
         foreach (Fruits f in _connectedFruits)
         {
-            f.ConnectedNode.Clear();
+/*            if (f.ConnectedNode != null)
+                f.ConnectedNode.Clear();*/
+
             Transform root = f.transform.Find("Nodes");
             GameObject[] obj = new GameObject[3];
             Image[] nodes = new Image[3];
