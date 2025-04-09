@@ -12,16 +12,8 @@ public partial class PlayEffectAction : Action
 
     protected override Status OnStart()
     {
-        return Status.Running;
-    }
-
-    protected override Status OnUpdate()
-    {
+        Effect.Value.Play();
         return Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
     }
 }
 
