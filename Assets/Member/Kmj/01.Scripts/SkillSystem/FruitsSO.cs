@@ -12,31 +12,26 @@ public enum statType
     Float, Skill
 }
 
-
 [CreateAssetMenu(fileName = "FruitsSO", menuName = "FruitSO")]
 public class FruitsSO : ScriptableObject
 {
 
     [SerializeField] private string FruitsName;
+    public int price;
 
-    public FruitsType soType;
+    public FruitsType fruitsType;
     private statType _statType;
 
     public int intValue { get; set; }
     public float floatValue { get; set; }
     public Skill skillValue { get; set; }
 
-
     public string Value;
 
     public FruitsSO(FruitsType thisType = FruitsType.HP,string value = "")
     {
-        soType = thisType;
+        fruitsType = thisType;
         Value = value;
-    }
-
-    private void OnEnable()
-    {
     }
 
     private void OnValidate()
@@ -47,26 +42,26 @@ public class FruitsSO : ScriptableObject
 
     private void SeTValue()
     {
-        if (soType == FruitsType.HP || soType == FruitsType.AttackDamage 
-            || soType == FruitsType.Speed || soType == FruitsType.AttackSpeed)
+        if (fruitsType == FruitsType.HP || fruitsType == FruitsType.AttackDamage 
+                                        || fruitsType == FruitsType.Speed || fruitsType == FruitsType.AttackSpeed)
         {
             _statType = statType.Float;
 
             if (Value == string.Empty)
             {
-                Debug.Log("³Ê °ª ¾È³ÖÀ½");
+                Debug.Log("Â³ÃŠ Â°Âª Â¾ÃˆÂ³Ã–Ã€Â½");
             }
             else if(Value != string.Empty)
             {
                 floatValue = float.Parse(Value);
             }
         }
-        else if (soType == FruitsType.Skill)
+        else if (fruitsType == FruitsType.Skill)
         {
             _statType = statType.Skill;
             if (Value == string.Empty)
             {
-                Debug.Log("³Ê °ª ¾È³ÖÀ½");
+                Debug.Log("Â³ÃŠ Â°Âª Â¾ÃˆÂ³Ã–Ã€Â½");
             }
             else
             {

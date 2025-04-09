@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Member.Ysc._01_Code.Combat.Bullet
 {
@@ -7,6 +8,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         protected override void BulletInit()
         {
             base.BulletInit();
+            
         }
     }
 }
