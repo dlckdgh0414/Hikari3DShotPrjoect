@@ -7,5 +7,5 @@ public class SkillTreeEventChannel : MonoBehaviour
 
 public class SkillTreeEvent : GameEvent
 {
-
+    public FruitsSO fruitsSO;
 }

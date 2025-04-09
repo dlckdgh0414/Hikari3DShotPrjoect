@@ -15,7 +15,6 @@ public enum statType
 [CreateAssetMenu(fileName = "FruitsSO", menuName = "FruitSO")]
 public class FruitsSO : ScriptableObject
 {
-
     public string fruitsName;
     public int price;
     public Sprite icon;
@@ -23,11 +22,16 @@ public class FruitsSO : ScriptableObject
     public FruitsType fruitsType;
     private statType _statType;
 
-    public int intValue { get; set; }
-    public float floatValue { get; set; }
-    public Skill skillValue { get; set; }
+    public int intValue;
+    public float floatValue;
+    public Skill skillValue;
+
+    public Fruits Fruits { get; set; }
 
     public string Value;
+
+    [TextArea]
+    public string description;
 
     public FruitsSO(FruitsType thisType = FruitsType.HP,string value = "")
     {

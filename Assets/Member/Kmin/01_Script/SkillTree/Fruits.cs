@@ -15,40 +15,46 @@ public class Fruits : MonoBehaviour, IFruits
     
     [HideInInspector]
     [field:SerializeField] public List<Image> ConnectedNode { get; private set; }
-
     public Button FruitsButton { get; private set; } = null;
-
     public bool IsActive { get; set; }
     public bool CanPurchase { get; private set; } = false;
 
-    [SerializeField, HideInInspector] private string uniqueID;
+    private SkillTreeEvent _skillTreeEvent = SkillTreeEventChannel.SkillTreeEvent;
 
     public void Initialize()
     {
         CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Set, 10000);
         FruitsButton = GetComponentInChildren<Button>();
-        FruitsButton.onClick.AddListener(PurchaseFruits);
+        FruitsButton.onClick.AddListener(SelectFruits);
+        fruitsSO.Fruits = this;
 
-        if(isRootFruits)
+        if(isRootFruits) _connectedFruits.ForEach(f => f.CanPurchase = true);
+    }
+
+    public void SelectFruits()
+    {
+        Debug.Log("FruitsSelect");
+        _skillTreeEvent.fruitsSO = fruitsSO;
+        eventChannelSO.RaiseEvent(_skillTreeEvent);
+    }
+
+    public void PurchaseFruits()
+    {
+        if (fruitsSO.price <= CurrencyManager.Instance.GetCurrency(CurrencyType.Eon) && !IsActive && CanPurchase)
         {
+            CurrencyManager.Instance.ModifyCurrency
+                (CurrencyType.Eon, ModifyType.Substract, fruitsSO.price);
             _connectedFruits.ForEach(f => f.CanPurchase = true);
+            IsActive = true;
+
+            ChangeColor();
         }
     }
 
-    private void PurchaseFruits()
+    private void ChangeColor()
     {
-        if(fruitsSO.price <= CurrencyManager.Instance.GetCurrency(CurrencyType.Eon) || !IsActive)
-        {
-            if (!CanPurchase) return;
-
-            CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Substract, fruitsSO.price);
-
-            SkillTreeEvent skillTreeEvent = SkillTreeEventChannel.SkillTreeEvent;
-            eventChannelSO.RaiseEvent(skillTreeEvent);
-            ConnectedNode.ForEach(line => line.color = Color.red);
-            _connectedFruits.ForEach(f => f.CanPurchase = true);
-            IsActive = true;
-        }
+        ConnectedNode.ForEach(line => line.color = Color.red);
+        //여기에 연출 추가 예정  
     }
 
     #region ConnectLineOnEditor
