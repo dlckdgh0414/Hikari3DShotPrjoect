@@ -2,9 +2,13 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEditor;
+using System.Linq;
+using System.Diagnostics.Tracing;
 
 public class Fruits : MonoBehaviour, IFruits
 {
+    [SerializeField] private GameEventChannelSO eventChannelSO;
     [SerializeField] private FruitsSO fruitsSO;
     [SerializeField] private List<Fruits> _connectedFruits;
     [SerializeField] private bool isRootFruits;
@@ -16,6 +20,8 @@ public class Fruits : MonoBehaviour, IFruits
 
     public bool IsActive { get; set; }
     public bool CanPurchase { get; private set; } = false;
+
+    [SerializeField, HideInInspector] private string uniqueID;
 
     public void Initialize()
     {
@@ -37,9 +43,11 @@ public class Fruits : MonoBehaviour, IFruits
 
             CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Substract, fruitsSO.price);
 
-            IsActive = true;
+            SkillTreeEvent skillTreeEvent = SkillTreeEventChannel.SkillTreeEvent;
+            eventChannelSO.RaiseEvent(skillTreeEvent);
             ConnectedNode.ForEach(line => line.color = Color.red);
             _connectedFruits.ForEach(f => f.CanPurchase = true);
+            IsActive = true;
         }
     }
 
