@@ -72,8 +72,4 @@ public abstract class Entity : MonoBehaviour, IDamageable
     public void ApplyDamage(float damage, Vector2 direction, Entity dealer)
         => OnDamage?.Invoke(damage, direction, dealer);
 
-    public void AfterInit()
-    {
-        throw new NotImplementedException();
-    }
 }

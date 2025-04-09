@@ -16,12 +16,12 @@ public partial class PlayerCheckerAction : Action
         Debug.Assert(Self != null, $"you not Self have");
         if (Self.Value.PlayerFinder.target == null)
         {
-            Debug.Log("Å¸°Ù¾øÀ½");
+            Debug.Log("íƒ€ê²Ÿì—†ìŒ");
             return Status.Failure;
         }
         if (Self.Value.PlayerFinder == null)
         {
-            Debug.Log("PlayerFinder¾øÀ½");
+            Debug.Log("PlayerFinderì—†ìŒ");
             return Status.Failure;
         }
         Target.Value = Self.Value.PlayerFinder.target.transform;
