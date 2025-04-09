@@ -58,9 +58,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8999362906901587695}
-  - component: {fileID: 3308374702262520649}
   - component: {fileID: 8299065827990993155}
   - component: {fileID: 6776544430331641507}
+  - component: {fileID: 3090193355891803411}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -86,25 +86,6 @@ Transform:
   - {fileID: 6117376433642705126}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3308374702262520649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6785985155981875351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b0775b8493c448280e8e459434944f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnHit:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDead:
-    m_PersistentCalls:
-      m_Calls: []
-  <PlayerFinder>k__BackingField: {fileID: 11400000, guid: a8f5956115900724b887c83261e903a8, type: 2}
 --- !u!114 &8299065827990993155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Graph: {fileID: 4531591371395837788, guid: b4ac2b5300ea74e45bf6f0be4dad1a11, type: 2}
+  m_Graph: {fileID: 4531591371395837788, guid: ceb02307ca2e25a4aafca311e35550bc, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 6282192128325189723
   m_IsInitialised: 0
@@ -126,7 +107,8 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 6282192128325189723
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]',
+        ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
           m_Value0: 1
@@ -160,6 +142,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3090193355891803411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6785985155981875351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5296112bb80c3b47835973f5f061b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDead:
+    m_PersistentCalls:
+      m_Calls: []
+  <PlayerFinder>k__BackingField: {fileID: 11400000, guid: a8f5956115900724b887c83261e903a8,
+    type: 2}
 --- !u!1 &8325209121560126546
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,4 +292,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9753a897656747c49a6f9014a24563f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 0}
+  <bulletPrefab>k__BackingField: {fileID: 0}
+  <FirePos>k__BackingField: []
