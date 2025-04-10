@@ -42,11 +42,6 @@ public class CurrencyManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    private void Update()
-    {
-        testTxt.text = _currencyDic[CurrencyType.Eon].ToString();
-    }
-
     public int GetCurrency(CurrencyType currencyType) => _currencyDic[currencyType];
 
     public void ModifyCurrency(CurrencyType currencyType, ModifyType modifyType, int amount)

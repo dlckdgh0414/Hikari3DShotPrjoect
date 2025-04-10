@@ -15,7 +15,7 @@ public class RollDataSO : ScriptableObject
     private string prefabPath = "Assets/Member/KimMin/03Prefab/SkillText";
 
 #if UNITY_EDITOR
-    private void OnValidate()
+    /*private void OnValidate()
     {
         string path = AssetDatabase.GetAssetPath(this);
         string fileName = Path.GetFileNameWithoutExtension(path);
@@ -31,6 +31,6 @@ public class RollDataSO : ScriptableObject
                 skillText = AssetDatabase.LoadAssetAtPath<TextMeshProUGUI>(file);
             }
         }
-    }
+    }*/
 #endif
 }
