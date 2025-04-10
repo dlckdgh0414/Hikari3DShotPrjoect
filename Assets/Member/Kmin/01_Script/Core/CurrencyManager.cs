@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public enum CurrencyType
 {
-    Eon
+    Eon, Test1
 }
 
 public enum ModifyType
@@ -19,13 +20,31 @@ public enum ModifyType
 
 public class CurrencyManager : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI testTxt;
     private Dictionary<CurrencyType, int> _currencyDic;
     
     public static CurrencyManager Instance;
 
     private void Awake()
     {
-        _currencyDic = new Dictionary<CurrencyType, int>();
+        _currencyDic = new Dictionary<CurrencyType, int>
+        {
+            { CurrencyType.Eon, 0 },
+            { CurrencyType.Test1, 0 }
+        };
+
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+            Destroy(gameObject);
+    }
+
+    private void Update()
+    {
+        testTxt.text = _currencyDic[CurrencyType.Eon].ToString();
     }
 
     public int GetCurrency(CurrencyType currencyType) => _currencyDic[currencyType];

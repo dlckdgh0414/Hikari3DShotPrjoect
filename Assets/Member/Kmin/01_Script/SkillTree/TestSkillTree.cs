@@ -1,15 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillTree : MonoBehaviour
+public class TestSkillTree : MonoBehaviour
 {
     [SerializeField] private List<Fruits> fruitsList;
+    [SerializeField] private SkillTreeSO skillTreeSO;
 
     private void Awake()
     {
-        foreach(var fruits in fruitsList)
-        {
-            //fruits.Initialize();
-        }
+        fruitsList.ForEach(f => f.Initialize());
     }
 }
