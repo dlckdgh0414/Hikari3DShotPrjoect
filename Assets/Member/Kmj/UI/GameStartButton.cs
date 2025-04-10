@@ -55,7 +55,7 @@ public class GameStartButton : MonoBehaviour
 
     public void OpenSelectSkill()
     {
-        OpenSetting("Select");
+        OpenSetting("SelectSkill");
     }
 
     private void Update()
@@ -115,7 +115,6 @@ public class GameStartButton : MonoBehaviour
             if (setting != null && setting.name.Contains(name))
                 return setting;
         }
-
         return null;
     }
 
