@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class Player : Entity
@@ -46,6 +47,9 @@ public class Player : Entity
         IsDead = true;
         _stateMachine.ChangeState("DEAD");
     }
+
+    public void SetZpos(float changeZPos)
+    => DOTween.To(()=> zPos,x=> zPos=x, changeZPos, 0.2f);
 
     protected override void HandleHit()
     {
