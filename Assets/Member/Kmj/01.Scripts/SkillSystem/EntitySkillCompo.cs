@@ -55,6 +55,7 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponent
 
     public void CurrentTimeClear(string name)
     {
+        //스킬을 클리어함
         skillList.GetValueOrDefault(name).currentcoolTime = 0;
     }
 
