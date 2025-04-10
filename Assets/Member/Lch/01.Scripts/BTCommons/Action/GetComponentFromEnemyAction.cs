@@ -14,8 +14,8 @@ public partial class GetComponentFromEnemyAction : Action
 
     protected override Status OnStart()
     {
+        Debug.Assert(BtEnemy != null,$"¾Ó ±â¸ð¶ì");
         Enemy enemy = BtEnemy.Value;
-        Debug.Assert(enemy != null,$"¾Ó ±â¸ð¶ì");
         SetVariableToBT(enemy, "Mover", enemy.GetCompo<EnemyMovement>());
         SetVariableToBT(enemy, "EnemyAttack", enemy.GetComponentInChildren<Attack>());
 
