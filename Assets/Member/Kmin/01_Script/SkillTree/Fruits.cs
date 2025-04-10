@@ -4,28 +4,40 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Linq;
 
-public class Fruits : MonoBehaviour
+public class Fruits : MonoBehaviour, IFruits
 {
     [SerializeField] private FruitsSO fruitsSO;
     [SerializeField] private List<Fruits> _connectedFruits;
 
+    [field:SerializeField] public List<Image> ConnectedNode { get; private set; }
+
     public event Action OnFruitsPurchase;
 
-    public bool IsConnected { get; private set; }
+    public bool IsActive { get; private set; }
 
-    [SerializeField] private Button _fruitsBtn;
+    public Button FruitsButton { get; private set; }
 
-    private void Awake()
+    public Fruits ParentFruits { get; private set; } = null;
+
+    public void Initialize(Fruits parent)
     {
-        _fruitsBtn = GetComponentInChildren<Button>();
-        _fruitsBtn.onClick.AddListener(PurchaseFruits);
+        ParentFruits = parent;
+        FruitsButton = GetComponentInChildren<Button>();
+        FruitsButton.onClick.AddListener(PurchaseFruits);
 
         OnFruitsPurchase += HandleFruitsPurchase;
+
+        Transform nodeTrm = transform.Find("Nodes");
+
+        for (int i = 0; i < 3; i++)
+        {
+            ConnectedNode.Add(nodeTrm.GetChild(i).GetComponent<Image>());
+        }
     }
 
     private void PurchaseFruits()
     {
-        if(fruitsSO.price < CurrencyManager.Instance.GetCurrency(CurrencyType.Eon))
+        if(fruitsSO.price < CurrencyManager.Instance.GetCurrency(CurrencyType.Eon) && !IsActive)
         {
             CurrencyManager.Instance.ModifyCurrency
                 (CurrencyType.Eon, ModifyType.Substract, fruitsSO.price);
@@ -34,28 +46,38 @@ public class Fruits : MonoBehaviour
         }
     }
 
+    [ContextMenu("TestPurchase")]
     private void HandleFruitsPurchase()
     {
-        _connectedFruits.Where(f => f.IsConnected == false).ToList().ForEach(f => f.ConnectLine());
+        IsActive = true;
+        ConnectedNode.ForEach(line => Debug.Log(line));
+
+        ConnectedNode.ForEach(line => line.color = Color.red);
+        Debug.Log("±¸¸Å");
     }
 
     #region ConnectLineOnEditor
     [ContextMenu("ConnectLine")]
     private void ConnectLine()
     {
-        foreach(Fruits f in _connectedFruits)
+        foreach (Fruits f in _connectedFruits)
         {
+            f.ConnectedNode.Clear();
+            Transform root = f.transform.Find("Nodes");
             GameObject[] obj = new GameObject[3];
             Image[] nodes = new Image[3];
 
             for (int i = 0; i < 3; i++) {
-                obj[i] = new GameObject($"{f}Node{i + 1}");
+                obj[i] = new GameObject($"Node{i}");
                 nodes[i] = obj[i].AddComponent<Image>();
-                nodes[i].transform.SetParent(transform, false);
+                nodes[i].transform.SetParent(root, false);
+
+                f.ConnectedNode.Add(nodes[i]);
             }
 
+            var rect = transform as RectTransform;
             Vector2 node1Pos = Vector2.zero;
-            Vector2 selfPos = _fruitsBtn.GetComponent<Image>().rectTransform.position;
+            Vector2 selfPos = rect.position;
             Vector2 fruitsPos = f.GetComponentInChildren<Image>().rectTransform.position;
 
             for (int i = 0; i < 2; i++)
