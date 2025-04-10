@@ -1,25 +1,14 @@
 ﻿using UnityEngine;
 using Unity.Behavior;
 
-namespace Member.Ysc._01_Code.Agent.Enemy.BT
+namespace Member.Ysc._01_Code.Agent.Enemies.BT
 {
-    public abstract class BTEnemy : Entity
+    public abstract class BTEnemy : Enemy
     {
-        protected BehaviorGraphAgent btAgent;
         private StateEventChange _stateChannel;
         private BlackboardVariable<BTEnemyState> _state;
-        [field: SerializeField] public EntityFinderSO PlayerFinder { get; protected set; }
 
-        protected override void AfterInitialize()
-        {
-            base.AfterInitialize();
-            btAgent = GetComponent<BehaviorGraphAgent>();
-            Debug.Assert(btAgent != null, $"{gameObject.name} does not have an BehaviorGraphAgent");
-            Debug.Log("BT에너미 후 초기화");
-        }
-
-
-        protected virtual void Start()
+        protected override void Start()
         {
             BlackboardVariable<StateEventChange> stateChannelVariable =
                 GetBlackboardVariable<StateEventChange>("StateChannel");
@@ -27,16 +16,6 @@ namespace Member.Ysc._01_Code.Agent.Enemy.BT
             Debug.Assert(_stateChannel != null, $"StateChannel variable is null {gameObject.name}");
 
             _state = GetBlackboardVariable<BTEnemyState>("EnemyState");
-        }
-
-        public BlackboardVariable<T> GetBlackboardVariable<T>(string key)
-        {
-            if (btAgent.GetVariable(key, out BlackboardVariable<T> result))
-            {
-                return result;
-            }
-
-            return default;
         }
 
         protected override void HandleHit()
