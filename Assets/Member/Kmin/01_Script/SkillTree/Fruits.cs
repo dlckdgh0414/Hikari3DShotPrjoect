@@ -2,58 +2,60 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEditor;
 using System.Linq;
+using System.Diagnostics.Tracing;
 
 public class Fruits : MonoBehaviour, IFruits
 {
+    [SerializeField] private GameEventChannelSO eventChannelSO;
     [SerializeField] private FruitsSO fruitsSO;
     [SerializeField] private List<Fruits> _connectedFruits;
-
+    [SerializeField] private bool isRootFruits;
+    [SerializeField] private float width = 10;
+    
+    [HideInInspector]
     [field:SerializeField] public List<Image> ConnectedNode { get; private set; }
+    public Button FruitsButton { get; private set; } = null;
+    public bool IsActive { get; set; }
+    public bool CanPurchase { get; private set; } = false;
 
-    public event Action OnFruitsPurchase;
+    private SkillTreeEvent _skillTreeEvent = SkillTreeEventChannel.SkillTreeEvent;
 
-    public bool IsActive { get; private set; }
-
-    public Button FruitsButton { get; private set; }
-
-    public Fruits ParentFruits { get; private set; } = null;
-
-    public void Initialize(Fruits parent)
+    public void Initialize()
     {
-        ParentFruits = parent;
+        CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Set, 10000);
         FruitsButton = GetComponentInChildren<Button>();
-        FruitsButton.onClick.AddListener(PurchaseFruits);
+        FruitsButton.onClick.AddListener(SelectFruits);
+        fruitsSO.Fruits = this;
 
-        OnFruitsPurchase += HandleFruitsPurchase;
-
-        Transform nodeTrm = transform.Find("Nodes");
-
-        for (int i = 0; i < 3; i++)
-        {
-            ConnectedNode.Add(nodeTrm.GetChild(i).GetComponent<Image>());
-        }
+        if(isRootFruits) _connectedFruits.ForEach(f => f.CanPurchase = true);
     }
 
-    private void PurchaseFruits()
+    public void SelectFruits()
     {
-        if(fruitsSO.price < CurrencyManager.Instance.GetCurrency(CurrencyType.Eon) && !IsActive)
+        Debug.Log("FruitsSelect");
+        _skillTreeEvent.fruitsSO = fruitsSO;
+        eventChannelSO.RaiseEvent(_skillTreeEvent);
+    }
+
+    public void PurchaseFruits()
+    {
+        if (fruitsSO.price <= CurrencyManager.Instance.GetCurrency(CurrencyType.Eon) && !IsActive && CanPurchase)
         {
             CurrencyManager.Instance.ModifyCurrency
                 (CurrencyType.Eon, ModifyType.Substract, fruitsSO.price);
+            _connectedFruits.ForEach(f => f.CanPurchase = true);
+            IsActive = true;
 
-            OnFruitsPurchase?.Invoke();
+            ChangeColor();
         }
     }
 
-    [ContextMenu("TestPurchase")]
-    private void HandleFruitsPurchase()
+    private void ChangeColor()
     {
-        IsActive = true;
-        ConnectedNode.ForEach(line => Debug.Log(line));
-
         ConnectedNode.ForEach(line => line.color = Color.red);
-        Debug.Log("±¸¸Å");
+        //ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½  
     }
 
     #region ConnectLineOnEditor
@@ -62,7 +64,23 @@ public class Fruits : MonoBehaviour, IFruits
     {
         foreach (Fruits f in _connectedFruits)
         {
-            f.ConnectedNode.Clear();
+            for (int i = 0; i < f.ConnectedNode.Count; i++)
+            {
+                if(f.ConnectedNode[i] == null)
+                    f.ConnectedNode.RemoveAt(i);
+            }
+
+            if (f.ConnectedNode.Count > 0)
+            {
+                foreach (var node in f.ConnectedNode)
+                {
+                    if (node != null)
+                        DestroyImmediate(node.gameObject);
+                }
+                
+                f.ConnectedNode.Clear();
+            }
+
             Transform root = f.transform.Find("Nodes");
             GameObject[] obj = new GameObject[3];
             Image[] nodes = new Image[3];
@@ -94,6 +112,23 @@ public class Fruits : MonoBehaviour, IFruits
         }
     }
 
+    [ContextMenu("ClearAllNode")]
+    private void ClearAllNode()
+    {
+        foreach(var fruits in _connectedFruits)
+        {
+            fruits.ConnectedNode.ForEach(n => DestroyImmediate(n.gameObject));
+            fruits.ConnectedNode.Clear();
+        }
+    }
+
+    [ContextMenu("ClearNode")]
+    private void ClearNode()
+    {
+        ConnectedNode.ForEach(n => DestroyImmediate(n.gameObject));
+        ConnectedNode.Clear();
+    }
+
     private void ConnectNode(Vector3 pos1, Vector3 pos2, Image node, bool isVert)
     {
         Vector3 centerPos = (pos1 + pos2) / 2f;
@@ -102,9 +137,9 @@ public class Fruits : MonoBehaviour, IFruits
         node.rectTransform.position = centerPos;
 
         if (isVert)
-            node.rectTransform.sizeDelta = new Vector2(10, distance);
+            node.rectTransform.sizeDelta = new Vector2(width, distance + width);
         else
-            node.rectTransform.sizeDelta = new Vector2(distance, 10);
+            node.rectTransform.sizeDelta = new Vector2(distance + width, width);
     }
     #endregion
 }
