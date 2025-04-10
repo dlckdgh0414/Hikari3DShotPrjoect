@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SkillSO : ScriptableObject
 {
     public string skillName;
-    public Image skillUIImage;
+    public Sprite skillUIImage;
     public float skillDamage;
     public float skillCoolTime;
     public float currentcoolTime;
