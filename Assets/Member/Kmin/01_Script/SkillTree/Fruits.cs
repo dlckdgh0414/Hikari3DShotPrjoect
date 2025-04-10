@@ -12,6 +12,7 @@ public class Fruits : MonoBehaviour, IFruits
     [SerializeField] private FruitsSO fruitsSO;
     [SerializeField] private List<Fruits> _connectedFruits;
     [SerializeField] private bool isRootFruits;
+    [SerializeField] private float width = 10;
     
     [HideInInspector]
     [field:SerializeField] public List<Image> ConnectedNode { get; private set; }
@@ -54,7 +55,7 @@ public class Fruits : MonoBehaviour, IFruits
     private void ChangeColor()
     {
         ConnectedNode.ForEach(line => line.color = Color.red);
-        //¿©±â¿¡ ¿¬Ãâ Ãß°¡ ¿¹Á¤  
+        //ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½  
     }
 
     #region ConnectLineOnEditor
@@ -63,8 +64,22 @@ public class Fruits : MonoBehaviour, IFruits
     {
         foreach (Fruits f in _connectedFruits)
         {
-/*            if (f.ConnectedNode != null)
-                f.ConnectedNode.Clear();*/
+            for (int i = 0; i < f.ConnectedNode.Count; i++)
+            {
+                if(f.ConnectedNode[i] == null)
+                    f.ConnectedNode.RemoveAt(i);
+            }
+
+            if (f.ConnectedNode.Count > 0)
+            {
+                foreach (var node in f.ConnectedNode)
+                {
+                    if (node != null)
+                        DestroyImmediate(node.gameObject);
+                }
+                
+                f.ConnectedNode.Clear();
+            }
 
             Transform root = f.transform.Find("Nodes");
             GameObject[] obj = new GameObject[3];
@@ -122,9 +137,9 @@ public class Fruits : MonoBehaviour, IFruits
         node.rectTransform.position = centerPos;
 
         if (isVert)
-            node.rectTransform.sizeDelta = new Vector2(10, distance);
+            node.rectTransform.sizeDelta = new Vector2(width, distance + width);
         else
-            node.rectTransform.sizeDelta = new Vector2(distance, 10);
+            node.rectTransform.sizeDelta = new Vector2(distance + width, width);
     }
     #endregion
 }
