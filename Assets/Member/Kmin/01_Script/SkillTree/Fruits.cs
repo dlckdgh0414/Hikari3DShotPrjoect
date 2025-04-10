@@ -24,7 +24,6 @@ public class Fruits : MonoBehaviour, IFruits
 
     public void Initialize()
     {
-        CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Set, 10000);
         FruitsButton = GetComponentInChildren<Button>();
         FruitsButton.onClick.AddListener(SelectFruits);
         fruitsSO.Fruits = this;

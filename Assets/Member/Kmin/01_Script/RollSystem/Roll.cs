@@ -13,6 +13,7 @@ public class Roll : MonoBehaviour
     private Dictionary<string, RollDataSO> _skillDic/*k*/ = new Dictionary<string, RollDataSO>();
 
     private RollDataSO _rolledSkill = null;
+    private bool _isRolling = false;
 
     private void Awake()
     {
@@ -29,6 +30,10 @@ public class Roll : MonoBehaviour
 
     public void SkillRoll()
     {
+        if (_isRolling || CurrencyManager.Instance.GetCurrency(CurrencyType.Eon) < 100)
+            return;
+        
+        CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Substract, 100);
         StartCoroutine(RollRoutine());
     }
 
@@ -52,7 +57,8 @@ public class Roll : MonoBehaviour
     private IEnumerator RollRoutine()
     {
         RollEndEvent rollEnd = RollEventChannel.RollEndEvent;
-
+        _isRolling = true;
+        
         for(int i = 0; i < 10; i++)
         {
             Rolling();
@@ -61,5 +67,6 @@ public class Roll : MonoBehaviour
 
         RollEventChannel.RollEndEvent.rolledSkill = _rolledSkill;
         rollEventChannel.RaiseEvent(RollEventChannel.RollEndEvent);
+        _isRolling = false;
     }
 }
