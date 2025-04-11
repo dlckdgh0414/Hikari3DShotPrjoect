@@ -5,14 +5,14 @@ public class ActiveSkillBtn : MonoBehaviour
 {
     [SerializeField] private SkillSO _skillSO;
 
-    private Sprite thisImage;
+    private Color thisImage;
     private SelectActiveBtn _saBtn;
-    private bool _isAct;
 
     private void Awake()
     {
-        thisImage = GetComponent<Sprite>();
-        thisImage = _skillSO.skillUIImage;
+        _saBtn = GameObject.Find("InvenSkill").GetComponent<SelectActiveBtn>();
+        thisImage = GetComponent<Image>().color;
+        //thisImage = _skillSO.skillUIImage;
     }
 
     public void PressThieBtn()
@@ -20,14 +20,10 @@ public class ActiveSkillBtn : MonoBehaviour
         if (_saBtn.currentListCount > 4)
             return;
 
-        if(_isAct)
-        {
-            _isAct = false;
-        }
-        _saBtn._invenList[_saBtn.currentListCount].TryGetComponent(out Sprite Image);
+        gameObject.GetComponent<Button>().interactable = false;
+        _saBtn._invenList[_saBtn.currentListCount].TryGetComponent(out Image Image);
 
-        Image = this.thisImage;
+        Image.color = transform.GetComponent<Image>().color;
         _saBtn.currentListCount++;
-        _isAct = true;
     }
 }
