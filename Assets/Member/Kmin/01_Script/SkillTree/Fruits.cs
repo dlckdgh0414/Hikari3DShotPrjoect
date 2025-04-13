@@ -10,7 +10,7 @@ public class Fruits : MonoBehaviour, IFruits
 {
     [SerializeField] private GameEventChannelSO eventChannelSO;
     [SerializeField] private FruitsSO fruitsSO;
-    [SerializeField] private List<Fruits> _connectedFruits;
+    [SerializeField] private List<Fruits> connectedFruits;
     [SerializeField] private bool isRootFruits;
     [SerializeField] private float width = 10;
     
@@ -28,12 +28,11 @@ public class Fruits : MonoBehaviour, IFruits
         FruitsButton.onClick.AddListener(SelectFruits);
         fruitsSO.Fruits = this;
 
-        if(isRootFruits) _connectedFruits.ForEach(f => f.CanPurchase = true);
+        if(isRootFruits) connectedFruits.ForEach(f => f.CanPurchase = true);
     }
 
     public void SelectFruits()
     {
-        Debug.Log("FruitsSelect");
         _skillTreeEvent.fruitsSO = fruitsSO;
         eventChannelSO.RaiseEvent(_skillTreeEvent);
     }
@@ -44,7 +43,7 @@ public class Fruits : MonoBehaviour, IFruits
         {
             CurrencyManager.Instance.ModifyCurrency
                 (CurrencyType.Eon, ModifyType.Substract, fruitsSO.price);
-            _connectedFruits.ForEach(f => f.CanPurchase = true);
+            connectedFruits.ForEach(f => f.CanPurchase = true);
             IsActive = true;
 
             ChangeColor();
@@ -61,7 +60,7 @@ public class Fruits : MonoBehaviour, IFruits
     [ContextMenu("ConnectLine")]
     private void ConnectLine()
     {
-        foreach (Fruits f in _connectedFruits)
+        foreach (Fruits f in connectedFruits)
         {
             for (int i = 0; i < f.ConnectedNode.Count; i++)
             {
@@ -79,6 +78,7 @@ public class Fruits : MonoBehaviour, IFruits
                 
                 f.ConnectedNode.Clear();
             }
+            
 
             Transform root = f.transform.Find("Nodes");
             GameObject[] obj = new GameObject[3];
@@ -114,7 +114,7 @@ public class Fruits : MonoBehaviour, IFruits
     [ContextMenu("ClearAllNode")]
     private void ClearAllNode()
     {
-        foreach(var fruits in _connectedFruits)
+        foreach(var fruits in connectedFruits)
         {
             fruits.ConnectedNode.ForEach(n => DestroyImmediate(n.gameObject));
             fruits.ConnectedNode.Clear();
