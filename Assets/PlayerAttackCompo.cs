@@ -45,7 +45,7 @@ public class PlayerAttackCompo : MonoBehaviour,IEntityComponent
     {
         Vector3 worldPosition = _player.InputReader.GetWorldPosition(out RaycastHit hitInfo);
 
-        BaseBullet bullet = Instantiate(_bullet, muzzle.transform.position, Quaternion.identity);
+        BaseBullet bullet = PoolManager.Instance.Pop(_bullet.name,muzzle.transform) as BaseBullet;
         bullet.SetDirection(worldPosition);
     }
 

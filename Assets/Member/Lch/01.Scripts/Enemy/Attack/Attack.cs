@@ -39,7 +39,8 @@ public abstract class Attack : MonoBehaviour
 
         if(bulletPrefab.GetBulletCount <= 1)
         {
-            bulletPrefab = Instantiate(bulletPrefab, FirePos[0].position, Quaternion.identity);
+            for(int i=0; i<FirePos.Length;i++)
+                bulletPrefab = PoolManager.Instance.Pop(bulletPrefab.name,FirePos[i]) as BaseBullet;
             bulletPrefab.SetDirection(target.position);
         }
         else
