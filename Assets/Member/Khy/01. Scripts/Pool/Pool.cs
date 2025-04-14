@@ -24,12 +24,12 @@ public class Pool
         }
     }
 
-    public IPoolable Pop(Transform point)
+    public IPoolable Pop()
     {
         IPoolable item = null;
         if (_pool.Count == 0)
         {
-            GameObject gameObj = GameObject.Instantiate(_prefab, point);
+            GameObject gameObj = GameObject.Instantiate(_prefab);
             gameObj.name = _poolable.ItemName;
             item = gameObj.GetComponent<IPoolable>();
         }

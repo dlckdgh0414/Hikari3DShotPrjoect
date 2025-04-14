@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Member.Ysc._01_Code.Combat.Bullet
 {
-    public abstract class BaseBullet : MonoBehaviour,IPoolable
+    public abstract class BaseBullet : MonoBehaviour
     {
         [field: SerializeField] private BulletSettingSO BulletSO; // 총알 데이터 받기
         
@@ -13,8 +13,6 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         
         public Rigidbody RbCompo { get; protected set; }
         public int GetBulletCount => BulletSO.BulletCount;
-
-        public string ItemName => "Bullet";
 
         public void SetDirection(Vector3 direction)
         {
@@ -31,15 +29,14 @@ namespace Member.Ysc._01_Code.Combat.Bullet
             RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
         }
 
-        private void OnCollisionEnter(Collision other)
+        protected virtual void OnCollisionEnter(Collision other)
         {
             Hit();
-            DestroyBullet();
         }
 
-        private void DestroyBullet()
+        protected virtual void DestroyBullet()
         {
-            PoolManager.Instance.Push(this);
+
         }
 
 

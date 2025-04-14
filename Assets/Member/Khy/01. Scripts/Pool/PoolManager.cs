@@ -33,11 +33,11 @@ public class PoolManager : MonoSingleton<PoolManager>
         _pools.Add(poolable.ItemName, pool);
     }
 
-    public IPoolable Pop(string itemName,Transform shootPoint)
+    public IPoolable Pop(string itemName)
     {
         if (_pools.ContainsKey(itemName))
         {
-            IPoolable item = _pools[itemName].Pop(shootPoint);
+            IPoolable item = _pools[itemName].Pop();
 
             item.ResetItem();
             return item;
