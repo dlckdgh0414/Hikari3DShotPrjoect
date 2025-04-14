@@ -19,7 +19,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
             fireDirection = direction - transform.position ;
         }
         
-        protected void Awake()
+        protected virtual void Awake()
         {
             BulletInit();
         }
@@ -29,14 +29,9 @@ namespace Member.Ysc._01_Code.Combat.Bullet
             RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
         }
 
-        protected virtual void OnCollisionEnter(Collision other)
+        protected virtual void DestroyBullet(IPoolable pool)
         {
-            Hit();
-        }
-
-        protected virtual void DestroyBullet()
-        {
-
+            PoolManager.Instance.Push(pool);
         }
 
 
