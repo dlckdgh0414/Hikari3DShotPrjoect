@@ -13,13 +13,13 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         
         public Rigidbody RbCompo { get; protected set; }
         public int GetBulletCount => BulletSO.BulletCount;
-        
+
         public void SetDirection(Vector3 direction)
         {
             fireDirection = direction - transform.position ;
         }
         
-        protected void Awake()
+        protected virtual void Awake()
         {
             BulletInit();
         }
@@ -29,21 +29,29 @@ namespace Member.Ysc._01_Code.Combat.Bullet
             RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
         }
 
-        private void OnCollisionEnter(Collision other)
+        protected virtual void DestroyBullet(IPoolable pool)
         {
-            Hit();
-            //Destroy(gameObject);
+            PoolManager.Instance.Push(pool);
         }
+
 
         protected virtual void Hit()
         {
         }
 
-
         protected virtual void BulletInit()
         {
             // 초기화
             RbCompo = GetComponent<Rigidbody>();
+        }
+
+        public GameObject GetGameObject()
+        {
+            return gameObject;
+        }
+
+        public void ResetItem()
+        {
         }
     }
 }
