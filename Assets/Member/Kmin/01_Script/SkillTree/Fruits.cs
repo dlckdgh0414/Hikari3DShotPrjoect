@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEditor;
 using System.Linq;
-using System.Diagnostics.Tracing;
 
 public class Fruits : MonoBehaviour, IFruits
 {
@@ -50,11 +49,7 @@ public class Fruits : MonoBehaviour, IFruits
         }
     }
 
-    private void ChangeColor()
-    {
-        ConnectedNode.ForEach(line => line.color = Color.red);
-        //���⿡ ���� �߰� ����  
-    }
+    private void ChangeColor() => ConnectedNode.ForEach(line => line.color = Color.red);
 
     #region ConnectLineOnEditor
     [ContextMenu("ConnectLine")]
