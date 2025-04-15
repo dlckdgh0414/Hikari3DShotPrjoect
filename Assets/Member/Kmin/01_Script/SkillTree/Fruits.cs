@@ -103,12 +103,13 @@ public class Fruits : MonoBehaviour, IFruits
                 fillImg.transform.SetParent(root, false);
                 fillImg.rectTransform.anchoredPosition = f.ConnectedNode[i].rectTransform.anchoredPosition;
                 fillImg.rectTransform.sizeDelta = f.ConnectedNode[i].rectTransform.sizeDelta;
-                fillImg.color = Color.cyan;
+                fillImg.color = new Color(0.4f, 0.4f, 1f, 1f);
                 fillImg.type = Image.Type.Filled;
                 fillImg.fillAmount = 0;
                 fillImg.sprite = fillNodeImage;
                 fillImg.transform.SetSiblingIndex(root.childCount);
                 
+                Debug.Log(fillImg.rectTransform.sizeDelta);
                 if(fillImg.rectTransform.sizeDelta.x > fillImg.rectTransform.sizeDelta.y)
                     fillImg.fillMethod = Image.FillMethod.Horizontal;
                 else
