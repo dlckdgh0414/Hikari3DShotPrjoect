@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class TestSkillTree : MonoBehaviour
 {
@@ -17,12 +19,28 @@ public class TestSkillTree : MonoBehaviour
         {
             f.FruitsButton.onClick.AddListener(() => SelectFruits(f.GetFruitsSO()));
         }
+        
+        eventChannelSO.AddListener<SkillTreePurchaseEvent>(HandleFruitsPurchase);
     }
-    
-    
+
+    private void HandleFruitsPurchase(SkillTreePurchaseEvent skillTreeEvent)
+    {
+        StartCoroutine(TestConnect(skillTreeEvent.fruits));
+    }
+
     public void SelectFruits(FruitsSO selectedFruits)
     {
         _skillTreeEvent.fruitsSO = selectedFruits;
         eventChannelSO.RaiseEvent(_skillTreeEvent);
+    }
+
+    private IEnumerator TestConnect(Fruits f)
+    {
+        f.transform.SetAsLastSibling();
+        for (int i = 0; i < 3; i++)
+        {
+            DOTween.To(() => 0, amount => f.FillNode[i].fillAmount = amount, 1f, 0.5f);
+            yield return new WaitUntil(() => f.FillNode[i].fillAmount == 1);
+        }
     }
 }

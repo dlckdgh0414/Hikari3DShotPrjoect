@@ -28,16 +28,13 @@ public class Fruits : MonoBehaviour, IFruits
     public void PurchaseFruits()
     {
         if (fruitsSO.price <= CurrencyManager.Instance.GetCurrency(CurrencyType.Eon) && !IsActive && CanPurchase)
-        {
+        { 
             CurrencyManager.Instance.ModifyCurrency
                 (CurrencyType.Eon, ModifyType.Substract, fruitsSO.price);
             connectedFruits.ForEach(f => f.CanPurchase = true);
             IsActive = true;
-
-            ChangeColor();
         }
     }
-    private void ChangeColor() => ConnectedNode.ForEach(line => line.color = Color.red);
 
     public FruitsSO GetFruitsSO() => fruitsSO;
 
@@ -79,7 +76,7 @@ public class Fruits : MonoBehaviour, IFruits
                 obj[i] = new GameObject($"Node{i}");
                 nodes[i] = obj[i].AddComponent<Image>();
                 nodes[i].transform.SetParent(root, false);
-                nodes[i].transform.SetSiblingIndex(5);
+                nodes[i].transform.SetSiblingIndex(0);
                 f.ConnectedNode.Add(nodes[i]);
             }
 
@@ -110,9 +107,9 @@ public class Fruits : MonoBehaviour, IFruits
                 fillImg.type = Image.Type.Filled;
                 fillImg.fillAmount = 0;
                 fillImg.sprite = fillNodeImage;
-                fillImg.transform.SetSiblingIndex(10);
+                fillImg.transform.SetSiblingIndex(root.childCount);
                 
-                if(fillImg.transform.localScale.x > fillImg.transform.localScale.y)
+                if(fillImg.rectTransform.sizeDelta.x > fillImg.rectTransform.sizeDelta.y)
                     fillImg.fillMethod = Image.FillMethod.Horizontal;
                 else
                     fillImg.fillMethod = Image.FillMethod.Vertical;
