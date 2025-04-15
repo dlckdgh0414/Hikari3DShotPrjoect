@@ -2,38 +2,27 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using UnityEditor;
-using System.Linq;
 
 public class Fruits : MonoBehaviour, IFruits
 {
-    [SerializeField] private GameEventChannelSO eventChannelSO;
     [SerializeField] private FruitsSO fruitsSO;
+    [SerializeField] private Sprite fillNodeImage;
     [SerializeField] private List<Fruits> connectedFruits;
     [SerializeField] private bool isRootFruits;
     [SerializeField] private float width = 10;
     
     [HideInInspector]
     [field:SerializeField] public List<Image> ConnectedNode { get; private set; }
+    [field:SerializeField] public List<Image> FillNode { get; private set; }
     public Button FruitsButton { get; private set; } = null;
     public bool IsActive { get; set; }
     public bool CanPurchase { get; private set; } = false;
 
-    private SkillTreeEvent _skillTreeEvent = SkillTreeEventChannel.SkillTreeEvent;
-
     public void Initialize()
     {
         FruitsButton = GetComponentInChildren<Button>();
-        FruitsButton.onClick.AddListener(SelectFruits);
-        fruitsSO.Fruits = this;
-
         if(isRootFruits) connectedFruits.ForEach(f => f.CanPurchase = true);
-    }
-
-    public void SelectFruits()
-    {
-        _skillTreeEvent.fruitsSO = fruitsSO;
-        eventChannelSO.RaiseEvent(_skillTreeEvent);
+        fruitsSO.Fruits = this;
     }
 
     public void PurchaseFruits()
@@ -48,8 +37,9 @@ public class Fruits : MonoBehaviour, IFruits
             ChangeColor();
         }
     }
-
     private void ChangeColor() => ConnectedNode.ForEach(line => line.color = Color.red);
+
+    public FruitsSO GetFruitsSO() => fruitsSO;
 
     #region ConnectLineOnEditor
     [ContextMenu("ConnectLine")]
@@ -61,19 +51,25 @@ public class Fruits : MonoBehaviour, IFruits
             {
                 if(f.ConnectedNode[i] == null)
                     f.ConnectedNode.RemoveAt(i);
+                
+                if(f.FillNode[i] == null)
+                    f.FillNode.RemoveAt(i);
             }
 
             if (f.ConnectedNode.Count > 0)
             {
-                foreach (var node in f.ConnectedNode)
+                for (int i = 0; i < f.ConnectedNode.Count; i++)
                 {
-                    if (node != null)
-                        DestroyImmediate(node.gameObject);
+                    if (f.ConnectedNode[i] != null)
+                        DestroyImmediate(f.ConnectedNode[i].gameObject);
+                    
+                    if (f.FillNode[i] != null)
+                        DestroyImmediate(f.FillNode[i].gameObject);
                 }
                 
                 f.ConnectedNode.Clear();
+                f.FillNode.Clear();
             }
-            
 
             Transform root = f.transform.Find("Nodes");
             GameObject[] obj = new GameObject[3];
@@ -83,7 +79,7 @@ public class Fruits : MonoBehaviour, IFruits
                 obj[i] = new GameObject($"Node{i}");
                 nodes[i] = obj[i].AddComponent<Image>();
                 nodes[i].transform.SetParent(root, false);
-
+                nodes[i].transform.SetSiblingIndex(5);
                 f.ConnectedNode.Add(nodes[i]);
             }
 
@@ -103,6 +99,26 @@ public class Fruits : MonoBehaviour, IFruits
                 ConnectNode(node1Pos, node2Pos, nodes[1], false);
                 ConnectNode(node2Pos, fruitsPos, nodes[2], true);
             }
+
+            for (int i = 0; i < 3; i++)
+            {
+                Image fillImg = new GameObject($"FillNode{i}").AddComponent<Image>();
+                fillImg.transform.SetParent(root, false);
+                fillImg.rectTransform.anchoredPosition = f.ConnectedNode[i].rectTransform.anchoredPosition;
+                fillImg.rectTransform.sizeDelta = f.ConnectedNode[i].rectTransform.sizeDelta;
+                fillImg.color = Color.cyan;
+                fillImg.type = Image.Type.Filled;
+                fillImg.fillAmount = 0;
+                fillImg.sprite = fillNodeImage;
+                fillImg.transform.SetSiblingIndex(10);
+                
+                if(fillImg.transform.localScale.x > fillImg.transform.localScale.y)
+                    fillImg.fillMethod = Image.FillMethod.Horizontal;
+                else
+                    fillImg.fillMethod = Image.FillMethod.Vertical;
+                
+                f.FillNode.Add(fillImg);
+            }
         }
     }
 
@@ -112,7 +128,9 @@ public class Fruits : MonoBehaviour, IFruits
         foreach(var fruits in connectedFruits)
         {
             fruits.ConnectedNode.ForEach(n => DestroyImmediate(n.gameObject));
+            fruits.FillNode.ForEach(n => DestroyImmediate(n.gameObject));
             fruits.ConnectedNode.Clear();
+            fruits.FillNode.Clear();
         }
     }
 
@@ -120,7 +138,9 @@ public class Fruits : MonoBehaviour, IFruits
     private void ClearNode()
     {
         ConnectedNode.ForEach(n => DestroyImmediate(n.gameObject));
+        FillNode.ForEach(n => DestroyImmediate(n.gameObject));
         ConnectedNode.Clear();
+        FillNode.Clear();
     }
 
     private void ConnectNode(Vector3 pos1, Vector3 pos2, Image node, bool isVert)

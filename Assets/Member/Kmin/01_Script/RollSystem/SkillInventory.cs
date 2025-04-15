@@ -26,5 +26,10 @@ public class SkillInventory : MonoBehaviour
             _ownSkillDic[rolledSkill]++;
             CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, 100);
         }
+
+        foreach (var skill in _ownSkillDic)
+        {
+            Debug.Log(skill);
+        }
     }
 }
