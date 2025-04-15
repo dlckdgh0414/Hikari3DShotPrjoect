@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using Unity.Behavior;
 
 namespace Member.Ysc._01_Code.Agent.Enemies.BT
@@ -32,5 +33,7 @@ namespace Member.Ysc._01_Code.Agent.Enemies.BT
             IsDead = true;
             _stateChannel.SendEventMessage(BTEnemyState.DEATH);
         }
+        
+        
     }
 }
