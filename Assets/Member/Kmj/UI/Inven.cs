@@ -1,16 +1,25 @@
-using NUnit.Framework;
+    using NUnit.Framework;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+enum ButtonType
+{
+    normal,
+    Static,
+}
 public class Inven : MonoBehaviour
 {
     [SerializeField] private int _invenNum;
     private Image _image;
     [SerializeField] private SelectActiveBtn _selctManager;
     [SerializeField] private GameObject Parent;
+    [SerializeField] private ButtonType type;
 
+    [field: SerializeField] public SkillSO _thisSkill;
+
+    [field: SerializeField] public GameObject skillUI;
     private void Awake()
     {
         _image = GetComponent<Image>();
@@ -22,23 +31,35 @@ public class Inven : MonoBehaviour
     }
     public void ReMoveThis()
     {
-        if (_image.color == Color.white)
+        if (_image.sprite == null)
             return;
         
-        if (_selctManager._invenList.Contains(gameObject))
+        if (type == ButtonType.normal && _selctManager._invenList.Contains(gameObject))
         {
+            skillUI.GetComponentInChildren<Button>().interactable = true;
             _selctManager._invenList.Remove(gameObject);
+            _image = null;
             _selctManager._invenList.Add(gameObject);
-            GameObject SkillUI = GameObject.Find(_selctManager._thisSkill.skillName);
-            SkillUI.GetComponent<Button>().interactable = true;
-            _selctManager._thisSkill = null;
+
+
+            transform.SetParent(Parent.transform);
+            transform.SetAsLastSibling();
+
+            _thisSkill = null;
+            skillUI = null;
+            _selctManager.currentListCount--;
         }
 
-       
-        transform.SetParent(Parent.transform); 
-        transform.SetAsLastSibling();
+        if (type == ButtonType.Static && _selctManager._invenList.Contains(gameObject))
+        {
+            _image = null;
+ 
+            skillUI.GetComponentInChildren<Button>().interactable = true;
 
-        _selctManager.currentListCount--;
+            skillUI = null;
+
+            _thisSkill = null;
+        }
 
     }
 }
