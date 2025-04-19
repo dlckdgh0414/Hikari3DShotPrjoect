@@ -6,14 +6,15 @@ using UnityEngine;
 
 public class SkillInventorySO : ScriptableObject
 {
-    public Dictionary<string, SkillSO> normalSkillList;
+    public List<SkillSO> normalSkillList;
 
-    public Dictionary<string, SkillSO> staticSkillList;
+    public List<SkillSO> staticSkillList;
 
     public Dictionary<string, SkillSO> TotalSkillList;
+
     public void AddNormalSkill(string name, SkillSO skill)
     {
-        normalSkillList.Add(name, skill);
+        normalSkillList.Add(skill);
 
         GameObject thisSkill = GameObject.Find(skill.skillName);
 
@@ -24,7 +25,7 @@ public class SkillInventorySO : ScriptableObject
 
     public void AddStaticSkill(string name, SkillSO skill)
     {
-        staticSkillList.Add(name, skill);
+        staticSkillList.Add(skill);
 
         GameObject thisSkill = GameObject.Find(skill.skillName);
 
@@ -36,7 +37,7 @@ public class SkillInventorySO : ScriptableObject
 
     public void RemoveNormalSkill(string name, SkillSO skill)
     {
-        normalSkillList.Remove(name);
+        normalSkillList.Remove(skill);
 
         GameObject thisSkill = GameObject.Find(skill.skillName);
 
@@ -47,7 +48,7 @@ public class SkillInventorySO : ScriptableObject
 
     public void RemoveStaticSkill(string name, SkillSO skill)
     {
-        staticSkillList.Remove(name);
+        staticSkillList.Remove(skill);
 
         GameObject thisSkill = GameObject.Find(skill.skillName);
 
