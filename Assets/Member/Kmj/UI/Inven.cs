@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -28,6 +29,9 @@ public class Inven : MonoBehaviour
         {
             _selctManager._invenList.Remove(gameObject);
             _selctManager._invenList.Add(gameObject);
+            GameObject SkillUI = GameObject.Find(_selctManager._thisSkill.skillName);
+            SkillUI.GetComponent<Button>().interactable = true;
+            _selctManager._thisSkill = null;
         }
 
        
@@ -36,6 +40,5 @@ public class Inven : MonoBehaviour
 
         _selctManager.currentListCount--;
 
-        transform.GetComponent<Image>().color = Color.white;
     }
 }

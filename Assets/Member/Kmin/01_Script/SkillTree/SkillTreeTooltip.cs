@@ -14,6 +14,7 @@ public class SkillTreeTooltip : MonoBehaviour
     private TextMeshProUGUI _fruitsPrice;
     private TextMeshProUGUI _fruitsName;
     private Image _icon;
+    private SkillTreePurchaseEvent _treePurchaseEvent = SkillTreeEventChannel.SkillTreePurchaseEvent;
 
     private void Awake()
     {
@@ -43,5 +44,11 @@ public class SkillTreeTooltip : MonoBehaviour
         Debug.Log("sdf");
     }
 
-    private void HandleFruitsPurchase(SkillTreeEvent skillTreeEvent) => skillTreeEvent.fruitsSO.Fruits.PurchaseFruits();
+    private void HandleFruitsPurchase(SkillTreeEvent skillTreeEvent)
+    {
+        skillTreeEvent.fruitsSO.Fruits.PurchaseFruits();
+        _treePurchaseEvent.fruits = skillTreeEvent.fruitsSO.Fruits;
+        eventChannel.RaiseEvent(_treePurchaseEvent);
+    }
+
 }
