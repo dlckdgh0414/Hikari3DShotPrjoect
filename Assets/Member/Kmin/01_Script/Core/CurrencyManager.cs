@@ -35,11 +35,13 @@ public class CurrencyManager : MonoBehaviour
 
         if (Instance == null)
         {
-            Instance = this;
+            Instance = this;        
             DontDestroyOnLoad(this);
         }
         else
             Destroy(gameObject);
+        
+        CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Set, 10000);
     }
 
     private void Update()
