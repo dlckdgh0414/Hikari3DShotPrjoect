@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Custom : MonoBehaviour
 {
@@ -9,17 +10,30 @@ public class Custom : MonoBehaviour
 
     [SerializeField] private MeshRenderer _playerMeshFilert;
 
-    private int currentMaterial;
+    [field : SerializeField] private int currentMaterial;
+
 
     public void NextMaterial()
     {
         currentMaterial++;
+        if (currentMaterial >= material.Count)
+            currentMaterial = 0;
+
         _playerMeshFilert.material = material[currentMaterial];
+    }
+
+    private void Update()
+    {
+        Debug.Log(material.Count); 
     }
 
     public void MinusMaterial()
     {
         currentMaterial--;
+
+        if (currentMaterial < 0)
+            currentMaterial = material.Count - 1;
+
         _playerMeshFilert.material = material[currentMaterial];
     }
 }

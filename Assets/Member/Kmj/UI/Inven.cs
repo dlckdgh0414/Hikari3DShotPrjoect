@@ -1,15 +1,22 @@
-using TMPro;
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.UI;
-
+enum ButtonType
+{
+    normal,
+    Static,
+}
 public class Inven : MonoBehaviour
 {
     [SerializeField] private int _invenNum;
     private Image _image;
     [SerializeField] private SelectActiveBtn _selctManager;
     [SerializeField] private GameObject Parent;
+    [SerializeField] private ButtonType type;
 
+    [field: SerializeField] public SkillSO _thisSkill;
+
+    [field: SerializeField] public GameObject skillUI;
     private void Awake()
     {
         _image = GetComponent<Image>();
@@ -21,21 +28,39 @@ public class Inven : MonoBehaviour
     }
     public void ReMoveThis()
     {
-        if (_image.color == Color.white)
+        if (skillUI == null)
             return;
         
-        if (_selctManager._invenList.Contains(gameObject))
+        if (type == ButtonType.normal && _selctManager._invenList.Contains(gameObject))
         {
+            skillUI.GetComponentInChildren<Button>().interactable = true;
             _selctManager._invenList.Remove(gameObject);
+            _image = null;
             _selctManager._invenList.Add(gameObject);
+
+
+            transform.SetParent(Parent.transform);
+            transform.SetAsLastSibling();
+
+            _selctManager.UseSkillDictionary.Remove(_thisSkill.skillName);
+            _thisSkill = null;
+            skillUI = null;
+            transform.GetComponentInChildren<Image>().sprite = null;
+            _selctManager.currentListCount--;
         }
 
-       
-        transform.SetParent(Parent.transform); 
-        transform.SetAsLastSibling();
+        if (type == ButtonType.Static && _selctManager._invenList.Contains(gameObject))
+        {
+            _image = null;
 
-        _selctManager.currentListCount--;
+            _selctManager.UseSkillDictionary.Remove(_thisSkill.skillName);
 
-        transform.GetComponent<Image>().color = Color.white;
+            skillUI.GetComponentInChildren<Button>().interactable = true;
+            transform.GetComponentInChildren<Image>().sprite = null;
+            skillUI = null;
+
+            _thisSkill = null;
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using Unity.Behavior;
 
 namespace Member.Ysc._01_Code.Agent.Enemies.BT
@@ -32,5 +33,18 @@ namespace Member.Ysc._01_Code.Agent.Enemies.BT
             IsDead = true;
             _stateChannel.SendEventMessage(BTEnemyState.DEATH);
         }
+        
+        [ContextMenu("Enemy Dead")]
+        public void EnemyDead()
+        {
+            
+            // movement.isMove = false;
+            transform.DORotate(new Vector3(-35f, 0f, 0f), 0.5f, RotateMode.Fast)
+                .OnUpdate(() =>
+                {
+                    Vector3 pos = new Vector3(transform.position.x, transform.forward.y, transform.forward.z * -0.4f);
+                    transform.DOMove(pos, 10f);
+                });
+        } 
     }
 }

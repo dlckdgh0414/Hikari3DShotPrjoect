@@ -14,6 +14,11 @@ public abstract class Enemy :Entity
         Debug.Log("BT에너미 후 초기화");
     }
 
+    public void LookTarget(Transform target)
+    {
+        transform.LookAt(target);
+    }
+
     public BlackboardVariable<T> GetBlackboardVariable<T>(string key)
     {
         if (btAgent.GetVariable(key, out BlackboardVariable<T> result))

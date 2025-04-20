@@ -5,9 +5,13 @@ using UnityEngine;
 
 namespace Member.Ysc._01_Code.Combat.Bullet
 {
-    public abstract class BaseBullet : MonoBehaviour
+    public abstract class BaseBullet : MonoBehaviour, IPoolable
     {
         [field: SerializeField] private BulletSettingSO BulletSO; // 총알 데이터 받기
+
+        [SerializeField] private string itemName;
+        
+        public string ItemName => itemName;
         
         protected Vector3 fireDirection;
         
@@ -44,6 +48,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
             // 초기화
             RbCompo = GetComponent<Rigidbody>();
         }
+
 
         public GameObject GetGameObject()
         {

@@ -14,7 +14,7 @@ public class EnemySpawn : MonoBehaviour
     public void SpawnEnemy()
     {
         Vector3 spawnPos = GetSpawnPositionOutsideCamera();
-        Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+        Instantiate(enemyPrefab, transform.position, Quaternion.identity);
     }
 
     private Vector3 GetSpawnPositionOutsideCamera()
