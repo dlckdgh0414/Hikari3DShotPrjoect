@@ -20,8 +20,6 @@ public class GameStartButton : MonoBehaviour
     private void Awake()
     {
         //SetUI();
-
-
         DontDestroyOnLoad(gameObject);
 
         _isOpenBase = true;
@@ -34,15 +32,9 @@ public class GameStartButton : MonoBehaviour
                 Instantiate(gameObject);
             }
         }
-
         else
             return;
-
     }
-
-
-
-
     public void OpenCustomBtn()
     {
         OpenSetting("Custom");

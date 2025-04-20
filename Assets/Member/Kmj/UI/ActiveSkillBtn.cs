@@ -21,12 +21,13 @@ public class ActiveSkillBtn : MonoBehaviour
     {
         _saBtn = GameObject.Find("InvenSkill").GetComponent<SelectActiveBtn>();
 
-        this.name = _skillSO.name;  
+        this.name = _skillSO.name;
+        this.GetComponentInChildren<Image>().sprite = _skillSO.skillUIImage;
     }
 
     public void PressThieBtn()
     {
-        if (_saBtn.currentListCount > _saBtn._invenList.Count)
+        if (_saBtn.currentListCount >= _saBtn._invenList.Count)
             return;
 
         if (_type == ThisType.Static)
@@ -35,24 +36,29 @@ public class ActiveSkillBtn : MonoBehaviour
 
         gameObject.GetComponent<Button>().interactable = false;
 
-
         if (_type == ThisType.Normal)
         {
-            SkillSO skill = _inventorySO.normalSkillList.GetValueOrDefault(_skillSO.skillName);
-            _saBtn._thisSkill = skill;
-            _saBtn.transform.TryGetComponent(out Image image);
-            image.sprite = skill.skillUIImage;
+            _saBtn._invenList[_saBtn.currentListCount].TryGetComponent(out Inven iven);
+
+            iven.skillUI = gameObject;
+
+            iven._thisSkill = _skillSO;
+
+            _saBtn.UseSkillDictionary.Add(_skillSO.skillName, _skillSO);
+
+            _saBtn._invenList[_saBtn.currentListCount].GetComponent<Image>().sprite = _skillSO.skillUIImage;
+
+            _saBtn.currentListCount++;
         }
-        else
+        else if(_type == ThisType.Static) 
         {
-            SkillSO skill = _inventorySO.staticSkillList.GetValueOrDefault(_skillSO.skillName);
-            _saBtn._thisSkill = skill;
-            _saBtn.transform.TryGetComponent(out Image image);
-            image.sprite = skill.skillUIImage;
+            _saBtn._invenList[0].GetComponent<Inven>().skillUI = gameObject;
+
+            _saBtn._invenList[0].GetComponent<Inven>()._thisSkill = _skillSO;
+
+            _saBtn._invenList[0].GetComponent<Image>().sprite = _skillSO.skillUIImage;
+
+            _saBtn.UseSkillDictionary.Add(_skillSO.skillName, _skillSO);
         }
-
-
-
-        _saBtn.currentListCount++;
     }
 }
