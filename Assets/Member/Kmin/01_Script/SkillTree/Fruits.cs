@@ -10,6 +10,7 @@ public class Fruits : MonoBehaviour, IFruits
     [SerializeField] private List<Fruits> connectedFruits;
     [SerializeField] private bool isRootFruits;
     [SerializeField] private float width = 10;
+    [SerializeField] private Color connectColor = Color.magenta;
     
     [HideInInspector]
     [field:SerializeField] public List<Image> ConnectedNode { get; private set; }
@@ -44,26 +45,10 @@ public class Fruits : MonoBehaviour, IFruits
     {
         foreach (Fruits f in connectedFruits)
         {
-            for (int i = 0; i < f.ConnectedNode.Count; i++)
-            {
-                if(f.ConnectedNode[i] == null)
-                    f.ConnectedNode.RemoveAt(i);
-                
-                if(f.FillNode[i] == null)
-                    f.FillNode.RemoveAt(i);
-            }
-
             if (f.ConnectedNode.Count > 0)
             {
-                for (int i = 0; i < f.ConnectedNode.Count; i++)
-                {
-                    if (f.ConnectedNode[i] != null)
-                        DestroyImmediate(f.ConnectedNode[i].gameObject);
-                    
-                    if (f.FillNode[i] != null)
-                        DestroyImmediate(f.FillNode[i].gameObject);
-                }
-                
+                f.ConnectedNode.ForEach(n => {if (n != null) DestroyImmediate(n.gameObject); });
+                f.FillNode.ForEach(n => { if (n != null) DestroyImmediate(n.gameObject); });
                 f.ConnectedNode.Clear();
                 f.FillNode.Clear();
             }
@@ -72,7 +57,8 @@ public class Fruits : MonoBehaviour, IFruits
             GameObject[] obj = new GameObject[3];
             Image[] nodes = new Image[3];
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 3; i++)
+            {
                 obj[i] = new GameObject($"Node{i}");
                 nodes[i] = obj[i].AddComponent<Image>();
                 nodes[i].transform.SetParent(root, false);
@@ -85,39 +71,45 @@ public class Fruits : MonoBehaviour, IFruits
             Vector2 selfPos = rect.position;
             Vector2 fruitsPos = f.GetComponentInChildren<Image>().rectTransform.position;
 
-            for (int i = 0; i < 2; i++)
-            {
-                if (node1Pos == Vector2.zero) {
-                    node1Pos = new Vector2(selfPos.x, (fruitsPos.y + selfPos.y) / 2);
-                    ConnectNode(selfPos, node1Pos, nodes[0], true);
-                }
+            int origin = 0;
 
-                Vector3 node2Pos = new Vector2(fruitsPos.x, node1Pos.y);
-                ConnectNode(node1Pos, node2Pos, nodes[1], false);
-                ConnectNode(node2Pos, fruitsPos, nodes[2], true);
+            if (node1Pos == Vector2.zero)
+            {
+                node1Pos = new Vector2(selfPos.x, (fruitsPos.y + selfPos.y) / 2);
+                origin = selfPos.y < node1Pos.y ? 0 : 1;
+                ConnectNode(selfPos, node1Pos, nodes[0], true);
+                ConnectFillNode(f.ConnectedNode[0], root, f, origin);
             }
 
-            for (int i = 0; i < 3; i++)
-            {
-                Image fillImg = new GameObject($"FillNode{i}").AddComponent<Image>();
-                fillImg.transform.SetParent(root, false);
-                fillImg.rectTransform.anchoredPosition = f.ConnectedNode[i].rectTransform.anchoredPosition;
-                fillImg.rectTransform.sizeDelta = f.ConnectedNode[i].rectTransform.sizeDelta;
-                fillImg.color = new Color(0.4f, 0.4f, 1f, 1f);
-                fillImg.type = Image.Type.Filled;
-                fillImg.fillAmount = 0;
-                fillImg.sprite = fillNodeImage;
-                fillImg.transform.SetSiblingIndex(root.childCount);
-                
-                Debug.Log(fillImg.rectTransform.sizeDelta);
-                if(fillImg.rectTransform.sizeDelta.x > fillImg.rectTransform.sizeDelta.y)
-                    fillImg.fillMethod = Image.FillMethod.Horizontal;
-                else
-                    fillImg.fillMethod = Image.FillMethod.Vertical;
-                
-                f.FillNode.Add(fillImg);
-            }
+            Vector3 node2Pos = new Vector2(fruitsPos.x, node1Pos.y);
+            origin = node1Pos.x < node2Pos.x ? 0 : 1;
+            ConnectNode(node1Pos, node2Pos, nodes[1], false);
+            ConnectFillNode(f.ConnectedNode[1], root, f, origin);
+
+            origin = node2Pos.y < fruitsPos.y ? 0 : 1;
+            ConnectNode(node2Pos, fruitsPos, nodes[2], true);
+            ConnectFillNode(f.ConnectedNode[2], root, f, origin);
         }
+    }
+
+    private void ConnectFillNode(Image target, Transform root, Fruits parent, int origin)
+    {
+        Image fillImg = new GameObject($"FillNode{parent.FillNode.Count}").AddComponent<Image>();
+        fillImg.transform.SetParent(root, false);
+        fillImg.rectTransform.anchoredPosition = target.rectTransform.anchoredPosition;
+        fillImg.rectTransform.sizeDelta = target.rectTransform.sizeDelta;
+        fillImg.type = Image.Type.Filled;
+        fillImg.fillAmount = 0;
+        fillImg.sprite = fillNodeImage;
+        fillImg.transform.SetSiblingIndex(root.childCount);
+
+        if (fillImg.rectTransform.sizeDelta.x > fillImg.rectTransform.sizeDelta.y)
+            fillImg.fillMethod = Image.FillMethod.Horizontal;
+        else
+            fillImg.fillMethod = Image.FillMethod.Vertical;
+
+        fillImg.fillOrigin = origin;
+        parent.FillNode.Add(fillImg);
     }
 
     [ContextMenu("ClearAllNode")]
@@ -154,4 +146,15 @@ public class Fruits : MonoBehaviour, IFruits
             node.rectTransform.sizeDelta = new Vector2(distance + width, width);
     }
     #endregion
+
+    private void OnValidate()
+    {
+        if (FillNode != null)
+        {
+            foreach (var node in FillNode)
+            {
+                node.color = connectColor;
+            }
+        }
+    }
 }
