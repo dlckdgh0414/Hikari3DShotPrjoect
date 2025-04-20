@@ -58,9 +58,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8999362906901587695}
-  - component: {fileID: 3308374702262520649}
   - component: {fileID: 8299065827990993155}
   - component: {fileID: 6776544430331641507}
+  - component: {fileID: 3090193355891803411}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -84,27 +84,9 @@ Transform:
   - {fileID: 907658896691717623}
   - {fileID: 6874675595168235896}
   - {fileID: 6117376433642705126}
+  - {fileID: 9019990920434335029}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3308374702262520649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6785985155981875351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b0775b8493c448280e8e459434944f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnHit:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDead:
-    m_PersistentCalls:
-      m_Calls: []
-  <PlayerFinder>k__BackingField: {fileID: 11400000, guid: a8f5956115900724b887c83261e903a8, type: 2}
 --- !u!114 &8299065827990993155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,16 +99,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Graph: {fileID: 4531591371395837788, guid: b4ac2b5300ea74e45bf6f0be4dad1a11, type: 2}
+  m_Graph: {fileID: 4531591371395837788, guid: ceb02307ca2e25a4aafca311e35550bc, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 6282192128325189723
+  - rid: 4070495634837734339
+  - rid: 4070495634837734340
+  - rid: 4070495634837734341
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
     version: 2
     RefIds:
+    - rid: 4070495634837734339
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]',
+        ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 2703232946570960602
+          m_Value1: 11701043985647352351
+        Name: Pattern1
+        m_Value: {fileID: 1061363476702058143, guid: e61a7369aa252374787ab5323a35ac8b,
+          type: 3}
+    - rid: 4070495634837734340
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]',
+        ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 9462864648468777071
+          m_Value1: 15907909976406492278
+        Name: Pattern2
+        m_Value: {fileID: 2163880529116585981, guid: bf2bf1224558fdc4f86e569573e4a5af,
+          type: 3}
+    - rid: 4070495634837734341
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Transform, UnityEngine.CoreModule]]',
+        ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 3784628903306001351
+          m_Value1: 2208457996610744229
+        Name: StartPos
+        m_Value: {fileID: 9019990920434335029}
     - rid: 6282192128325189723
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]',
+        ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
           m_Value0: 1
@@ -160,6 +175,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3090193355891803411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6785985155981875351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5296112bb80c3b47835973f5f061b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDead:
+    m_PersistentCalls:
+      m_Calls: []
+  <PlayerFinder>k__BackingField: {fileID: 11400000, guid: a8f5956115900724b887c83261e903a8,
+    type: 2}
 --- !u!1 &8325209121560126546
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,4 +325,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9753a897656747c49a6f9014a24563f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 0}
+  <bulletPrefab>k__BackingField: {fileID: 0}
+  <FirePos>k__BackingField: []
+--- !u!1 &9178835160596380784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9019990920434335029}
+  m_Layer: 0
+  m_Name: ShotPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9019990920434335029
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9178835160596380784}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.885}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8999362906901587695}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

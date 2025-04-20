@@ -36,18 +36,16 @@ public abstract class Attack : MonoBehaviour
 
     protected void SpawnBullet(Transform target,float timer)
     {
-
-        if(bulletPrefab.GetBulletCount <= 1)
+        if (bulletPrefab.GetBulletCount <= 1)
         {
-            bulletPrefab = Instantiate(bulletPrefab, FirePos[0].position, Quaternion.identity);
+            bulletPrefab = PoolManager.Instance.Pop(bulletPrefab.name) as BaseBullet;
+            bulletPrefab.transform.position = FirePos[0].position;
             bulletPrefab.SetDirection(target.position);
         }
         else
         {
             StartCoroutine(ManyBulletAttack(timer,target));
         }
-
-       
     }
 
     private IEnumerator ManyBulletAttack(float timer,Transform target)
@@ -59,7 +57,8 @@ public abstract class Attack : MonoBehaviour
                 IsAttackEnd = true;
                 _shotCount = 0;
             }
-            bulletPrefab = Instantiate(bulletPrefab, FirePos[_shotCount].position, Quaternion.identity);
+            bulletPrefab = PoolManager.Instance.Pop(bulletPrefab.name) as BaseBullet;
+            bulletPrefab.transform.position = FirePos[_shotCount].position;
             bulletPrefab.SetDirection(target.position);
             yield return new WaitForSeconds(timer);
             _shotCount++;

@@ -3,13 +3,13 @@ using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
 using Unity.Properties;
-using Member.Ysc._01_Code.Agent.Enemy.BT;
+using Member.Ysc._01_Code.Agent.Enemies.BT;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "PlayerChecker", story: "[self] set [target] from finder", category: "Action", id: "7f5cc3478c9bd1a270fb36305cb14aaa")]
 public partial class PlayerCheckerAction : Action
 {
-    [SerializeReference] public BlackboardVariable<BTEnemy> Self;
+    [SerializeReference] public BlackboardVariable<Enemy> Self;
     [SerializeReference] public BlackboardVariable<Transform> Target;
     protected override Status OnStart()
     {

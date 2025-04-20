@@ -7,7 +7,8 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponent
 
     public List<SkillSO> skills;
 
-    public Dictionary<string, SkillSO> skillList = new Dictionary<string, SkillSO>();
+    [field: SerializeField] public SkillInventorySO skillList;
+
     public void Initialize(Entity entity)
     {
         _entity = entity;
@@ -23,7 +24,7 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponent
     {
         //foreach로 돌려서 스킬 리스트에 있는 SO중에 currentCoolTime이 SkillCoolTime보다 작으면
         //1초 씩 더해준다.
-        foreach (var skill in skillList)
+        foreach (var skill in skillList.TotalSkillList)
         {
             if (skill.Value.currentcoolTime >= skill.Value.skillCoolTime)
                 return;
@@ -38,15 +39,15 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponent
     private void AddSkillInDictionary()
     {
         //리스트에 있는 스킬 SO들을 Dictionary에 넣는 코드
-        skills.ForEach(skill => skillList.Add(skill.skillName, skill));
+        skills.ForEach(skill => skillList.TotalSkillList.Add(skill.skillName, skill));
     }
 
     public bool CanUseSkill(string name)
     {
         //스킬을 실행했을떄 정해진 스킬이 CurrentCoolTime 이 SkillCoolTime보다 크거나 같으면
         //true를 반환 하니면 false를 반환
-        if (skillList.GetValueOrDefault(name).currentcoolTime >=
-           skillList.GetValueOrDefault(name).skillCoolTime)
+        if (skillList.TotalSkillList.GetValueOrDefault(name).currentcoolTime >=
+           skillList.TotalSkillList.GetValueOrDefault(name).skillCoolTime)
             return true;
         else
             return false;
@@ -55,7 +56,8 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponent
 
     public void CurrentTimeClear(string name)
     {
-        skillList.GetValueOrDefault(name).currentcoolTime = 0;
+        //스킬을 클리어함
+        skillList.TotalSkillList.GetValueOrDefault(name).currentcoolTime = 0;
     }
 
 
