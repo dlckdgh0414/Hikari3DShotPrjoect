@@ -1,9 +1,6 @@
-    using NUnit.Framework;
-using TMPro;
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.UI;
-
 enum ButtonType
 {
     normal,
@@ -31,7 +28,7 @@ public class Inven : MonoBehaviour
     }
     public void ReMoveThis()
     {
-        if (_image.sprite == null)
+        if (skillUI == null)
             return;
         
         if (type == ButtonType.normal && _selctManager._invenList.Contains(gameObject))
@@ -45,17 +42,21 @@ public class Inven : MonoBehaviour
             transform.SetParent(Parent.transform);
             transform.SetAsLastSibling();
 
+            _selctManager.UseSkillDictionary.Remove(_thisSkill.skillName);
             _thisSkill = null;
             skillUI = null;
+            transform.GetComponentInChildren<Image>().sprite = null;
             _selctManager.currentListCount--;
         }
 
         if (type == ButtonType.Static && _selctManager._invenList.Contains(gameObject))
         {
             _image = null;
- 
-            skillUI.GetComponentInChildren<Button>().interactable = true;
 
+            _selctManager.UseSkillDictionary.Remove(_thisSkill.skillName);
+
+            skillUI.GetComponentInChildren<Button>().interactable = true;
+            transform.GetComponentInChildren<Image>().sprite = null;
             skillUI = null;
 
             _thisSkill = null;

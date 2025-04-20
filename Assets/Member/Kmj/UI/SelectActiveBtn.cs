@@ -8,8 +8,9 @@ using static UnityEngine.Rendering.VolumeComponent;
 public class SelectActiveBtn : MonoBehaviour
 {
     public Button StaticBtn;
-    [field :SerializeField] public List<GameObject> _invenList {get; private set;}
+    [field: SerializeField] public List<GameObject> _invenList { get; private set; }
 
+    public Dictionary<string, SkillSO> UseSkillDictionary { get; private set; }
     [field: SerializeField] public int currentListCount  { get; set; } = 1;
 
 
