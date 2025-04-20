@@ -19,7 +19,7 @@ public class ImageFade : MonoBehaviour
 
     IEnumerator FadeInCorutine()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2.5f);
         while (timer <= colorDuraction)
         {
          timer += Time.deltaTime;
