@@ -37,9 +37,11 @@ public class TestSkillTree : MonoBehaviour
     private IEnumerator TestConnect(Fruits f)
     {
         f.transform.SetSiblingIndex(f.transform.parent.childCount - 2);
+        DOTween.Kill(f);
         for (int i = 0; i < 3; i++)
         {
-            DOTween.To(() => 0, amount => f.FillNode[i].fillAmount = amount, 1f, 1f);
+            DOTween.To(() => 0, amount => f.FillNode[i].fillAmount = amount, 1f, 0.1f)
+                .SetEase(Ease.OutQuad);
             yield return new WaitUntil(() => f.FillNode[i].fillAmount == 1);
         }
     }
