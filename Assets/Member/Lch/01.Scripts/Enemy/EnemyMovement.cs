@@ -14,7 +14,7 @@ public class EnemyMovement : MonoBehaviour,IEntityComponent
 
         Vector3 spawnPos = cam.transform.position + cam.transform.forward * 20f;
 
-        spawnPos += new Vector3(Random.Range(-10f, 10f), Random.Range(-5f, 5f), 0);
+        spawnPos += new Vector3(Random.Range(-10f, 10f), Random.Range(-5f, 5f), 280);
 
         return spawnPos;
     }
@@ -67,7 +67,7 @@ public class EnemyMovement : MonoBehaviour,IEntityComponent
             return;
 
         Vector3 movDir = new Vector3(Dir.x - transform.position.x, Dir.y - transform.position.y , 0);
-
+        movDir.Normalize();
         rb.linearVelocity = movDir * speed;
 
         float distance = Vector2.Distance(transform.position, Dir);

@@ -9813,7 +9813,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a1d6217af1f32df42823abb0e5226cb7, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14789,6 +14788,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2163880529116585979}
   - component: {fileID: 2163880529116585980}
+  - component: {fileID: 670198711000783843}
+  - component: {fileID: 142386098598913472}
   m_Layer: 0
   m_Name: Effect_26_IceRing
   m_TagString: Untagged
@@ -14832,6 +14833,39 @@ MonoBehaviour:
   m_rightMove: 0
   m_upMove: 0
   m_changedFactor: 0
+--- !u!65 &670198711000783843
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2163880529116585981}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 56.54201, y: 0.54796195, z: 56.983414}
+  m_Center: {x: -0.15092659, y: -0.22601902, z: -0.1584959}
+--- !u!114 &142386098598913472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2163880529116585981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 041feafc476264f4fa671329d0988591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2163880529144723630
 GameObject:
   m_ObjectHideFlags: 0
@@ -19692,7 +19726,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a1d6217af1f32df42823abb0e5226cb7, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24605,7 +24638,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a1d6217af1f32df42823abb0e5226cb7, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

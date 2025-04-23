@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Member.Ysc._01_Code.Agent;
 using Unity.Behavior;
 using UnityEngine;
@@ -5,7 +6,11 @@ using UnityEngine;
 public abstract class Enemy :Entity
 {
     protected BehaviorGraphAgent btAgent;
+    protected StateEventChange _stateChannel;
     [field: SerializeField] public EntityFinderSO PlayerFinder { get; protected set; }
+
+    public bool IsDeadEnd {get; protected set; }
+
     protected override void AfterInitialize()
     {
         base.AfterInitialize();
@@ -33,4 +38,6 @@ public abstract class Enemy :Entity
     {
 
     }
+
+   
 }

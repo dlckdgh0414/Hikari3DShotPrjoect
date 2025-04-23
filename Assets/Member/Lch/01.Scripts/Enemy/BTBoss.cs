@@ -1,17 +1,18 @@
+using DG.Tweening;
 using Unity.Behavior;
 using UnityEngine;
 
 public abstract class BTBoss : Enemy
 {
-    private BossStateChangeEvent _stateChannel;
+    private BossStateChangeEvent _bossstateChannel;
     private BlackboardVariable<BTBossStat> _state;
     
     protected override void Start()
     {
         BlackboardVariable<BossStateChangeEvent> stateChannelVariable =
             GetBlackboardVariable<BossStateChangeEvent>("StateChannel");
-        _stateChannel = stateChannelVariable.Value;
-        Debug.Assert(_stateChannel != null, $"StateChannel variable is null {gameObject.name}");
+        _bossstateChannel = stateChannelVariable.Value;
+        Debug.Assert(_bossstateChannel != null, $"StateChannel variable is null {gameObject.name}");
 
         _state = GetBlackboardVariable<BTBossStat>("EnemyState");
     }
@@ -19,8 +20,6 @@ public abstract class BTBoss : Enemy
     protected override void HandleHit()
     {
         if (IsDead) return;
-
-        _stateChannel.SendEventMessage(BTBossStat.HIT);
     }
 
     protected override void HandleDead()
@@ -28,6 +27,20 @@ public abstract class BTBoss : Enemy
         if (IsDead) return;
         gameObject.layer = DeadBodyLayer;
         IsDead = true;
-        _stateChannel.SendEventMessage(BTBossStat.DEATH);
+        _stateChannel.SendEventMessage(BTEnemyState.DEATH);
     }
+
+    [ContextMenu("Enemy Dead")]
+    public void EnemyDead()
+    {
+
+        // movement.isMove = false;
+        transform.DORotate(new Vector3(-35f, 0f, 0f), 0.5f, RotateMode.Fast)
+            .OnUpdate(() =>
+            {
+                Vector3 pos = new Vector3(transform.position.x, transform.forward.y, transform.forward.z * -0.4f);
+                transform.DOMove(pos, 10f);
+            }).OnComplete(() => IsDeadEnd = true);
+    }
+
 }
