@@ -1,25 +1,20 @@
-﻿using UnityEngine;
-using UnityEngine.Rendering;
+﻿using System;
+using UnityEngine;
 
 namespace Member.Ysc._01_Code.GameSystem
 {
     public class MapCreator : MonoBehaviour
     {
         [SerializeField] private Material[] matArray;
-
-        private MeshFilter _meshFilter;
+        
         private MeshRenderer[] _meshRenderers;
+        
         private void Awake()
         {
-            _meshFilter = GetComponent<MeshFilter>();
             _meshRenderers = GetComponentsInChildren<MeshRenderer>();
-        }
-
-        private void Start()
-        {
             CreateMap();
         }
-
+        
         private void CreateMap()
         {
             for (int i = 0; i < _meshRenderers.Length; i++)
