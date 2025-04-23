@@ -7,9 +7,11 @@ using TMPro;
 public class RollDataSO : ScriptableObject
 {
     public string name;
+    public Sprite icon;
     public int rarity;
     [TextArea]
     public string description = string.Empty;
+    public Color itemColor;
     public TextMeshProUGUI skillText;
 
     private string prefabPath = "Assets/Member/KimMin/03Prefab/SkillText";
