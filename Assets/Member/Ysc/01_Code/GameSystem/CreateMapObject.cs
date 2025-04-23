@@ -52,8 +52,11 @@ namespace Member.Ysc._01_Code.GameSystem
         
         private void CreateObj()
         {
+            
             if (objs.Count > 0)
                 ClearObj();
+            
+            if (obj == null) return;
             
             int val = Random.Range(minVal, maxVal+1);
             
