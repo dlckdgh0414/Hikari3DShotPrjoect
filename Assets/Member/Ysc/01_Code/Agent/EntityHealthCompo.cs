@@ -7,7 +7,7 @@ namespace Member.Ysc._01_Code.Agent
     {
         [SerializeField] private StatSO hpStat;
         public float maxHealth;
-        private float _currentHealth;
+        [SerializeField]private float _currentHealth;
 
         private Entity _entity;
         private EntityStat _statCompo;
@@ -16,14 +16,15 @@ namespace Member.Ysc._01_Code.Agent
         public void Initialize(Entity entity)
         {
             _entity = entity;
-            _statCompo ??= _entity.GetCompo<EntityStat>();
-            _feedbackData ??= _entity.GetCompo<EntityFeedbackData>();
         }
 
         public void AfterInit()
         {
+            _statCompo = _entity.GetCompo<EntityStat>();
+            _feedbackData = _entity.GetCompo<EntityFeedbackData>();
             _statCompo.GetStat(hpStat).OnValueChange += HandleHPChange;
-            _currentHealth = maxHealth = _statCompo.GetStat(hpStat).Value;
+            maxHealth = _statCompo.GetStat(hpStat).Value;
+            _currentHealth = maxHealth;
             _entity.OnDamage += ApplyDamage;
         }
 

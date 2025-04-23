@@ -20,6 +20,6 @@ public class EnemySpawn : MonoBehaviour
     private Vector3 GetSpawnPositionOutsideCamera()
     {
         Vector3 viewportPos = new Vector3(Random.Range(-0.2f, 1.2f), Random.Range(-0.2f, 1.2f), spawnDistance);
-        return mainCamera.ViewportToWorldPoint(viewportPos);
+        return viewportPos;
     }
 }

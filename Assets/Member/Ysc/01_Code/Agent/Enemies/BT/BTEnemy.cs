@@ -6,7 +6,7 @@ namespace Member.Ysc._01_Code.Agent.Enemies.BT
 {
     public abstract class BTEnemy : Enemy
     {
-        private StateEventChange _stateChannel;
+       
         private BlackboardVariable<BTEnemyState> _state;
 
         protected override void Start()
@@ -18,12 +18,10 @@ namespace Member.Ysc._01_Code.Agent.Enemies.BT
 
             _state = GetBlackboardVariable<BTEnemyState>("EnemyState");
         }
-
         protected override void HandleHit()
         {
             if (IsDead) return;
 
-            _stateChannel.SendEventMessage(BTEnemyState.HIT);
         }
 
         protected override void HandleDead()
@@ -33,18 +31,19 @@ namespace Member.Ysc._01_Code.Agent.Enemies.BT
             IsDead = true;
             _stateChannel.SendEventMessage(BTEnemyState.DEATH);
         }
-        
+
         [ContextMenu("Enemy Dead")]
         public void EnemyDead()
         {
-            
+
             // movement.isMove = false;
             transform.DORotate(new Vector3(-35f, 0f, 0f), 0.5f, RotateMode.Fast)
                 .OnUpdate(() =>
                 {
                     Vector3 pos = new Vector3(transform.position.x, transform.forward.y, transform.forward.z * -0.4f);
                     transform.DOMove(pos, 10f);
-                });
-        } 
+                }).OnComplete(()=>IsDeadEnd = true);
+        }
+
     }
 }
