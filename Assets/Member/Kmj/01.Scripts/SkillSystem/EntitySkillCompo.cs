@@ -5,9 +5,7 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponent
 {
     private Entity _entity;
 
-    public List<SkillSO> skills;
-
-    [field: SerializeField] public SelectActiveBtn skillList;
+    [field: SerializeField] public UseSkillSO skillList;
 
     public void Initialize(Entity entity)
     {
@@ -16,7 +14,6 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponent
 
     private void Awake()
     {
-        AddSkillInDictionary();
     }
 
 
@@ -36,11 +33,7 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponent
 
 
     }
-    private void AddSkillInDictionary()
-    {
-        //리스트에 있는 스킬 SO들을 Dictionary에 넣는 코드
-        skills.ForEach(skill => skillList.UseSkillDictionary.Add(skill.skillName, skill));
-    }
+
 
     public bool CanUseSkill(string name)
     {

@@ -80,6 +80,42 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""TestAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""f5214589-a159-49b3-98dd-22b76f07d7ee"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TestAttack2"",
+                    ""type"": ""Button"",
+                    ""id"": ""08c95a8a-ca00-469a-9b8f-2bfd5699ad36"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TestAttack3"",
+                    ""type"": ""Button"",
+                    ""id"": ""e9208f7b-4baa-4088-bfe6-4d13c8066195"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TestAttack4"",
+                    ""type"": ""Button"",
+                    ""id"": ""0f2ae76a-9a62-45cc-b154-f5f000c02352"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +228,50 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b9d20aa2-0ce0-4278-af57-67351b455814"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TestAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c53d856-7052-441c-9a95-c61902441e10"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TestAttack2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f43df1ee-b861-42a4-af59-39152105a4a4"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TestAttack3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e5719575-c1c0-414c-af8f-b88efe8c9bad"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TestAttack4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -206,6 +286,10 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
         m_PlayerMap_Move = m_PlayerMap.FindAction("Move", throwIfNotFound: true);
         m_PlayerMap_ChargeAttack = m_PlayerMap.FindAction("ChargeAttack", throwIfNotFound: true);
         m_PlayerMap_Aim = m_PlayerMap.FindAction("Aim", throwIfNotFound: true);
+        m_PlayerMap_TestAttack = m_PlayerMap.FindAction("TestAttack", throwIfNotFound: true);
+        m_PlayerMap_TestAttack2 = m_PlayerMap.FindAction("TestAttack2", throwIfNotFound: true);
+        m_PlayerMap_TestAttack3 = m_PlayerMap.FindAction("TestAttack3", throwIfNotFound: true);
+        m_PlayerMap_TestAttack4 = m_PlayerMap.FindAction("TestAttack4", throwIfNotFound: true);
     }
 
     ~@InputControlls()
@@ -278,6 +362,10 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMap_Move;
     private readonly InputAction m_PlayerMap_ChargeAttack;
     private readonly InputAction m_PlayerMap_Aim;
+    private readonly InputAction m_PlayerMap_TestAttack;
+    private readonly InputAction m_PlayerMap_TestAttack2;
+    private readonly InputAction m_PlayerMap_TestAttack3;
+    private readonly InputAction m_PlayerMap_TestAttack4;
     public struct PlayerMapActions
     {
         private @InputControlls m_Wrapper;
@@ -288,6 +376,10 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_PlayerMap_Move;
         public InputAction @ChargeAttack => m_Wrapper.m_PlayerMap_ChargeAttack;
         public InputAction @Aim => m_Wrapper.m_PlayerMap_Aim;
+        public InputAction @TestAttack => m_Wrapper.m_PlayerMap_TestAttack;
+        public InputAction @TestAttack2 => m_Wrapper.m_PlayerMap_TestAttack2;
+        public InputAction @TestAttack3 => m_Wrapper.m_PlayerMap_TestAttack3;
+        public InputAction @TestAttack4 => m_Wrapper.m_PlayerMap_TestAttack4;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -315,6 +407,18 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
+            @TestAttack.started += instance.OnTestAttack;
+            @TestAttack.performed += instance.OnTestAttack;
+            @TestAttack.canceled += instance.OnTestAttack;
+            @TestAttack2.started += instance.OnTestAttack2;
+            @TestAttack2.performed += instance.OnTestAttack2;
+            @TestAttack2.canceled += instance.OnTestAttack2;
+            @TestAttack3.started += instance.OnTestAttack3;
+            @TestAttack3.performed += instance.OnTestAttack3;
+            @TestAttack3.canceled += instance.OnTestAttack3;
+            @TestAttack4.started += instance.OnTestAttack4;
+            @TestAttack4.performed += instance.OnTestAttack4;
+            @TestAttack4.canceled += instance.OnTestAttack4;
         }
 
         private void UnregisterCallbacks(IPlayerMapActions instance)
@@ -337,6 +441,18 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
+            @TestAttack.started -= instance.OnTestAttack;
+            @TestAttack.performed -= instance.OnTestAttack;
+            @TestAttack.canceled -= instance.OnTestAttack;
+            @TestAttack2.started -= instance.OnTestAttack2;
+            @TestAttack2.performed -= instance.OnTestAttack2;
+            @TestAttack2.canceled -= instance.OnTestAttack2;
+            @TestAttack3.started -= instance.OnTestAttack3;
+            @TestAttack3.performed -= instance.OnTestAttack3;
+            @TestAttack3.canceled -= instance.OnTestAttack3;
+            @TestAttack4.started -= instance.OnTestAttack4;
+            @TestAttack4.performed -= instance.OnTestAttack4;
+            @TestAttack4.canceled -= instance.OnTestAttack4;
         }
 
         public void RemoveCallbacks(IPlayerMapActions instance)
@@ -362,5 +478,9 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnChargeAttack(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnTestAttack(InputAction.CallbackContext context);
+        void OnTestAttack2(InputAction.CallbackContext context);
+        void OnTestAttack3(InputAction.CallbackContext context);
+        void OnTestAttack4(InputAction.CallbackContext context);
     }
 }
