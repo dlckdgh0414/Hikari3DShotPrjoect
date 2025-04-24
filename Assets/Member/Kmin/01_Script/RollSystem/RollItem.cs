@@ -10,6 +10,7 @@ public class RollItem : MonoBehaviour
 
     public void SettingItem(RollDataSO rollData)
     {
+        gameObject.name = rollData.name;
         itemName.text = rollData.name;
         itemIcon.sprite = rollData.icon;
         itemNamebg.color = rollData.itemColor;
