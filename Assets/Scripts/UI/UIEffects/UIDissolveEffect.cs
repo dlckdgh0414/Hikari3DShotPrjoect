@@ -7,6 +7,7 @@ public class UIDissolveEffect : MonoBehaviour
 {
     VideoPlayer vid;
     [SerializeField] List<GameObject> obj;
+    public float time = 12f;
     private void Awake()
     {
         vid = GetComponent<VideoPlayer>();
@@ -17,7 +18,7 @@ public class UIDissolveEffect : MonoBehaviour
 
     IEnumerator ShowUIEffect()
     {
-        yield return new WaitForSeconds(12f);
+        yield return new WaitForSeconds(time);
 
         foreach (GameObject item in obj)
         {
