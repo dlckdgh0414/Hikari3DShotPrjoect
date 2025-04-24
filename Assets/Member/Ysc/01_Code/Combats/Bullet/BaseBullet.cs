@@ -11,7 +11,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
 
         [SerializeField] private string itemName;
         
-        public string ItemName => itemName;
+        public string PoolingName => itemName;
         
         protected Vector3 fireDirection;
         
@@ -28,6 +28,13 @@ namespace Member.Ysc._01_Code.Combat.Bullet
             BulletInit();
         }
 
+        protected virtual void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player")) return;
+            Hit(other);
+            DestroyBullet(this);
+        }
+
         protected void FixedUpdate()
         {
             RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
@@ -39,8 +46,13 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         }
 
 
-        protected virtual void Hit()
+        protected virtual void Hit(Collider hitable)
         {
+            if (hitable.TryGetComponent(out IDamageable damageable))
+            {
+                Vector2 direction = (hitable.transform.position - transform.position).normalized;
+                damageable.ApplyDamage(BulletSO.bulletDamage, direction);
+            }
         }
 
         protected virtual void BulletInit()
@@ -57,6 +69,11 @@ namespace Member.Ysc._01_Code.Combat.Bullet
 
         public void ResetItem()
         {
+        }
+
+        private void OnValidate()
+        {
+            gameObject.name = PoolingName;
         }
     }
 }

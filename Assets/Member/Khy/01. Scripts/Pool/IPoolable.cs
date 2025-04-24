@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IPoolable
 {
-    public string ItemName { get; }
+    public string PoolingName { get; }
     public GameObject GetGameObject();
     public void ResetItem();
 }
