@@ -232,7 +232,7 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b9d20aa2-0ce0-4278-af57-67351b455814"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
