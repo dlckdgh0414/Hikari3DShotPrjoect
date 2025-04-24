@@ -75,8 +75,9 @@ public class KeyRebinder : MonoBehaviour
                 if (!string.IsNullOrEmpty(json))
                 {
                     _inputreader._controlls.LoadBindingOverridesFromJson(json);
+                    _inputreader.Initialize(_inputreader._controlls);
                 }
-                _inputreader.Initialize(_inputreader._controlls);
+                
 
                 rebindButton.interactable = true;
                 UpdateBindingDisplay();
