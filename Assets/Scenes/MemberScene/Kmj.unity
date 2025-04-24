@@ -333,6 +333,7 @@ MonoBehaviour:
   Parent: {fileID: 761901202}
   type: 0
   _thisSkill: {fileID: 0}
+  _skillInven: {fileID: 0}
   skillUI: {fileID: 0}
 --- !u!114 &5011437
 MonoBehaviour:
@@ -2087,6 +2088,7 @@ MonoBehaviour:
   _skillSO: {fileID: 11400000, guid: c89d7b7b5a5af68499ed4b5778cb3ca7, type: 2}
   _saBtn: {fileID: 13622370}
   _inventorySO: {fileID: 11400000, guid: 4e1c3ec8cedfd994ba21ca4ccc72e037, type: 2}
+  skillInventory: {fileID: 0}
   _type: 0
 --- !u!1 &249276848
 GameObject:
@@ -2800,6 +2802,7 @@ MonoBehaviour:
   _skillSO: {fileID: 11400000, guid: 986ab386eee68bf498077030a3a63873, type: 2}
   _saBtn: {fileID: 13622370}
   _inventorySO: {fileID: 11400000, guid: 4e1c3ec8cedfd994ba21ca4ccc72e037, type: 2}
+  skillInventory: {fileID: 0}
   _type: 0
 --- !u!1 &374005608
 GameObject:
@@ -3152,6 +3155,7 @@ MonoBehaviour:
   Parent: {fileID: 761901202}
   type: 0
   _thisSkill: {fileID: 0}
+  _skillInven: {fileID: 0}
   skillUI: {fileID: 0}
 --- !u!114 &406998934
 MonoBehaviour:
@@ -3483,7 +3487,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 303, y: 376}
+  m_AnchoredPosition: {x: 83, y: 376}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &445183250
@@ -3946,6 +3950,7 @@ MonoBehaviour:
   Parent: {fileID: 761901202}
   type: 1
   _thisSkill: {fileID: 0}
+  _skillInven: {fileID: 0}
   skillUI: {fileID: 0}
 --- !u!1 &543147877
 GameObject:
@@ -5465,7 +5470,6 @@ GameObject:
   m_Component:
   - component: {fileID: 737597185}
   - component: {fileID: 737597184}
-  - component: {fileID: 737597186}
   m_Layer: 0
   m_Name: Test
   m_TagString: Untagged
@@ -5501,19 +5505,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &737597186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 737597183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60dc7ea6a2da4934085630b588d72b34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillList: {fileID: 13622370}
 --- !u!1 &744851419
 GameObject:
   m_ObjectHideFlags: 0
@@ -5969,6 +5960,7 @@ MonoBehaviour:
   _skillSO: {fileID: 11400000, guid: b2b612dc89b714749b0e613f878e6a0f, type: 2}
   _saBtn: {fileID: 13622370}
   _inventorySO: {fileID: 11400000, guid: 4e1c3ec8cedfd994ba21ca4ccc72e037, type: 2}
+  skillInventory: {fileID: 0}
   _type: 0
 --- !u!1 &818018999
 GameObject:
@@ -7100,8 +7092,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bindingDisplayName: {fileID: 1229742124}
   rebindButton: {fileID: 66231208}
-  _inputreader: {fileID: -944628639613478452, guid: 20bb5c8f2406bb0448cb54eef65a7820,
-    type: 3}
+  _inputreader: {fileID: 11400000, guid: 1fe6fc5c438cdda499ca7dea43cd338a, type: 2}
   inputActions: {fileID: -944628639613478452, guid: 20bb5c8f2406bb0448cb54eef65a7820,
     type: 3}
   actionMapName: PlayerMap
@@ -7256,6 +7247,7 @@ MonoBehaviour:
   _skillSO: {fileID: 11400000, guid: 986ab386eee68bf498077030a3a63873, type: 2}
   _saBtn: {fileID: 13622370}
   _inventorySO: {fileID: 11400000, guid: 4e1c3ec8cedfd994ba21ca4ccc72e037, type: 2}
+  skillInventory: {fileID: 0}
   _type: 0
 --- !u!1 &999892090
 GameObject:
@@ -7797,6 +7789,7 @@ MonoBehaviour:
   _skillSO: {fileID: 11400000, guid: d066d791331af6c4789b0e5a8dba1e22, type: 2}
   _saBtn: {fileID: 13622370}
   _inventorySO: {fileID: 11400000, guid: 4e1c3ec8cedfd994ba21ca4ccc72e037, type: 2}
+  skillInventory: {fileID: 0}
   _type: 0
 --- !u!1 &1063098718
 GameObject:
@@ -7809,7 +7802,7 @@ GameObject:
   - component: {fileID: 1063098719}
   - component: {fileID: 1063098720}
   m_Layer: 5
-  m_Name: ThridSkill
+  m_Name: ForthSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7850,8 +7843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bindingDisplayName: {fileID: 1978298518}
   rebindButton: {fileID: 90223366}
-  _inputreader: {fileID: -944628639613478452, guid: 20bb5c8f2406bb0448cb54eef65a7820,
-    type: 3}
+  _inputreader: {fileID: 11400000, guid: 1fe6fc5c438cdda499ca7dea43cd338a, type: 2}
   inputActions: {fileID: -944628639613478452, guid: 20bb5c8f2406bb0448cb54eef65a7820,
     type: 3}
   actionMapName: PlayerMap
@@ -8900,6 +8892,7 @@ MonoBehaviour:
   _skillSO: {fileID: 11400000, guid: 65a44c94118b9b24295ae815c7fd2177, type: 2}
   _saBtn: {fileID: 13622370}
   _inventorySO: {fileID: 11400000, guid: 4e1c3ec8cedfd994ba21ca4ccc72e037, type: 2}
+  skillInventory: {fileID: 0}
   _type: 0
 --- !u!1 &1177180641
 GameObject:
@@ -9564,7 +9557,7 @@ GameObject:
   - component: {fileID: 1259996580}
   - component: {fileID: 1259996584}
   m_Layer: 5
-  m_Name: Setting
+  m_Name: Active
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10524,7 +10517,7 @@ GameObject:
   - component: {fileID: 1441840912}
   - component: {fileID: 1441840913}
   m_Layer: 5
-  m_Name: ForthSkill
+  m_Name: ThirdSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10565,8 +10558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bindingDisplayName: {fileID: 445183250}
   rebindButton: {fileID: 1665535703}
-  _inputreader: {fileID: -944628639613478452, guid: 20bb5c8f2406bb0448cb54eef65a7820,
-    type: 3}
+  _inputreader: {fileID: 11400000, guid: 1fe6fc5c438cdda499ca7dea43cd338a, type: 2}
   inputActions: {fileID: -944628639613478452, guid: 20bb5c8f2406bb0448cb54eef65a7820,
     type: 3}
   actionMapName: PlayerMap
@@ -11060,6 +11052,7 @@ MonoBehaviour:
   _skillSO: {fileID: 11400000, guid: 986ab386eee68bf498077030a3a63873, type: 2}
   _saBtn: {fileID: 13622370}
   _inventorySO: {fileID: 11400000, guid: 4e1c3ec8cedfd994ba21ca4ccc72e037, type: 2}
+  skillInventory: {fileID: 0}
   _type: 1
 --- !u!1 &1525402928
 GameObject:
@@ -11113,8 +11106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bindingDisplayName: {fileID: 1428278867}
   rebindButton: {fileID: 664452258}
-  _inputreader: {fileID: -944628639613478452, guid: 20bb5c8f2406bb0448cb54eef65a7820,
-    type: 3}
+  _inputreader: {fileID: 11400000, guid: 1fe6fc5c438cdda499ca7dea43cd338a, type: 2}
   inputActions: {fileID: -944628639613478452, guid: 20bb5c8f2406bb0448cb54eef65a7820,
     type: 3}
   actionMapName: PlayerMap
@@ -12425,8 +12417,8 @@ RectTransform:
   m_Children:
   - {fileID: 1525402929}
   - {fileID: 988478312}
-  - {fileID: 1063098719}
   - {fileID: 1441840912}
+  - {fileID: 1063098719}
   m_Father: {fileID: 302773948}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -13222,6 +13214,7 @@ MonoBehaviour:
   _skillSO: {fileID: 11400000, guid: 986ab386eee68bf498077030a3a63873, type: 2}
   _saBtn: {fileID: 13622370}
   _inventorySO: {fileID: 11400000, guid: 4e1c3ec8cedfd994ba21ca4ccc72e037, type: 2}
+  skillInventory: {fileID: 0}
   _type: 0
 --- !u!1 &1785066547
 GameObject:
@@ -13317,6 +13310,7 @@ MonoBehaviour:
   Parent: {fileID: 761901202}
   type: 0
   _thisSkill: {fileID: 0}
+  _skillInven: {fileID: 0}
   skillUI: {fileID: 0}
 --- !u!114 &1785066552
 MonoBehaviour:
@@ -13598,6 +13592,7 @@ MonoBehaviour:
   _skillSO: {fileID: 11400000, guid: 986ab386eee68bf498077030a3a63873, type: 2}
   _saBtn: {fileID: 13622370}
   _inventorySO: {fileID: 11400000, guid: 4e1c3ec8cedfd994ba21ca4ccc72e037, type: 2}
+  skillInventory: {fileID: 0}
   _type: 0
 --- !u!1 &1830244936
 GameObject:
@@ -14649,6 +14644,7 @@ MonoBehaviour:
   _skillSO: {fileID: 11400000, guid: 986ab386eee68bf498077030a3a63873, type: 2}
   _saBtn: {fileID: 13622370}
   _inventorySO: {fileID: 11400000, guid: 4e1c3ec8cedfd994ba21ca4ccc72e037, type: 2}
+  skillInventory: {fileID: 0}
   _type: 0
 --- !u!1 &1978298516
 GameObject:
@@ -14684,7 +14680,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 73, y: 375}
+  m_AnchoredPosition: {x: 308, y: 375}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1978298518
