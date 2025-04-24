@@ -13,9 +13,6 @@ public class EntityMover : MonoBehaviour,IEntityComponent
 
     private Rigidbody _rbCompo;
     private Vector3 _autoMovement;
-
-    [field: SerializeField] public EffectorPlayer EffectorPlayer { get; private set; }
-
     #endregion
 
     public bool CanManualMove { get; set; } = true;

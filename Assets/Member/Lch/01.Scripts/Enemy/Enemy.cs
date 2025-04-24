@@ -11,7 +11,12 @@ public abstract class Enemy :Entity
         base.AfterInitialize();
         btAgent = GetComponent<BehaviorGraphAgent>();
         Debug.Assert(btAgent != null, $"{gameObject.name} does not have an BehaviorGraphAgent");
-        Debug.Log("BT¿¡³Ê¹Ì ÈÄ ÃÊ±âÈ­");
+        Debug.Log("BTì—ë„ˆë¯¸ í›„ ì´ˆê¸°í™”");
+    }
+
+    public void LookTarget(Transform target)
+    {
+        transform.LookAt(target);
     }
 
     public BlackboardVariable<T> GetBlackboardVariable<T>(string key)
