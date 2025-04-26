@@ -197,20 +197,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Graph: {fileID: 4531591371395837788, guid: ceb02307ca2e25a4aafca311e35550bc, type: 2}
+  m_Graph: {fileID: 4531591371395837788, guid: 8fcac44bdc9b0a74ebef1ed3ffade168, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 6282192128325189723
-  - rid: 4070495634837734339
-  - rid: 4070495634837734340
-  - rid: 4070495634837734341
-  - rid: 4070495931753824540
-  - rid: 4070495951691187008
+  - rid: 4070495979498897499
+  - rid: 4070495979498897500
+  - rid: 4070495979498897501
+  - rid: 4070495979498897502
+  - rid: 4070495979498897503
+  - rid: 4070495979498898323
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
     version: 2
     RefIds:
-    - rid: 4070495634837734339
+    - rid: 4070495979498897499
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Transform, UnityEngine.CoreModule]]',
+        ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 3784628903306001351
+          m_Value1: 2208457996610744229
+        Name: StartPos
+        m_Value: {fileID: 9019990920434335029}
+    - rid: 4070495979498897500
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]',
+        ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 16081302605589731988
+          m_Value1: 12884367835949491107
+        Name: Pattern1Effect
+        m_Value: {fileID: 0}
+    - rid: 4070495979498897501
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]',
+        ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 2602859118257778624
+          m_Value1: 12552104581243609022
+        Name: Pattern2Effect
+        m_Value: {fileID: 0}
+    - rid: 4070495979498897502
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]',
         ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -220,7 +248,7 @@ MonoBehaviour:
         Name: Pattern1
         m_Value: {fileID: 1061363476702058143, guid: e61a7369aa252374787ab5323a35ac8b,
           type: 3}
-    - rid: 4070495634837734340
+    - rid: 4070495979498897503
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]',
         ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -230,33 +258,15 @@ MonoBehaviour:
         Name: Pattern2
         m_Value: {fileID: 2163880529116585981, guid: bf2bf1224558fdc4f86e569573e4a5af,
           type: 3}
-    - rid: 4070495634837734341
-      type: {class: 'BlackboardVariable`1[[UnityEngine.Transform, UnityEngine.CoreModule]]',
-        ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 3784628903306001351
-          m_Value1: 2208457996610744229
-        Name: StartPos
-        m_Value: {fileID: 9019990920434335029}
-    - rid: 4070495931753824540
+    - rid: 4070495979498898323
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior,
         asm: Unity.Behavior}
       data:
         GUID:
-          m_Value0: 2238759868507223748
-          m_Value1: 11151012368872840572
-        Name: AttackDuration
+          m_Value0: 4236400432823817047
+          m_Value1: 8424441759805297558
+        Name: AttackDelayTime
         m_Value: 2.5
-    - rid: 4070495951691187008
-      type: {class: 'BlackboardVariable`1[[EnemyMovement, Assembly-CSharp]]', ns: Unity.Behavior,
-        asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 1393903150250154060
-          m_Value1: 5916176437347067062
-        Name: Mover
-        m_Value: {fileID: 4421724855119156169}
     - rid: 6282192128325189723
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]',
         ns: Unity.Behavior, asm: Unity.Behavior}
