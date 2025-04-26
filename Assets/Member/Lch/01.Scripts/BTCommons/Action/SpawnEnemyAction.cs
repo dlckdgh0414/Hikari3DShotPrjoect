@@ -13,6 +13,8 @@ public partial class SpawnEnemyAction : Action
     [SerializeReference] public BlackboardVariable<Vector3> Dir;
     protected override Status OnStart()
     {
+        Debug.Assert(Mover.Value != null ,"Dffafd");
+        Debug.Assert(Dir.Value != null, "dfafsff");
         Dir.Value = Mover.Value.GetMovePos();
         return Status.Running;
     }
