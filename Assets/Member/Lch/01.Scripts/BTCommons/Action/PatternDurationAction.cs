@@ -10,6 +10,8 @@ public partial class PatternDurationAction : Action
 {
     [SerializeReference] public BlackboardVariable<EnemyAttack> PatternEffect;
     [SerializeReference] public BlackboardVariable<float> Duration;
+    
+    
     private float _currentTime;
     protected override Status OnStart()
     {

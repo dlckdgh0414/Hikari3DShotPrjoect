@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,14 +13,14 @@ public class ActiveSkillBtn : MonoBehaviour
     [SerializeField] private SkillSO _skillSO;
 
     private Color thisImage;
-    private SelectActiveBtn _saBtn;
+    [SerializeField] private SelectActiveBtn _saBtn;
 
     [SerializeField] private SkillInventorySO _inventorySO;
+    [SerializeField] private UseSkillSO skillInventory;
 
     [SerializeField] private ThisType _type;
     private void Awake()
     {
-        _saBtn = GameObject.Find("InvenSkill").GetComponent<SelectActiveBtn>();
 
         this.name = _skillSO.name;
         this.GetComponentInChildren<Image>().sprite = _skillSO.skillUIImage;
@@ -44,7 +45,8 @@ public class ActiveSkillBtn : MonoBehaviour
 
             iven._thisSkill = _skillSO;
 
-            _saBtn.UseSkillDictionary.Add(_skillSO.skillName, _skillSO);
+
+            skillInventory.UseSkillDictionary.Add(_skillSO.skillName, _skillSO);
 
             _saBtn._invenList[_saBtn.currentListCount].GetComponent<Image>().sprite = _skillSO.skillUIImage;
 
@@ -58,7 +60,8 @@ public class ActiveSkillBtn : MonoBehaviour
 
             _saBtn._invenList[0].GetComponent<Image>().sprite = _skillSO.skillUIImage;
 
-            _saBtn.UseSkillDictionary.Add(_skillSO.skillName, _skillSO);
+
+            skillInventory.UseSkillDictionary.Add(_skillSO.skillName, _skillSO);
         }
     }
 }

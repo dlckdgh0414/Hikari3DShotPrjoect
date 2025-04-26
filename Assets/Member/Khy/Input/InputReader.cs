@@ -11,8 +11,13 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
     public Action OnStartChargeAttackEvent;
     public Action OnEndChargeAttackEvent;
     public Action<int> OnWingEvent;
+
+    public Action TestInput;
+    public Action TestInput2;
+    public Action TestInput3;
+    public Action TestInput4;
     public Vector2 InputDirection { get; private set; }
-    private InputControlls _controlls;
+    public InputControlls _controlls;
 
     public LayerMask whatIShootPlace;
 
@@ -27,6 +32,14 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
             _controlls = new();
             _controlls.PlayerMap.SetCallbacks(this);
         }
+        _controlls.PlayerMap.Enable();
+    }
+
+
+    public void Initialize(InputControlls controlls)
+    {
+        _controlls = controlls;
+        _controlls.PlayerMap.SetCallbacks(this);
         _controlls.PlayerMap.Enable();
     }
 
@@ -83,5 +96,29 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
     public void OnAim(InputAction.CallbackContext context)
     {
         MousePosition = context.ReadValue<Vector2>();
+    }
+
+    public void OnTestAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            TestInput?.Invoke();
+    }
+
+    public void OnTestAttack2(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            TestInput2?.Invoke();
+    }
+
+    public void OnTestAttack3(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            TestInput3?.Invoke();
+    }
+
+    public void OnTestAttack4(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            TestInput4?.Invoke();
     }
 }

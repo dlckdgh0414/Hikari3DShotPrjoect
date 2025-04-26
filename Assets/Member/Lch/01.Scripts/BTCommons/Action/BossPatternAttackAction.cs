@@ -15,8 +15,13 @@ public partial class BossPatternAttackAction : Action
     [SerializeReference] public BlackboardVariable<GameObject> EffectObj;
     [SerializeReference] public BlackboardVariable<Entity> boss;
     [SerializeReference] public BlackboardVariable<bool> IsSetParent;
+    [SerializeReference] public BlackboardVariable<Vector3> OriginRotate;
+    
     protected override Status OnStart()
     {
+        Quaternion q = StartPos.Value.rotation;
+        OriginRotate.Value = q.eulerAngles;
+        
         if (StartTargetPos.Value)
         {
             EffectObj.Value = GameObject.Instantiate(PlayEffect.Value.gameObject,StartPos.Value.position, PlayEffect.Value.transform.rotation);
