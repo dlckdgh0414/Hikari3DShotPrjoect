@@ -16,6 +16,8 @@ public class Inven : MonoBehaviour
 
     [field: SerializeField] public SkillSO _thisSkill;
 
+    [SerializeField] private UseSkillSO _skillInven;
+
     [field: SerializeField] public GameObject skillUI;
     private void Awake()
     {
@@ -42,7 +44,7 @@ public class Inven : MonoBehaviour
             transform.SetParent(Parent.transform);
             transform.SetAsLastSibling();
 
-            _selctManager.UseSkillDictionary.Remove(_thisSkill.skillName);
+            _skillInven.UseSkillDictionary.Remove(_thisSkill.skillName);
             _thisSkill = null;
             skillUI = null;
             transform.GetComponentInChildren<Image>().sprite = null;
@@ -52,8 +54,7 @@ public class Inven : MonoBehaviour
         if (type == ButtonType.Static && _selctManager._invenList.Contains(gameObject))
         {
             _image = null;
-
-            _selctManager.UseSkillDictionary.Remove(_thisSkill.skillName);
+            _skillInven.UseSkillDictionary.Remove(_thisSkill.skillName);
 
             skillUI.GetComponentInChildren<Button>().interactable = true;
             transform.GetComponentInChildren<Image>().sprite = null;
