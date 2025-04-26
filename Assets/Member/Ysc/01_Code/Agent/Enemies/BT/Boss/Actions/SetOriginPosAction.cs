@@ -13,7 +13,7 @@ public partial class SetOriginPosAction : Action
 
     protected override Status OnStart()
     {
-        TargetPos.Value.position = Origin.Value;
+        Origin.Value = TargetPos.Value.position;
         return Status.Success;
     }
 }
