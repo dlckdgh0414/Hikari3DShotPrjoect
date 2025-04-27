@@ -69,7 +69,7 @@ public class Roll : MonoBehaviour
     {
         scrollSpeed = 0;
 
-        string rolledSkill = rollItems.OrderBy(x => (((RectTransform)x.transform).position - Vector3.zero).magnitude).Last().name;
+        string rolledSkill = rollItems.OrderBy(x => (((RectTransform)x.transform).position).magnitude).Last().name;
         
         Debug.Log(name);
 
