@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine.UI;
 public class ImageFade : MonoBehaviour
 {
+    [SerializeField] private GameObject obj;
     RawImage img;
   public float colorDuraction = 1f;
     Color imgColor;
@@ -28,5 +29,6 @@ public class ImageFade : MonoBehaviour
             yield return null;
         }
         imgColor = Color.black;
+        obj.SetActive(true);
     }
 }
