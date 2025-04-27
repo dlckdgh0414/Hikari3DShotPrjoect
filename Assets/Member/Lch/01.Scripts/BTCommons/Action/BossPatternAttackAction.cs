@@ -20,7 +20,7 @@ public partial class BossPatternAttackAction : Action
     protected override Status OnStart()
     {
         Quaternion q = StartPos.Value.rotation;
-         OriginRotate.Value = q.eulerAngles;
+        // OriginRotate.Value = q.eulerAngles;
         
         if (StartTargetPos.Value)
         {
