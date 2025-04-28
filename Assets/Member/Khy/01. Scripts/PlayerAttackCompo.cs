@@ -17,10 +17,14 @@ public class PlayerAttackCompo : MonoBehaviour,IEntityComponent
     [SerializeField]
     private BaseBullet _bullet;
 
+    private EntityVFX entityVFX;
+    private readonly string vfxName = "ShootVFX";
+
     public void Initialize(Entity entity)
     {
         _player = entity as Player;
         _player.InputReader.OnAttackEvent += Debug;
+        entityVFX = entity.GetCompo<EntityVFX>();
     }
 
     private void OnDestroy()
@@ -44,6 +48,8 @@ public class PlayerAttackCompo : MonoBehaviour,IEntityComponent
     private void FireBullet()
     {
         Vector3 worldPosition = _player.InputReader.GetWorldPosition(out RaycastHit hitInfo);
+        entityVFX.PlayVfx(vfxName, Vector3.zero, Quaternion.identity);
+
         BaseBullet bullet = PoolManager.Instance.Pop(_bullet.name) as BaseBullet;
         bullet.transform.position = muzzle.transform.position;
         bullet.SetDirection(worldPosition);

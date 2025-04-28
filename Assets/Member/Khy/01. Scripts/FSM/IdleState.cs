@@ -15,7 +15,6 @@ public class IdleState : PlayerState
     public override void Update()
     {
         base.Update();
-        Debug.Log("cfcf");
         Vector2 input = _player.InputReader.InputDirection;
 
         if(input.magnitude > _inputThreshold)
