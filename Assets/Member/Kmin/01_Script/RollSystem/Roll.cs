@@ -13,13 +13,10 @@ public class Roll : MonoBehaviour
 
     public List<RollItem> rollItems = new List<RollItem>();
     private Dictionary<string, SkillSO> _skillDic/*k*/ = new Dictionary<string, SkillSO>();
-    private RollDataSO _rolledSkill = null;
     
-    private readonly RollStartEvent _rollStartEvent = new RollStartEvent();
     private readonly RollEndEvent _rollEndEvent = new RollEndEvent();
 
     private float _scrollSpeed;
-    
     private bool _isRolling = false;
     
     private void Awake()
@@ -48,7 +45,7 @@ public class Roll : MonoBehaviour
     private void Rolling()
     {
         contentPanel.anchoredPosition += Vector2.left * (scrollSpeed * Time.deltaTime);
-        _scrollSpeed /= (1.005f );
+        _scrollSpeed /= (1.005f);
  
         if (_scrollSpeed <= 25) RollEnd();
 
