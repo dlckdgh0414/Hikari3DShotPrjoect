@@ -1,18 +1,19 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AfterRoll : MonoBehaviour
+namespace Member.Kmin._01_Script.RollSystem
 {
-    [SerializeField] private GameEventChannelSO eventChannel;
-
-    private void Awake()
+    public class AfterRoll : MonoBehaviour
     {
-        eventChannel.AddListener<RollEndEvent>(HandleRollEnd);
-    }
+        [SerializeField] private GameEventChannelSO eventChannel;
 
-    private void HandleRollEnd(RollEndEvent rollEvent)
-    {
-        //if(rollEvent.rolledSkill)
+        private void Awake()
+        {
+            eventChannel.AddListener<RollEndEvent>(HandleRollEnd);
+        }
+
+        private void HandleRollEnd(RollEndEvent rollEvent)
+        {
+            //if(rollEvent.rolledSkill)
+        }
     }
 }
