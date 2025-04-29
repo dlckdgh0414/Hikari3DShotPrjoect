@@ -16,7 +16,7 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
     public Action OnSecSkillEvent;
     public Action OnThrSkillEvent;
     public Vector2 InputDirection { get; private set; }
-    private InputControlls _controlls;
+    public InputControlls _controlls;
 
     public LayerMask whatIShootPlace;
 
@@ -31,6 +31,14 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
             _controlls = new();
             _controlls.PlayerMap.SetCallbacks(this);
         }
+        _controlls.PlayerMap.Enable();
+    }
+
+
+    public void Initialize(InputControlls controlls)
+    {
+        _controlls = controlls;
+        _controlls.PlayerMap.SetCallbacks(this);
         _controlls.PlayerMap.Enable();
     }
 

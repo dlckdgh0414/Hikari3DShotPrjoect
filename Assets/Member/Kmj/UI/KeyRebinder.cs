@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Purchasing.MiniJSON;
+using TMPro.Examples;
 
 public class KeyRebinder : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class KeyRebinder : MonoBehaviour
     [SerializeField] private Button rebindButton;
 
     [Header("Binding Info")]
-    [SerializeField] InputActionAsset _inputreader;
+    [SerializeField] InputReader _inputreader;
     [SerializeField] private InputActionAsset inputActions;
     [SerializeField] private string actionMapName = "PlayerMap";
     [SerializeField] private string actionName;
@@ -41,12 +42,12 @@ public class KeyRebinder : MonoBehaviour
             return;
         }
 
-        string json = PlayerPrefs.GetString("rebinds", "");
+        string json = PlayerPrefs.GetString("rebinds", string.Empty);
         if (!string.IsNullOrEmpty(json))
         {
-            _inputreader.LoadBindingOverridesFromJson(json);
-            Debug.Log("오버라이드 적용 완료!");
+            _inputreader._controlls.LoadBindingOverridesFromJson(json);
         }
+        _inputreader.Initialize(_inputreader._controlls);
     }
 
     private void OnEnable()
@@ -69,24 +70,31 @@ public class KeyRebinder : MonoBehaviour
             {
                 operation.Dispose();
                 _actionToRebind.Enable();
+
+                string json = PlayerPrefs.GetString("rebinds", string.Empty);
+                if (!string.IsNullOrEmpty(json))
+                {
+                    _inputreader._controlls.LoadBindingOverridesFromJson(json);
+                    _inputreader.Initialize(_inputreader._controlls);
+                }
+                
+
                 rebindButton.interactable = true;
                 UpdateBindingDisplay();
                 print(_actionToRebind.ToString());
                 SaveBindingOverride();
-                string json = PlayerPrefs.GetString("rebinds", "");
-                if (!string.IsNullOrEmpty(json))
-                {
-                    _inputreader.LoadBindingOverridesFromJson(json);
-                    Debug.Log("오버라이드 적용 완료!");
-                }
+               
+                
             })
             .OnCancel(operation =>
             {
                 operation.Dispose();
-                _actionToRebind.Enable();
+                _inputreader._controlls.Enable();
+                _inputreader.Initialize(_inputreader._controlls);
+
                 rebindButton.interactable = true;
                 UpdateBindingDisplay();
-                string json = PlayerPrefs.GetString("rebinds", "");
+                
             })
             .Start();
     }
