@@ -13,6 +13,7 @@ public class RollDataSO : ScriptableObject
     public string description = string.Empty;
     public Color itemColor;
     public TextMeshProUGUI skillText;
+    public SkillSO skill;
 
     private string prefabPath = "Assets/Member/KimMin/03Prefab/SkillText";
 

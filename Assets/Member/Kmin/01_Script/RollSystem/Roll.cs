@@ -1,20 +1,14 @@
-        using System;
-        using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using System.Collections;
-using DG.Tweening;
-using Unity.Burst.Intrinsics;
-using VHierarchy.Libs;
-using Random = UnityEngine.Random;
 
 public class Roll : MonoBehaviour
 {
     [SerializeField] private GameEventChannelSO rollEventChannel;
     [SerializeField] private SkillSOList skillListSO;
-    [SerializeField] private RectTransform cotnentPanel;
+    [SerializeField] private RectTransform contentPanel;
     [SerializeField] private float scrollSpeed;
-    
+    [SerializeField] private UseSkillSO skillSO;
     //[SerializeField] private float luck;
 
     public List<RollItem> rollItems = new List<RollItem>();
@@ -37,7 +31,6 @@ public class Roll : MonoBehaviour
         if (_isRolling)
             Rolling();
     }
-
     private bool IsPicked(float rarity)
     {
         return Random.Range(1, (int)rarity) == 1;
@@ -48,12 +41,12 @@ public class Roll : MonoBehaviour
 
     private void Rolling()
     {
-        cotnentPanel.anchoredPosition += Vector2.left * (scrollSpeed * Time.deltaTime);
+        contentPanel.anchoredPosition += Vector2.left * (scrollSpeed * Time.deltaTime);
         scrollSpeed /= (1.005f );
-
+ 
         if (scrollSpeed <= 25) RollEnd();
 
-        if (cotnentPanel.anchoredPosition.x <= -215)
+        if (contentPanel.anchoredPosition.x <= -215)
         {
             RollItem item = rollItems[0];
             rollItems[0].transform.SetAsLastSibling();
@@ -61,7 +54,7 @@ public class Roll : MonoBehaviour
             
             rollItems.RemoveAt(0);
             rollItems.Add(item);
-            cotnentPanel.anchoredPosition = Vector2.zero;
+            contentPanel.anchoredPosition = Vector2.zero;
         }
     }
 
@@ -69,16 +62,16 @@ public class Roll : MonoBehaviour
     {
         scrollSpeed = 0;
 
-        string rolledSkill = rollItems.OrderBy(x => (((RectTransform)x.transform).position).magnitude).Last().name;
-        
-        Debug.Log(name);
+        string rolledSkill = rollItems.OrderBy(x => 
+            Vector3.Distance(contentPanel.parent.position, x.gameObject.transform.position)).First().name;
 
         RollDataSO rolledData = _skillDic
             .Where(x => x.Key == rolledSkill)
             .Select(x => x.Value)
             .FirstOrDefault();
-        
+
         _isRolling = false;
+        skillSO.UseSkillDictionary.Add(rolledData.name, rolledData.skill);
         _rollEndEvent.rolledSkill = rolledData;
         rollEventChannel.RaiseEvent(_rollEndEvent);
     }
