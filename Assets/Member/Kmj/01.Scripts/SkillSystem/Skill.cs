@@ -10,6 +10,8 @@ public abstract class Skill : MonoBehaviour
     [SerializeField] protected float cooldown;
     protected float _cooldownTimer;
     protected Entity _entity;
+    protected EntityMover _mover;
+    protected Player _player;
     protected SkillCompo _skillCompo;
 
     public bool IsCooldown => _cooldownTimer > 0f;
@@ -18,7 +20,9 @@ public abstract class Skill : MonoBehaviour
     public virtual void InitializeSkill(Entity entity, SkillCompo skillCompo)
     {
         _entity = entity;
+        _player = entity as Player;
         _skillCompo = skillCompo;
+        _mover = entity.GetCompo<EntityMover>();
     }
 
     protected virtual void Update()
@@ -29,7 +33,6 @@ public abstract class Skill : MonoBehaviour
 
             if (_cooldownTimer <= 0)
                 OverSkillCooltime();
-            Debug.Log($"Skill cooldown{_cooldownTimer}");
             OnCooldown?.Invoke(_cooldownTimer, cooldown);
         }
     }

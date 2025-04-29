@@ -11,6 +11,7 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
     public Skill thirdSkill; 
     public ContactFilter2D whatIsEnemy;
     public Collider2D[] colliders;
+    [HideInInspector] public EntityVFX entityVFX;
 
     [SerializeField] private int maxCheckEnemy;
 
@@ -22,7 +23,7 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
     {
         _entity = entity;
         colliders = new Collider2D[maxCheckEnemy];
-
+        entityVFX = entity.GetCompo<EntityVFX>();
         _skills = new Dictionary<Type, Skill>();
         GetComponentsInChildren<Skill>().ToList().ForEach(skill => _skills.Add(skill.GetType(), skill));
         _skills.Values.ToList().ForEach(skill => skill.InitializeSkill(_entity, this));
