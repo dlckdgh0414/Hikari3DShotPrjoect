@@ -12,11 +12,13 @@ public class Roll : MonoBehaviour
     //[SerializeField] private float luck;
 
     public List<RollItem> rollItems = new List<RollItem>();
-    private Dictionary<string, RollDataSO> _skillDic/*k*/ = new Dictionary<string, RollDataSO>();
+    private Dictionary<string, SkillSO> _skillDic/*k*/ = new Dictionary<string, SkillSO>();
     private RollDataSO _rolledSkill = null;
     
     private readonly RollStartEvent _rollStartEvent = new RollStartEvent();
     private readonly RollEndEvent _rollEndEvent = new RollEndEvent();
+
+    private float _scrollSpeed;
     
     private bool _isRolling = false;
     
@@ -37,17 +39,23 @@ public class Roll : MonoBehaviour
     }
 
     [ContextMenu("Roll")]
-    public void SkillRoll() => _isRolling = true;
+    public void SkillRoll()
+    {
+        _scrollSpeed = scrollSpeed;
+        _isRolling = true;
+    }
 
     private void Rolling()
     {
         contentPanel.anchoredPosition += Vector2.left * (scrollSpeed * Time.deltaTime);
-        scrollSpeed /= (1.005f );
+        _scrollSpeed /= (1.005f );
  
-        if (scrollSpeed <= 25) RollEnd();
+        if (_scrollSpeed <= 25) RollEnd();
 
         if (contentPanel.anchoredPosition.x <= -215)
         {
+            _scrollSpeed = 0;
+
             RollItem item = rollItems[0];
             rollItems[0].transform.SetAsLastSibling();
             rollItems[0].SettingItem(SelectedSkill());
@@ -60,27 +68,25 @@ public class Roll : MonoBehaviour
 
     private void RollEnd()
     {
-        scrollSpeed = 0;
-
-        string rolledSkill = rollItems.OrderBy(x => 
+        string rolledName = rollItems.OrderBy(x => 
             Vector3.Distance(contentPanel.parent.position, x.gameObject.transform.position)).First().name;
 
-        RollDataSO rolledData = _skillDic
-            .Where(x => x.Key == rolledSkill)
+        SkillSO rolledSkill = _skillDic
+            .Where(x => x.Key == rolledName)
             .Select(x => x.Value)
             .FirstOrDefault();
 
         _isRolling = false;
-        skillSO.UseSkillDictionary.Add(rolledData.name, rolledData.skill);
-        _rollEndEvent.rolledSkill = rolledData;
+        skillSO.UseSkillDictionary.Add(rolledSkill.name, rolledSkill);
+        _rollEndEvent.rolledSkill = rolledSkill;
         rollEventChannel.RaiseEvent(_rollEndEvent);
     }
 
-    private RollDataSO SelectedSkill()
+    private SkillSO SelectedSkill()
     {
         RollStartEvent rollStartEvent = RollEventChannel.rollStartEvent;
 
-        foreach (RollDataSO skill in _skillDic.Values.Reverse())
+        foreach (SkillSO skill in _skillDic.Values.Reverse())
         {
             if (IsPicked(skill.rarity / 1))
             {

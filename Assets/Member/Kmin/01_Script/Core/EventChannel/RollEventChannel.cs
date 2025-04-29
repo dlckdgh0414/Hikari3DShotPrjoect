@@ -10,6 +10,6 @@ public class RollStartEvent : GameEvent { }
 
 public class RollEndEvent : GameEvent
 {
-    public RollDataSO rolledSkill;
+    public SkillSO rolledSkill;
 }
 

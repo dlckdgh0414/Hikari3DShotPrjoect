@@ -8,11 +8,11 @@ public class RollItem : MonoBehaviour
     [SerializeField] private Image itemIcon;
     [SerializeField] private Image itemNamebg;
 
-    public void SettingItem(RollDataSO rollData)
+    public void SettingItem(SkillSO skillSO)
     {
-        gameObject.name = rollData.name;
-        itemName.text = rollData.name;
-        itemIcon.sprite = rollData.icon;
-        itemNamebg.color = rollData.itemColor;
+        gameObject.name = skillSO.name;
+        itemName.text = skillSO.name;
+        itemIcon.sprite = skillSO.icon;
+        itemNamebg.color = skillSO.itemColor;
     }
 }

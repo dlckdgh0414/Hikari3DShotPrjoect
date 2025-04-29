@@ -6,17 +6,17 @@ namespace Member.Kmin._01_Script.RollSystem
     public class SkillInventory : MonoBehaviour
     {
         [SerializeField] private GameEventChannelSO eventChannel;
-        public Dictionary<RollDataSO, int> _ownSkillDic { get; private set; }
-            = new Dictionary<RollDataSO, int>();
+        public Dictionary<SkillSO, int> _ownSkillDic { get; private set; }
+            = new Dictionary<SkillSO, int>();
 
         private void Awake()
         {
             eventChannel.AddListener<RollEndEvent>(HandleRollEnd);
         }
 
-        private void HandleRollEnd(RollEndEvent obj)
+        private void HandleRollEnd(RollEndEvent evt)
         {
-            RollDataSO rolledSkill = obj.rolledSkill;
+            SkillSO rolledSkill = evt.rolledSkill;
 
             if (!_ownSkillDic.ContainsKey(rolledSkill))
             {
