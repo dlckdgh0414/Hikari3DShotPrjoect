@@ -13,6 +13,9 @@ public class Custom : MonoBehaviour
     [field : SerializeField] private int currentMaterial;
 
 
+    private void Start()
+    {
+    }
     public void NextMaterial()
     {
         currentMaterial++;
@@ -20,11 +23,11 @@ public class Custom : MonoBehaviour
             currentMaterial = 0;
 
         _playerMeshFilert.material = material[currentMaterial];
+
     }
 
     private void Update()
     {
-        Debug.Log(material.Count); 
     }
 
     public void MinusMaterial()
@@ -33,6 +36,7 @@ public class Custom : MonoBehaviour
 
         if (currentMaterial < 0)
             currentMaterial = material.Count - 1;
+
 
         _playerMeshFilert.material = material[currentMaterial];
     }
