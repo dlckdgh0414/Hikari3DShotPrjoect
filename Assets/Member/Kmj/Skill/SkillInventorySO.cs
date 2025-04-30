@@ -16,21 +16,21 @@ public class SkillInventorySO : ScriptableObject
     {
         normalSkillList.Add(skill);
 
-        GameObject thisSkill = GameObject.Find(skill.skillName);
+        GameObject thisSkill = GameObject.Find(skill.name);
 
         thisSkill.GetComponent<Button>().interactable = true;
 
-        TotalSkillList.Add(skill.skillName, skill);
+        TotalSkillList.Add(skill.name, skill);
     }
 
     public void AddStaticSkill(string name, SkillSO skill)
     {
         staticSkillList.Add(skill);
 
-        GameObject thisSkill = GameObject.Find(skill.skillName);
+        GameObject thisSkill = GameObject.Find(skill.name);
 
         thisSkill.GetComponent<Button>().interactable = true;
-        TotalSkillList.Add(skill.skillName,skill);
+        TotalSkillList.Add(skill.name,skill);
 
     }
 
@@ -39,22 +39,22 @@ public class SkillInventorySO : ScriptableObject
     {
         normalSkillList.Remove(skill);
 
-        GameObject thisSkill = GameObject.Find(skill.skillName);
+        GameObject thisSkill = GameObject.Find(skill.name);
 
         thisSkill.GetComponent<Button>().interactable = false;
 
-        TotalSkillList.Remove(skill.skillName);
+        TotalSkillList.Remove(skill.name);
     }
 
     public void RemoveStaticSkill(string name, SkillSO skill)
     {
         staticSkillList.Remove(skill);
 
-        GameObject thisSkill = GameObject.Find(skill.skillName);
+        GameObject thisSkill = GameObject.Find(skill.name);
 
         thisSkill.GetComponent<Button>().interactable = false;
 
-        TotalSkillList.Remove(skill.skillName);
+        TotalSkillList.Remove(skill.name);
     }
 
 }

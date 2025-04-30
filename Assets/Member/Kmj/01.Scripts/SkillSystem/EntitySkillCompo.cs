@@ -19,8 +19,8 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponent
 
     private void Update()
     {
-        //foreach·Î µ¹·Á¼­ ½ºÅ³ ¸®½ºÆ®¿¡ ÀÖ´Â SOÁß¿¡ currentCoolTimeÀÌ SkillCoolTimeº¸´Ù ÀÛÀ¸¸é
-        //1ÃÊ ¾¿ ´õÇØÁØ´Ù.
+        //foreachï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö´ï¿½ SOï¿½ß¿ï¿½ currentCoolTimeï¿½ï¿½ SkillCoolTimeï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //1ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
         foreach (var skill in skillList.UseSkillDictionary)
         {
             if (skill.Value.currentcoolTime >= skill.Value.skillCoolTime)
@@ -37,8 +37,8 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponent
 
     public bool CanUseSkill(string name)
     {
-        //½ºÅ³À» ½ÇÇàÇßÀ»‹š Á¤ÇØÁø ½ºÅ³ÀÌ CurrentCoolTime ÀÌ SkillCoolTimeº¸´Ù Å©°Å³ª °°À¸¸é
-        //true¸¦ ¹ÝÈ¯ ÇÏ´Ï¸é false¸¦ ¹ÝÈ¯
+        //ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ CurrentCoolTime ï¿½ï¿½ SkillCoolTimeï¿½ï¿½ï¿½ï¿½ Å©ï¿½Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //trueï¿½ï¿½ ï¿½ï¿½È¯ ï¿½Ï´Ï¸ï¿½ falseï¿½ï¿½ ï¿½ï¿½È¯
         if (skillList.UseSkillDictionary.GetValueOrDefault(name).currentcoolTime >=
            skillList.UseSkillDictionary.GetValueOrDefault(name).skillCoolTime)
             return true;
@@ -49,7 +49,7 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponent
 
     public void CurrentTimeClear(string name)
     {
-        //½ºÅ³À» Å¬¸®¾îÇÔ
+        //ï¿½ï¿½Å³ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         skillList.UseSkillDictionary.GetValueOrDefault(name).currentcoolTime = 0;
     }
 

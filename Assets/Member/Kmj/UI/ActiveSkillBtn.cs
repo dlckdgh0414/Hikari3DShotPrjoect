@@ -23,7 +23,7 @@ public class ActiveSkillBtn : MonoBehaviour
     {
 
         this.name = _skillSO.name;
-        this.GetComponentInChildren<Image>().sprite = _skillSO.skillUIImage;
+        this.GetComponentInChildren<Image>().sprite = _skillSO.icon;
     }
 
     public void PressThieBtn()
@@ -46,9 +46,9 @@ public class ActiveSkillBtn : MonoBehaviour
             iven._thisSkill = _skillSO;
 
 
-            skillInventory.UseSkillDictionary.Add(_skillSO.skillName, _skillSO);
+            skillInventory.UseSkillDictionary.Add(_skillSO.name, _skillSO);
 
-            _saBtn._invenList[_saBtn.currentListCount].GetComponent<Image>().sprite = _skillSO.skillUIImage;
+            _saBtn._invenList[_saBtn.currentListCount].GetComponent<Image>().sprite = _skillSO.icon;
 
             _saBtn.currentListCount++;
         }
@@ -58,10 +58,10 @@ public class ActiveSkillBtn : MonoBehaviour
 
             _saBtn._invenList[0].GetComponent<Inven>()._thisSkill = _skillSO;
 
-            _saBtn._invenList[0].GetComponent<Image>().sprite = _skillSO.skillUIImage;
+            _saBtn._invenList[0].GetComponent<Image>().sprite = _skillSO.icon;
 
 
-            skillInventory.UseSkillDictionary.Add(_skillSO.skillName, _skillSO);
+            skillInventory.UseSkillDictionary.Add(_skillSO.name, _skillSO);
         }
     }
 }
