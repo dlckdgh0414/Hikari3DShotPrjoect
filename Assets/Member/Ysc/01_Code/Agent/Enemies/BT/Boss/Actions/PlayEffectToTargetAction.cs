@@ -29,6 +29,7 @@ public partial class PlayEffectToTargetAction : Action
             Effect.Value._entity = _boss.Value;
 
         }
+        
         return Status.Success;
     }
 }
