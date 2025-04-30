@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 enum ButtonType
 {
@@ -16,7 +17,7 @@ public class Inven : MonoBehaviour
 
     [field: SerializeField] public SkillSO _thisSkill;
 
-    [SerializeField] private UseSkillSO _skillInven;
+    [FormerlySerializedAs("_skillInven")] [SerializeField] private UseSkillDataSO skillDataInven;
 
     [field: SerializeField] public GameObject skillUI;
     private void Awake()
@@ -44,7 +45,7 @@ public class Inven : MonoBehaviour
             transform.SetParent(Parent.transform);
             transform.SetAsLastSibling();
 
-            _skillInven.UseSkillDictionary.Remove(_thisSkill.name);
+            skillDataInven.UseSkillDictionary.Remove(_thisSkill);
             _thisSkill = null;
             skillUI = null;
             transform.GetComponentInChildren<Image>().sprite = null;
@@ -54,7 +55,7 @@ public class Inven : MonoBehaviour
         if (type == ButtonType.Static && _selctManager._invenList.Contains(gameObject))
         {
             _image = null;
-            _skillInven.UseSkillDictionary.Remove(_thisSkill.name);
+            skillDataInven.UseSkillDictionary.Remove(_thisSkill);
 
             skillUI.GetComponentInChildren<Button>().interactable = true;
             transform.GetComponentInChildren<Image>().sprite = null;
