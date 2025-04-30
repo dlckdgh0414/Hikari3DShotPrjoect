@@ -15,6 +15,7 @@ public class Fruits : MonoBehaviour, IFruits
     [HideInInspector]
     [field:SerializeField] public List<Image> ConnectedNode { get; private set; }
     [field:SerializeField] public List<Image> FillNode { get; private set; }
+    public List<Image> BackgroundNode { get; private set; }
     public Button FruitsButton { get; private set; } = null;
     public bool IsActive { get; set; }
     public bool CanPurchase { get; private set; } = false;
@@ -49,8 +50,10 @@ public class Fruits : MonoBehaviour, IFruits
             {
                 f.ConnectedNode.ForEach(n => {if (n != null) DestroyImmediate(n.gameObject); });
                 f.FillNode.ForEach(n => { if (n != null) DestroyImmediate(n.gameObject); });
+                f.BackgroundNode.ForEach(n => { if (n != null) DestroyImmediate(n.gameObject); });
                 f.ConnectedNode.Clear();
                 f.FillNode.Clear();
+                f.BackgroundNode.Clear();
             }
 
             Transform root = f.transform.Find("Nodes");
@@ -111,6 +114,18 @@ public class Fruits : MonoBehaviour, IFruits
         fillImg.fillOrigin = origin;
         parent.FillNode.Add(fillImg);
     }
+    
+    private void ConnectBGNode(Image target, Transform root, Fruits parent)
+    {
+        Image fillImg = new GameObject($"BackgroundNode{parent.FillNode.Count}").AddComponent<Image>();
+        fillImg.transform.SetParent(root, false);
+        fillImg.rectTransform.anchoredPosition = target.rectTransform.anchoredPosition;
+        fillImg.rectTransform.sizeDelta = new Vector2(target.rectTransform.sizeDelta.x * 2, target.rectTransform.sizeDelta.y);
+        fillImg.sprite = fillNodeImage;
+        fillImg.transform.SetSiblingIndex(0);
+
+        parent.BackgroundNode.Add(fillImg);
+    }
 
     [ContextMenu("ClearAllNode")]
     private void ClearAllNode()
@@ -132,7 +147,7 @@ public class Fruits : MonoBehaviour, IFruits
         ConnectedNode.Clear();
         FillNode.Clear();
     }
-
+    
     private void ConnectNode(Vector3 pos1, Vector3 pos2, Image node, bool isVert)
     {
         Vector3 centerPos = (pos1 + pos2) / 2f;

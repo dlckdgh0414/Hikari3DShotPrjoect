@@ -1,35 +1,37 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillInventory : MonoBehaviour
+namespace Member.Kmin._01_Script.RollSystem
 {
-    [SerializeField] private GameEventChannelSO eventChannel;
-    public Dictionary<RollDataSO, int> _ownSkillDic { get; private set; }
-        = new Dictionary<RollDataSO, int>();
-
-    private void Awake()
+    public class SkillInventory : MonoBehaviour
     {
-        eventChannel.AddListener<RollEndEvent>(HandleRollEnd);
-    }
+        [SerializeField] private GameEventChannelSO eventChannel;
+        public Dictionary<SkillSO, int> _ownSkillDic { get; private set; }
+            = new Dictionary<SkillSO, int>();
 
-    private void HandleRollEnd(RollEndEvent obj)
-    {
-        RollDataSO rolledSkill = obj.rolledSkill;
-
-        if (!_ownSkillDic.ContainsKey(rolledSkill))
+        private void Awake()
         {
-            _ownSkillDic.Add(rolledSkill, 1);
-        }
-        else
-        {
-            _ownSkillDic[rolledSkill]++;
-            CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, 100);
+            eventChannel.AddListener<RollEndEvent>(HandleRollEnd);
         }
 
-        foreach (var skill in _ownSkillDic)
+        private void HandleRollEnd(RollEndEvent evt)
         {
-            Debug.Log(skill);
+            SkillSO rolledSkill = evt.rolledSkill;
+
+            if (!_ownSkillDic.ContainsKey(rolledSkill))
+            {
+                _ownSkillDic.Add(rolledSkill, 1);
+            }
+            else
+            {
+                _ownSkillDic[rolledSkill]++;
+                CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, 100);
+            }
+
+            foreach (var skill in _ownSkillDic)
+            {
+                Debug.Log(skill);
+            }
         }
     }
 }

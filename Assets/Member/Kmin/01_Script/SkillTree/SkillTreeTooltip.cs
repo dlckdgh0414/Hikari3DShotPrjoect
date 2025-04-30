@@ -40,8 +40,6 @@ public class SkillTreeTooltip : MonoBehaviour
 
         _purchaseBtn.onClick.RemoveAllListeners();
         _purchaseBtn.onClick.AddListener(() => HandleFruitsPurchase(skillTreeEvent));
-
-        Debug.Log("sdf");
     }
 
     private void HandleFruitsPurchase(SkillTreeEvent skillTreeEvent)

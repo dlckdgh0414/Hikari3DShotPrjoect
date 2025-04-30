@@ -44,7 +44,7 @@ public class Inven : MonoBehaviour
             transform.SetParent(Parent.transform);
             transform.SetAsLastSibling();
 
-            _skillInven.UseSkillDictionary.Remove(_thisSkill.skillName);
+            _skillInven.UseSkillDictionary.Remove(_thisSkill.name);
             _thisSkill = null;
             skillUI = null;
             transform.GetComponentInChildren<Image>().sprite = null;
@@ -54,7 +54,7 @@ public class Inven : MonoBehaviour
         if (type == ButtonType.Static && _selctManager._invenList.Contains(gameObject))
         {
             _image = null;
-            _skillInven.UseSkillDictionary.Remove(_thisSkill.skillName);
+            _skillInven.UseSkillDictionary.Remove(_thisSkill.name);
 
             skillUI.GetComponentInChildren<Button>().interactable = true;
             transform.GetComponentInChildren<Image>().sprite = null;
