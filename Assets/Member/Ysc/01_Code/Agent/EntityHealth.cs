@@ -3,15 +3,16 @@ using UnityEngine;
 
 namespace Member.Ysc._01_Code.Agent
 {
-    public class EntityHealthCompo : MonoBehaviour, IEntityComponent, IAfterInit
+    public class EntityHealth : MonoBehaviour, IEntityComponent, IAfterInit
     {
         [SerializeField] private StatSO hpStat;
-        public float maxHealth;
+        public float maxHealth = 0f;
         [SerializeField]private float _currentHealth;
 
         private Entity _entity;
         private EntityStat _statCompo;
         private EntityFeedbackData _feedbackData;
+        [SerializeField] private HealthGageAdjuster hpBar;
 
         public void Initialize(Entity entity)
         {
@@ -54,6 +55,11 @@ namespace Member.Ysc._01_Code.Agent
         private void AfterHitFeedbacks()
         {
             _entity.OnHit?.Invoke();
+
+            if(hpBar != null)
+            {
+                hpBar.ApplyHealth(_currentHealth);
+            }
 
             if (_currentHealth <= 0)
             {
