@@ -40,7 +40,7 @@ namespace Member.Ysc._01_Code.Agent
             maxHealth = current;
             _currentHealth = Mathf.Clamp(_currentHealth + current - previous, 1f, maxHealth);
         }
-        
+
         public void ApplyDamage(float damage, Vector2 direction, Entity dealer)
         {
             if (_entity.IsDead) return;
