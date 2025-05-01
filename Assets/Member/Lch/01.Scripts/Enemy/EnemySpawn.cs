@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemySpawn : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private EnemySpawnListSO enemySpawnSO;
     [SerializeField] private float spawnDistance = 10f;
 
     private void Start()
@@ -14,7 +14,12 @@ public class EnemySpawn : MonoBehaviour
     public void SpawnEnemy()
     {
         Vector3 spawnPos = GetSpawnPositionOutsideCamera();
-        Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+        for(int i = 0; i < enemySpawnSO.SpawnCount; i++)
+        {
+            int randIndex = Random.Range(0, enemySpawnSO.enemies.Count);
+            Enemy enemy = Instantiate(enemySpawnSO.enemies[randIndex], transform.position, Quaternion.identity);
+            enemy.transform.SetParent(mainCamera.transform);
+        }
     }
 
     private Vector3 GetSpawnPositionOutsideCamera()
