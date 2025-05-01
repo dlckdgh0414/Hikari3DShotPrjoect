@@ -251,6 +251,7 @@ GameObject:
   - component: {fileID: 5011435}
   - component: {fileID: 5011434}
   - component: {fileID: 5011437}
+  - component: {fileID: 5011438}
   m_Layer: 5
   m_Name: Equip4
   m_TagString: Untagged
@@ -371,6 +372,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5011438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5011432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59f03a360d027445a93eb2b8d21f5f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &13622368
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,6 +443,11 @@ MonoBehaviour:
   tempSO1: {fileID: 11400000, guid: 59b52eb2c5f1bc94e9adfb91f2712535, type: 2}
   tempSO2: {fileID: 11400000, guid: 310e1a05ca62cfc4792fea22c7fa3eaa, type: 2}
   tempSO3: {fileID: 11400000, guid: f08122de76995474f981a5f6f4f59e23, type: 2}
+  childTransform:
+  - {fileID: 537714304}
+  - {fileID: 1785066548}
+  - {fileID: 406998930}
+  - {fileID: 5011433}
 --- !u!1 &16948357
 GameObject:
   m_ObjectHideFlags: 0
@@ -2010,7 +2028,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 189898316}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ActiveSkillBtn, Assembly-CSharp
         m_MethodName: PressThieBtn
         m_Mode: 1
@@ -2785,7 +2803,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillEventChannel: {fileID: 11400000, guid: fe38f0f1bdd81fd48a4faab089f3aa04, type: 2}
-  <thisSkill>k__BackingField: {fileID: 0}
+  <thisSkill>k__BackingField: {fileID: 11400000, guid: 5894a5157ced2804793959f4417dcfce,
+    type: 2}
 --- !u!1 &374005608
 GameObject:
   m_ObjectHideFlags: 0
@@ -3055,6 +3074,7 @@ GameObject:
   - component: {fileID: 406998932}
   - component: {fileID: 406998931}
   - component: {fileID: 406998934}
+  - component: {fileID: 406998935}
   m_Layer: 5
   m_Name: Equip3
   m_TagString: Untagged
@@ -3175,6 +3195,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &406998935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406998929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59f03a360d027445a93eb2b8d21f5f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &412454970
 GameObject:
   m_ObjectHideFlags: 0
@@ -3774,6 +3806,7 @@ GameObject:
   - component: {fileID: 537714306}
   - component: {fileID: 537714305}
   - component: {fileID: 537714308}
+  - component: {fileID: 537714309}
   m_Layer: 5
   m_Name: Equip1
   m_TagString: Untagged
@@ -3894,6 +3927,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &537714309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537714303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59f03a360d027445a93eb2b8d21f5f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &543147877
 GameObject:
   m_ObjectHideFlags: 0
@@ -5568,7 +5613,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 785619698}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ActiveSkillBtn, Assembly-CSharp
         m_MethodName: PressThieBtn
         m_Mode: 1
@@ -6727,7 +6772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &988478312
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6761,13 +6806,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30fd9edca4bb5ce4e95ef4d7561e6b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bindingDisplayName: {fileID: 1229742124}
-  rebindButton: {fileID: 66231208}
-  _inputreader: {fileID: 11400000, guid: 1fe6fc5c438cdda499ca7dea43cd338a, type: 2}
-  inputActions: {fileID: -944628639613478452, guid: 20bb5c8f2406bb0448cb54eef65a7820,
-    type: 3}
+  bindingDisplayName: {fileID: 0}
+  rebindButton: {fileID: 0}
+  _inputreader: {fileID: 0}
+  inputActions: {fileID: 0}
   actionMapName: PlayerMap
-  actionName: TestAttack2
+  actionName: 
   bindingIndex: 0
 --- !u!1 &999593389
 GameObject:
@@ -6916,7 +6960,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillEventChannel: {fileID: 11400000, guid: fe38f0f1bdd81fd48a4faab089f3aa04, type: 2}
-  <thisSkill>k__BackingField: {fileID: 0}
+  <thisSkill>k__BackingField: {fileID: 11400000, guid: d193c1e77efdb34428a76d1cb12fd972,
+    type: 2}
 --- !u!1 &999892090
 GameObject:
   m_ObjectHideFlags: 0
@@ -7392,7 +7437,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1041042151}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ActiveSkillBtn, Assembly-CSharp
         m_MethodName: PressThieBtn
         m_Mode: 1
@@ -7473,7 +7518,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1063098719
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7507,13 +7552,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30fd9edca4bb5ce4e95ef4d7561e6b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bindingDisplayName: {fileID: 1978298518}
-  rebindButton: {fileID: 90223366}
-  _inputreader: {fileID: 11400000, guid: 1fe6fc5c438cdda499ca7dea43cd338a, type: 2}
-  inputActions: {fileID: -944628639613478452, guid: 20bb5c8f2406bb0448cb54eef65a7820,
-    type: 3}
+  bindingDisplayName: {fileID: 0}
+  rebindButton: {fileID: 0}
+  _inputreader: {fileID: 0}
+  inputActions: {fileID: 0}
   actionMapName: PlayerMap
-  actionName: TestAttack4
+  actionName: 
   bindingIndex: 0
 --- !u!1 &1067031313
 GameObject:
@@ -8493,7 +8537,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1171138144}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ActiveSkillBtn, Assembly-CSharp
         m_MethodName: PressThieBtn
         m_Mode: 1
@@ -9323,10 +9367,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _settingUiList:
-  - {fileID: 1471014530}
-  - {fileID: 1644861904}
-  - {fileID: 302773947}
-  mainUI: {fileID: 1935017510}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  mainUI: {fileID: 0}
 --- !u!1 &1276918428
 GameObject:
   m_ObjectHideFlags: 0
@@ -10050,7 +10094,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1441840912
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10084,13 +10128,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30fd9edca4bb5ce4e95ef4d7561e6b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bindingDisplayName: {fileID: 445183250}
-  rebindButton: {fileID: 1665535703}
-  _inputreader: {fileID: 11400000, guid: 1fe6fc5c438cdda499ca7dea43cd338a, type: 2}
-  inputActions: {fileID: -944628639613478452, guid: 20bb5c8f2406bb0448cb54eef65a7820,
-    type: 3}
+  bindingDisplayName: {fileID: 0}
+  rebindButton: {fileID: 0}
+  _inputreader: {fileID: 0}
+  inputActions: {fileID: 0}
   actionMapName: PlayerMap
-  actionName: TestAttack3
+  actionName: 
   bindingIndex: 0
 --- !u!1 &1442225500
 GameObject:
@@ -10515,7 +10558,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1514525565}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ActiveSkillBtn, Assembly-CSharp
         m_MethodName: PressThieBtn
         m_Mode: 1
@@ -12095,19 +12138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a0df8218c81db47850363ed04b1a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material:
-  - {fileID: 2100000, guid: abcc3c67b7d0a794f8bb91be4e85abdd, type: 2}
-  - {fileID: 2100000, guid: 1b681c146a0938447b05d12da3479735, type: 2}
-  - {fileID: 2100000, guid: dc60a1e64de33bb44979dad0c2529fa1, type: 2}
-  - {fileID: 2100000, guid: a3d57aecc832ae545b4519104feee7e0, type: 2}
-  _playerMeshFilert: {fileID: 1648827972}
+  material: []
+  _playerMeshFilert: {fileID: 0}
   currentMaterial: 0
---- !u!23 &1648827972 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2687494795355863344, guid: c0c8857bd24fa1f45bc871c64b4b5c59,
-    type: 3}
-  m_PrefabInstance: {fileID: 8302005523475665004}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1648827974 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1395954178927072410, guid: c0c8857bd24fa1f45bc871c64b4b5c59,
@@ -12698,6 +12731,7 @@ GameObject:
   - component: {fileID: 1785066550}
   - component: {fileID: 1785066549}
   - component: {fileID: 1785066552}
+  - component: {fileID: 1785066553}
   m_Layer: 5
   m_Name: Equip2
   m_TagString: Untagged
@@ -12818,6 +12852,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1785066553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785066547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59f03a360d027445a93eb2b8d21f5f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1797880463
 GameObject:
   m_ObjectHideFlags: 0
@@ -14090,7 +14136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillEventChannel: {fileID: 11400000, guid: fe38f0f1bdd81fd48a4faab089f3aa04, type: 2}
-  <thisSkill>k__BackingField: {fileID: 0}
+  <thisSkill>k__BackingField: {fileID: 11400000, guid: d066d791331af6c4789b0e5a8dba1e22,
+    type: 2}
 --- !u!1 &1978298516
 GameObject:
   m_ObjectHideFlags: 0
