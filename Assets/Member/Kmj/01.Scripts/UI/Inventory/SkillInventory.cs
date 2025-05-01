@@ -10,9 +10,12 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
     public class SkillInventory : MonoBehaviour
     {
         [SerializeField] private GameEventChannelSO _skillInvenEvent;
-        [SerializeField] private SkillInventorySO _inventorySO;
-        [SerializeField] private List<SkillSO> _skills;
+        [SerializeField] private UseSkillDataSO _inventorySO;
         [SerializeField] private List<Button> equipBtns;
+
+        [SerializeField] private SkillSO tempSO1;
+        [SerializeField] private SkillSO tempSO2;
+        [SerializeField] private SkillSO tempSO3;
 
         private Image _image;
         
@@ -23,6 +26,10 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
             _skillInvenEvent.AddListener<SkillSelectEvent>(HandleSkillSelect);
             
             equipBtns.ForEach(btn => btn.onClick.AddListener(HandleSkillEquip));
+            
+            _inventorySO.invenSkillDictionary.Add(tempSO1, true);
+            _inventorySO.invenSkillDictionary.Add(tempSO2, true);
+            _inventorySO.invenSkillDictionary.Add(tempSO3, true);
         }
 
         private void HandleSkillEquip()

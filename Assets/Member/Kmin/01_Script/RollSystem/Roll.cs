@@ -9,6 +9,7 @@ public class Roll : MonoBehaviour
     [SerializeField] private SkillSOList skillListSO;
     [SerializeField] private RectTransform contentPanel;
     [SerializeField] private float scrollSpeed;
+    [SerializeField] private UseSkillDataSO skillData;
     [FormerlySerializedAs("skillSO")] [SerializeField] private UseSkillDataSO skillDataSo;
 
     public List<RollItem> rollItems = new List<RollItem>();
