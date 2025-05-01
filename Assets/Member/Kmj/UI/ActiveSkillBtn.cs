@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public enum ThisType
@@ -16,7 +17,7 @@ public class ActiveSkillBtn : MonoBehaviour
     [SerializeField] private SelectActiveBtn _saBtn;
 
     [SerializeField] private SkillInventorySO _inventorySO;
-    [SerializeField] private UseSkillSO skillInventory;
+    [FormerlySerializedAs("skillInventory")] [SerializeField] private UseSkillDataSO skillDataInventory;
 
     [SerializeField] private ThisType _type;
     private void Awake()
@@ -46,7 +47,7 @@ public class ActiveSkillBtn : MonoBehaviour
             iven._thisSkill = _skillSO;
 
 
-            skillInventory.UseSkillDictionary.Add(_skillSO.name, _skillSO);
+            skillDataInventory.UseSkillDictionary.Add(_skillSO, 1);
 
             _saBtn._invenList[_saBtn.currentListCount].GetComponent<Image>().sprite = _skillSO.icon;
 
@@ -61,7 +62,7 @@ public class ActiveSkillBtn : MonoBehaviour
             _saBtn._invenList[0].GetComponent<Image>().sprite = _skillSO.icon;
 
 
-            skillInventory.UseSkillDictionary.Add(_skillSO.name, _skillSO);
+            skillDataInventory.UseSkillDictionary.Add(_skillSO, 1);
         }
     }
 }
