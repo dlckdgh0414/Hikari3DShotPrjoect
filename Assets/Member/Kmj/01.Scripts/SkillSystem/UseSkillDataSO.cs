@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu (fileName = "SkillSO/SkillList",menuName = "SkillSO/SkillList")]
-public class UseSkillSO : ScriptableObject
+public class UseSkillDataSO : ScriptableObject
 {
-    public Dictionary<string, SkillSO> UseSkillDictionary;
+    public Dictionary<SkillSO, int> UseSkillDictionary = new Dictionary<SkillSO, int>();
 }
