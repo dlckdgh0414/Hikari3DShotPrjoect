@@ -23,7 +23,7 @@ public class ShowTuToTxt : MonoBehaviour
         _txtNum = 0;
         GetColliderInChild();
     }
-
+    
     public void InteractTxt()
     {
         _txt.alpha = 255;
