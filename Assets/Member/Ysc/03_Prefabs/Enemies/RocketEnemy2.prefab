@@ -264,7 +264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9f13f11daf48ae90b0a5283a9b0cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <bulletPrefab>k__BackingField: {fileID: 2532395592336657066, guid: a58ab4fb7d6b20542985690008dfa1f2, type: 3}
+  <bulletPrefab>k__BackingField: {fileID: 2532395592336657066, guid: a58ab4fb7d6b20542985690008dfa1f2,
+    type: 3}
   <FirePos>k__BackingField:
   - {fileID: 4825675572933743834}
   - {fileID: 2234681280211879901}
@@ -314,6 +315,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpStat: {fileID: 11400000, guid: 089ab1b41302fdc4380904f3f834dcc9, type: 2}
   maxHealth: 100
+  _currentHealth: 0
+  hpBar: {fileID: 3424015527017806261}
 --- !u!1 &3611374294748441205
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +385,7 @@ Transform:
   - {fileID: 6428242711018702498}
   - {fileID: 5292569963363467541}
   - {fileID: 954863626199475743}
+  - {fileID: 3112955788973079899}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &279434470226854779
@@ -402,7 +406,8 @@ MonoBehaviour:
   OnDead:
     m_PersistentCalls:
       m_Calls: []
-  <PlayerFinder>k__BackingField: {fileID: 11400000, guid: a8f5956115900724b887c83261e903a8, type: 2}
+  <PlayerFinder>k__BackingField: {fileID: 11400000, guid: a8f5956115900724b887c83261e903a8,
+    type: 2}
 --- !u!114 &589041899060987113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,7 +432,8 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 2898964706085830730
-      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior,
+        asm: Unity.Behavior}
       data:
         GUID:
           m_Value0: 15394646901424463464
@@ -435,7 +441,8 @@ MonoBehaviour:
         Name: AttackTime
         m_Value: 0.2
     - rid: 2898964706085830731
-      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior,
+        asm: Unity.Behavior}
       data:
         GUID:
           m_Value0: 4236400432823817047
@@ -443,7 +450,8 @@ MonoBehaviour:
         Name: AttackDelayTime
         m_Value: 0.5
     - rid: 2898964737453195406
-      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior,
+        asm: Unity.Behavior}
       data:
         GUID:
           m_Value0: 4997750086116982637
@@ -451,7 +459,8 @@ MonoBehaviour:
         Name: ShotDelay
         m_Value: 0.4
     - rid: 9000330145074249805
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]',
+        ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
           m_Value0: 1
@@ -506,3 +515,144 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!1001 &2036307273030356696
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8750264247770973734}
+    m_Modifications:
+    - target: {fileID: 233470808517498969, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyHP
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730917100937918317, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: entityhealth
+      value: 
+      objectReference: {fileID: 2563013889848013358}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cac193e2ac3181f449145c0b3fcd19d5, type: 3}
+--- !u!224 &3112955788973079899 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 2036307273030356696}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3424015527017806261 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3730917100937918317, guid: cac193e2ac3181f449145c0b3fcd19d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 2036307273030356696}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c822602ca86569b4788e0514b563b3fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
