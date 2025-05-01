@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "SkillSOList", menuName = "Scriptable Objects/SkillSOList")]
+[CreateAssetMenu(fileName = "SkillSOList", menuName = "SO/Skill/SkillSOList")]
 public class SkillSOList : ScriptableObject
 {
     public List<SkillSO> skillList;

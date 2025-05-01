@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EntitySkillCompo : MonoBehaviour, IEntityComponent
 {
     private Entity _entity;
 
-    [field: SerializeField] public UseSkillSO skillList;
+    [FormerlySerializedAs("skillList")] [field: SerializeField] public UseSkillDataSO skillDataList;
 
     public void Initialize(Entity entity)
     {
@@ -21,13 +22,13 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponent
     {
         //foreach�� ������ ��ų ����Ʈ�� �ִ� SO�߿� currentCoolTime�� SkillCoolTime���� ������
         //1�� �� �����ش�.
-        foreach (var skill in skillList.UseSkillDictionary)
+        foreach (var skill in skillDataList.UseSkillDictionary)
         {
-            if (skill.Value.currentcoolTime >= skill.Value.skillCoolTime)
+            if (skill.Key.currentcoolTime >= skill.Key.skillCoolTime)
                 return;
             else
             {
-                skill.Value.currentcoolTime += 1 * Time.deltaTime;
+                skill.Key.currentcoolTime += 1 * Time.deltaTime;
             }
         }
 
@@ -35,22 +36,17 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponent
     }
 
 
-    public bool CanUseSkill(string name)
+    public bool CanUseSkill(SkillSO skillSO)
     {
         //��ų�� ���������� ������ ��ų�� CurrentCoolTime �� SkillCoolTime���� ũ�ų� ������
         //true�� ��ȯ �ϴϸ� false�� ��ȯ
-        if (skillList.UseSkillDictionary.GetValueOrDefault(name).currentcoolTime >=
-           skillList.UseSkillDictionary.GetValueOrDefault(name).skillCoolTime)
-            return true;
-        else
-            return false;
-
+        return skillSO.currentcoolTime >= skillSO.skillCoolTime ? true : false;
     }
 
-    public void CurrentTimeClear(string name)
+    public void CurrentTimeClear(SkillSO skillSO)
     {
         //��ų�� Ŭ������
-        skillList.UseSkillDictionary.GetValueOrDefault(name).currentcoolTime = 0;
+        skillSO.currentcoolTime = 0;
     }
 
 
