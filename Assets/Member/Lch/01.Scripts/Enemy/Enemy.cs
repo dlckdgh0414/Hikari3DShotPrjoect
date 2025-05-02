@@ -16,7 +16,6 @@ public abstract class Enemy :Entity
         base.AfterInitialize();
         btAgent = GetComponent<BehaviorGraphAgent>();
         Debug.Assert(btAgent != null, $"{gameObject.name} does not have an BehaviorGraphAgent");
-        Debug.Log("BT에너미 후 초기화");
     }
 
     public void LookTarget(Transform target)

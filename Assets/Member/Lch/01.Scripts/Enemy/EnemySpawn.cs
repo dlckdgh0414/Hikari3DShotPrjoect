@@ -4,27 +4,30 @@ public class EnemySpawn : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private EnemySpawnListSO enemySpawnSO;
-    [SerializeField] private float spawnDistance = 10f;
+    private float _currentSpawnTime;
 
     private void Start()
     {
         SpawnEnemy();
     }
 
+    private void Update()
+    {
+        _currentSpawnTime += Time.deltaTime;
+        if (_currentSpawnTime >= enemySpawnSO.SpawnTimer)
+        {
+            SpawnEnemy();
+            _currentSpawnTime = 0;
+        }
+    }
+
     public void SpawnEnemy()
     {
-        Vector3 spawnPos = GetSpawnPositionOutsideCamera();
-        for(int i = 0; i < enemySpawnSO.SpawnCount; i++)
+        for (int i = 0; i < enemySpawnSO.SpawnCount; i++)
         {
             int randIndex = Random.Range(0, enemySpawnSO.enemies.Count);
             Enemy enemy = Instantiate(enemySpawnSO.enemies[randIndex], transform.position, Quaternion.identity);
             enemy.transform.SetParent(mainCamera.transform);
         }
-    }
-
-    private Vector3 GetSpawnPositionOutsideCamera()
-    {
-        Vector3 viewportPos = new Vector3(Random.Range(-0.2f, 1.2f), Random.Range(-0.2f, 1.2f), spawnDistance);
-        return viewportPos;
     }
 }

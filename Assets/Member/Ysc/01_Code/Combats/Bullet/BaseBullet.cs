@@ -9,9 +9,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
     {
         [field: SerializeField] private BulletSettingSO BulletSO; // 총알 데이터 받기
 
-        [SerializeField] private string itemName;
-        
-        public string ItemName => itemName;
+        public string ItemName => BulletSO.BulletName;
         
         protected Vector3 fireDirection;
         
