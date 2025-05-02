@@ -14,7 +14,7 @@ public class EnemyMovement : MonoBehaviour,IEntityComponent
 
         Vector3 spawnPos = cam.transform.position + cam.transform.forward * 20f;
 
-        spawnPos += new Vector3(Random.Range(-10f, 10f), Random.Range(-5f, 5f), 280);
+        spawnPos += new Vector3(Random.Range(-20f, 20f), Random.Range(-10f, 10f));
 
         return spawnPos;
     }
@@ -49,14 +49,14 @@ public class EnemyMovement : MonoBehaviour,IEntityComponent
 
         Camera cam = Camera.main;
 
-        float height = 2f * cam.orthographicSize;
-        float width = height * cam.aspect;
+        float halfHeight = cam.orthographicSize;
+        float halfWidth = halfHeight * cam.aspect;
 
-        float randomX = cam.transform.position.x + Random.Range(-width / 2f, width / 2f) * 0.9f;
-        float randomY = cam.transform.position.y + Random.Range(-height / 2f, height / 2f) * 0.9f;
-        float randomZ = cam.transform.position.z;
+        float randomX = Random.Range(-halfWidth, halfWidth);
+        float randomY = Random.Range(-halfHeight, halfHeight);
 
-        Vector3 randomPos = new Vector3(randomX, randomY, randomZ);
+        Vector3 randomPos = cam.transform.position + new Vector3(randomX, randomY, transform.position.z);
+
         return randomPos;
     }
 
