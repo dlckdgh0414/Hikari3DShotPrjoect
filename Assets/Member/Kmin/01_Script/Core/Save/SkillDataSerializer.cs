@@ -13,7 +13,7 @@ public static class SkillDataSerializer
             serializableData.invenSkillList.Add(new SkillEntry { skill = kvp.Key, isUnlocked = kvp.Value });
         }
 
-        serializableData.useSkillList = skillData.useSkillDictionary;
+        serializableData.useSkillList = skillData.useSkillList;
 
         string json = JsonUtility.ToJson(serializableData, true);
         File.WriteAllText(path, json);
@@ -37,7 +37,7 @@ public static class SkillDataSerializer
             skillData.invenSkillDictionary[entry.skill] = entry.isUnlocked;
         }
 
-        skillData.useSkillDictionary = new List<SkillSO>(loadedData.useSkillList);
+        skillData.useSkillList = new List<SkillSO>(loadedData.useSkillList);
         Debug.Log($"Skill data loaded from {path}");
     }
 }

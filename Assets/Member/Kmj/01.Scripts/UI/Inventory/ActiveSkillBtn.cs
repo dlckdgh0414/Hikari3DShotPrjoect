@@ -2,11 +2,6 @@ using Member.Kmin._01_Script.Core.EventChannel;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum ThisType
-{
-    Normal,
-    Static,
-}
 
 public class ActiveSkillBtn : MonoBehaviour
 {
