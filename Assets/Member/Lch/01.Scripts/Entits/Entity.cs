@@ -53,6 +53,7 @@ public abstract class Entity : MonoBehaviour, IDamageable
     }
 
     protected abstract void HandleHit();
+
     protected abstract void HandleDead();
 
     public T GetCompo<T>(bool isDerived = false) where T : IEntityComponent

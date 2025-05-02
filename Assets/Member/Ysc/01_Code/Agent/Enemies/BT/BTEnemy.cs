@@ -24,6 +24,7 @@ namespace Member.Ysc._01_Code.Agent.Enemies.BT
 
         }
 
+        [ContextMenu("Dead")]
         protected override void HandleDead()
         {
             if (IsDead) return;
