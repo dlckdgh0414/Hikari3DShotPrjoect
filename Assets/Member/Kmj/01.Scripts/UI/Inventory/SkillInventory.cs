@@ -14,6 +14,7 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
         [SerializeField] private GameEventChannelSO _skillInvenEvent;
         [SerializeField] private UseSkillDataSO _inventorySO;
         [SerializeField] private List<Button> equipBtns;
+        [SerializeField] private Button _staticButton;
 
         [SerializeField] private SkillSO tempSO1;
         [SerializeField] private SkillSO tempSO2;
@@ -25,11 +26,12 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
         private Image _image;
         
         public SkillSO _selectedSkill { get; set; }
+        public SkillSO _staticSkill { get; set; }
 
         private void Awake()
         {
             _skillInvenEvent.AddListener<SkillSelectEvent>(HandleSkillSelect);
-            
+            _skillInvenEvent.AddListener<StaticSelectEvent>(HandleStaticSkillSelect);
             _inventorySO.invenSkillDictionary.Add(tempSO1, true);
             _inventorySO.invenSkillDictionary.Add(tempSO2, true);
             _inventorySO.invenSkillDictionary.Add(tempSO3, true);
@@ -37,36 +39,66 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
 
         private void Start()
         {
+            _staticButton.onClick.AddListener(HandleStaticSkillEquip);
             equipBtns.ForEach(btn => btn.onClick.AddListener(HandleSkillEquip));
         }
 
         private void HandleSkillEquip()
         {  
+            if (_selectedSkill == null || _selectedSkill.icon == null)
+                return;
             
-            foreach (Transform child in childTransform )
+            if (EventSystem.current.currentSelectedGameObject == null)
+                return;
+
+            Image clickedImage = EventSystem.current.currentSelectedGameObject.GetComponent<Image>();
+            if (clickedImage == null)
+                return;
+            
+            foreach (Transform child in childTransform)
             {
                 Image img = child.GetComponentInChildren<Image>();
                 if (img != null && img.sprite == _selectedSkill.icon)
                 {
-                    return;
+                    clickedImage.sprite = _selectedSkill.icon;
+                    img.sprite = null;
                 }
             }
             
+            clickedImage.sprite = _selectedSkill.icon;
             
-            _image = EventSystem.current.currentSelectedGameObject.GetComponent<Image>();
-
-            if (_image.sprite == _selectedSkill.icon)
-            {
-                _image.sprite = null;
-                return;
-            }
-            
-            _image.sprite = _selectedSkill.icon;
+            clickedImage = null;
+            _selectedSkill = null;
         }
+        
+        private void HandleStaticSkillEquip()
+        {  
+            if (_staticSkill == null || _staticSkill.icon == null)
+                return;
+            
+            if (EventSystem.current.currentSelectedGameObject == null)
+                return;
+
+            Image clickedImage = EventSystem.current.currentSelectedGameObject.GetComponent<Image>();
+            if (clickedImage == null)
+                return;
+            
+            clickedImage.sprite = _staticSkill.icon;
+            
+            clickedImage = null;
+            _staticSkill = null;
+        }
+        
 
         private void HandleSkillSelect(SkillSelectEvent evt)
         {
             _selectedSkill = evt.selectedSkill;
         }
+        
+        private void HandleStaticSkillSelect(StaticSelectEvent evt)
+        {
+            _staticSkill = evt.staticSkill;
+        }
+        
     }
 }
