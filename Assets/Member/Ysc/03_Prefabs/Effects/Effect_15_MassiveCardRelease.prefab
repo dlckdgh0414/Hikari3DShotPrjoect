@@ -10138,8 +10138,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2
-      minScalar: 1
+      scalar: 1
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -14794,7 +14794,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4320880397854126818}
   - component: {fileID: 3327396235221383039}
-  - component: {fileID: 4096363213256496375}
+  - component: {fileID: 8189372109439071277}
   m_Layer: 0
   m_Name: Effect_15_MassiveCardRelease
   m_TagString: Untagged
@@ -14812,8 +14812,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.7, y: 0.7, z: 2.5}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2501239627182803622}
   - {fileID: 8387857191902440189}
@@ -14835,8 +14835,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   _entity: {fileID: 0}
---- !u!135 &4096363213256496375
-SphereCollider:
+--- !u!65 &8189372109439071277
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -14854,8 +14854,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5.69
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 7, y: 3.2, z: 40}
+  m_Center: {x: 0, y: 7, z: 20}
 --- !u!1 &9001513461213069391
 GameObject:
   m_ObjectHideFlags: 0
