@@ -9,7 +9,7 @@ public abstract class Enemy :Entity
     protected StateEventChange _stateChannel;
     [field: SerializeField] public EntityFinderSO PlayerFinder { get; protected set; }
 
-    public bool IsDeadEnd {get; protected set; }
+    public bool IsDeadEnd {get; protected set; } = false;
 
     protected override void AfterInitialize()
     {
@@ -38,5 +38,19 @@ public abstract class Enemy :Entity
 
     }
 
-   
+    [ContextMenu("Enemy Dead")]
+    public void EnemyDead()
+    {
+
+        // movement.isMove = false;
+        transform.DORotate(new Vector3(-35f, 0f, 0f), 0.5f, RotateMode.Fast)
+            .OnUpdate(() =>
+            {
+                Vector3 pos = new Vector3(transform.position.x, transform.forward.y, transform.forward.z * -0.4f);
+                transform.DOMove(pos, 10f);
+            }).OnComplete(() => IsDeadEnd = true);
+    }
+
+
+
 }
