@@ -12,6 +12,7 @@ public partial class DestroyObjectCheckAction : Action
 
     protected override Status OnStart()
     {
+        Enemy.Value.EnemyDead();
         return Status.Running;
     }
 
