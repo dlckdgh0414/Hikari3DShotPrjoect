@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EntitySkillCompo : MonoBehaviour, IEntityComponent
 {
     private Entity _entity;
 
-    [field: SerializeField] public UseSkillSO skillList;
+    [FormerlySerializedAs("skillList")] [field: SerializeField] public UseSkillDataSO skillDataList;
 
     public void Initialize(Entity entity)
     {
@@ -19,15 +20,15 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponent
 
     private void Update()
     {
-        //foreach·Î µ¹·Á¼­ ½ºÅ³ ¸®½ºÆ®¿¡ ÀÖ´Â SOÁß¿¡ currentCoolTimeÀÌ SkillCoolTimeº¸´Ù ÀÛÀ¸¸é
-        //1ÃÊ ¾¿ ´õÇØÁØ´Ù.
-        foreach (var skill in skillList.UseSkillDictionary)
+        //foreachï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö´ï¿½ SOï¿½ß¿ï¿½ currentCoolTimeï¿½ï¿½ SkillCoolTimeï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //1ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
+        foreach (var skill in skillDataList.invenSkillDictionary)
         {
-            if (skill.Value.currentcoolTime >= skill.Value.skillCoolTime)
+            if (skill.Key.currentcoolTime >= skill.Key.skillCoolTime)
                 return;
             else
             {
-                skill.Value.currentcoolTime += 1 * Time.deltaTime;
+                skill.Key.currentcoolTime += 1 * Time.deltaTime;
             }
         }
 
@@ -35,22 +36,17 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponent
     }
 
 
-    public bool CanUseSkill(string name)
+    public bool CanUseSkill(SkillSO skillSO)
     {
-        //½ºÅ³À» ½ÇÇàÇßÀ»‹š Á¤ÇØÁø ½ºÅ³ÀÌ CurrentCoolTime ÀÌ SkillCoolTimeº¸´Ù Å©°Å³ª °°À¸¸é
-        //true¸¦ ¹ÝÈ¯ ÇÏ´Ï¸é false¸¦ ¹ÝÈ¯
-        if (skillList.UseSkillDictionary.GetValueOrDefault(name).currentcoolTime >=
-           skillList.UseSkillDictionary.GetValueOrDefault(name).skillCoolTime)
-            return true;
-        else
-            return false;
-
+        //ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ CurrentCoolTime ï¿½ï¿½ SkillCoolTimeï¿½ï¿½ï¿½ï¿½ Å©ï¿½Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //trueï¿½ï¿½ ï¿½ï¿½È¯ ï¿½Ï´Ï¸ï¿½ falseï¿½ï¿½ ï¿½ï¿½È¯
+        return skillSO.currentcoolTime >= skillSO.skillCoolTime ? true : false;
     }
 
-    public void CurrentTimeClear(string name)
+    public void CurrentTimeClear(SkillSO skillSO)
     {
-        //½ºÅ³À» Å¬¸®¾îÇÔ
-        skillList.UseSkillDictionary.GetValueOrDefault(name).currentcoolTime = 0;
+        //ï¿½ï¿½Å³ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        skillSO.currentcoolTime = 0;
     }
 
 
