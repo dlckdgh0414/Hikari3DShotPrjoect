@@ -36,6 +36,12 @@ public class MainMenuState : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
             flag = true;
             Oldsize = gameObject.transform.localScale;
             gameObject.transform.localScale = Oldsize;
+         
         }
+    }
+
+    public void OnDisable()
+    {
+        gameObject.transform.DOKill();
     }
 }
