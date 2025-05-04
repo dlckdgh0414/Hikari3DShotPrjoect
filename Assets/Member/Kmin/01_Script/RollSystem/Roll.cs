@@ -9,6 +9,7 @@ public class Roll : MonoBehaviour
     [SerializeField] private SkillSOList skillListSO;
     [SerializeField] private RectTransform contentPanel;
     [SerializeField] private float scrollSpeed;
+    [SerializeField] private UseSkillDataSO skillData;
     [FormerlySerializedAs("skillSO")] [SerializeField] private UseSkillDataSO skillDataSo;
 
     public List<RollItem> rollItems = new List<RollItem>();
@@ -73,13 +74,13 @@ public class Roll : MonoBehaviour
             .Select(x => x.Value)
             .FirstOrDefault();
 
-        if (skillDataSo.UseSkillDictionary.ContainsKey(rolledSkill))
+        if (skillDataSo.invenSkillDictionary.ContainsKey(rolledSkill))
         {
-            skillDataSo.UseSkillDictionary[rolledSkill]++;
+            skillDataSo.invenSkillDictionary[rolledSkill] = true;
         }
         else
         {
-            skillDataSo.UseSkillDictionary.Add(rolledSkill, 1);
+            //중복 되었을때 판정
         }
         
         _isRolling = false;

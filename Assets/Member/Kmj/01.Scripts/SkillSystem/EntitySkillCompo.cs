@@ -22,7 +22,7 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponent
     {
         //foreach�� ������ ��ų ����Ʈ�� �ִ� SO�߿� currentCoolTime�� SkillCoolTime���� ������
         //1�� �� �����ش�.
-        foreach (var skill in skillDataList.UseSkillDictionary)
+        foreach (var skill in skillDataList.invenSkillDictionary)
         {
             if (skill.Key.currentcoolTime >= skill.Key.skillCoolTime)
                 return;
