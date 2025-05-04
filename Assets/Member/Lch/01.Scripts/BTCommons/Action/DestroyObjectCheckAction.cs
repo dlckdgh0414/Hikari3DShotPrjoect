@@ -18,7 +18,7 @@ public partial class DestroyObjectCheckAction : Action
 
     protected override Status OnUpdate()
     {
-        if(Enemy.Value.IsDeadEnd)
+        if (Enemy.Value.IsDeadEnd)
         {
             return Status.Success;
         }

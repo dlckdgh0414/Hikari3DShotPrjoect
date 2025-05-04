@@ -1,3 +1,4 @@
+using Member.Ysc._01_Code.UI;
 using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
@@ -5,6 +6,8 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private EnemySpawnListSO enemySpawnSO;
     private float _currentSpawnTime;
+    
+    [SerializeField] private GameProgressCheckUI gameProgressCheckUI;
 
     private void Start()
     {
@@ -28,6 +31,7 @@ public class EnemySpawn : MonoBehaviour
             int randIndex = Random.Range(0, enemySpawnSO.enemies.Count);
             Enemy enemy = Instantiate(enemySpawnSO.enemies[randIndex], transform.position, Quaternion.identity);
             enemy.transform.SetParent(mainCamera.transform);
+            enemy.OnDead.AddListener(gameProgressCheckUI.HandleEnemyDeadCount);
         }
     }
 }

@@ -29,8 +29,7 @@ public abstract class BTBoss : Enemy
         IsDead = true;
         _stateChannel.SendEventMessage(BTEnemyState.DEATH);
     }
-
-    [ContextMenu("Enemy Dead")]
+    
     public void EnemyDead()
     {
 
