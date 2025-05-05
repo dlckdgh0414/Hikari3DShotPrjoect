@@ -1,16 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.Serialization;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class Roll : MonoBehaviour
 {
     [SerializeField] private GameEventChannelSO rollEventChannel;
+    [SerializeField] private Image maskBackground;
     [SerializeField] private SkillSOList skillListSO;
     [SerializeField] private RectTransform contentPanel;
     [SerializeField] private float scrollSpeed;
     [SerializeField] private UseSkillDataSO skillData;
-    [FormerlySerializedAs("skillSO")] [SerializeField] private UseSkillDataSO skillDataSo;
 
     public List<RollItem> rollItems = new List<RollItem>();
     private Dictionary<string, SkillSO> _skillDic/*k*/ = new Dictionary<string, SkillSO>();
@@ -19,6 +20,7 @@ public class Roll : MonoBehaviour
 
     private float _scrollSpeed;
     private bool _isRolling = false;
+    private bool _isDecrease = false;
     
     private void Awake()
     {
@@ -39,16 +41,26 @@ public class Roll : MonoBehaviour
     [ContextMenu("Roll")]
     public void SkillRoll()
     {
-        _scrollSpeed = scrollSpeed;
+        DOTween.To(() => 0f, y => maskBackground.rectTransform.sizeDelta = 
+            new Vector2(maskBackground.rectTransform.sizeDelta.x, y), 300f, 2f)
+            .SetEase(Ease.InQuad).OnComplete(() => _isDecrease = true);
+        
         _isRolling = true;
+        _scrollSpeed = scrollSpeed;
     }
 
     private void Rolling()
     {
         contentPanel.anchoredPosition += Vector2.left * (_scrollSpeed * Time.deltaTime);
-        _scrollSpeed /= (1.005f);
- 
-        if (_scrollSpeed <= 25) RollEnd();
+        if(_isDecrease) _scrollSpeed /= (1.005f);
+
+        if (_scrollSpeed <= 25)
+        {
+            _isRolling = false;
+            DOTween.To(() => 300f, y => maskBackground.rectTransform.sizeDelta = 
+                    new Vector2(maskBackground.rectTransform.sizeDelta.x, y), 0f, 2f)
+                .SetEase(Ease.InQuad).OnComplete(() => RollEnd());
+        }
 
         if (contentPanel.anchoredPosition.x <= -215)
         {
@@ -65,7 +77,8 @@ public class Roll : MonoBehaviour
     private void RollEnd()
     {
         _scrollSpeed = 0;
-
+        maskBackground.rectTransform.sizeDelta = new Vector2(maskBackground.rectTransform.sizeDelta.x, 0);
+        
         string rolledName = rollItems.OrderBy(x => 
             Vector3.Distance(contentPanel.parent.position, x.gameObject.transform.position)).First().name;
 
@@ -74,16 +87,16 @@ public class Roll : MonoBehaviour
             .Select(x => x.Value)
             .FirstOrDefault();
 
-        if (skillDataSo.invenSkillDictionary.ContainsKey(rolledSkill))
+        if (skillData.invenSkillDictionary.ContainsKey(rolledSkill))
         {
-            skillDataSo.invenSkillDictionary[rolledSkill] = true;
+            skillData.invenSkillDictionary[rolledSkill] = true;
         }
         else
         {
             //중복 되었을때 판정
         }
-        
-        _isRolling = false;
+
+        _isDecrease = false;
         _rollEndEvent.rolledSkill = rolledSkill;
         rollEventChannel.RaiseEvent(_rollEndEvent);
     }
