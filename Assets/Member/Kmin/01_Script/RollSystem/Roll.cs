@@ -2,14 +2,16 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using TMPro;
 using UnityEngine.UI;
 
 public class Roll : MonoBehaviour
 {
     [SerializeField] private GameEventChannelSO rollEventChannel;
     [SerializeField] private Image maskBackground;
-    [SerializeField] private SkillSOList skillListSO;
+    [SerializeField] private TextMeshProUGUI rolledSkillText;
     [SerializeField] private RectTransform contentPanel;
+    [SerializeField] private SkillSOList skillListSO;
     [SerializeField] private float scrollSpeed;
     [SerializeField] private UseSkillDataSO skillData;
 
@@ -24,6 +26,8 @@ public class Roll : MonoBehaviour
     
     private void Awake()
     {
+        rolledSkillText.transform.parent.gameObject.SetActive(false);
+
         skillListSO.skillList.ForEach(s =>  _skillDic.Add(s.name, s));
         rollItems.ForEach(item => item.SettingItem(SelectedSkill()));
     }
@@ -45,6 +49,7 @@ public class Roll : MonoBehaviour
             new Vector2(maskBackground.rectTransform.sizeDelta.x, y), 300f, 2f)
             .SetEase(Ease.InQuad).OnComplete(() => _isDecrease = true);
         
+        rolledSkillText.transform.parent.gameObject.SetActive(false);
         _isRolling = true;
         _scrollSpeed = scrollSpeed;
     }
@@ -56,10 +61,9 @@ public class Roll : MonoBehaviour
 
         if (_scrollSpeed <= 25)
         {
-            _isRolling = false;
-            DOTween.To(() => 300f, y => maskBackground.rectTransform.sizeDelta = 
-                    new Vector2(maskBackground.rectTransform.sizeDelta.x, y), 0f, 2f)
-                .SetEase(Ease.InQuad).OnComplete(() => RollEnd());
+            RollEnd();
+            DOTween.To(() => 300f, y => maskBackground.rectTransform.sizeDelta =
+                new Vector2(maskBackground.rectTransform.sizeDelta.x, y), 0f, 2f).SetEase(Ease.InQuad);
         }
 
         if (contentPanel.anchoredPosition.x <= -215)
@@ -95,7 +99,11 @@ public class Roll : MonoBehaviour
         {
             //중복 되었을때 판정
         }
-
+        
+        rolledSkillText.transform.parent.gameObject.SetActive(true);
+        rolledSkillText.text = $"{rolledSkill.name}({rolledSkill.rarity}분의 1)";
+        
+        _isRolling = false;
         _isDecrease = false;
         _rollEndEvent.rolledSkill = rolledSkill;
         rollEventChannel.RaiseEvent(_rollEndEvent);

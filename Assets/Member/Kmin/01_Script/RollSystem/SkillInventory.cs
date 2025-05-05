@@ -30,7 +30,7 @@ namespace Member.Kmin._01_Script.RollSystem
 
             foreach (var skill in _ownSkillDic)
             {
-                Debug.Log(skill);
+                //Debug.Log(skill);
             }
         }
     }
