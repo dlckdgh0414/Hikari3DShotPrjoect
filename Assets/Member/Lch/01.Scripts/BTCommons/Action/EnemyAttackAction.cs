@@ -13,6 +13,8 @@ public partial class EnemyAttackAction : Action
     [SerializeReference] public BlackboardVariable<float> AttackTimer;
     protected override Status OnStart()
     {
+        Debug.Assert(Attack != null,$"너 어택없음 ㅅㄱ");
+
         Attack.Value.EnemyAttack(Target.Value,AttackTimer);
         return Status.Running;
     }
