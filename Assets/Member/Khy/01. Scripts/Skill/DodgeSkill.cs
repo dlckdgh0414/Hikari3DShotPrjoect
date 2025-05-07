@@ -42,7 +42,7 @@ public class DodgeSkill : Skill
         CameraEffectEvent effectCamera = CamaraEvents.CameraEffectEvent;
         effectCamera.cameraEffect = CameraEffectEnum.DUTCH;
         effectCamera.second =SpinCameraEffectSec;
-        effectCamera.value = SpinCameraEffectIntensity * dir;
+        effectCamera.value = SpinCameraEffectIntensity * -dir;
 
         CameraChannel.RaiseEvent(effectCamera);
     }

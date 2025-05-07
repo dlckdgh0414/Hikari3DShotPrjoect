@@ -1,4 +1,5 @@
-﻿using Member.Ysc._01_Code.StatSystems;
+﻿using DG.Tweening;
+using Member.Ysc._01_Code.StatSystems;
 using UnityEngine;
 
 namespace Member.Ysc._01_Code.Agent
@@ -7,11 +8,13 @@ namespace Member.Ysc._01_Code.Agent
     {
         [SerializeField] private StatSO hpStat;
         public float maxHealth;
-        private float _currentHealth;
+        [SerializeField] private float _currentHealth;
 
         private Entity _entity;
         private EntityStat _statCompo;
         private EntityFeedbackData _feedbackData;
+
+        [HideInInspector] public NotifyValue<float> Hp = new();
 
         public void Initialize(Entity entity)
         {
@@ -42,10 +45,36 @@ namespace Member.Ysc._01_Code.Agent
         public void ApplyDamage(float damage, Vector2 direction)
         {
             if (_entity.IsDead || _entity.IsInvin) return;
-            
+
+            Debug.Log(direction);
             _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, maxHealth);
             _feedbackData.LastAttackDirection = direction.normalized;
+            Hp.Value = _currentHealth;
             AfterHitFeedbacks();
+        }
+
+        public float GetCurrentHp()
+        {
+            return _currentHealth;
+        }
+
+        public void ApplyHeal(float heal,float duration)
+        {
+            if (_entity.IsDead) return;
+
+            float startValue = _currentHealth;
+            float endValue = Mathf.Clamp(_currentHealth + heal, 0, maxHealth);
+
+            DOTween.To(
+                () => startValue,
+                value =>
+                {
+                    _currentHealth = Mathf.Clamp(value, 0, maxHealth);
+                    Hp.Value = _currentHealth;
+                },
+                endValue,
+                duration
+            );
         }
 
         private void AfterHitFeedbacks()

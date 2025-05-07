@@ -64,7 +64,7 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""ChargeAttack"",
+                    ""name"": ""AutoAim"",
                     ""type"": ""Button"",
                     ""id"": ""ead454a1-0c02-4f86-9283-4c8d113e51a0"",
                     ""expectedControlType"": """",
@@ -205,7 +205,7 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ChargeAttack"",
+                    ""action"": ""AutoAim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -264,7 +264,7 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
         m_PlayerMap_LeftWing = m_PlayerMap.FindAction("LeftWing", throwIfNotFound: true);
         m_PlayerMap_RightWing = m_PlayerMap.FindAction("RightWing", throwIfNotFound: true);
         m_PlayerMap_Move = m_PlayerMap.FindAction("Move", throwIfNotFound: true);
-        m_PlayerMap_ChargeAttack = m_PlayerMap.FindAction("ChargeAttack", throwIfNotFound: true);
+        m_PlayerMap_AutoAim = m_PlayerMap.FindAction("AutoAim", throwIfNotFound: true);
         m_PlayerMap_Aim = m_PlayerMap.FindAction("Aim", throwIfNotFound: true);
         m_PlayerMap_FirSkill = m_PlayerMap.FindAction("FirSkill", throwIfNotFound: true);
         m_PlayerMap_SecSkill = m_PlayerMap.FindAction("SecSkill", throwIfNotFound: true);
@@ -339,7 +339,7 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMap_LeftWing;
     private readonly InputAction m_PlayerMap_RightWing;
     private readonly InputAction m_PlayerMap_Move;
-    private readonly InputAction m_PlayerMap_ChargeAttack;
+    private readonly InputAction m_PlayerMap_AutoAim;
     private readonly InputAction m_PlayerMap_Aim;
     private readonly InputAction m_PlayerMap_FirSkill;
     private readonly InputAction m_PlayerMap_SecSkill;
@@ -352,7 +352,7 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
         public InputAction @LeftWing => m_Wrapper.m_PlayerMap_LeftWing;
         public InputAction @RightWing => m_Wrapper.m_PlayerMap_RightWing;
         public InputAction @Move => m_Wrapper.m_PlayerMap_Move;
-        public InputAction @ChargeAttack => m_Wrapper.m_PlayerMap_ChargeAttack;
+        public InputAction @AutoAim => m_Wrapper.m_PlayerMap_AutoAim;
         public InputAction @Aim => m_Wrapper.m_PlayerMap_Aim;
         public InputAction @FirSkill => m_Wrapper.m_PlayerMap_FirSkill;
         public InputAction @SecSkill => m_Wrapper.m_PlayerMap_SecSkill;
@@ -378,9 +378,9 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @ChargeAttack.started += instance.OnChargeAttack;
-            @ChargeAttack.performed += instance.OnChargeAttack;
-            @ChargeAttack.canceled += instance.OnChargeAttack;
+            @AutoAim.started += instance.OnAutoAim;
+            @AutoAim.performed += instance.OnAutoAim;
+            @AutoAim.canceled += instance.OnAutoAim;
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
@@ -409,9 +409,9 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @ChargeAttack.started -= instance.OnChargeAttack;
-            @ChargeAttack.performed -= instance.OnChargeAttack;
-            @ChargeAttack.canceled -= instance.OnChargeAttack;
+            @AutoAim.started -= instance.OnAutoAim;
+            @AutoAim.performed -= instance.OnAutoAim;
+            @AutoAim.canceled -= instance.OnAutoAim;
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
@@ -447,7 +447,7 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
         void OnLeftWing(InputAction.CallbackContext context);
         void OnRightWing(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
-        void OnChargeAttack(InputAction.CallbackContext context);
+        void OnAutoAim(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnFirSkill(InputAction.CallbackContext context);
         void OnSecSkill(InputAction.CallbackContext context);

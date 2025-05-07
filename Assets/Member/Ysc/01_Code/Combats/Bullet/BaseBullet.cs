@@ -18,6 +18,9 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         public Rigidbody RbCompo { get; protected set; }
         public int GetBulletCount => BulletSO.BulletCount;
 
+        public static bool isSlowy;
+        public static float SlowyDegree;
+
         public void SetDirection(Vector3 direction)
         {
             fireDirection = direction - transform.position ;
@@ -30,14 +33,19 @@ namespace Member.Ysc._01_Code.Combat.Bullet
 
         protected virtual void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player")) return;
+            if (other.CompareTag("Player") || other.CompareTag("Bullet")) return;
             Hit(other);
             DestroyBullet(this);
         }
 
         protected void FixedUpdate()
         {
-            RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
+            if(isSlowy)
+                RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed/SlowyDegree;
+            else
+                RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
+            Quaternion quaternion = Quaternion.LookRotation(fireDirection);
+            transform.rotation = quaternion;
         }
 
         protected virtual void DestroyBullet(IPoolable pool)

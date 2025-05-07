@@ -8,6 +8,8 @@ using UnityEngine.InputSystem;
 public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
 {
     public Action<bool> OnAttackEvent;
+    public Action<bool> OnAutoAimEvent;
+
     public Action OnStartChargeAttackEvent;
     public Action OnEndChargeAttackEvent;
     public Action<int> OnWingEvent;
@@ -113,5 +115,13 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
     {
         if (context.performed)
             OnThrSkillEvent?.Invoke();
+    }
+
+    public void OnAutoAim(InputAction.CallbackContext context)
+    {
+        if (context.started)
+            OnAutoAimEvent?.Invoke(true);
+        if (context.canceled)
+            OnAutoAimEvent?.Invoke(false);
     }
 }
