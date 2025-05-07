@@ -91,14 +91,14 @@ public class Roll : MonoBehaviour
             .Select(x => x.Value)
             .FirstOrDefault();
 
-        if (skillData.useSkillList.Contains(rolledSkill))
+        if (skillData.invenSkillList.Contains(rolledSkill) == false)
         {
-            skillData.useSkillList.Add(rolledSkill);
+            skillData.invenSkillList.Add(rolledSkill);
         }
         else
         {
-            //중복 되었을때 판정
-        }
+            Debug.Log("중복");
+        } 
         
         rolledSkillText.transform.parent.gameObject.SetActive(true);
         rolledSkillText.text = $"{rolledSkill.name}({rolledSkill.rarity}분의 1)";
