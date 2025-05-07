@@ -24,7 +24,7 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
 
         private void ClickThis()
         {
-            _skillEvent.staticSkill = thisSkill;
+            _skillEvent.staticSkill = thisSkill.ThisSkill;
             _skillEventChannel.RaiseEvent(_skillEvent);
         }
     }

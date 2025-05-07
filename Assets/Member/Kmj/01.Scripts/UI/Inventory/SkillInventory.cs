@@ -92,12 +92,12 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
 
         private void HandleSkillSelect(SkillSelectEvent evt)
         {
-            _selectedSkill = evt.selectedSkill;
+            _selectedSkill.ThisSkill = evt.selectedSkill;
         }
         
         private void HandleStaticSkillSelect(StaticSelectEvent evt)
         {
-            _staticSkill = evt.staticSkill;
+            _staticSkill.ThisSkill = evt.staticSkill;
         }
         
     }

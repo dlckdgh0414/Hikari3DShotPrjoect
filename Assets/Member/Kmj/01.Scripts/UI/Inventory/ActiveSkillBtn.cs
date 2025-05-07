@@ -23,7 +23,7 @@ public class ActiveSkillBtn : MonoBehaviour
 
     private void ClickThis()
     {
-        _skillEvent.selectedSkill = thisSkill;
+        _skillEvent.selectedSkill = thisSkill.ThisSkill;
         _skillEventChannel.RaiseEvent(_skillEvent);
     }
 }
