@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Member.Kmin._01_Script.Core.EventChannel;
+using Member.Kmj._01.Scripts.Core.EventChannel;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,6 +12,14 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
 {
     public class SkillInventory : MonoBehaviour
     {
+        [SerializeField] private GameEventChannelSO _skillSendEvent;
+        
+        private SendSkill _skillEvent = SendSkillChannel.SkillEquipEvent;
+        
+        private SendStaticSkill _staticSkilEvent = SendSkillChannel.staticSkillEquipEvent;
+        
+        
+        
         [SerializeField] private GameEventChannelSO _skillInvenEvent;
         [SerializeField] private UseSkillDataSO _inventorySO;
         [SerializeField] private List<Button> equipBtns;
@@ -69,6 +78,9 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
             
             clickedImage = null;
             _selectedSkill = null;
+            
+            _skillEvent.selectedSkill = _selectedSkill.name;
+            _skillSendEvent.RaiseEvent(_skillEvent);
         }
         
         private void HandleStaticSkillEquip()
@@ -84,20 +96,23 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
                 return;
             
             clickedImage.sprite = _staticSkill.icon;
+            _staticSkilEvent.staticSkill = _staticSkill.name;
+            _skillSendEvent.RaiseEvent(_skillEvent);
             
             clickedImage = null;
             _staticSkill = null;
+            
         }
         
 
         private void HandleSkillSelect(SkillSelectEvent evt)
         {
-            _selectedSkill.ThisSkill = evt.selectedSkill;
+            _selectedSkill = evt.selectedSkill;
         }
         
         private void HandleStaticSkillSelect(StaticSelectEvent evt)
         {
-            _staticSkill.ThisSkill = evt.staticSkill;
+            _staticSkill = evt.staticSkill;
         }
         
     }

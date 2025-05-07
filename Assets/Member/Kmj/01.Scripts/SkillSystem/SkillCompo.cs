@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Member.Kmin._01_Script.Core.EventChannel;
+using Member.Kmj._01.Scripts.Core.EventChannel;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class SkillCompo : MonoBehaviour, IEntityComponent
@@ -19,6 +22,9 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
 
     private Dictionary<Type, Skill> _skills;
 
+    private GameEventChannelSO _eventChannel;
+
+
     public void Initialize(Entity entity)
     {
         _entity = entity;
@@ -27,8 +33,45 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
         _skills = new Dictionary<Type, Skill>();
         GetComponentsInChildren<Skill>().ToList().ForEach(skill => _skills.Add(skill.GetType(), skill));
         _skills.Values.ToList().ForEach(skill => skill.InitializeSkill(_entity, this));
+        
+        _eventChannel.AddListener<SendSkill>(HandleSendSkill);
+        _eventChannel.AddListener<SendStaticSkill>(HandleStaticSkill);
     }
 
+    private void HandleSendSkill(SendSkill evt)
+    {
+        Transform child = transform.Find(evt.selectedSkill);
+        
+        if (child != null)
+        {
+            Skill skill = child.GetComponent<Skill>();
+            
+
+            if (secondSkill == null)
+            {
+                secondSkill = skill;
+            }
+            else if(thirdSkill == null)
+            {
+                thirdSkill = skill;
+            }
+            
+        }
+    }
+        
+    private void HandleStaticSkill(SendStaticSkill evt)
+    {
+        Transform child = transform.Find(evt.staticSkill);
+
+        if (child != null)
+        {
+            Skill skill = child.GetComponent<Skill>();
+            
+            firstSkill = skill;
+        }
+    }
+    
+    
     public T GetSkill<T>() where T : Skill
     {
         Type type = typeof(T);
