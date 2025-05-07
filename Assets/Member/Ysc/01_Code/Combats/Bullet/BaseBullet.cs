@@ -81,7 +81,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
 
         private void OnValidate()
         {
-            gameObject.name = PoolingName;
+            itemName = gameObject.name;
         }
     }
 }
