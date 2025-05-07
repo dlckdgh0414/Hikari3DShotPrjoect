@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-[CreateAssetMenu(menuName = "Skill/So", fileName = "SKills")]
+[CreateAssetMenu(menuName = "SO/Skill/SkillSO", fileName = "SkillSO")]
 
 public class SkillSO : ScriptableObject
 {
