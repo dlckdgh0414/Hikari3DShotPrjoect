@@ -98,7 +98,7 @@ public class Roll : MonoBehaviour
         else
         {
             Debug.Log("중복");
-        }
+        } 
         
         rolledSkillText.transform.parent.gameObject.SetActive(true);
         rolledSkillText.text = $"{rolledSkill.name}({rolledSkill.rarity}분의 1)";
