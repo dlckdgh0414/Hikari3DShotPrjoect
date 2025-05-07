@@ -10,7 +10,7 @@ public class EnemyAttack : MonoBehaviour
         if(other.gameObject.TryGetComponent(out Player player))
         {
             IDamageable damageable = player.GetComponentInChildren<IDamageable>();
-            damageable.ApplyDamage(damage,Vector2.zero,_entity);
+        //    damageable.ApplyDamage(damage,Vector2.zero,_entity);
         }
     }
 }
