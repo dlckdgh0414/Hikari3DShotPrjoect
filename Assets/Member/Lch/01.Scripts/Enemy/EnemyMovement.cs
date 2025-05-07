@@ -52,8 +52,8 @@ public class EnemyMovement : MonoBehaviour,IEntityComponent
         float halfHeight = cam.orthographicSize;
         float halfWidth = halfHeight * cam.aspect;
 
-        float randomX = Random.Range(-halfWidth, halfWidth);
-        float randomY = Random.Range(-halfHeight, halfHeight);
+        float randomX = Random.Range(-halfWidth /2, halfWidth/2);
+        float randomY = Random.Range(-halfHeight / 2, halfHeight/ 2);
 
         Vector3 randomPos = cam.transform.position + new Vector3(randomX, randomY, transform.position.z);
 
