@@ -26,9 +26,9 @@ public class SkillSO : ScriptableObject
         }
         else
         {
-            Type t = Type.GetType(name);
+            /*Type t = Type.GetType(name);
             Skill skill = Activator.CreateInstance(t) as Skill;
-            ThisSkill = skill;
+            ThisSkill = skill;*/
         }
     }
 }
