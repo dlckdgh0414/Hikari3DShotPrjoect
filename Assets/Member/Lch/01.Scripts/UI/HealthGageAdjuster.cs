@@ -5,7 +5,7 @@ using Member.Ysc._01_Code.Agent;
 
 public class HealthGageAdjuster : MonoBehaviour
 {
-    [SerializeField] private EntityHealth entityhealth;
+    [SerializeField] private EntityHealthCompo entityhealth;
     [SerializeField] private Image gage;
 
     private void Awake()
