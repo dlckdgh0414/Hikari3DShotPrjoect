@@ -91,9 +91,9 @@ public class Roll : MonoBehaviour
             .Select(x => x.Value)
             .FirstOrDefault();
 
-        if (skillData.invenSkillDictionary.ContainsKey(rolledSkill))
+        if (skillData.useSkillList.Contains(rolledSkill))
         {
-            skillData.invenSkillDictionary[rolledSkill] = true;
+            skillData.useSkillList.Add(rolledSkill);
         }
         else
         {

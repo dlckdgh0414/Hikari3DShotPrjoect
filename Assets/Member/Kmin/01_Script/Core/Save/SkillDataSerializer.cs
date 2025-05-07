@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+/*using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -40,4 +40,4 @@ public static class SkillDataSerializer
         skillData.useSkillList = new List<SkillSO>(loadedData.useSkillList);
         Debug.Log($"Skill data loaded from {path}");
     }
-}
+}*/
