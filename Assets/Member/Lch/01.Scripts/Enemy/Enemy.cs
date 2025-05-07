@@ -4,6 +4,7 @@ using Member.Ysc._01_Code.Agent;
 using NUnit.Framework;
 using Unity.Behavior;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Enemy :Entity
 {
@@ -12,6 +13,8 @@ public abstract class Enemy :Entity
     protected BehaviorGraphAgent btAgent;
     protected StateEventChange _stateChannel;
     [field: SerializeField] public EntityFinderSO PlayerFinder { get; protected set; }
+
+    public UnityEvent OnRealDead;
 
     public bool IsDeadEnd { get; protected set; } = false;
     
@@ -31,6 +34,7 @@ public abstract class Enemy :Entity
 
         _sequence?.Kill();
         _sequence = null;
+        OnRealDead?.Invoke();
     }
 
     public void LookTarget(Transform target)
