@@ -13,6 +13,8 @@ public class Player : Entity
     private StateMachine _stateMachine;
     [field: SerializeField] public float zPos { get; set; }
 
+    
+
 
     protected override void Awake()
     {
