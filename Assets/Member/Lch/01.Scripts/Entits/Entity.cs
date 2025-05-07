@@ -8,13 +8,14 @@ using UnityEngine.Events;
 public abstract class Entity : MonoBehaviour, IDamageable
 {
 
-    public delegate void OnDamageHandler(float damage, Vector2 direction, Entity dealer);
+    public delegate void OnDamageHandler(float damage, Vector2 direction);
     public event OnDamageHandler OnDamage;
 
     public UnityEvent OnHit;
     public UnityEvent OnDead;
 
     public bool IsDead { get; set; } 
+    public bool IsInvin { get; set; }
     public int DeadBodyLayer { get; private set; }
 
     protected Dictionary<Type, IEntityComponent> _components;
@@ -70,7 +71,6 @@ public abstract class Entity : MonoBehaviour, IDamageable
         return default(T);
     }
 
-    public void ApplyDamage(float damage, Vector2 direction, Entity dealer)
-        => OnDamage?.Invoke(damage, direction, dealer);
-
+    public void ApplyDamage(float damage, Vector2 direction)
+        => OnDamage?.Invoke(damage, direction);
 }

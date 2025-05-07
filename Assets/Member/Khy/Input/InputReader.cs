@@ -8,14 +8,15 @@ using UnityEngine.InputSystem;
 public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
 {
     public Action<bool> OnAttackEvent;
+    public Action<bool> OnAutoAimEvent;
+
     public Action OnStartChargeAttackEvent;
     public Action OnEndChargeAttackEvent;
     public Action<int> OnWingEvent;
 
-    public Action TestInput;
-    public Action TestInput2;
-    public Action TestInput3;
-    public Action TestInput4;
+    public Action OnFirSkillEvent;
+    public Action OnSecSkillEvent;
+    public Action OnThrSkillEvent;
     public Vector2 InputDirection { get; private set; }
     public InputControlls _controlls;
 
@@ -98,27 +99,29 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
         MousePosition = context.ReadValue<Vector2>();
     }
 
-    public void OnTestAttack(InputAction.CallbackContext context)
+    public void OnFirSkill(InputAction.CallbackContext context)
     {
         if (context.performed)
-            TestInput?.Invoke();
+            OnFirSkillEvent?.Invoke();
     }
 
-    public void OnTestAttack2(InputAction.CallbackContext context)
+    public void OnSecSkill(InputAction.CallbackContext context)
     {
         if (context.performed)
-            TestInput2?.Invoke();
+            OnSecSkillEvent?.Invoke();
     }
 
-    public void OnTestAttack3(InputAction.CallbackContext context)
+    public void OnThrSkill(InputAction.CallbackContext context)
     {
         if (context.performed)
-            TestInput3?.Invoke();
+            OnThrSkillEvent?.Invoke();
     }
 
-    public void OnTestAttack4(InputAction.CallbackContext context)
+    public void OnAutoAim(InputAction.CallbackContext context)
     {
-        if (context.performed)
-            TestInput4?.Invoke();
+        if (context.started)
+            OnAutoAimEvent?.Invoke(true);
+        if (context.canceled)
+            OnAutoAimEvent?.Invoke(false);
     }
 }

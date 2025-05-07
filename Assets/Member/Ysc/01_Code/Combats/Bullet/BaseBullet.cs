@@ -9,12 +9,17 @@ namespace Member.Ysc._01_Code.Combat.Bullet
     {
         [field: SerializeField] private BulletSettingSO BulletSO; // 총알 데이터 받기
 
-        public string ItemName => BulletSO.BulletName;
+        [SerializeField] private string itemName;
+        
+        public string PoolingName => itemName;
         
         protected Vector3 fireDirection;
         
         public Rigidbody RbCompo { get; protected set; }
         public int GetBulletCount => BulletSO.BulletCount;
+
+        public static bool isSlowy;
+        public static float SlowyDegree;
 
         public void SetDirection(Vector3 direction)
         {
@@ -26,9 +31,21 @@ namespace Member.Ysc._01_Code.Combat.Bullet
             BulletInit();
         }
 
+        protected virtual void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player") || other.CompareTag("Bullet")) return;
+            Hit(other);
+            DestroyBullet(this);
+        }
+
         protected void FixedUpdate()
         {
-            RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
+            if(isSlowy)
+                RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed/SlowyDegree;
+            else
+                RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
+            Quaternion quaternion = Quaternion.LookRotation(fireDirection);
+            transform.rotation = quaternion;
         }
 
         protected virtual void DestroyBullet(IPoolable pool)
@@ -37,8 +54,13 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         }
 
 
-        protected virtual void Hit()
+        protected virtual void Hit(Collider hitable)
         {
+            if (hitable.TryGetComponent(out IDamageable damageable))
+            {
+                Vector2 direction = (hitable.transform.position - transform.position).normalized;
+                damageable.ApplyDamage(BulletSO.bulletDamage, direction);
+            }
         }
 
         protected virtual void BulletInit()
@@ -55,6 +77,11 @@ namespace Member.Ysc._01_Code.Combat.Bullet
 
         public void ResetItem()
         {
+        }
+
+        private void OnValidate()
+        {
+            gameObject.name = PoolingName;
         }
     }
 }

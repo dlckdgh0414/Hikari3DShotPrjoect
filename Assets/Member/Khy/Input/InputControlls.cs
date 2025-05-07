@@ -64,7 +64,7 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""ChargeAttack"",
+                    ""name"": ""AutoAim"",
                     ""type"": ""Button"",
                     ""id"": ""ead454a1-0c02-4f86-9283-4c8d113e51a0"",
                     ""expectedControlType"": """",
@@ -82,36 +82,27 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""TestAttack"",
+                    ""name"": ""FirSkill"",
                     ""type"": ""Button"",
-                    ""id"": ""f5214589-a159-49b3-98dd-22b76f07d7ee"",
+                    ""id"": ""eadf97cd-2806-4171-9bab-3f53c0ae7ba9"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""TestAttack2"",
+                    ""name"": ""SecSkill"",
                     ""type"": ""Button"",
-                    ""id"": ""08c95a8a-ca00-469a-9b8f-2bfd5699ad36"",
+                    ""id"": ""142c0f45-dea0-4584-9474-5f7fb525f4f2"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""TestAttack3"",
+                    ""name"": ""ThrSkill"",
                     ""type"": ""Button"",
-                    ""id"": ""e9208f7b-4baa-4088-bfe6-4d13c8066195"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""TestAttack4"",
-                    ""type"": ""Button"",
-                    ""id"": ""0f2ae76a-9a62-45cc-b154-f5f000c02352"",
+                    ""id"": ""a7fab605-5c92-4efe-8bbb-60e2ff06d6bb"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -214,7 +205,7 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ChargeAttack"",
+                    ""action"": ""AutoAim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -231,45 +222,34 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b9d20aa2-0ce0-4278-af57-67351b455814"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""id"": ""4191121f-5030-47f6-b7a2-0a1c795eee07"",
+                    ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TestAttack"",
+                    ""action"": ""FirSkill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4c53d856-7052-441c-9a95-c61902441e10"",
-                    ""path"": """",
+                    ""id"": ""f1f9e6b6-3e59-48fa-a07c-3f399c576c97"",
+                    ""path"": ""<Keyboard>/t"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TestAttack2"",
+                    ""action"": ""SecSkill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f43df1ee-b861-42a4-af59-39152105a4a4"",
-                    ""path"": """",
+                    ""id"": ""944972d6-a2ef-4178-87ea-6b0a88c8afe7"",
+                    ""path"": ""<Keyboard>/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TestAttack3"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e5719575-c1c0-414c-af8f-b88efe8c9bad"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TestAttack4"",
+                    ""action"": ""ThrSkill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -284,12 +264,11 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
         m_PlayerMap_LeftWing = m_PlayerMap.FindAction("LeftWing", throwIfNotFound: true);
         m_PlayerMap_RightWing = m_PlayerMap.FindAction("RightWing", throwIfNotFound: true);
         m_PlayerMap_Move = m_PlayerMap.FindAction("Move", throwIfNotFound: true);
-        m_PlayerMap_ChargeAttack = m_PlayerMap.FindAction("ChargeAttack", throwIfNotFound: true);
+        m_PlayerMap_AutoAim = m_PlayerMap.FindAction("AutoAim", throwIfNotFound: true);
         m_PlayerMap_Aim = m_PlayerMap.FindAction("Aim", throwIfNotFound: true);
-        m_PlayerMap_TestAttack = m_PlayerMap.FindAction("TestAttack", throwIfNotFound: true);
-        m_PlayerMap_TestAttack2 = m_PlayerMap.FindAction("TestAttack2", throwIfNotFound: true);
-        m_PlayerMap_TestAttack3 = m_PlayerMap.FindAction("TestAttack3", throwIfNotFound: true);
-        m_PlayerMap_TestAttack4 = m_PlayerMap.FindAction("TestAttack4", throwIfNotFound: true);
+        m_PlayerMap_FirSkill = m_PlayerMap.FindAction("FirSkill", throwIfNotFound: true);
+        m_PlayerMap_SecSkill = m_PlayerMap.FindAction("SecSkill", throwIfNotFound: true);
+        m_PlayerMap_ThrSkill = m_PlayerMap.FindAction("ThrSkill", throwIfNotFound: true);
     }
 
     ~@InputControlls()
@@ -360,12 +339,11 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMap_LeftWing;
     private readonly InputAction m_PlayerMap_RightWing;
     private readonly InputAction m_PlayerMap_Move;
-    private readonly InputAction m_PlayerMap_ChargeAttack;
+    private readonly InputAction m_PlayerMap_AutoAim;
     private readonly InputAction m_PlayerMap_Aim;
-    private readonly InputAction m_PlayerMap_TestAttack;
-    private readonly InputAction m_PlayerMap_TestAttack2;
-    private readonly InputAction m_PlayerMap_TestAttack3;
-    private readonly InputAction m_PlayerMap_TestAttack4;
+    private readonly InputAction m_PlayerMap_FirSkill;
+    private readonly InputAction m_PlayerMap_SecSkill;
+    private readonly InputAction m_PlayerMap_ThrSkill;
     public struct PlayerMapActions
     {
         private @InputControlls m_Wrapper;
@@ -374,12 +352,11 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
         public InputAction @LeftWing => m_Wrapper.m_PlayerMap_LeftWing;
         public InputAction @RightWing => m_Wrapper.m_PlayerMap_RightWing;
         public InputAction @Move => m_Wrapper.m_PlayerMap_Move;
-        public InputAction @ChargeAttack => m_Wrapper.m_PlayerMap_ChargeAttack;
+        public InputAction @AutoAim => m_Wrapper.m_PlayerMap_AutoAim;
         public InputAction @Aim => m_Wrapper.m_PlayerMap_Aim;
-        public InputAction @TestAttack => m_Wrapper.m_PlayerMap_TestAttack;
-        public InputAction @TestAttack2 => m_Wrapper.m_PlayerMap_TestAttack2;
-        public InputAction @TestAttack3 => m_Wrapper.m_PlayerMap_TestAttack3;
-        public InputAction @TestAttack4 => m_Wrapper.m_PlayerMap_TestAttack4;
+        public InputAction @FirSkill => m_Wrapper.m_PlayerMap_FirSkill;
+        public InputAction @SecSkill => m_Wrapper.m_PlayerMap_SecSkill;
+        public InputAction @ThrSkill => m_Wrapper.m_PlayerMap_ThrSkill;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -401,24 +378,21 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @ChargeAttack.started += instance.OnChargeAttack;
-            @ChargeAttack.performed += instance.OnChargeAttack;
-            @ChargeAttack.canceled += instance.OnChargeAttack;
+            @AutoAim.started += instance.OnAutoAim;
+            @AutoAim.performed += instance.OnAutoAim;
+            @AutoAim.canceled += instance.OnAutoAim;
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
-            @TestAttack.started += instance.OnTestAttack;
-            @TestAttack.performed += instance.OnTestAttack;
-            @TestAttack.canceled += instance.OnTestAttack;
-            @TestAttack2.started += instance.OnTestAttack2;
-            @TestAttack2.performed += instance.OnTestAttack2;
-            @TestAttack2.canceled += instance.OnTestAttack2;
-            @TestAttack3.started += instance.OnTestAttack3;
-            @TestAttack3.performed += instance.OnTestAttack3;
-            @TestAttack3.canceled += instance.OnTestAttack3;
-            @TestAttack4.started += instance.OnTestAttack4;
-            @TestAttack4.performed += instance.OnTestAttack4;
-            @TestAttack4.canceled += instance.OnTestAttack4;
+            @FirSkill.started += instance.OnFirSkill;
+            @FirSkill.performed += instance.OnFirSkill;
+            @FirSkill.canceled += instance.OnFirSkill;
+            @SecSkill.started += instance.OnSecSkill;
+            @SecSkill.performed += instance.OnSecSkill;
+            @SecSkill.canceled += instance.OnSecSkill;
+            @ThrSkill.started += instance.OnThrSkill;
+            @ThrSkill.performed += instance.OnThrSkill;
+            @ThrSkill.canceled += instance.OnThrSkill;
         }
 
         private void UnregisterCallbacks(IPlayerMapActions instance)
@@ -435,24 +409,21 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @ChargeAttack.started -= instance.OnChargeAttack;
-            @ChargeAttack.performed -= instance.OnChargeAttack;
-            @ChargeAttack.canceled -= instance.OnChargeAttack;
+            @AutoAim.started -= instance.OnAutoAim;
+            @AutoAim.performed -= instance.OnAutoAim;
+            @AutoAim.canceled -= instance.OnAutoAim;
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
-            @TestAttack.started -= instance.OnTestAttack;
-            @TestAttack.performed -= instance.OnTestAttack;
-            @TestAttack.canceled -= instance.OnTestAttack;
-            @TestAttack2.started -= instance.OnTestAttack2;
-            @TestAttack2.performed -= instance.OnTestAttack2;
-            @TestAttack2.canceled -= instance.OnTestAttack2;
-            @TestAttack3.started -= instance.OnTestAttack3;
-            @TestAttack3.performed -= instance.OnTestAttack3;
-            @TestAttack3.canceled -= instance.OnTestAttack3;
-            @TestAttack4.started -= instance.OnTestAttack4;
-            @TestAttack4.performed -= instance.OnTestAttack4;
-            @TestAttack4.canceled -= instance.OnTestAttack4;
+            @FirSkill.started -= instance.OnFirSkill;
+            @FirSkill.performed -= instance.OnFirSkill;
+            @FirSkill.canceled -= instance.OnFirSkill;
+            @SecSkill.started -= instance.OnSecSkill;
+            @SecSkill.performed -= instance.OnSecSkill;
+            @SecSkill.canceled -= instance.OnSecSkill;
+            @ThrSkill.started -= instance.OnThrSkill;
+            @ThrSkill.performed -= instance.OnThrSkill;
+            @ThrSkill.canceled -= instance.OnThrSkill;
         }
 
         public void RemoveCallbacks(IPlayerMapActions instance)
@@ -476,11 +447,10 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
         void OnLeftWing(InputAction.CallbackContext context);
         void OnRightWing(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
-        void OnChargeAttack(InputAction.CallbackContext context);
+        void OnAutoAim(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
-        void OnTestAttack(InputAction.CallbackContext context);
-        void OnTestAttack2(InputAction.CallbackContext context);
-        void OnTestAttack3(InputAction.CallbackContext context);
-        void OnTestAttack4(InputAction.CallbackContext context);
+        void OnFirSkill(InputAction.CallbackContext context);
+        void OnSecSkill(InputAction.CallbackContext context);
+        void OnThrSkill(InputAction.CallbackContext context);
     }
 }

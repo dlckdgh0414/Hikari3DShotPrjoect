@@ -19,7 +19,7 @@ public class PoolItemSO : ScriptableObject
             }
             else
             {
-                poolName = item.ItemName;
+                poolName = item.PoolingName;
             }
         }
     }
