@@ -6,8 +6,8 @@ namespace Member.Kmin._01_Script.RollSystem
     public class SkillInventory : MonoBehaviour
     {
         [SerializeField] private GameEventChannelSO eventChannel;
-        public Dictionary<SkillSO, int> _ownSkillDic { get; private set; }
-            = new Dictionary<SkillSO, int>();
+        public List<SkillSO> _ownSkillList { get; private set; }
+            = new List<SkillSO>();
 
         private void Awake()
         {
@@ -18,17 +18,16 @@ namespace Member.Kmin._01_Script.RollSystem
         {
             SkillSO rolledSkill = evt.rolledSkill;
 
-            if (!_ownSkillDic.ContainsKey(rolledSkill))
+            if (!_ownSkillList.Contains(rolledSkill))
             {
-                _ownSkillDic.Add(rolledSkill, 1);
+                _ownSkillList.Add(rolledSkill);
             }
             else
             {
-                _ownSkillDic[rolledSkill]++;
                 CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, 100);
             }
 
-            foreach (var skill in _ownSkillDic)
+            foreach (var skill in _ownSkillList)
             {
                 //Debug.Log(skill);
             }
