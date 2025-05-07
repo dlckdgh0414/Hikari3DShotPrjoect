@@ -30,7 +30,7 @@ public class PoolManager : MonoSingleton<PoolManager>
 
 
         Pool pool = new Pool(poolable,transform, count);
-        _pools.Add(poolable.ItemName, pool);
+        _pools.Add(poolable.PoolingName, pool);
     }
 
     public IPoolable Pop(string itemName)
@@ -48,11 +48,11 @@ public class PoolManager : MonoSingleton<PoolManager>
 
     public void Push(IPoolable item)
     {
-        if (_pools.ContainsKey(item.ItemName))
+        if (_pools.ContainsKey(item.PoolingName))
         {
-            _pools[item.ItemName].Push(item);
+            _pools[item.PoolingName].Push(item);
             return;
         }
-        Debug.LogError($"There is no pool {item.ItemName}");
+        Debug.LogError($"There is no pool {item.PoolingName}");
     }
 }
