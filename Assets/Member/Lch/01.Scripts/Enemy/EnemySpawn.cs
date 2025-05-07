@@ -9,11 +9,6 @@ public class EnemySpawn : MonoBehaviour
     
     [SerializeField] private GameProgressCheckUI gameProgressCheckUI;
 
-    private void Start()
-    {
-        SpawnEnemy();
-    }
-
     private void Update()
     {
         _currentSpawnTime += Time.deltaTime;
@@ -31,7 +26,7 @@ public class EnemySpawn : MonoBehaviour
             int randIndex = Random.Range(0, enemySpawnSO.enemies.Count);
             Enemy enemy = Instantiate(enemySpawnSO.enemies[randIndex], transform.position, Quaternion.identity);
             enemy.transform.SetParent(mainCamera.transform);
-            enemy.OnDead.AddListener(gameProgressCheckUI.HandleEnemyDeadCount);
+            enemy.OnRealDead.AddListener(gameProgressCheckUI.HandleEnemyDeadCount);
         }
     }
 }
