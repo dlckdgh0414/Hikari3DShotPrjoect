@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(menuName = "Skill/So", fileName = "SKills")]
+[CreateAssetMenu(menuName = "SO/Skill/SkillSO", fileName = "SkillSO")]
 
 public class SkillSO : ScriptableObject
 {

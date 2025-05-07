@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SkillLIst/skillLIst", menuName = "SkillList")]
+[CreateAssetMenu(fileName = "SkillLIst/skillLIst", menuName = "SO/Skill/SkillInventory")]
 
 public class SkillInventorySO : ScriptableObject
 {
