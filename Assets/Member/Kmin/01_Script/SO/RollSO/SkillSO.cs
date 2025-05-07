@@ -17,4 +17,18 @@ public class SkillSO : ScriptableObject
     public TextMeshProUGUI skillText;
 
     public Skill ThisSkill;
+
+    private void OnValidate()
+    {
+        if (name == string.Empty)
+        {
+            Debug.Log("³Ê °ª ¾È³ÖÀ½");
+        }
+        else
+        {
+            Type t = Type.GetType(name);
+            Skill skill = Activator.CreateInstance(t) as Skill;
+            ThisSkill = skill;
+        }
+    }
 }

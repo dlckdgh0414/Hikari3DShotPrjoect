@@ -32,9 +32,9 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
         {
             _skillInvenEvent.AddListener<SkillSelectEvent>(HandleSkillSelect);
             _skillInvenEvent.AddListener<StaticSelectEvent>(HandleStaticSkillSelect);
-            _inventorySO.invenSkillDictionary.Add(tempSO1, true);
-            _inventorySO.invenSkillDictionary.Add(tempSO2, true);
-            _inventorySO.invenSkillDictionary.Add(tempSO3, true);
+            _inventorySO.invenSkillList.Add(tempSO1);
+            _inventorySO.invenSkillList.Add(tempSO2);
+            _inventorySO.invenSkillList.Add(tempSO3);
         }
 
         private void Start()
