@@ -47,7 +47,7 @@ public class Roll : MonoBehaviour
     {
         DOTween.To(() => 0f, y => maskBackground.rectTransform.sizeDelta = 
             new Vector2(maskBackground.rectTransform.sizeDelta.x, y), 300f, 2f)
-            .SetEase(Ease.InQuad).OnComplete(() => _isDecrease = true);
+            .SetEase(Ease.InExpo).OnComplete(() => _isDecrease = true);
         
         rolledSkillText.transform.parent.gameObject.SetActive(false);
         _isRolling = true;
@@ -63,7 +63,7 @@ public class Roll : MonoBehaviour
         {
             RollEnd();
             DOTween.To(() => 300f, y => maskBackground.rectTransform.sizeDelta =
-                new Vector2(maskBackground.rectTransform.sizeDelta.x, y), 0f, 2f).SetEase(Ease.InQuad);
+                new Vector2(maskBackground.rectTransform.sizeDelta.x, y), 0f, 2f).SetEase(Ease.InExpo);
         }
 
         if (contentPanel.anchoredPosition.x <= -215)
@@ -91,9 +91,9 @@ public class Roll : MonoBehaviour
             .Select(x => x.Value)
             .FirstOrDefault();
 
-        if (skillData.invenSkillDictionary.ContainsKey(rolledSkill))
+        if (skillData.useSkillList.Contains(rolledSkill))
         {
-            skillData.invenSkillDictionary[rolledSkill] = true;
+            skillData.useSkillList.Add(rolledSkill);
         }
         else
         {
