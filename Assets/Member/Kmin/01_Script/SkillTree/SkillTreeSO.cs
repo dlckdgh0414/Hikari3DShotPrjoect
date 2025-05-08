@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SkillTreeSO", menuName = "SO/Skill/SkillTreeSO")]
+[CreateAssetMenu(fileName = "SkillTreeSO", menuName = "Scriptable Objects/SkillTreeSO")]
 public class SkillTreeSO : ScriptableObject
 {
-    public string treeName;
+    public int selectNodeCount;
 }
