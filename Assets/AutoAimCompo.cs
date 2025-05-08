@@ -16,8 +16,6 @@ public class AutoAimCompo : MonoBehaviour,IEntityComponent
     public LayerMask targetLayer; // 검사할 오브젝트 레이어
     public float maxDistance = 100f; // 최대 감지 거리
 
-    public GameObject[] enemies;
-
     public bool IsAutoAim { get; private set; }
 
     public void Initialize(Entity entity)
@@ -31,7 +29,7 @@ public class AutoAimCompo : MonoBehaviour,IEntityComponent
     }
     private void Start()
     {
-        target = enemies[0];
+        target = null;
     }
 
     private void Update()
@@ -41,13 +39,15 @@ public class AutoAimCompo : MonoBehaviour,IEntityComponent
 
     void FindClosestObjectToMouse()
     {
-        Vector3 mousePos = Input.mousePosition;
+        Vector2 mousePos = Input.mousePosition;
 
-        float closestDistance = 200f;
+        float closestDistance = 200f; //초반 최대 감지거리
 
-        foreach (GameObject obj in enemies)
+        foreach (GameObject obj in EnemyManager.Enemies)
         {
-            Vector3 screenPos = Camera.main.WorldToScreenPoint(obj.transform.position);
+            if (obj == null || Camera.main == null) return;
+
+            Vector2 screenPos = Camera.main.WorldToScreenPoint(obj.transform.position);
             float distance = Vector2.Distance(mousePos, screenPos);
 
             if (distance < closestDistance)

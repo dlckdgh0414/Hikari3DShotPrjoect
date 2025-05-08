@@ -11,14 +11,14 @@ public class HealingSkill : Skill
     public float healAmount;
 
     private EntityVFX entityVFX;
-    private EntityHealthCompo healthCompo;
+    private EntityHealth healthCompo;
     private readonly string healSkill = "HealVFX";
 
     public override void InitializeSkill(Entity entity, SkillCompo skillCompo)
     {
         base.InitializeSkill(entity, skillCompo);
         entityVFX = _entity.GetCompo<EntityVFX>();
-        healthCompo = _entity.GetCompo<EntityHealthCompo>();
+        healthCompo = _entity.GetCompo<EntityHealth>();
     }
 
     public override void OverSkillCooltime()
