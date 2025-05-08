@@ -32,8 +32,6 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
 
         [SerializeField] private List<Transform> childTransform;
 
-       // [SerializeField] private SkillCompo skillcompo;
-
         [SerializeField] private Transform _skillTransform;
         
 
@@ -84,46 +82,6 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
                 {
                     clickedImage.sprite = _selectedSkill.icon;
                     img.sprite = null;
-                    
-                    if (EventSystem.current.currentSelectedGameObject.name.Contains("2"))
-                    {
-                        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-                        
-                        GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-                        
-                        SkillCompo skillCompo = instance.GetComponentInChildren<SkillCompo>();
-                        
-                        skillCompo.firstSkill = null;
-                        
-                        PrefabUtility.SaveAsPrefabAsset(instance, path);
-                        GameObject.DestroyImmediate(instance);
-                    }
-                    else if(EventSystem.current.currentSelectedGameObject.name.Contains("3"))
-                    {
-                        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-                        
-                        GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-                        
-                        SkillCompo skillCompo = instance.GetComponentInChildren<SkillCompo>();
-                        
-                        skillCompo.secondSkill = null;
-                        
-                        PrefabUtility.SaveAsPrefabAsset(instance, path);
-                        GameObject.DestroyImmediate(instance);
-                    }
-                    else if(EventSystem.current.currentSelectedGameObject.name.Contains("4"))
-                    {
-                        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-                        
-                        GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-                        
-                        SkillCompo skillCompo = instance.GetComponentInChildren<SkillCompo>();
-                        
-                        skillCompo.thirdSkill = null;
-                        
-                        PrefabUtility.SaveAsPrefabAsset(instance, path);
-                        GameObject.DestroyImmediate(instance);
-                    }
                 }
             }
             
@@ -159,6 +117,8 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
                 }
                 
                 skillCompo.firstSkill = skill;
+
+                childTransform[0].GetComponent<EqumentBtn>()._thisSkill = _selectedSkill;
                 
                 PrefabUtility.SaveAsPrefabAsset(instance, path);
                 GameObject.DestroyImmediate(instance);
@@ -204,6 +164,7 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
 
                 // 👉 7. SkillCompo에 Skill 할당
                 skillCompo.secondSkill = skill;
+                childTransform[1].GetComponent<EqumentBtn>()._thisSkill = _selectedSkill;
 
                 // 👉 8. Prefab에 저장
                 PrefabUtility.SaveAsPrefabAsset(instance, path);
@@ -251,6 +212,7 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
                 // 👉 7. SkillCompo에 Skill 할당
                 skillCompo.thirdSkill = skill;
 
+                childTransform[2].GetComponent<EqumentBtn>()._thisSkill = _selectedSkill;
                 // 👉 8. Prefab에 저장
                 PrefabUtility.SaveAsPrefabAsset(instance, path);
                 GameObject.DestroyImmediate(instance);
