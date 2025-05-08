@@ -24,9 +24,12 @@ public class EnemySpawn : MonoBehaviour
         for (int i = 0; i < enemySpawnSO.SpawnCount; i++)
         {
             int randIndex = Random.Range(0, enemySpawnSO.enemies.Count);
-            Enemy enemy = Instantiate(enemySpawnSO.enemies[randIndex], transform.position, Quaternion.identity);
-            enemy.transform.SetParent(mainCamera.transform);
-            enemy.OnRealDead.AddListener(gameProgressCheckUI.HandleEnemyDeadCount);
+            var enemy = PoolManager.Instance.Pop( enemySpawnSO.enemies[randIndex].name);
+            enemy.GetGameObject().transform.SetParent(mainCamera.transform);
+            if (enemy.GetGameObject().TryGetComponent( out Enemy e))
+            {
+                e.OnRealDead.AddListener(gameProgressCheckUI.HandleEnemyDeadCount);
+            }
         }
     }
 }

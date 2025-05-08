@@ -6,7 +6,7 @@ using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Enemy :Entity
+public abstract class Enemy :Entity, IPoolable
 {
     [SerializeField] private Transform deadPoint;
     
@@ -19,7 +19,7 @@ public abstract class Enemy :Entity
     public bool IsDeadEnd { get; protected set; } = false;
     
     private Sequence _sequence;
-    
+    public string PoolingName => gameObject.name;
     
     protected override void AfterInitialize()
     {
@@ -27,14 +27,30 @@ public abstract class Enemy :Entity
         btAgent = GetComponent<BehaviorGraphAgent>();
         Debug.Assert(btAgent != null, $"{gameObject.name} does not have an BehaviorGraphAgent");
     }
-    
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
 
+    private void OnEnable()
+    {
+        EnemyManager.Register(gameObject);
+    }
+
+    private void OnDisable()
+    {
+        EnemyManager.Unregister(gameObject);
+        
         _sequence?.Kill();
         _sequence = null;
         OnRealDead?.Invoke();
+    }
+    
+    public GameObject GetGameObject()
+    {
+        return gameObject;
+    }
+
+    public void ResetItem()
+    {
+        IsDeadEnd = false;
+        IsDead = false;
     }
 
     public void LookTarget(Transform target)
@@ -57,6 +73,11 @@ public abstract class Enemy :Entity
 
     }
 
+    public void DestroyEnemy()
+    {
+        PoolManager.Instance.Push(this);
+    }
+
     public void EnemyDead()
     {
         // movement.isMove = false;
@@ -76,7 +97,4 @@ public abstract class Enemy :Entity
 
         _sequence.Play();
     }
-
-
-
 }

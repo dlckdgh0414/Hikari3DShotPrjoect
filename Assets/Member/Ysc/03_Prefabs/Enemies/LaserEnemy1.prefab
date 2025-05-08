@@ -197,6 +197,9 @@ MonoBehaviour:
   deadPoint: {fileID: 6851723826451186508}
   <PlayerFinder>k__BackingField: {fileID: 11400000, guid: a8f5956115900724b887c83261e903a8,
     type: 2}
+  OnRealDead:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4125580976418787907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,7 +486,8 @@ MonoBehaviour:
   hpStat: {fileID: 11400000, guid: bc53798e3901b154db687c6bbd4e8aab, type: 2}
   maxHealth: 100
   _currentHealth: 0
-  hpBar: {fileID: 6686662367053625476}
+  Hp:
+    value: 0
 --- !u!1 &8978544059595815219
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,15 +653,3 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8002099017555218409}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6686662367053625476 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3730917100937918317, guid: cac193e2ac3181f449145c0b3fcd19d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 8002099017555218409}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c822602ca86569b4788e0514b563b3fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
