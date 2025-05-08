@@ -13,12 +13,11 @@ public partial class SpawnEnemyAction : Action
     [SerializeReference] public BlackboardVariable<Vector3> Dir;
     protected override Status OnStart()
     {
-        Dir.Value = Mover.Value.GetMovePos();
-        return Status.Running;
+        Mover.Value.Move(Target.Value, Dir);
+        return Status.Success;
     }
     protected override Status OnUpdate()
     {
-        Mover.Value.Move(Target.Value, Dir);
         if (Mover.Value.isArrive)
         {
             Mover.Value.isArrive = false;

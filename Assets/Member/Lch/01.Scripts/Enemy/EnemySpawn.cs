@@ -1,4 +1,6 @@
+using DG.Tweening;
 using Member.Ysc._01_Code.UI;
+using System.Collections;
 using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
@@ -14,20 +16,27 @@ public class EnemySpawn : MonoBehaviour
         _currentSpawnTime += Time.deltaTime;
         if (_currentSpawnTime >= enemySpawnSO.SpawnTimer && enemySpawnSO.StageEnemyCount != _enemySpawnCount)
         {
-            SpawnEnemy();
+            StartCoroutine(SpawnEnemy());
             _currentSpawnTime = 0;
         }
     }
 
-    public void SpawnEnemy()
+    public IEnumerator SpawnEnemy()
     {
         for (int i = 0; i < enemySpawnSO.SpawnCount; i++)
         {
             int randIndex = Random.Range(0, enemySpawnSO.enemies.Count);
             Enemy enemy = Instantiate(enemySpawnSO.enemies[randIndex], transform.position, Quaternion.identity);
+            _enemySpawnCount += 1;
+            Debug.Log(_enemySpawnCount);
+            if(_enemySpawnCount >= enemySpawnSO.StageEnemyCount)
+            {
+                _enemySpawnCount = enemySpawnSO.StageEnemyCount;
+            }
             enemy.transform.SetParent(mainCamera.transform);
             enemy.OnRealDead.AddListener(gameProgressCheckUI.HandleEnemyDeadCount);
+            yield return new WaitForSeconds(1.5f);
+            continue;
         }
-        _enemySpawnCount += 1;
     }
 }
