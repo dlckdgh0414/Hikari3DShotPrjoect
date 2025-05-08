@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Member.Ysc._01_Code.Agent
 {
-    public class EntityHealth : MonoBehaviour, IEntityComponent, IAfterInit
+    public class EntityHealthCompo : MonoBehaviour, IEntityComponent, IAfterInit
     {
         [SerializeField] private StatSO hpStat;
         public float maxHealth;
