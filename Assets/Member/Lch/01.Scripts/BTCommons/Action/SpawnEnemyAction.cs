@@ -14,14 +14,13 @@ public partial class SpawnEnemyAction : Action
     protected override Status OnStart()
     {
         Mover.Value.Move(Target.Value, Dir);
-        return Status.Success;
+        return Status.Running;
     }
     protected override Status OnUpdate()
     {
         if (Mover.Value.isArrive)
         {
             Mover.Value.isArrive = false;
-            Mover.Value.isMove = true;
             return Status.Success;
         }
         return Status.Running;

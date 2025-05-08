@@ -12,7 +12,7 @@ public class EnemyMovement : MonoBehaviour,IEntityComponent
     public void Move(Transform player,Vector3 targetPosition)
     {
         Vector3 targetZPos = new Vector3(Random.Range(-20f,20f), Random.Range(-10f, 10f), 45f);
-        rb.DOMove(targetZPos,1.5f);
+        rb.DOMove(targetZPos,1.5f).OnComplete(()=>isArrive = true);
     }
 
     public void StopMover()
@@ -38,8 +38,8 @@ public class EnemyMovement : MonoBehaviour,IEntityComponent
 
     public void PatrolMove(Vector3 Dir)
     {
-        Vector3 movDir = new Vector3(Random.Range(-20f,20f), Random.Range(-10f, 10f), 0);
-        transform.DOMove(movDir,1.5f);
+        Vector3 movDir = new Vector3(Random.Range(-20f,20f), Random.Range(-10f, 10f), 45);
+        rb.DOMove(movDir,1.5f).OnComplete(()=>isArrive =true);
 
     }
 

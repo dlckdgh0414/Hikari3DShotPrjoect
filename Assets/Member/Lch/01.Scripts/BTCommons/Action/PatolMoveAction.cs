@@ -14,7 +14,17 @@ public partial class PatolMoveAction : Action
     protected override Status OnStart()
     {
         Mover.Value.PatrolMove(Dir);
-        return Status.Success;
+        return Status.Running;
+    }
+
+    protected override Status OnUpdate()
+    {
+        if (Mover.Value.isArrive)
+        {
+            Mover.Value.isArrive = false;
+            return Status.Success;
+        }
+        return Status.Running;
     }
 }
 
