@@ -88,8 +88,8 @@ public abstract class Enemy :Entity, IPoolable
         
         Debug.Log(IsDead);
         
-        Tween tween = transform.DORotate(new Vector3(-35f, 0f, 0f), 0.3f, RotateMode.Fast);
-        Tween tween2 = transform.DOMove(deadPoint.position, 7f).OnComplete(() => IsDeadEnd = true);
+        Tween tween = transform.DORotate(new Vector3(-35f, 0f, 0f), 0.2f, RotateMode.Fast);
+        Tween tween2 = transform.DOMove(deadPoint.position, 3f).OnComplete(() => IsDeadEnd = true);
 
         _sequence = DOTween.Sequence()
             .Append(tween)
