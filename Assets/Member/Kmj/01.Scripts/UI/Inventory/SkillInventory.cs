@@ -4,6 +4,7 @@ using System.Linq;
 using Member.Kmin._01_Script.Core.EventChannel;
 using Member.Kmj._01.Scripts.Core.EventChannel;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -30,12 +31,20 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
         [SerializeField] private SkillSO tempSO3;
 
         [SerializeField] private List<Transform> childTransform;
+
+       // [SerializeField] private SkillCompo skillcompo;
+
+        [SerializeField] private Transform _skillTransform;
         
 
         private Image _image;
         
         public SkillSO _selectedSkill { get; set; }
         public SkillSO _staticSkill { get; set; }
+        
+        [SerializeField] private GameObject skillCompo;
+
+        private string path;
 
         private void Awake()
         {
@@ -44,6 +53,8 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
             _inventorySO.invenSkillList.Add(tempSO1);
             _inventorySO.invenSkillList.Add(tempSO2);
             _inventorySO.invenSkillList.Add(tempSO3);
+            
+            path = AssetDatabase.GetAssetPath(skillCompo);
         }
 
         private void Start()
@@ -61,8 +72,10 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
                 return;
 
             Image clickedImage = EventSystem.current.currentSelectedGameObject.GetComponent<Image>();
+            
             if (clickedImage == null)
                 return;
+            
             
             foreach (Transform child in childTransform)
             {
@@ -71,7 +84,178 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
                 {
                     clickedImage.sprite = _selectedSkill.icon;
                     img.sprite = null;
+                    
+                    if (EventSystem.current.currentSelectedGameObject.name.Contains("2"))
+                    {
+                        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                        
+                        GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+                        
+                        SkillCompo skillCompo = instance.GetComponentInChildren<SkillCompo>();
+                        
+                        skillCompo.firstSkill = null;
+                        
+                        PrefabUtility.SaveAsPrefabAsset(instance, path);
+                        GameObject.DestroyImmediate(instance);
+                    }
+                    else if(EventSystem.current.currentSelectedGameObject.name.Contains("3"))
+                    {
+                        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                        
+                        GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+                        
+                        SkillCompo skillCompo = instance.GetComponentInChildren<SkillCompo>();
+                        
+                        skillCompo.secondSkill = null;
+                        
+                        PrefabUtility.SaveAsPrefabAsset(instance, path);
+                        GameObject.DestroyImmediate(instance);
+                    }
+                    else if(EventSystem.current.currentSelectedGameObject.name.Contains("4"))
+                    {
+                        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                        
+                        GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+                        
+                        SkillCompo skillCompo = instance.GetComponentInChildren<SkillCompo>();
+                        
+                        skillCompo.thirdSkill = null;
+                        
+                        PrefabUtility.SaveAsPrefabAsset(instance, path);
+                        GameObject.DestroyImmediate(instance);
+                    }
                 }
+            }
+            
+            
+            if (EventSystem.current.currentSelectedGameObject.name.Contains("2"))
+            {
+                
+                
+                GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                if (prefab == null)
+                {
+                    return;
+                }
+                
+                GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+                
+                SkillCompo skillCompo = instance.GetComponentInChildren<SkillCompo>();
+                if (skillCompo == null)
+                {
+                    return;
+                }
+                
+                Transform child = skillCompo.transform.Find(_selectedSkill.name);
+                if (child == null)
+                {
+                    return;
+                }
+
+                Skill skill = child.GetComponent<Skill>();
+                if (skill == null)
+                {
+                    return;
+                }
+                
+                skillCompo.firstSkill = skill;
+                
+                PrefabUtility.SaveAsPrefabAsset(instance, path);
+                GameObject.DestroyImmediate(instance);
+
+                Debug.Log("Prefab이 성공적으로 수정되었습니다.");
+            }
+            else if(EventSystem.current.currentSelectedGameObject.name.Contains("3"))
+            {
+
+                // 👉 3. Prefab 로드
+                GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                if (prefab == null)
+                {
+                    Debug.LogError("Prefab을 찾을 수 없습니다: " + path);
+                    return;
+                }
+
+                // 👉 4. Prefab 인스턴스를 임시로 생성 (Scene에 놓지 않고)
+                GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+
+                // 👉 5. SkillCompo 찾기
+                SkillCompo skillCompo = instance.GetComponentInChildren<SkillCompo>();
+                if (skillCompo == null)
+                {
+                    Debug.LogError("SkillCompo를 찾을 수 없습니다.");
+                    return;
+                }
+
+                // 👉 6. 자식 중 Skill 이름에 해당하는 Transform 찾기
+                Transform child = skillCompo.transform.Find(_selectedSkill.name);
+                if (child == null)
+                {
+                    Debug.LogError($"자식 오브젝트 '{_selectedSkill.name}'를 찾을 수 없습니다.");
+                    return;
+                }
+
+                Skill skill = child.GetComponent<Skill>();
+                if (skill == null)
+                {
+                    Debug.LogError("Skill 컴포넌트를 찾을 수 없습니다.");
+                    return;
+                }
+
+                // 👉 7. SkillCompo에 Skill 할당
+                skillCompo.secondSkill = skill;
+
+                // 👉 8. Prefab에 저장
+                PrefabUtility.SaveAsPrefabAsset(instance, path);
+                GameObject.DestroyImmediate(instance);
+
+                Debug.Log("Prefab이 성공적으로 수정되었습니다.");
+            }
+            else if(EventSystem.current.currentSelectedGameObject.name.Contains("4"))
+            {
+
+                // 👉 3. Prefab 로드
+                GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                if (prefab == null)
+                {
+                    Debug.LogError("Prefab을 찾을 수 없습니다: " + path);
+                    return;
+                }
+
+                // 👉 4. Prefab 인스턴스를 임시로 생성 (Scene에 놓지 않고)
+                GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+
+                // 👉 5. SkillCompo 찾기
+                SkillCompo skillCompo = instance.GetComponentInChildren<SkillCompo>();
+                if (skillCompo == null)
+                {
+                    Debug.LogError("SkillCompo를 찾을 수 없습니다.");
+                    return;
+                }
+
+                // 👉 6. 자식 중 Skill 이름에 해당하는 Transform 찾기
+                Transform child = skillCompo.transform.Find(_selectedSkill.name);
+                if (child == null)
+                {
+                    Debug.LogError($"자식 오브젝트 '{_selectedSkill.name}'를 찾을 수 없습니다.");
+                    return;
+                }
+
+                Skill skill = child.GetComponent<Skill>();
+                if (skill == null)
+                {
+                    Debug.LogError("Skill 컴포넌트를 찾을 수 없습니다.");
+                    return;
+                }
+
+                // 👉 7. SkillCompo에 Skill 할당
+                skillCompo.thirdSkill = skill;
+
+                // 👉 8. Prefab에 저장
+                PrefabUtility.SaveAsPrefabAsset(instance, path);
+                GameObject.DestroyImmediate(instance);
+
+                Debug.Log("Prefab이 성공적으로 수정되었습니다.");
             }
             
             clickedImage.sprite = _selectedSkill.icon;
@@ -79,10 +263,9 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
             clickedImage = null;
             _selectedSkill = null;
             
-            _skillEvent.selectedSkill = _selectedSkill.name;
-            _skillSendEvent.RaiseEvent(_skillEvent);
         }
         
+
         private void HandleStaticSkillEquip()
         {  
             if (_staticSkill == null || _staticSkill.icon == null)
@@ -96,8 +279,8 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
                 return;
             
             clickedImage.sprite = _staticSkill.icon;
-            _staticSkilEvent.staticSkill = _staticSkill.name;
-            _skillSendEvent.RaiseEvent(_skillEvent);
+            //_staticSkilEvent.staticSkill = _staticSkill.name;
+            //_skillSendEvent.RaiseEvent(_skillEvent);
             
             clickedImage = null;
             _staticSkill = null;

@@ -22,8 +22,6 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
 
     private Dictionary<Type, Skill> _skills;
 
-    private GameEventChannelSO _eventChannel;
-
 
     public void Initialize(Entity entity)
     {
@@ -34,42 +32,8 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
         GetComponentsInChildren<Skill>().ToList().ForEach(skill => _skills.Add(skill.GetType(), skill));
         _skills.Values.ToList().ForEach(skill => skill.InitializeSkill(_entity, this));
         
-        _eventChannel.AddListener<SendSkill>(HandleSendSkill);
-        _eventChannel.AddListener<SendStaticSkill>(HandleStaticSkill);
     }
-
-    private void HandleSendSkill(SendSkill evt)
-    {
-        Transform child = transform.Find(evt.selectedSkill);
-        
-        if (child != null)
-        {
-            Skill skill = child.GetComponent<Skill>();
-            
-
-            if (secondSkill == null)
-            {
-                secondSkill = skill;
-            }
-            else if(thirdSkill == null)
-            {
-                thirdSkill = skill;
-            }
-            
-        }
-    }
-        
-    private void HandleStaticSkill(SendStaticSkill evt)
-    {
-        Transform child = transform.Find(evt.staticSkill);
-
-        if (child != null)
-        {
-            Skill skill = child.GetComponent<Skill>();
-            
-            firstSkill = skill;
-        }
-    }
+    
     
     
     public T GetSkill<T>() where T : Skill

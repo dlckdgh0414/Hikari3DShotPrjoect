@@ -433,6 +433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59fb898e10a8412fb7edeaa0995712d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _skillSendEvent: {fileID: 11400000, guid: fe38f0f1bdd81fd48a4faab089f3aa04, type: 2}
   _skillInvenEvent: {fileID: 11400000, guid: fe38f0f1bdd81fd48a4faab089f3aa04, type: 2}
   _inventorySO: {fileID: 11400000, guid: 1432442f5cc64c24d8134c26746f5e12, type: 2}
   equipBtns:
@@ -440,13 +441,17 @@ MonoBehaviour:
   - {fileID: 406998934}
   - {fileID: 5011437}
   _staticButton: {fileID: 537714308}
-  tempSO1: {fileID: 11400000, guid: 59b52eb2c5f1bc94e9adfb91f2712535, type: 2}
-  tempSO2: {fileID: 11400000, guid: 310e1a05ca62cfc4792fea22c7fa3eaa, type: 2}
-  tempSO3: {fileID: 11400000, guid: f08122de76995474f981a5f6f4f59e23, type: 2}
+  tempSO1: {fileID: 11400000, guid: 986ab386eee68bf498077030a3a63873, type: 2}
+  tempSO2: {fileID: 11400000, guid: b2b612dc89b714749b0e613f878e6a0f, type: 2}
+  tempSO3: {fileID: 11400000, guid: c89d7b7b5a5af68499ed4b5778cb3ca7, type: 2}
   childTransform:
   - {fileID: 1785066548}
   - {fileID: 406998930}
   - {fileID: 5011433}
+  _skillTransform: {fileID: 4094066041669317938, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
+    type: 3}
+  skillCompo: {fileID: 8608821372656261494, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
+    type: 3}
 --- !u!1 &16948357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1956,6 +1961,7 @@ GameObject:
   - component: {fileID: 189898314}
   - component: {fileID: 189898313}
   - component: {fileID: 189898316}
+  - component: {fileID: 189898317}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -2090,8 +2096,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillEventChannel: {fileID: 11400000, guid: fe38f0f1bdd81fd48a4faab089f3aa04, type: 2}
-  <thisSkill>k__BackingField: {fileID: 11400000, guid: f08122de76995474f981a5f6f4f59e23,
+  <thisSkill>k__BackingField: {fileID: 11400000, guid: c89d7b7b5a5af68499ed4b5778cb3ca7,
     type: 2}
+--- !u!114 &189898317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189898311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6450a8dc318510144a4a0ebd2879645a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillso: {fileID: 11400000, guid: c89d7b7b5a5af68499ed4b5778cb3ca7, type: 2}
+  useSkillList: {fileID: 11400000, guid: 1432442f5cc64c24d8134c26746f5e12, type: 2}
 --- !u!1 &249276848
 GameObject:
   m_ObjectHideFlags: 0
@@ -2668,6 +2688,7 @@ GameObject:
   - component: {fileID: 370157736}
   - component: {fileID: 370157735}
   - component: {fileID: 370157738}
+  - component: {fileID: 370157739}
   m_Layer: 5
   m_Name: Button (9)
   m_TagString: Untagged
@@ -2804,6 +2825,20 @@ MonoBehaviour:
   _skillEventChannel: {fileID: 11400000, guid: fe38f0f1bdd81fd48a4faab089f3aa04, type: 2}
   <thisSkill>k__BackingField: {fileID: 11400000, guid: 5894a5157ced2804793959f4417dcfce,
     type: 2}
+--- !u!114 &370157739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370157733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6450a8dc318510144a4a0ebd2879645a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillso: {fileID: 0}
+  useSkillList: {fileID: 11400000, guid: 1432442f5cc64c24d8134c26746f5e12, type: 2}
 --- !u!1 &374005608
 GameObject:
   m_ObjectHideFlags: 0
@@ -3718,6 +3753,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 471270511}
   m_CullTransparentMesh: 1
+--- !u!1 &479158440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 479158441}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &479158441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479158440}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 892.07, y: 1004.0016, z: -893.17664}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &531470487
 GameObject:
   m_ObjectHideFlags: 0
@@ -5540,6 +5606,7 @@ GameObject:
   - component: {fileID: 785619696}
   - component: {fileID: 785619695}
   - component: {fileID: 785619698}
+  - component: {fileID: 785619699}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -5674,8 +5741,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillEventChannel: {fileID: 11400000, guid: fe38f0f1bdd81fd48a4faab089f3aa04, type: 2}
-  <thisSkill>k__BackingField: {fileID: 11400000, guid: 310e1a05ca62cfc4792fea22c7fa3eaa,
+  <thisSkill>k__BackingField: {fileID: 11400000, guid: b2b612dc89b714749b0e613f878e6a0f,
     type: 2}
+--- !u!114 &785619699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785619693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6450a8dc318510144a4a0ebd2879645a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillso: {fileID: 11400000, guid: b2b612dc89b714749b0e613f878e6a0f, type: 2}
+  useSkillList: {fileID: 11400000, guid: 1432442f5cc64c24d8134c26746f5e12, type: 2}
 --- !u!1 &818018999
 GameObject:
   m_ObjectHideFlags: 0
@@ -6824,6 +6905,7 @@ GameObject:
   - component: {fileID: 999593392}
   - component: {fileID: 999593391}
   - component: {fileID: 999593394}
+  - component: {fileID: 999593395}
   m_Layer: 5
   m_Name: Button (8)
   m_TagString: Untagged
@@ -6960,6 +7042,20 @@ MonoBehaviour:
   _skillEventChannel: {fileID: 11400000, guid: fe38f0f1bdd81fd48a4faab089f3aa04, type: 2}
   <thisSkill>k__BackingField: {fileID: 11400000, guid: d193c1e77efdb34428a76d1cb12fd972,
     type: 2}
+--- !u!114 &999593395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999593389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6450a8dc318510144a4a0ebd2879645a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillso: {fileID: 0}
+  useSkillList: {fileID: 11400000, guid: 1432442f5cc64c24d8134c26746f5e12, type: 2}
 --- !u!1 &999892090
 GameObject:
   m_ObjectHideFlags: 0
@@ -7364,13 +7460,14 @@ GameObject:
   - component: {fileID: 1041042149}
   - component: {fileID: 1041042148}
   - component: {fileID: 1041042151}
+  - component: {fileID: 1041042152}
   m_Layer: 5
   m_Name: Button (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1041042147
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7386,10 +7483,10 @@ RectTransform:
   - {fileID: 2076247957}
   m_Father: {fileID: 614885088}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 700, y: -85}
+  m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1041042148
 MonoBehaviour:
@@ -7500,6 +7597,20 @@ MonoBehaviour:
   _skillEventChannel: {fileID: 11400000, guid: fe38f0f1bdd81fd48a4faab089f3aa04, type: 2}
   <thisSkill>k__BackingField: {fileID: 11400000, guid: 6a61dea57bc1fd042a21e6cd7da7c405,
     type: 2}
+--- !u!114 &1041042152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041042146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6450a8dc318510144a4a0ebd2879645a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillso: {fileID: 11400000, guid: 6a61dea57bc1fd042a21e6cd7da7c405, type: 2}
+  useSkillList: {fileID: 11400000, guid: 1432442f5cc64c24d8134c26746f5e12, type: 2}
 --- !u!1 &1063098718
 GameObject:
   m_ObjectHideFlags: 0
@@ -8464,6 +8575,7 @@ GameObject:
   - component: {fileID: 1171138142}
   - component: {fileID: 1171138141}
   - component: {fileID: 1171138144}
+  - component: {fileID: 1171138145}
   m_Layer: 5
   m_Name: Button (4)
   m_TagString: Untagged
@@ -8600,6 +8712,20 @@ MonoBehaviour:
   _skillEventChannel: {fileID: 11400000, guid: fe38f0f1bdd81fd48a4faab089f3aa04, type: 2}
   <thisSkill>k__BackingField: {fileID: 11400000, guid: 986ab386eee68bf498077030a3a63873,
     type: 2}
+--- !u!114 &1171138145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171138139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6450a8dc318510144a4a0ebd2879645a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillso: {fileID: 0}
+  useSkillList: {fileID: 11400000, guid: 1432442f5cc64c24d8134c26746f5e12, type: 2}
 --- !u!1 &1177180641
 GameObject:
   m_ObjectHideFlags: 0
@@ -10485,6 +10611,7 @@ GameObject:
   - component: {fileID: 1514525563}
   - component: {fileID: 1514525562}
   - component: {fileID: 1514525565}
+  - component: {fileID: 1514525566}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -10619,8 +10746,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillEventChannel: {fileID: 11400000, guid: fe38f0f1bdd81fd48a4faab089f3aa04, type: 2}
-  <thisSkill>k__BackingField: {fileID: 11400000, guid: 59b52eb2c5f1bc94e9adfb91f2712535,
+  <thisSkill>k__BackingField: {fileID: 11400000, guid: 986ab386eee68bf498077030a3a63873,
     type: 2}
+--- !u!114 &1514525566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514525560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6450a8dc318510144a4a0ebd2879645a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillso: {fileID: 11400000, guid: 986ab386eee68bf498077030a3a63873, type: 2}
+  useSkillList: {fileID: 11400000, guid: 1432442f5cc64c24d8134c26746f5e12, type: 2}
 --- !u!1 &1530623912
 GameObject:
   m_ObjectHideFlags: 0
@@ -12581,6 +12722,7 @@ GameObject:
   - component: {fileID: 1771905891}
   - component: {fileID: 1771905890}
   - component: {fileID: 1771905893}
+  - component: {fileID: 1771905894}
   m_Layer: 5
   m_Name: Button (6)
   m_TagString: Untagged
@@ -12717,6 +12859,20 @@ MonoBehaviour:
   _skillEventChannel: {fileID: 11400000, guid: fe38f0f1bdd81fd48a4faab089f3aa04, type: 2}
   <thisSkill>k__BackingField: {fileID: 11400000, guid: c89d7b7b5a5af68499ed4b5778cb3ca7,
     type: 2}
+--- !u!114 &1771905894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771905888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6450a8dc318510144a4a0ebd2879645a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillso: {fileID: 0}
+  useSkillList: {fileID: 11400000, guid: 1432442f5cc64c24d8134c26746f5e12, type: 2}
 --- !u!1 &1785066547
 GameObject:
   m_ObjectHideFlags: 0
@@ -12950,6 +13106,7 @@ GameObject:
   - component: {fileID: 1813328792}
   - component: {fileID: 1813328791}
   - component: {fileID: 1813328794}
+  - component: {fileID: 1813328795}
   m_Layer: 5
   m_Name: Button (5)
   m_TagString: Untagged
@@ -13086,6 +13243,20 @@ MonoBehaviour:
   _skillEventChannel: {fileID: 11400000, guid: fe38f0f1bdd81fd48a4faab089f3aa04, type: 2}
   <thisSkill>k__BackingField: {fileID: 11400000, guid: b2b612dc89b714749b0e613f878e6a0f,
     type: 2}
+--- !u!114 &1813328795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813328789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6450a8dc318510144a4a0ebd2879645a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillso: {fileID: 0}
+  useSkillList: {fileID: 11400000, guid: 1432442f5cc64c24d8134c26746f5e12, type: 2}
 --- !u!1 &1830244936
 GameObject:
   m_ObjectHideFlags: 0
@@ -14000,6 +14171,7 @@ GameObject:
   - component: {fileID: 1973556380}
   - component: {fileID: 1973556379}
   - component: {fileID: 1973556382}
+  - component: {fileID: 1973556383}
   m_Layer: 5
   m_Name: Button (7)
   m_TagString: Untagged
@@ -14136,6 +14308,20 @@ MonoBehaviour:
   _skillEventChannel: {fileID: 11400000, guid: fe38f0f1bdd81fd48a4faab089f3aa04, type: 2}
   <thisSkill>k__BackingField: {fileID: 11400000, guid: d066d791331af6c4789b0e5a8dba1e22,
     type: 2}
+--- !u!114 &1973556383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973556377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6450a8dc318510144a4a0ebd2879645a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillso: {fileID: 0}
+  useSkillList: {fileID: 11400000, guid: 1432442f5cc64c24d8134c26746f5e12, type: 2}
 --- !u!1 &1978298516
 GameObject:
   m_ObjectHideFlags: 0
@@ -15144,3 +15330,4 @@ SceneRoots:
   - {fileID: 1259996583}
   - {fileID: 1541211391}
   - {fileID: 737597185}
+  - {fileID: 479158441}
