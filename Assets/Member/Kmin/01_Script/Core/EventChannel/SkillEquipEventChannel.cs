@@ -9,12 +9,12 @@
 
     public class SkillSelectEvent : GameEvent
     {
-        public Skill selectedSkill;
+        public SkillSO selectedSkill;
     }
 
     public class StaticSelectEvent : GameEvent
     {
-        public Skill staticSkill;
+        public SkillSO staticSkill;
     }
     
     public class SkillEquipEvent : GameEvent {}

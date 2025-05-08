@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 
@@ -54,14 +55,15 @@ public abstract class Skill : MonoBehaviour
         _cooldownTimer = 0;
         Debug.Log("Skill enable");
     }
+    
 
     public virtual void UseSkill()
     {
-        //¿©±â¼­ ³ªÁß¿¡ ½ºÅ³À» ½èÀ½À» ¾Ë·ÁÁÖ´Â ÇÇµå¹éÀÌ ÇÊ¿äÇÏ´Ù.
+        //ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë·ï¿½ï¿½Ö´ï¿½ ï¿½Çµï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½Ï´ï¿½.
     }
 
     public virtual void UseSkillWithoutCooltimeAndEffect()
     {
-        //ÀÚµ¿¹ßµ¿ ½ºÅ³µéÀÌ ÀÌ¿ëÇÏ±â À§ÇØ ¸¸µç ÇÔ¼ö.
+        //ï¿½Úµï¿½ï¿½ßµï¿½ ï¿½ï¿½Å³ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½.
     }
 }
