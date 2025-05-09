@@ -309,6 +309,7 @@ GameObject:
   - component: {fileID: 311781709}
   - component: {fileID: 311781711}
   - component: {fileID: 311781712}
+  - component: {fileID: 311781713}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -343,7 +344,7 @@ MonoBehaviour:
     FieldOfView: 50
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 9000
+    FarClipPlane: 1000
     Dutch: 0
     ModeOverride: 0
     PhysicalProperties:
@@ -426,6 +427,20 @@ MonoBehaviour:
     FrequencyGain: 1
     Duration: 1
     m_NoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!114 &311781713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311781708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d75924d76b05344aa410607bc57db98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoundingVolume: {fileID: 0}
+  SlowingDistance: 0
 --- !u!4 &356407185 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4094066041669317938, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
@@ -894,7 +909,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 9000
+  far clip plane: 1000
   field of view: 50
   orthographic: 0
   orthographic size: 5
@@ -1601,7 +1616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1899111094
 BoxCollider:
   m_ObjectHideFlags: 0
