@@ -43,7 +43,6 @@ namespace Member.Ysc._01_Code.UI
             float target = _slider.value + 1;
             while (percent < 1)
             {
-                Debug.Log("무한반복!");
                 _slider.value = Mathf.Lerp(_slider.value, target, (percent += 0.01f));
                 yield return null;
             }
