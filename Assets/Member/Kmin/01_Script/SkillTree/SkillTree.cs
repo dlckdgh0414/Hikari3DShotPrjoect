@@ -36,12 +36,6 @@ public class SkillTree : MonoBehaviour
 
     private void HandleNodePurchase(SkillTreePurchaseEvent evt)
     {
-        SkillSO? skill = null;
-            
-        if (evt.node.SkillCompo != null)
-            skill = evt.node.SkillCompo.SkillSO;
-        
-        NodeSO nodeSO = evt.node.GetNodeSO();
         ConnectColor(evt.node);
     }
 
@@ -74,16 +68,14 @@ public class SkillTree : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         Outline outline = f.GetComponentInChildren<Outline>();
         Color lineColor = outline.effectColor;
-
+        
         seq.Join(DOTween.To(() => lineColor, color => outline.effectColor = color,
             f.branchColor, 1.5f).SetEase(Ease.InCubic));
         seq.Join(f.NodeIcon.DOColor(f.branchColor, 1f))
             .Join(f.NodeIcon.DOFade(1f, 1f));
 
-        seq.OnComplete(() =>
-        {
-            f.ConnectedNodes.ForEach(n =>
-            {
+        seq.OnComplete(() => {
+            f.ConnectedNodes.ForEach(n => {
                 n.NodeIcon.DOColor(Color.grey, 1f);
                 n.NodeIcon.DOFade(1f, 1f);
                 n.NodeButton.interactable = true;

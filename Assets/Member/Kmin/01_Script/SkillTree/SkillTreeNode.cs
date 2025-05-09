@@ -12,12 +12,11 @@ public class SkillTreeNode : MonoBehaviour, INode
     
     [field: SerializeField] public List<SkillTreeNode> ConnectedNodes;
     [field: SerializeField] public bool IsRootNode { get; private set; }
-    [field: SerializeField, HideInInspector] public List<Image> ConnectedBranch { get; private set; }
-    [field: SerializeField, HideInInspector] public List<Image> FillBranch { get; private set; }
+    [field: SerializeField] public List<Image> ConnectedBranch { get; private set; }
+    [field: SerializeField] public List<Image> FillBranch { get; private set; }
     public SkillTreeNode ParentNode { get; private set; }
     public Button NodeButton { get; private set; }
     public Image NodeIcon { get; private set; }
-    public SkillSOCompo SkillCompo;
     
     public Color branchColor = Color.magenta;
 
@@ -54,8 +53,8 @@ public class SkillTreeNode : MonoBehaviour, INode
                 f.ConnectedBranch.ForEach(n => { if (n != null) DestroyImmediate(n.gameObject); });
                 f.FillBranch.ForEach(n => { if (n != null) DestroyImmediate(n.gameObject); });
                 
-                f.ConnectedBranch.Clear();
-                f.FillBranch.Clear();
+                FillBranch.Clear();
+                ConnectedBranch.Clear();
             }
 
             Transform root = f.transform.Find("Nodes");
@@ -157,7 +156,7 @@ public class SkillTreeNode : MonoBehaviour, INode
 
     private void OnValidate()
     {
-        //nodeImage.sprite = nodeSO.icon;
+        nodeImage.sprite = nodeSO.SkillSO.icon;
 
         if (FillBranch == null)
             return;

@@ -46,50 +46,21 @@ public class SkillTreeTooltip : MonoBehaviour
     private void HandleOnFruitsSelect(SkillTreeSelectEvent evt)
     {
         NodeSO node = evt.node.GetNodeSO();
-        
-        _description.text = node.description;
+
+        _description.text = node.SkillSO.description;
         _fruitsPrice.text = node.price.ToString();
         _fruitsName.text = node.nodeName;
-        _icon.sprite = node.icon;
+        _icon.sprite = node.SkillSO.icon;
 
         _purchaseBtn.onClick.RemoveAllListeners();
-        
-        if (node.NodeType == NodeType.Choice && node.isPurchase)
-        {
-            _purchaseText.text = node.isActive ? "UnSelect" : "Select";
-            _purchaseBtn.onClick.AddListener(() => HandleNodeActive(node));
-        }
-        else
-        {
-            _purchaseText.text = "Purchase";
-            _purchaseBtn.onClick.AddListener(() => HandleFruitsPurchase(evt.node));
-        }
+        _purchaseText.text = "Purchased";
+        _purchaseBtn.onClick.AddListener(() => HandleFruitsPurchase(evt.node));
     }
 
     private void HandleFruitsPurchase(SkillTreeNode node)
     {
-        NodeSO nodeSO = node.GetNodeSO();
-        
-        if (nodeSO.NodeType == NodeType.Choice)
-        {
-            _purchaseText.text = "Select";
-
-            _purchaseBtn.onClick.RemoveAllListeners();
-            _purchaseBtn.onClick.AddListener(() => HandleNodeActive(nodeSO));
-        }
-            
-        nodeSO.isPurchase = true;
+        node.GetNodeSO().isPurchase = true;
         _treePurchaseEvent.node = node;
         eventChannel.RaiseEvent(_treePurchaseEvent);
-    }
-    
-    private void HandleNodeActive(NodeSO node)
-    {
-        node.isActive = !node.isActive;
-        _purchaseText.text = node.isActive ? "UnSelect" : "Select";
-        //skillTreeSO.selectNodeCount += node.isActive ? -1 : 1;
-        
-        _treeActiveEvent.isActive = node.isActive;
-        eventChannel.RaiseEvent(_treeActiveEvent);
     }
 }
