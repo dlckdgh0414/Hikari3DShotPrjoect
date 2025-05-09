@@ -13,16 +13,15 @@ public partial class PatolMoveAction : Action
     [SerializeReference] public BlackboardVariable<EnemyMovement> Mover;
     protected override Status OnStart()
     {
-        Dir.Value = Mover.Value.GetPatrolMove();
+        Mover.Value.PatrolMove(Dir);
         return Status.Running;
     }
+
     protected override Status OnUpdate()
     {
-        Mover.Value.PatrolMove(Dir);
         if (Mover.Value.isArrive)
         {
             Mover.Value.isArrive = false;
-            Mover.Value.isMove = true;
             return Status.Success;
         }
         return Status.Running;
