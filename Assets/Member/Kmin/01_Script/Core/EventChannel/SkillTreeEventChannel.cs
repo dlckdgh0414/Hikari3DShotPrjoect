@@ -1,3 +1,4 @@
+using Member.Kmin._01_Script.SkillTree;
 using UnityEngine;
 
 public class SkillTreeEventChannel : MonoBehaviour

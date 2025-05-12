@@ -1,4 +1,5 @@
 using System;
+using Member.Kmin._01_Script.SkillTree;
 using Member.Ysc._01_Code.StatSystems;
 using TMPro;
 using UnityEngine;
@@ -8,7 +9,6 @@ public class SkillTreeTooltip : MonoBehaviour
 {
     [SerializeField] private GameEventChannelSO eventChannel;
     [SerializeField] private SkillTree skillTree;
-    [SerializeField] private StatSO selectNodeCount;
     
     private SkillTreeSO skillTreeSO;
 
@@ -23,7 +23,6 @@ public class SkillTreeTooltip : MonoBehaviour
     private Image _icon;
     
     private SkillTreePurchaseEvent _treePurchaseEvent = SkillTreeEventChannel.SkillTreePurchaseEvent;
-    private SkillTreeActiveEvent _treeActiveEvent = SkillTreeEventChannel.SkillTreeActiveEvent;
 
     private void Awake()
     {
@@ -47,18 +46,20 @@ public class SkillTreeTooltip : MonoBehaviour
     {
         NodeSO node = evt.node.GetNodeSO();
 
+        _purchaseText.text = node.isPurchase ? "구매하기" : "소유중";
+        
         _description.text = node.SkillSO.description;
         _fruitsPrice.text = node.price.ToString();
         _fruitsName.text = node.nodeName;
         _icon.sprite = node.SkillSO.icon;
 
         _purchaseBtn.onClick.RemoveAllListeners();
-        _purchaseText.text = "Purchased";
         _purchaseBtn.onClick.AddListener(() => HandleFruitsPurchase(evt.node));
     }
 
     private void HandleFruitsPurchase(SkillTreeNode node)
     {
+        _purchaseText.text = "Purchased";
         node.GetNodeSO().isPurchase = true;
         _treePurchaseEvent.node = node;
         eventChannel.RaiseEvent(_treePurchaseEvent);
