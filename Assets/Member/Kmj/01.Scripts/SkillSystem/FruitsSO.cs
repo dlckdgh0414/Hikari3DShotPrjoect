@@ -26,7 +26,7 @@ public class FruitsSO : ScriptableObject
     public float floatValue;
     public Skill skillValue;
 
-    public Fruits Fruits { get; set; }
+    //public Fruits Fruits { get; set; }
 
     public string Value;
 
