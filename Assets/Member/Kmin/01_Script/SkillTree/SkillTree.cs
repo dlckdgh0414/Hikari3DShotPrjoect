@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using Member.Kmin._01_Script.SkillTree;
 using Member.Ysc._01_Code.Agent;
+using Member.Ysc._01_Code.StatSystems;
 using UnityEngine.UI;
 
 public class SkillTree : MonoBehaviour
@@ -37,6 +38,10 @@ public class SkillTree : MonoBehaviour
 
     private void HandleNodePurchase(SkillTreePurchaseEvent evt)
     {
+        NodeSO nodeSO = evt.node.GetNodeSO();
+        StatSO targetStat = statCompo.GetStat(nodeSO.statSO);
+        targetStat.AddModifier(this, nodeSO.upgradeValue);
+        
         ConnectColor(evt.node);
     }
 

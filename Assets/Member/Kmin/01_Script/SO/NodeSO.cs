@@ -10,7 +10,9 @@ public class NodeSO : ScriptableObject
 {
     public string nodeName;
     public int price;
+    public float upgradeValue;
     public SkillSO SkillSO;
+    public StatSO statSO;
     public bool isPurchase { get; set; } = false;
     public bool isActive {get; set;}
     public SkillTreeNode SkillTreeNode { get; set; }
