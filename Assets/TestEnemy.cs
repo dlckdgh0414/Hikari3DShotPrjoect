@@ -1,14 +1,12 @@
 using UnityEngine;
 
-public class TestEnemy : MonoBehaviour
+public class TestEnemy : Enemy
 {
-    private void OnEnable()
+    protected override void HandleDead()
     {
-        EnemyManager.Register(gameObject);
     }
 
-    private void OnDisable()
+    protected override void HandleHit()
     {
-        EnemyManager.Unregister(gameObject);
     }
 }
