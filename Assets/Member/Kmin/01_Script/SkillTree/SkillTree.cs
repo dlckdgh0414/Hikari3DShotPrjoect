@@ -51,22 +51,26 @@ public class SkillTree : MonoBehaviour
         _skillTreeSelectEvent.node = selectedNode;
         eventChannelSO.RaiseEvent(_skillTreeSelectEvent);
     }
-    
+
 
     private void ConnectColor(SkillTreeNode f)
     {
         f.transform.SetSiblingIndex(f.ParentNode.transform.GetSiblingIndex() - 1);
-    
+
         Sequence seq = DOTween.Sequence();
-    
+
+        var isSameXPos = f.FillBranch.All(b =>
+            Mathf.Approximately(b.transform.position.x, f.FillBranch[0].transform.position.x));
+
         for (int i = 0; i < 3; i++) {
             int idx = i;
-            seq.Append(DOTween.To(() => 0f, amount 
-                    => f.FillBranch[idx].fillAmount = amount, 1f,
-                0.2f).SetEase(Ease.OutQuad));
+            seq.Append(DOTween.To(() => 0f, amount
+                    => f.FillBranch[idx].fillAmount = amount, 1f, 0.2f));
+
+            if(isSameXPos) seq.SetEase(Ease.OutQuad);
         }
-    
-        seq.OnComplete(() => SetNodeColor(f)); 
+
+        seq.OnComplete(() => SetNodeColor(f));
     }
 
     public void SetNodeColor(SkillTreeNode f)
