@@ -8,14 +8,13 @@ public class Player : Entity
 
     [SerializeField] private StateListSO playerFSM;
 
-    [field: SerializeField] public GameObject model { get; private set; }
+    [field: SerializeField]
+    public GameObject model { get; private set; }
 
     private StateMachine _stateMachine;
     [field: SerializeField] public float zPos { get; set; }
 
     
-
-
     protected override void Awake()
     {
         base.Awake();
@@ -40,6 +39,11 @@ public class Player : Entity
     protected override void AfterInitialize()
     {
         base.AfterInitialize();
+    }
+
+    public void ModelChange(GameObject newSkin)
+    {
+        model = newSkin;
     }
 
     protected override void HandleDead()
