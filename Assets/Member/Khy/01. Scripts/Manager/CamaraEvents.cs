@@ -11,7 +11,7 @@ public enum CameraEffectEnum
 public static class CamaraEvents
 {
     public static SwapCameraEvent SwapCameraEvent = new();
-    public static PerlinShakeEvent CameraShakeEvent = new();
+    public static ShakeEvent CameraShakeEvent = new();
     public static CameraEffectEvent CameraEffectEvent = new();
 }
 
@@ -28,8 +28,7 @@ public class CameraEffectEvent : GameEvent
     public float second;
 }
 
-public class PerlinShakeEvent : GameEvent
+public class ShakeEvent : GameEvent
 {
     public float intensity;
-    public float second;
 }

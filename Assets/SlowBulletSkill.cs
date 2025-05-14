@@ -1,6 +1,8 @@
+using DG.Tweening;
 using Member.Ysc._01_Code.Combat.Bullet;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SlowBulletSkill : Skill
 {
@@ -8,6 +10,8 @@ public class SlowBulletSkill : Skill
     public float slowDuration;
     [Header("느려지는 정도")]
     public float slowDegree;
+
+    public Volume[] volume;
 
     public override void InitializeSkill(Entity entity, SkillCompo skillCompo)
     {
@@ -23,6 +27,10 @@ public class SlowBulletSkill : Skill
     public override void UseSkill()
     {
         base.UseSkill();
+        for(int i=0; i< volume.Length;i++)
+        {
+            volume[i].gameObject.SetActive(true);
+        }
         StartCoroutine(SlowBulletRoutine());
     }
 
@@ -31,5 +39,9 @@ public class SlowBulletSkill : Skill
         BaseBullet.isSlowy = true;
         yield return new WaitForSeconds(slowDuration);
         BaseBullet.isSlowy = false;
+        for (int i = 0; i < volume.Length; i++)
+        {
+            volume[i].gameObject.SetActive(false);
+        }
     }
 }

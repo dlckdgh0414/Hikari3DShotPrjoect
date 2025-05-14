@@ -1,4 +1,5 @@
-
+using Member.Ysc._01_Code.Agent;
+using Member.Ysc._01_Code.StatSystems;
 using UnityEngine;
 
 
@@ -9,11 +10,13 @@ public abstract class Skill : MonoBehaviour
     public bool skillEnabled = false;
 
     [SerializeField] protected float cooldown;
+
     protected float _cooldownTimer;
     protected Entity _entity;
     protected EntityMover _mover;
     protected Player _player;
     protected SkillCompo _skillCompo;
+    protected EntityStat _statCompo;
 
     public bool IsCooldown => _cooldownTimer > 0f;
     public event CooldownInfo OnCooldown;
@@ -24,6 +27,8 @@ public abstract class Skill : MonoBehaviour
         _player = entity as Player;
         _skillCompo = skillCompo;
         _mover = entity.GetCompo<EntityMover>();
+        _statCompo = entity.GetCompo<EntityStat>();
+        _skillCompo.CoolDownStat = _statCompo.GetStat(_skillCompo.CoolDownStat);
     }
 
     protected virtual void Update()
@@ -42,7 +47,7 @@ public abstract class Skill : MonoBehaviour
     {
         if (_cooldownTimer <= 0 && skillEnabled)
         {
-            _cooldownTimer = cooldown;
+            _cooldownTimer = cooldown/_skillCompo.CoolDownStat.Value;
             UseSkill();
             return true;
         }

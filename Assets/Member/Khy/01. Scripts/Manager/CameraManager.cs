@@ -10,11 +10,13 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private int activeCameraPriority = 15;
     [SerializeField] private int disableCameraPriority = 10;
     [SerializeField] private GameEventChannelSO cameraChannel;
+    
+
 
     private void Awake()
     {
         cameraChannel.AddListener<SwapCameraEvent>(HandleSwapCamera);
-        cameraChannel.AddListener<PerlinShakeEvent>(HandleShakeCamera);
+        cameraChannel.AddListener<ShakeEvent>(HandleShakeCamera);
         cameraChannel.AddListener<CameraEffectEvent>(HandleEffectCamera);
 
         currentCamera = FindObjectsByType<CinemachineCamera>(FindObjectsSortMode.None)
@@ -33,9 +35,10 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    private void HandleShakeCamera(PerlinShakeEvent obj)
+    private void HandleShakeCamera(ShakeEvent obj)
     {
-
+        Debug.Assert(currentCamera.GetComponent<CinemachineImpulseSource>() != null, $"Check camera priority, there is no active camera");
+        currentCamera.GetComponent<CinemachineImpulseSource>().GenerateImpulse(obj.intensity);
     }
 
     private void HandleSwapCamera(SwapCameraEvent swapEvt)
@@ -53,7 +56,7 @@ public class CameraManager : MonoBehaviour
     }
     private void OnDestroy()
     {
-        cameraChannel.RemoveListener<PerlinShakeEvent>(HandleShakeCamera);
+        cameraChannel.RemoveListener<ShakeEvent>(HandleShakeCamera);
         cameraChannel.RemoveListener<SwapCameraEvent>(HandleSwapCamera);
     }
 }
