@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class EnemyManager
 {
-    private static List<GameObject> _enemies = new();
+    private static List<Enemy> _enemies = new();
 
-    public static IReadOnlyList<GameObject> Enemies => _enemies;
+    public static IReadOnlyList<Enemy> Enemies => _enemies;
 
-    public static void Register(GameObject enemy)
+    public static void Register(Enemy enemy)
     {
         if (!_enemies.Contains(enemy))
             _enemies.Add(enemy);
     }
 
-    public static void Unregister(GameObject enemy)
+    public static void Unregister(Enemy enemy)
     {
         _enemies.Remove(enemy);
     }

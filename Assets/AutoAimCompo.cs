@@ -6,6 +6,7 @@ public class AutoAimCompo : MonoBehaviour,IEntityComponent
 {
     private Player _player;
 
+    [HideInInspector]
     public GameObject target;
 
     public Image aim;
@@ -43,16 +44,14 @@ public class AutoAimCompo : MonoBehaviour,IEntityComponent
 
         float closestDistance = 200f; //초반 최대 감지거리
 
-        foreach (GameObject obj in EnemyManager.Enemies)
+        foreach (Enemy obj in EnemyManager.Enemies)
         {
-            if (obj == null || Camera.main == null) return;
-
             Vector2 screenPos = Camera.main.WorldToScreenPoint(obj.transform.position);
             float distance = Vector2.Distance(mousePos, screenPos);
 
             if (distance < closestDistance)
             {
-                target = obj;
+                target = obj.gameObject;
                 closestDistance = distance;
             }
         }
