@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Member.Kmin._01_Script.Core.EventChannel;
 using Member.Kmj._01.Scripts.Core.EventChannel;
+using Member.Ysc._01_Code.StatSystems;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -18,6 +19,8 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
 
     [SerializeField] private int maxCheckEnemy;
 
+    public StatSO CoolDownStat;
+
     private Entity _entity;
 
     private Dictionary<Type, Skill> _skills;
@@ -31,7 +34,6 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
         _skills = new Dictionary<Type, Skill>();
         GetComponentsInChildren<Skill>().ToList().ForEach(skill => _skills.Add(skill.GetType(), skill));
         _skills.Values.ToList().ForEach(skill => skill.InitializeSkill(_entity, this));
-        
     }
     
     

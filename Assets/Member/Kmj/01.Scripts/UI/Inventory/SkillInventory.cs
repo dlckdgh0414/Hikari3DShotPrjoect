@@ -20,7 +20,6 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
         private SendStaticSkill _staticSkilEvent = SendSkillChannel.staticSkillEquipEvent;
         
         
-        
         [SerializeField] private GameEventChannelSO _skillInvenEvent;
         [SerializeField] private UseSkillDataSO _inventorySO;
         [SerializeField] private List<Button> equipBtns;
@@ -59,6 +58,28 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
         {
             _staticButton.onClick.AddListener(HandleStaticSkillEquip);
             equipBtns.ForEach(btn => btn.onClick.AddListener(HandleSkillEquip));
+
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+            if (prefab == null)
+            {
+                Debug.LogError("Prefab을 찾을 수 없습니다: " + path);
+                return;
+            }
+
+            GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+
+            SkillCompo skillComponent = instance.GetComponentInChildren<SkillCompo>();
+            if (skillComponent == null)
+            {
+                Debug.LogError("SkillCompo를 찾을 수 없습니다.");
+                return;
+            }
+
+            skillComponent.secondSkill = null;
+            skillComponent.firstSkill = null;
+            skillComponent.thirdSkill = null;
+            PrefabUtility.SaveAsPrefabAsset(instance, path);
+            GameObject.DestroyImmediate(instance);
         }
 
         private void HandleSkillEquip()

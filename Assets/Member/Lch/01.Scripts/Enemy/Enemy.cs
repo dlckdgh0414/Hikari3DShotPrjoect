@@ -30,12 +30,12 @@ public abstract class Enemy :Entity, IPoolable
 
     private void OnEnable()
     {
-        EnemyManager.Register(gameObject);
+        EnemyManager.Register(this);
     }
 
     private void OnDisable()
     {
-        EnemyManager.Unregister(gameObject);
+        EnemyManager.Unregister(this);
         
         _sequence?.Kill();
         _sequence = null;
