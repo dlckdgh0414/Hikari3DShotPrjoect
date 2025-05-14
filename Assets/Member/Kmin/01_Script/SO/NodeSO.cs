@@ -13,12 +13,8 @@ public class NodeSO : ScriptableObject
     public float upgradeValue;
     public SkillSO SkillSO;
     public StatSO statSO;
+    [TextArea] public string description;
     public bool isPurchase { get; set; } = false;
     public bool isActive {get; set;}
     public SkillTreeNode SkillTreeNode { get; set; }
-
-    private void OnValidate()
-    {
-        nodeName = this.name;
-    }
 }
