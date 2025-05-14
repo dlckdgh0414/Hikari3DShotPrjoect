@@ -82,7 +82,7 @@ public class SkillTree : MonoBehaviour
 
         seq.OnComplete(() => {
             f.ConnectedNodes.ForEach(n => {
-                n.NodeIcon.DOColor(Color.grey, 1f);
+                n.NodeIcon.DOColor(Color.white, 1f);
                 n.NodeIcon.DOFade(1f, 1f);
                 n.NodeButton.interactable = true;
             });

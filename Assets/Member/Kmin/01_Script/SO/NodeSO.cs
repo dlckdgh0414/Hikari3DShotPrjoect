@@ -17,9 +17,4 @@ public class NodeSO : ScriptableObject
     public bool isPurchase { get; set; } = false;
     public bool isActive {get; set;}
     public SkillTreeNode SkillTreeNode { get; set; }
-
-    private void OnValidate()
-    {
-        nodeName = this.name;
-    }
 }
