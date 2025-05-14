@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class GameStartButton : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _settingUiList = new GameObject[3];
+    [SerializeField] private GameObject[] _settingUiList;
 
     public RectTransform mainUI;
 
@@ -34,6 +34,8 @@ public class GameStartButton : MonoBehaviour
         }
         else
             return;
+
+        _settingUiList.ToList().ForEach(UI => Debug.Log(UI.name));
     }
     public void OpenCustomBtn()
     {
@@ -77,6 +79,7 @@ public class GameStartButton : MonoBehaviour
     }
 
     private void ClearSetting()
+
     {
         _settingUiList.ToList().ForEach(setting => setting.SetActive(false));
     }
