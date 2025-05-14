@@ -21,12 +21,14 @@ public class KingdomButton : MonoBehaviour,IPointerEnterHandler, IPointerExitHan
     private bool IsTweening = false;
     private bool hasTweened = false; // 트윈이 실행되었는지 여부
 
+    //맵 일치하는지 확인(보안용도및 버그 가능성 베제)
+
     private Dictionary<string, int> worldSceneMap = new Dictionary<string, int>()
     {
-        { "World 1", 1 },
-        { "World 2", 2 },
-        { "World 3", 3 },
-        { "World 4", 4 }
+        { "World 1", 2 },
+        { "World 2", 3 },
+        { "World 3", 4 },
+        { "World 4", 5 }
     };
     private void Start()
     {
