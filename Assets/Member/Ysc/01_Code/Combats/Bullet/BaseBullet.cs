@@ -10,7 +10,8 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         [field: SerializeField] private BulletSettingSO BulletSO; // 총알 데이터 받기
 
         [SerializeField] private string itemName;
-        
+        [HideInInspector] public PlayerAttackCompo _attackCompo;
+
         public string PoolingName => itemName;
         
         protected Vector3 fireDirection;
@@ -25,7 +26,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         {
             fireDirection = direction - transform.position ;
         }
-        
+
         protected virtual void Awake()
         {
             BulletInit();
@@ -59,7 +60,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
             if (hitable.TryGetComponent(out IDamageable damageable))
             {
                 Vector2 direction = (hitable.transform.position - transform.position).normalized;
-                damageable.ApplyDamage(BulletSO.bulletDamage, direction);
+                damageable.ApplyDamage(_attackCompo.BulletDamage, direction);
             }
         }
 
@@ -83,5 +84,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         {
             itemName = gameObject.name;
         }
+
+        
     }
 }

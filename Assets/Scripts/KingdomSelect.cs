@@ -106,7 +106,12 @@ public class KingdomSelect : MonoBehaviour
        
     }
 
-  
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            _ClearGame();
+    }
+
 
     public void LookAtKingdom(Kingdom k)
     {

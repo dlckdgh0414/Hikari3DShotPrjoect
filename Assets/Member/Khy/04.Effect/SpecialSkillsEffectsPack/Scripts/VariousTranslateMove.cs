@@ -21,7 +21,7 @@ public class VariousTranslateMove : MonoBehaviour {
         m_changedFactor = VariousEffectsScene.m_gaph_scenesizefactor;
 
         if (m_fowardMove)
-            transform.Translate(transform.forward * m_power * m_changedFactor);
+            transform.Translate(-transform.forward * m_power * m_changedFactor);
         if (m_rightMove)
             transform.Translate(transform.right * m_power* m_changedFactor);
         if (m_upMove)
