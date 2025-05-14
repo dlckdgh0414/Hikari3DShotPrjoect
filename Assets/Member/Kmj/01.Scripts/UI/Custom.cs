@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class Custom : MonoBehaviour
 {
-    [SerializeField]  private List<GameObject> Skin = new List<GameObject>();
+    [SerializeField]  private List<PlayerSkinSO> Skin = new List<PlayerSkinSO>();
 
     [field : SerializeField] public GameObject _playerSkin {get; private set;}
 
@@ -35,35 +35,24 @@ public class Custom : MonoBehaviour
         GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
         if (prefab == null)
         {
-            print("프리팹없음");
             return;
         }
                 
         GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
                 
-        Transform child = instance.transform.Find("ModelChanger");
-        if (child == null)
+        ModelChanger Changer = instance.GetComponentInChildren<ModelChanger>();
+        if (Changer == null)
         {
-            print("자식없음");
-            return;
-        }
-
-        GameObject prafabs = AssetDatabase.LoadAssetAtPath<GameObject>(skilPath);
-
-        if (prafabs == null)
-        {
-            print(" 프프리팹없음");
             return;
         }
         
-        GameObject instances = PrefabUtility.InstantiatePrefab(prafabs) as GameObject;
-        
-        instances.transform.SetParent(instance.transform);
-        
+        PlayerSkinSO SO = AssetDatabase.LoadAssetAtPath<PlayerSkinSO>(skilPath);
+
+        Changer.skinSO = SO;
+                
         PrefabUtility.SaveAsPrefabAsset(instance, path);
-        PrefabUtility.SaveAsPrefabAsset(instances, path);
         GameObject.DestroyImmediate(instance);
-        GameObject.DestroyImmediate(instances);
+
 
         Debug.Log("Prefab이 성공적으로 수정되었습니다.");
     }
