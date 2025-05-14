@@ -5,7 +5,7 @@ public class EntityMover : MonoBehaviour,IEntityComponent
 {
     #region Member field
 
-    [field: SerializeField] public float MoveSpeed { get; private set; }
+    public float MoveSpeed { get; set; }
     [field: SerializeField] public float SpinSpeed { get; private set; }
 
     private Vector3 _velocity;
@@ -23,6 +23,7 @@ public class EntityMover : MonoBehaviour,IEntityComponent
         _rbCompo = entity.GetComponent<Rigidbody>();
         Debug.Assert(_rbCompo != null,"이거 없음");
         _moveSpeedMultiplier = 1f;
+        MoveSpeed = entity.GetCompo<ModelChanger>().skinSO.speed;
     }
 
     public void SetMovement(Vector2 moveDir)
