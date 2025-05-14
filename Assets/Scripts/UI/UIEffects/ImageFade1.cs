@@ -12,9 +12,9 @@ public class ImageFade1 : MonoBehaviour
     float timer = 0f;
     void Start()
     {
-        imgColor = new Color[6];
+        imgColor = new Color[4];
 
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 4; i++)
         {
           img = GetComponentsInChildren<TextMeshProUGUI>();
           
