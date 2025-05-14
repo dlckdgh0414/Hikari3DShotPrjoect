@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class HealingSkill : Skill
 {
-    [Header("Áö¼Ó½Ã°£")]
+    [Header("ì§€ì†ì‹œê°„")]
     public float duration;
-    [Header("Èú·®")]
+    [Header("íëŸ‰")]
     public float healAmount;
 
     private EntityVFX entityVFX;
