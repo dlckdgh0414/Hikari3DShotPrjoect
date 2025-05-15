@@ -54,8 +54,9 @@ public class SkillTreeTooltip : MonoBehaviour
 
     private void HandleFruitsPurchase(SkillTreeNode node)
     {
+        if (node.GetNodeSO().isPurchase) return;
+        
         _purchaseText.text = "소유중";
-        node.GetNodeSO().isPurchase = true;
         _treePurchaseEvent.node = node;
         eventChannel.RaiseEvent(_treePurchaseEvent);
     }

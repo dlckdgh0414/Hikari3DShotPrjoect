@@ -14,7 +14,7 @@ public class NodeSO : ScriptableObject
     public SkillSO SkillSO;
     public StatSO statSO;
     [TextArea] public string description;
-    public bool isPurchase { get; set; } = false;
+    public bool isPurchase = false;
     public bool isActive {get; set;}
     public SkillTreeNode SkillTreeNode { get; set; }
 }

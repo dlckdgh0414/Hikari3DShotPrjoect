@@ -26,7 +26,7 @@ public class SkillTree : MonoBehaviour
             f.Initialize();
 
             if (f.IsRootNode)
-                SetNodeColor(f);
+                ChangeNodeColor(f);
         });
         
         _fruitsList.ForEach(f => f.NodeButton.onClick.AddListener(() => SelectFruits(f)));
@@ -39,6 +39,7 @@ public class SkillTree : MonoBehaviour
     private void HandleNodePurchase(SkillTreePurchaseEvent evt)
     {
         NodeSO nodeSO = evt.node.GetNodeSO();
+        nodeSO.isPurchase = true;
         StatSO targetStat = statCompo.GetStat(nodeSO.statSO);
         targetStat.AddModifier(this, nodeSO.upgradeValue);
         
@@ -58,30 +59,23 @@ public class SkillTree : MonoBehaviour
         f.transform.SetSiblingIndex(f.ParentNode.transform.GetSiblingIndex() - 1);
 
         Sequence seq = DOTween.Sequence();
-
-        var isSameXPos = f.FillBranch.All(b =>
-            Mathf.Approximately(b.transform.position.x, f.FillBranch[0].transform.position.x));
-
+        
         for (int i = 0; i < 3; i++) {
             int idx = i;
             seq.Append(DOTween.To(() => 0f, amount
                     => f.FillBranch[idx].fillAmount = amount, 1f, 0.2f));
-
-            if(isSameXPos) seq.SetEase(Ease.OutQuad);
         }
 
-        seq.OnComplete(() => SetNodeColor(f));
+        seq.OnComplete(() => ChangeNodeColor(f));
     }
 
-    public void SetNodeColor(SkillTreeNode f)
+    public void ChangeNodeColor(SkillTreeNode f)
     {
         Sequence seq = DOTween.Sequence();
         Outline outline = f.GetComponentInChildren<Outline>();
-        Color lineColor = outline.effectColor;
-        
-        seq.Join(DOTween.To(() => lineColor, color => outline.effectColor = color,
-            f.branchColor, 1.5f).SetEase(Ease.InCubic));
-        seq.Join(f.NodeIcon.DOColor(f.branchColor, 1f))
+
+        seq.Join(f.NodeOutline.DOColor(f.branchColor, 1f))
+            .Join(f.NodeIcon.DOColor(f.branchColor, 1f))
             .Join(f.NodeIcon.DOFade(1f, 1f));
 
         seq.OnComplete(() => {
@@ -95,11 +89,9 @@ public class SkillTree : MonoBehaviour
 
     private void ActiveNodeColor(SkillTreeNode node, bool isActive)
     {
-        Outline outline = node.GetComponentInChildren<Outline>();
-        Color lineColor = outline.effectColor;
         Color targetColor = isActive ? node.branchColor : Color.white;
 
-        DOTween.To(() => lineColor, color => outline.effectColor = color, targetColor, 0.2f);
+        node.NodeOutline.DOColor(targetColor, 0.2f);
         node.NodeIcon.DOColor(targetColor, 0.2f);
     }
 }
