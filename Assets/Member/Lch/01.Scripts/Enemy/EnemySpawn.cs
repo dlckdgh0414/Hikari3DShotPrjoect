@@ -10,6 +10,11 @@ public class EnemySpawn : MonoBehaviour
     
     [SerializeField] private GameProgressCheckUI gameProgressCheckUI;
 
+    private void Awake()
+    {
+        mainCamera = Camera.main;
+    }
+
     private void Update()
     {
         _currentSpawnTime += Time.deltaTime;
