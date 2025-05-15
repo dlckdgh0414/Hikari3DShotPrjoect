@@ -18,6 +18,8 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
         private SendSkill _skillEvent = SendSkillChannel.SkillEquipEvent;
         
         private SendStaticSkill _staticSkilEvent = SendSkillChannel.staticSkillEquipEvent;
+
+        [SerializeField] private Sprite _baseImage;
         
         
         [SerializeField] private GameEventChannelSO _skillInvenEvent;
@@ -81,8 +83,8 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
                 if (img != null && img.sprite == _selectedSkill.icon)
                 {
                     clickedImage.sprite = _selectedSkill.icon;
-                    
-                    img.sprite = null;
+
+                    img.sprite = _baseImage;
                     if (child.name.Contains("2"))
                     {
                         PlayerSendInfo.Instance.skillName[0] = string.Empty;
