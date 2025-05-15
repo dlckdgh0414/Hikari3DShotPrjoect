@@ -8,7 +8,6 @@ public class EqumentBtn : MonoBehaviour
     private Button thisBtn;
     private Image thisImg;
     
-    [SerializeField] private GameObject skillCompo;
 
     [field: SerializeField] public SkillSO _thisSkill { get; set; }
     private string path;
@@ -20,55 +19,30 @@ public class EqumentBtn : MonoBehaviour
         thisBtn = GetComponent<Button>();
         thisBtn.onClick.AddListener(ClickThis);
         
-        path = AssetDatabase.GetAssetPath(skillCompo);
     }
 
     private void ClickThis()
     {
         if (thisImg.sprite != null)
         {
-            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-                    
-            print(prefab);
-                    
-            GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-                    
-            print(instance);
-                
-            SkillCompo skillCompo = instance.GetComponentInChildren<SkillCompo>();
-                    
-            print(skillCompo);
-                
-            Transform baby = skillCompo.transform.Find(_thisSkill.name); 
-                    
-            print(baby);
-                    
-
-            Skill skill = baby.GetComponent<Skill>();
-                    
-            print(skill.name);
-
-            if (skillCompo.firstSkill == skill)
+            if (_thisSkill != null  && PlayerSendInfo.Instance.skillName[0] == _thisSkill.name)
             {
-                skillCompo.firstSkill = null;
+                PlayerSendInfo.Instance.skillName[0] = string.Empty;
                 _thisSkill = null;
             }
 
-            else if (skillCompo.secondSkill == skill)
+            else if (_thisSkill != null && PlayerSendInfo.Instance.skillName[1] == _thisSkill.name)
             {
-                skillCompo.secondSkill = null;
+                PlayerSendInfo.Instance.skillName[1] = string.Empty;
                 _thisSkill = null;
             }
-            else if (skillCompo.thirdSkill == skill)
+            else if (_thisSkill != null  && PlayerSendInfo.Instance.skillName[2] == _thisSkill.name)
             {
-                skillCompo.thirdSkill = null;
+                PlayerSendInfo.Instance.skillName[2] = string.Empty;
                 _thisSkill = null;
             }
             else
                 return;
-                        
-            PrefabUtility.SaveAsPrefabAsset(instance, path);
-            GameObject.DestroyImmediate(instance);
             
             thisImg.sprite = null;
         }
