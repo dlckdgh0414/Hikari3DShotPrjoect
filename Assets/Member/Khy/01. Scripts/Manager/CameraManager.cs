@@ -3,6 +3,7 @@ using System.Linq;
 using Unity.Cinemachine;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
 
 public class CameraManager : MonoBehaviour
 {
@@ -10,8 +11,8 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private int activeCameraPriority = 15;
     [SerializeField] private int disableCameraPriority = 10;
     [SerializeField] private GameEventChannelSO cameraChannel;
-    
 
+    public UnityEvent OnCameraShakeing;
 
     private void Awake()
     {
@@ -38,7 +39,7 @@ public class CameraManager : MonoBehaviour
     private void HandleShakeCamera(ShakeEvent obj)
     {
         Debug.Assert(currentCamera.GetComponent<CinemachineImpulseSource>() != null, $"Check camera priority, there is no active camera");
-        currentCamera.GetComponent<CinemachineImpulseSource>().GenerateImpulse(obj.intensity);
+        OnCameraShakeing?.Invoke();
     }
 
     private void HandleSwapCamera(SwapCameraEvent swapEvt)
