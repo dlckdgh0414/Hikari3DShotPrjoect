@@ -40,6 +40,7 @@ public abstract class Attack : MonoBehaviour
         {
             bulletPrefab = PoolManager.Instance.Pop(bulletPrefab.name) as BaseBullet;
             bulletPrefab.transform.position = FirePos[0].position;
+            IsAttackEnd = true;
             bulletPrefab.SetDirection(target.position);
         }
         else
