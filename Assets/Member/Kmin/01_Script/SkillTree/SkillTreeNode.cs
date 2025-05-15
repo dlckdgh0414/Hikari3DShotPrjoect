@@ -14,11 +14,12 @@ namespace Member.Kmin._01_Script.SkillTree
     
         [field: SerializeField] public List<SkillTreeNode> ConnectedNodes;
         [field: SerializeField] public bool IsRootNode { get; private set; }
-        [field: SerializeField] public List<Image> ConnectedBranch { get; private set; }
-        [field: SerializeField] public List<Image> FillBranch { get; private set; }
+        [field: SerializeField, HideInInspector] public List<Image> ConnectedBranch { get; private set; }
+        [field: SerializeField, HideInInspector] public List<Image> FillBranch { get; private set; }
         public SkillTreeNode ParentNode { get; private set; }
         public Button NodeButton { get; private set; }
         public Image NodeIcon { get; private set; }
+        public Image NodeOutline { get; private set; }
     
         public Color branchColor = Color.magenta;
 
@@ -26,6 +27,9 @@ namespace Member.Kmin._01_Script.SkillTree
         {
             NodeButton = GetComponentInChildren<Button>();
             NodeIcon = NodeButton.transform.Find("Icon").GetComponent<Image>();
+            NodeOutline = NodeButton.transform.Find("Outline").GetComponent<Image>();
+            
+            Debug.Log(NodeOutline);
 
             nodeSO.isPurchase = false;
 
