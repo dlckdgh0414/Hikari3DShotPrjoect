@@ -62,6 +62,8 @@ public class PlayerState : EntityState
 
     void HorizontalLean()
     {
+        if (_aimCompo.target == null) return;
+
         Vector3 targetEulerAngels = _player.model.transform.localEulerAngles;
         Vector3 playerRotateDir;
 

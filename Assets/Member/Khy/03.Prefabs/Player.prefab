@@ -20549,7 +20549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f4da53b722b704fbd34b37d9d236e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skinSO: {fileID: 11400000, guid: 1bcc1813d4bfb434bb06b25b69a9833b, type: 2}
+  skinSO: {fileID: 11400000, guid: e1fb617322e39824397a694bfc8e6003, type: 2}
 --- !u!1 &1070910397795459867
 GameObject:
   m_ObjectHideFlags: 0
@@ -71864,7 +71864,7 @@ GameObject:
   - component: {fileID: 3400925291086581010}
   - component: {fileID: 3314010286558330456}
   - component: {fileID: 3313468891646911144}
-  - component: {fileID: 7778033840675302138}
+  - component: {fileID: 78944530147933513}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Untagged
@@ -76759,7 +76759,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &7778033840675302138
+--- !u!114 &78944530147933513
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -76768,12 +76768,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3402848243189873144}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfd58bb4c834bef44b7ebd71c2e41a7c, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d66e134a9a8d65448ffe5c811f179f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <VfxName>k__BackingField: Explosion
-  isOnPosition: 1
   particle: {fileID: 3314010286558330456}
+  isOnPosition: 1
   objParticle: {fileID: 0}
   TrueIsObjParticle: 0
 --- !u!1 &3403461153107819040
@@ -117272,6 +117272,7 @@ MonoBehaviour:
   cooldown: 7
   duration: 3
   intensity: 5
+  healingCrash: 1
   cameraSO: {fileID: 11400000, guid: abd9c912f20296a42a41e0bb57eb6c8d, type: 2}
 --- !u!1 &4873316972333310072
 GameObject:
@@ -124900,6 +124901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eeadd4d379dc8f4bafdeac412c66b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MoveSpeed>k__BackingField: 0
   <SpinSpeed>k__BackingField: 50
 --- !u!1 &7989093317412528064
 GameObject:
@@ -130682,7 +130684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d412b5c885c1de847be757f211ae0066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSkill: {fileID: 8552298935103334801}
+  firstSkill: {fileID: 1459242475231197582}
   secondSkill: {fileID: 2809807132453447673}
   thirdSkill: {fileID: 8928604765757848092}
   whatIsEnemy:
