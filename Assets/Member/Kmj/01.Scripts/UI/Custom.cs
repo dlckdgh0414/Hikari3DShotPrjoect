@@ -1,33 +1,41 @@
+using System;
 using NUnit.Framework;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Custom : MonoBehaviour
 {
-    [SerializeField]
-    private List<Material> material = new List<Material>();
+    [field: SerializeField]  public List<PlayerSkinSO> Skin = new List<PlayerSkinSO>();
 
-    [SerializeField] private MeshRenderer _playerMeshFilert;
+    [field : SerializeField] public GameObject _playerSkin {get; private set;}
 
-    [field : SerializeField] private int currentMaterial;
+    [SerializeField] public int currentMaterial;
 
+    private string path;
 
-    private void Start()
+    private string skilPath;
+    
+
+    private void Awake()
     {
+        path = AssetDatabase.GetAssetPath(_playerSkin);
     }
+
     public void NextMaterial()
     {
         currentMaterial++;
-        if (currentMaterial >= material.Count)
+        if (currentMaterial >= Skin.Count)
             currentMaterial = 0;
-
-        _playerMeshFilert.material = material[currentMaterial];
-
-    }
-
-    private void Update()
-    {
+        
+        if (PlayerSendInfo.Instance.ThisSkill != null)
+        {
+            PlayerSendInfo.Instance.ThisSkill = null;
+        }
+        
+        PlayerSendInfo.Instance.ThisSkill = Skin[currentMaterial];
     }
 
     public void MinusMaterial()
@@ -35,10 +43,14 @@ public class Custom : MonoBehaviour
         currentMaterial--;
 
         if (currentMaterial < 0)
-            currentMaterial = material.Count - 1;
+            currentMaterial = Skin.Count - 1;
 
-
-        _playerMeshFilert.material = material[currentMaterial];
+        if (PlayerSendInfo.Instance.ThisSkill != null)
+        {
+            PlayerSendInfo.Instance.ThisSkill = null;
+        }
+        
+        PlayerSendInfo.Instance.ThisSkill = Skin[currentMaterial];
     }
 }
  

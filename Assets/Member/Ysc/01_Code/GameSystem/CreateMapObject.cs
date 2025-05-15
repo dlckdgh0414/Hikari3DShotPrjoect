@@ -7,7 +7,7 @@ namespace Member.Ysc._01_Code.GameSystem
 {
     public class CreateMapObject : MonoBehaviour
     {
-        [SerializeField] private GameObject obj;
+        [SerializeField]private List<GameObject> objList;
         [SerializeField] private Transform targetTrm;
 
         [SerializeField] private float yOffset;
@@ -56,7 +56,7 @@ namespace Member.Ysc._01_Code.GameSystem
             if (objs.Count > 0)
                 ClearObj();
             
-            if (obj == null) return;
+            if (objList == null) return;
             
             int val = Random.Range(minVal, maxVal+1);
             
@@ -65,7 +65,7 @@ namespace Member.Ysc._01_Code.GameSystem
                 float x = Random.Range(gameObject.transform.localScale.x * ( -1 * range), gameObject.transform.localScale.x * range);
                 float z = Random.Range(gameObject.transform.localScale.z * (-1 * range), gameObject.transform.localScale.z * range);
                 Vector3 pos = new Vector3(transform.position.x + x, transform.position.y + yOffset,transform.position.z + z);
-                GameObject o = Instantiate(obj, pos, Quaternion.identity);
+                GameObject o = Instantiate(objList[Random.Range(0, objList.Count)], pos, Quaternion.identity);
                 o.transform.SetParent(transform);
                 objs.Add(o);
             }
