@@ -31,7 +31,7 @@ namespace Member.Ysc._01_Code.Agent
             return outStat;
 
         }
-
+    
         public void SetBaseValue(StatSO stat, float value) => GetStat(stat).BaseValue = value;
         public float GetBaseValue(StatSO stat) => GetStat(stat).BaseValue;
         public void IncreaseBaseValue(StatSO stat, float value) => GetStat(stat).BaseValue += value;

@@ -8,11 +8,11 @@ using UnityEngine.UI;
 
 public class Custom : MonoBehaviour
 {
-    [SerializeField]  private List<PlayerSkinSO> Skin = new List<PlayerSkinSO>();
+    [field: SerializeField]  public List<PlayerSkinSO> Skin = new List<PlayerSkinSO>();
 
     [field : SerializeField] public GameObject _playerSkin {get; private set;}
 
-    [SerializeField] private int currentMaterial;
+    [SerializeField] public int currentMaterial;
 
     private string path;
 
@@ -29,32 +29,13 @@ public class Custom : MonoBehaviour
         currentMaterial++;
         if (currentMaterial >= Skin.Count)
             currentMaterial = 0;
-
-        skilPath = AssetDatabase.GetAssetPath(Skin[currentMaterial]);
         
-        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-        if (prefab == null)
+        if (PlayerSendInfo.Instance.ThisSkill != null)
         {
-            return;
-        }
-                
-        GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-                
-        ModelChanger Changer = instance.GetComponentInChildren<ModelChanger>();
-        if (Changer == null)
-        {
-            return;
+            PlayerSendInfo.Instance.ThisSkill = null;
         }
         
-        PlayerSkinSO SO = AssetDatabase.LoadAssetAtPath<PlayerSkinSO>(skilPath);
-
-        Changer.skinSO = SO;
-                
-        PrefabUtility.SaveAsPrefabAsset(instance, path);
-        GameObject.DestroyImmediate(instance);
-
-
-        Debug.Log("Prefab이 성공적으로 수정되었습니다.");
+        PlayerSendInfo.Instance.ThisSkill = Skin[currentMaterial];
     }
 
     public void MinusMaterial()
@@ -64,41 +45,12 @@ public class Custom : MonoBehaviour
         if (currentMaterial < 0)
             currentMaterial = Skin.Count - 1;
 
-
-        skilPath = AssetDatabase.GetAssetPath(Skin[currentMaterial]);
-        
-        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-        if (prefab == null)
+        if (PlayerSendInfo.Instance.ThisSkill != null)
         {
-            print("프리팹없음");
-            return;
-        }
-                
-        GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-                
-        Transform child = instance.transform.Find("ModelChanger");
-        if (child == null)
-        {
-            print("자식없음");
-            return;
-        }
-
-        GameObject prafabs = AssetDatabase.LoadAssetAtPath<GameObject>(skilPath);
-
-        if (prafabs == null)
-        {
-            print(" 프프리팹없음");
-            return;
+            PlayerSendInfo.Instance.ThisSkill = null;
         }
         
-        GameObject instances = PrefabUtility.InstantiatePrefab(prafabs) as GameObject;
-        
-        instances.transform.SetParent(instance.transform);
-        
-        PrefabUtility.SaveAsPrefabAsset(instance, path);
-        PrefabUtility.SaveAsPrefabAsset(instances, path);
-        GameObject.DestroyImmediate(instance);
-        GameObject.DestroyImmediate(instances);
+        PlayerSendInfo.Instance.ThisSkill = Skin[currentMaterial];
     }
 }
  
