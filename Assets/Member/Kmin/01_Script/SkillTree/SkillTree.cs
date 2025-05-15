@@ -39,6 +39,7 @@ public class SkillTree : MonoBehaviour
     private void HandleNodePurchase(SkillTreePurchaseEvent evt)
     {
         NodeSO nodeSO = evt.node.GetNodeSO();
+        nodeSO.isPurchase = true;
         StatSO targetStat = statCompo.GetStat(nodeSO.statSO);
         targetStat.AddModifier(this, nodeSO.upgradeValue);
         
@@ -61,13 +62,16 @@ public class SkillTree : MonoBehaviour
 
         var isSameXPos = f.FillBranch.All(b =>
             Mathf.Approximately(b.transform.position.x, f.FillBranch[0].transform.position.x));
-
+        
         for (int i = 0; i < 3; i++) {
             int idx = i;
             seq.Append(DOTween.To(() => 0f, amount
                     => f.FillBranch[idx].fillAmount = amount, 1f, 0.2f));
 
-            if(isSameXPos) seq.SetEase(Ease.OutQuad);
+            if (isSameXPos)
+            {
+                seq.SetEase(Ease.OutSine);
+            }
         }
 
         seq.OnComplete(() => SetNodeColor(f));
