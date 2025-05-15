@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Member.Ysc._01_Code.Agent;
 using System.Collections;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class SelfBoomSkill : Skill
 {
     private EntityVFX entityVFX;
+    private EntityMover _mover;
     private readonly string fuseEffect = "BombFuse";
     private readonly string explosionEffect = "Explosion";
 
@@ -12,6 +14,8 @@ public class SelfBoomSkill : Skill
     public float duration;
     [Header("흔들림 강도")]
     public float intensity;
+    [Header("폭발 후 회복 속도")]
+    public float healingCrash = 1f;
 
     [SerializeField]
     private GameEventChannelSO cameraSO;
@@ -20,6 +24,7 @@ public class SelfBoomSkill : Skill
     {
         base.InitializeSkill(entity, skillCompo);
         entityVFX = _entity.GetCompo<EntityVFX>();
+        _mover = entity.GetCompo<EntityMover>();
     }
 
     public override void OverSkillCooltime()
@@ -42,6 +47,11 @@ public class SelfBoomSkill : Skill
         ShakeEvent shakeEvent = CamaraEvents.CameraShakeEvent;
         shakeEvent.intensity = intensity;
         cameraSO.RaiseEvent(shakeEvent);
+
+        float prevSpeed = _mover.MoveSpeed;
+
+        _mover.MoveSpeed /= 10;
+        DOVirtual.DelayedCall(3f, () => { DOTween.To(() => _mover.MoveSpeed, x => _mover.MoveSpeed = x, prevSpeed, healingCrash); });
 
         foreach (Enemy obj in EnemyManager.Enemies)
         {

@@ -5,7 +5,7 @@ public class EnemyMovement : MonoBehaviour,IEntityComponent
 {
     [SerializeField] private float speed = 300f;
     [SerializeField] private float playerDistance = 20;
-    [SerializeField] private int zPos =45;
+    [SerializeField] private int zPos = 45;
     [SerializeField] private Rigidbody rb;
     public bool isMove = true;
     public bool isArrive = false;

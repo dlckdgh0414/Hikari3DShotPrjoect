@@ -5,7 +5,7 @@ public class EntityMover : MonoBehaviour,IEntityComponent
 {
     #region Member field
 
-    public float MoveSpeed { get; set; }
+    [field: SerializeField] public float MoveSpeed { get; set; }
     [field: SerializeField] public float SpinSpeed { get; private set; }
 
     private Vector3 _velocity;
