@@ -59,13 +59,13 @@ namespace Member.Kmin._01_Script.SkillTree
                     f.FillBranch.Clear();
                 }
 
-                Transform root = f.transform.Find("Nodes");
+                Transform root = f.transform.Find("Branches");
                 GameObject[] obj = new GameObject[3];
                 Image[] nodes = new Image[3];
 
                 for (int i = 0; i < 3; i++)
                 {
-                    obj[i] = new GameObject($"@Node{i}");
+                    obj[i] = new GameObject($"@Branches{i}");
                 
                     nodes[i] = obj[i].AddComponent<Image>();
                     nodes[i].transform.SetParent(root, false);
@@ -103,7 +103,7 @@ namespace Member.Kmin._01_Script.SkillTree
 
         private void ConnectFillBranch(Image target, Transform root, SkillTreeNode parent, int origin)
         {
-            Image fillImg = new GameObject($"@FillNode{parent.FillBranch.Count}").AddComponent<Image>();
+            Image fillImg = new GameObject($"@FillBranches{parent.FillBranch.Count}").AddComponent<Image>();
         
             fillImg.transform.SetParent(root, false);
             fillImg.rectTransform.anchoredPosition = target.rectTransform.anchoredPosition;
@@ -155,10 +155,14 @@ namespace Member.Kmin._01_Script.SkillTree
 
 #endif
         #endregion
-
+        
+        #if UNITY_EDITOR
         private void OnValidate()
         {
-            nodeImage.sprite = nodeSO.SkillSO.icon;
+            if (nodeImage == null)
+                nodeImage = GetComponent<Image>();
+            
+            nodeImage.sprite = nodeSO.SkillSO == null ? nodeSO.statSO.Icon : nodeSO.SkillSO.icon;
 
             if (FillBranch == null)
                 return;
@@ -166,5 +170,6 @@ namespace Member.Kmin._01_Script.SkillTree
             foreach (var node in FillBranch)
                 node.color = branchColor;
         }
+        #endif
     }
 }
