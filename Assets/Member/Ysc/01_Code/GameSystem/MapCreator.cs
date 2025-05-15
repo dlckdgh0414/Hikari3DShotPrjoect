@@ -19,6 +19,7 @@ namespace Member.Ysc._01_Code.GameSystem
         {
             for (int i = 0; i < _meshRenderers.Length; i++)
             {
+                if (matArray[i] == null) _meshRenderers[i].gameObject.SetActive(false);
                 _meshRenderers[i].sharedMaterial = matArray[i];
             }
         }
