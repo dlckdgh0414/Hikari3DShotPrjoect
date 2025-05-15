@@ -7,7 +7,7 @@ namespace Member.Ysc._01_Code.GameSystem
 {
     public class CreateMapObject : MonoBehaviour
     {
-        private List<GameObject> objList;
+        [SerializeField]private List<GameObject> objList;
         [SerializeField] private Transform targetTrm;
 
         [SerializeField] private float yOffset;
