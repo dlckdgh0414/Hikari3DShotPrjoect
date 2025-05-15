@@ -1,20 +1,15 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Test : MonoBehaviour
 {
-    [SerializeField] private GameObject _playerPrefabs;
-
-    private void Awake()
-    {
-        
-    }
-
+    private GameObject _player;
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(_playerPrefabs);
+            Instantiate(_player);
         }
     }
 }

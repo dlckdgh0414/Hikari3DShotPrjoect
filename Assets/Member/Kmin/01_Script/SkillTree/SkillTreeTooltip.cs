@@ -9,16 +9,15 @@ public class SkillTreeTooltip : MonoBehaviour
 {
     [SerializeField] private GameEventChannelSO eventChannel;
     [SerializeField] private SkillTree skillTree;
+    [SerializeField] private GameObject background;
     
     private SkillTreeSO skillTreeSO;
 
     private Button _purchaseBtn;
-    private Transform _background;
     private Transform _textArea;
-    private Transform _purchaseArea;
     private TextMeshProUGUI _description;
-    private TextMeshProUGUI _fruitsPrice;
-    private TextMeshProUGUI _fruitsName;
+    private TextMeshProUGUI _priceText;
+    private TextMeshProUGUI _nodeName;
     private TextMeshProUGUI _purchaseText;
     private Image _icon;
     
@@ -27,18 +26,14 @@ public class SkillTreeTooltip : MonoBehaviour
     private void Awake()
     {
         eventChannel.AddListener<SkillTreeSelectEvent>(HandleOnFruitsSelect);
-
-        _background = transform.Find("Background");
-        _icon = _background.Find("FruitsIcon/Icon").GetComponent<Image>();
-        _textArea = _background.Find("TextArea");
-        _purchaseArea = _background.Find("PurchaseArea");
-        _description = _textArea.Find("Description").GetComponent<TextMeshProUGUI>();
-        _fruitsName = _background.Find("Name").GetComponent<TextMeshProUGUI>();
-        _fruitsPrice = _purchaseArea.Find("FruitsPrice").GetComponent<TextMeshProUGUI>();
         
-        _purchaseBtn = _background.GetComponentInChildren<Button>();
+        _purchaseBtn = background.GetComponentInChildren<Button>();
         _purchaseText = _purchaseBtn.GetComponentInChildren<TextMeshProUGUI>();
-
+        _description = background.transform.Find("TextArea").GetComponentInChildren<TextMeshProUGUI>();
+        _nodeName = background.transform.Find("Name").GetComponent<TextMeshProUGUI>();
+        _priceText = background.transform.Find("Price").GetComponent<TextMeshProUGUI>();
+        _icon = background.transform.Find("Icon").GetComponent<Image>();
+        
         skillTreeSO = skillTree.skillTreeSO;
     }
 
@@ -46,12 +41,12 @@ public class SkillTreeTooltip : MonoBehaviour
     {
         NodeSO node = evt.node.GetNodeSO();
 
-        _purchaseText.text = node.isPurchase ? "구매하기" : "소유중";
-        
-        _description.text = node.SkillSO.description;
-        _fruitsPrice.text = node.price.ToString();
-        _fruitsName.text = node.nodeName;
-        _icon.sprite = node.SkillSO.icon;
+        _purchaseText.text = node.isPurchase ? "소유중" : "구매하기";
+        _icon.sprite = node.SkillSO ==null ? node.statSO.Icon : node.SkillSO.icon;
+
+        _description.text = node.description;
+        _priceText.text = $"{node.price}원";
+        _nodeName.text = node.nodeName;
 
         _purchaseBtn.onClick.RemoveAllListeners();
         _purchaseBtn.onClick.AddListener(() => HandleFruitsPurchase(evt.node));
@@ -59,7 +54,7 @@ public class SkillTreeTooltip : MonoBehaviour
 
     private void HandleFruitsPurchase(SkillTreeNode node)
     {
-        _purchaseText.text = "Purchased";
+        _purchaseText.text = "소유중";
         node.GetNodeSO().isPurchase = true;
         _treePurchaseEvent.node = node;
         eventChannel.RaiseEvent(_treePurchaseEvent);
