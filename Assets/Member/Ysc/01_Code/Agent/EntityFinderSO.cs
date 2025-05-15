@@ -10,6 +10,7 @@ namespace Member.Ysc._01_Code.Agent
 
         public void SetPlayer(Entity entity)
         {
+            Debug.Log($"타겟 엔티티 : {entity.name}");
             target = entity;
         }
     }
