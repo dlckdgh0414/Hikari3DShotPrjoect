@@ -7,7 +7,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         protected override void BulletInit()
         {
             base.BulletInit();
-
+            isRotModle = true;
         }
         protected override void OnTriggerEnter(Collider other)
         {
