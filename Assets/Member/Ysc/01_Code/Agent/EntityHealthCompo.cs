@@ -42,13 +42,11 @@ namespace Member.Ysc._01_Code.Agent
             _currentHealth = Mathf.Clamp(_currentHealth + current - previous, 1f, maxHealth);
         }
         
-        public void ApplyDamage(float damage, Vector2 direction)
+        public void ApplyDamage(float damage)
         {
             if (_entity.IsDead || _entity.IsInvin) return;
 
-            Debug.Log(direction);
             _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, maxHealth);
-            _feedbackData.LastAttackDirection = direction.normalized;
             Hp.Value = _currentHealth;
             AfterHitFeedbacks();
         }
