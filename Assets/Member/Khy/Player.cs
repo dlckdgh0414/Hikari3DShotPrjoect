@@ -14,7 +14,11 @@ public class Player : Entity
     private StateMachine _stateMachine;
     [field: SerializeField] public float zPos { get; set; }
 
-    
+    #region ¿¹Çà
+    public float edgeThreshold = 100f;
+    public CanvasGroup inGameUI;
+    #endregion
+
     protected override void Awake()
     {
         base.Awake();
@@ -29,6 +33,26 @@ public class Player : Entity
     private void Update()
     {
         _stateMachine.UpdateStateMachine();
+
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+        Vector2 screenSize = new(Screen.width, Screen.height);
+
+        Vector2 edgeDirection = Vector2.zero;
+
+        if (screenPos.x <= edgeThreshold)
+            edgeDirection.x = -1; // Left
+        else if (screenPos.x >= screenSize.x - edgeThreshold)
+            edgeDirection.x = 1;  // Right
+
+        if (screenPos.y <= edgeThreshold)
+            edgeDirection.y = -1; // Bottom
+        //else if (screenPos.y >= screenSize.y - edgeThreshold)
+        //    edgeDirection.y = 1;  // Top
+
+        if (edgeDirection != Vector2.zero)
+            inGameUI.DOFade(0.2f, 0.2f).SetEase(Ease.OutQuart);
+        else
+            inGameUI.DOFade(1f, 0.2f).SetEase(Ease.OutSine);
     }
 
     private void FixedUpdate()

@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using Member.Ysc._01_Code.StatSystems;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Member.Ysc._01_Code.Agent
 {
@@ -15,6 +16,9 @@ namespace Member.Ysc._01_Code.Agent
         private EntityFeedbackData _feedbackData;
 
         [HideInInspector] public NotifyValue<float> Hp = new();
+
+        [SerializeField]
+        private Slider hpSlider;
 
         public void Initialize(Entity entity)
         {
@@ -38,6 +42,7 @@ namespace Member.Ysc._01_Code.Agent
 
         private void HandleHPChange(StatSO stat, float current, float previous)
         {
+            hpSlider.value = current;
             maxHealth = current;
             _currentHealth = Mathf.Clamp(_currentHealth + current - previous, 1f, maxHealth);
         }

@@ -10,6 +10,7 @@ public class PlayerState : EntityState
     protected readonly float _inputThreshold = 0.1f;
     private AutoAimCompo _aimCompo;
 
+
     public PlayerState(Entity entity) : base(entity)
     {
         _player = entity as Player;
