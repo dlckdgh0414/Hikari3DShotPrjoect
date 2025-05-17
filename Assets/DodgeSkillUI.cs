@@ -1,0 +1,21 @@
+using UnityEngine;
+
+public class DodgeSkillUI : SkillCoolDownUI
+{
+    private Skill _currentSkill;
+    private float _cooltime;
+
+    private void Start()
+    {
+        _currentSkill = _skillCompo.GetSkill<DodgeSkill>();
+        _currentSkill.OnCooldown += CooldownInfo;
+    }
+
+    protected override void CooldownInfo(float current, float totalTime)//5
+    {
+        base.CooldownInfo(current,totalTime);
+        Debug.Log($"{current}");
+        _cooltime = totalTime;
+        _iconCool.fillAmount = current / _cooltime;
+    }
+}

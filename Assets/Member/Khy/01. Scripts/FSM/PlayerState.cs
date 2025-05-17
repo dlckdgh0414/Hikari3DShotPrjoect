@@ -62,12 +62,10 @@ public class PlayerState : EntityState
 
     void HorizontalLean()
     {
-        if (_aimCompo.target == null) return;
-
         Vector3 targetEulerAngels = _player.model.transform.localEulerAngles;
         Vector3 playerRotateDir;
 
-        if (_aimCompo.IsAutoAim)
+        if (_aimCompo.IsAutoAim || _aimCompo.target != null)
             playerRotateDir = _aimCompo.target.transform.position - _player.transform.position;
         else
             playerRotateDir = _player.InputReader.GetWorldPosition(out RaycastHit hitInfo) - _player.transform.position;

@@ -63,7 +63,10 @@ public class AutoAimCompo : MonoBehaviour,IEntityComponent
         if (IsAutoAim)
         {
             FindClosestObjectToMouse();
-            destination = Camera.main.WorldToScreenPoint(target.transform.position + (Vector3)uiOffset);
+            if(target != null)
+                destination = Camera.main.WorldToScreenPoint(target.transform.position + (Vector3)uiOffset);
+            else
+                destination = Input.mousePosition;
         }
         else
             destination = Input.mousePosition;
