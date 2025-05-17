@@ -24,7 +24,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
 
         public void SetDirection(Vector3 direction)
         {
-            fireDirection = direction - transform.position ;
+            fireDirection = direction - transform.position;
         }
 
         protected virtual void Awake()
@@ -41,12 +41,12 @@ namespace Member.Ysc._01_Code.Combat.Bullet
 
         protected void FixedUpdate()
         {
-            if(isSlowy)
+            if(isSlowy) 
                 RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed/SlowyDegree;
             else
                 RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
             Quaternion quaternion = Quaternion.LookRotation(fireDirection);
-            transform.rotation = quaternion;
+            transform.rotation = Quaternion.Euler(-90,0,quaternion.z);
         }
 
         protected virtual void DestroyBullet(IPoolable pool)
@@ -60,7 +60,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
             if (hitable.TryGetComponent(out IDamageable damageable))
             {
                 Vector2 direction = (hitable.transform.position - transform.position).normalized;
-                damageable.ApplyDamage(_attackCompo.BulletDamage, direction);
+                damageable.ApplyDamage(_attackCompo.BulletDamage);
             }
         }
 

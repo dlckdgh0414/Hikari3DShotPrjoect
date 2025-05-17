@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2161975274045626599}
   - component: {fileID: 7494715817369220865}
   m_Layer: 0
-  m_Name: 
+  m_Name: LaserBullet4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +50,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -96,7 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletSO: {fileID: 11400000, guid: 8663e3ed9b0159d4cbea5f3b620dc2bb, type: 2}
-  itemName: 
+  itemName: LaserBullet4
+  _attackCompo: {fileID: 0}
 --- !u!1 &6795272075498377805
 GameObject:
   m_ObjectHideFlags: 0

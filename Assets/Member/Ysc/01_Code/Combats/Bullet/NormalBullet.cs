@@ -8,7 +8,17 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         protected override void BulletInit()
         {
             base.BulletInit();
-            
+
+        }
+
+        protected override void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                //Debug.Log("앙 플레이어띠");
+                //Hit(other);
+                //DestroyBullet(this);
+            }
         }
     }
 }
