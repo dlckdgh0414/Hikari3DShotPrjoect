@@ -5,7 +5,7 @@ using UnityEngine.Video;
 public class EffectTaskWaiting : MonoBehaviour
 {
     private static bool Flag = false;
-    [SerializeField] GameObject obj;
+    [SerializeField] MinimalWait waitcanvas;
     private void Awake()
     {
         DontDestroyOnLoad(this);
@@ -14,7 +14,12 @@ public class EffectTaskWaiting : MonoBehaviour
     {
         if (!Flag)
         {
-            obj.GetComponent<VideoPlayer>().Play();
+            Flag = true;
+        }
+
+        else
+        {
+            waitcanvas.wait = 0.1f;
         }
     }
 

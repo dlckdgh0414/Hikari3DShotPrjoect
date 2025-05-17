@@ -7,6 +7,8 @@ public class EqumentBtn : MonoBehaviour
 {
     private Button thisBtn;
     private Image thisImg;
+
+    [SerializeField] private Sprite _baseImage;
     
 
     [field: SerializeField] public SkillSO _thisSkill { get; set; }
@@ -44,7 +46,7 @@ public class EqumentBtn : MonoBehaviour
             else
                 return;
             
-            thisImg.sprite = null;
+            thisImg.sprite = _baseImage;
         }
         
     }
