@@ -99,9 +99,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   playerDistance: 20
+  zPos: 45
   rb: {fileID: 8806081218793530937}
   isMove: 1
   isArrive: 0
+  IsCanManulMove: 0
 --- !u!1 &601251015718899370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,7 +1315,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0

@@ -46,7 +46,7 @@ public class SelfBoomSkill : Skill
         foreach (Enemy obj in EnemyManager.Enemies)
         {
             Debug.Log(obj);
-            obj.GetCompo<EntityHealthCompo>().ApplyDamage(100f, Vector2.left);
+            obj.GetCompo<EntityHealthCompo>().ApplyDamage(100f);
         }
     }
 }

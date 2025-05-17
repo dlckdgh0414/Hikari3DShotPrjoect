@@ -108,9 +108,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   playerDistance: 20
+  zPos: 45
   rb: {fileID: 3705254718939435585}
   isMove: 1
   isArrive: 0
+  IsCanManulMove: 0
 --- !u!1 &2940547456775856004
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,7 +324,7 @@ MonoBehaviour:
           m_Value0: 15394646901424463464
           m_Value1: 13930352482894011036
         Name: AttackTime
-        m_Value: 0.2
+        m_Value: 5
     - rid: 2898964706085830731
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior,
         asm: Unity.Behavior}
@@ -390,7 +392,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
