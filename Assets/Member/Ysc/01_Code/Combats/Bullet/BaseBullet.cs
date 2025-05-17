@@ -12,6 +12,8 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         [SerializeField] private string itemName;
         [HideInInspector] public PlayerAttackCompo _attackCompo;
 
+        protected bool isRotModle;
+
         public string PoolingName => itemName;
         
         protected Vector3 fireDirection;
@@ -34,19 +36,42 @@ namespace Member.Ysc._01_Code.Combat.Bullet
 
         protected virtual void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player") || other.CompareTag("Bullet")) return;
-            Hit(other);
-            DestroyBullet(this);
+          
         }
 
-        protected void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
-            if(isSlowy) 
-                RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed/SlowyDegree;
+            if (isRotModle)
+            {
+                if (isSlowy)
+                    RbCompo.linearVelocity = -Vector3.forward * BulletSO.BulletSpeed / SlowyDegree;
+                else
+                    RbCompo.linearVelocity = -Vector3.forward * BulletSO.BulletSpeed;
+            }
             else
-                RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
-            Quaternion quaternion = Quaternion.LookRotation(fireDirection);
-            transform.rotation = Quaternion.Euler(-90,0,quaternion.z);
+            {
+                if(isSlowy) 
+                    RbCompo.linearVelocity = transform.forward * BulletSO.BulletSpeed/SlowyDegree;
+                else
+                    RbCompo.linearVelocity = transform.forward * BulletSO.BulletSpeed;
+
+            }
+
+        }
+
+        protected void LoockTarget()
+        {
+            if (isRotModle)
+            {
+                Quaternion quaternion = Quaternion.LookRotation(fireDirection);
+                float anglez = quaternion.eulerAngles.z;
+                transform.rotation = Quaternion.Euler(90, quaternion.eulerAngles.y, anglez);
+            }
+            else
+            {
+                Quaternion quaternion = Quaternion.LookRotation(fireDirection);
+                transform.rotation = quaternion;
+            }
         }
 
         protected virtual void DestroyBullet(IPoolable pool)
@@ -59,7 +84,6 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         {
             if (hitable.TryGetComponent(out IDamageable damageable))
             {
-                Vector2 direction = (hitable.transform.position - transform.position).normalized;
                 damageable.ApplyDamage(_attackCompo.BulletDamage);
             }
         }
