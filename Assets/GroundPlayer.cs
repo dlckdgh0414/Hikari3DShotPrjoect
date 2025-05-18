@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+    //½Ã°£ ¾ø´Ù¤¿¤¿¤¿¤¿¤¿¤¿¤¿¤¿ÀÌ³«¤¾‘§¹Â¤Ó¤¤´Ý·ùÇÏ´ö¤¸µð»Ø¤Ó¤©
 public class GroundPlayer : MonoBehaviour
 {
     [SerializeField]
