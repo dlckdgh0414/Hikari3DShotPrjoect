@@ -13,6 +13,7 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
     public Action OnStartChargeAttackEvent;
     public Action OnEndChargeAttackEvent;
     public Action<int> OnWingEvent;
+    public Action<float> OnXMoveEvent;
 
     public Action OnFirSkillEvent;
     public Action OnSecSkillEvent;
@@ -66,6 +67,9 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
     public void OnMove(InputAction.CallbackContext context)
     {
         InputDirection = context.ReadValue<Vector2>();
+
+        if (context.started)
+            OnXMoveEvent?.Invoke(InputDirection.x);
     }
 
     public void OnRightWing(InputAction.CallbackContext context)

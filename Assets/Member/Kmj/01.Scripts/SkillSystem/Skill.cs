@@ -1,5 +1,6 @@
 using Member.Ysc._01_Code.Agent;
 using Member.Ysc._01_Code.StatSystems;
+using System;
 using UnityEngine;
 
 
@@ -20,7 +21,6 @@ public abstract class Skill : MonoBehaviour
 
     public bool IsCooldown => _cooldownTimer > 0f;
     public event CooldownInfo OnCooldown;
-
     public virtual void InitializeSkill(Entity entity, SkillCompo skillCompo)
     {
         _entity = entity;

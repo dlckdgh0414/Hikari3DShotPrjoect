@@ -6,7 +6,6 @@ using UnityEngine;
 public class SelfBoomSkill : Skill
 {
     private EntityVFX entityVFX;
-    private EntityMover _mover;
     private readonly string fuseEffect = "BombFuse";
     private readonly string explosionEffect = "Explosion";
 
@@ -24,7 +23,6 @@ public class SelfBoomSkill : Skill
     {
         base.InitializeSkill(entity, skillCompo);
         entityVFX = _entity.GetCompo<EntityVFX>();
-        _mover = entity.GetCompo<EntityMover>();
     }
 
     public override void OverSkillCooltime()
@@ -56,7 +54,7 @@ public class SelfBoomSkill : Skill
         foreach (Enemy obj in EnemyManager.Enemies)
         {
             Debug.Log(obj);
-            obj.GetCompo<EntityHealthCompo>().ApplyDamage(100f, Vector2.left);
+            obj.GetCompo<EntityHealthCompo>().ApplyDamage(100f);
         }
     }
 }

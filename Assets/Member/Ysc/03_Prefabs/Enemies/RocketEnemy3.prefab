@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &86107812314025510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4378083055747610497}
+  - component: {fileID: 6383125580477129711}
+  m_Layer: 6
+  m_Name: HitFeedback
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4378083055747610497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86107812314025510}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8750264247770973734}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6383125580477129711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86107812314025510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca0e5c48e50c4b529af7ed14b7cd0181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matTarget: {fileID: 4754090670276747528}
+  blinkDuration: 0.15
+  blinkIntensity: 0.15
 --- !u!1 &149033847881095858
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   playerDistance: 20
-  zPos: 35
+  zPos: 45
   rb: {fileID: 3705254718939435585}
   isMove: 1
   isArrive: 0
@@ -263,6 +310,7 @@ Transform:
   m_Children:
   - {fileID: 4754090670276747528}
   - {fileID: 6428242711018702498}
+  - {fileID: 4378083055747610497}
   - {fileID: 5424406384127825216}
   - {fileID: 954863626199475743}
   - {fileID: 5576774166485073673}
@@ -283,7 +331,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnHit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6383125580477129711}
+        m_TargetAssemblyTypeName: Member.Ysc._01_Code.Feedbacks.BlinkFeedback, Assembly-CSharp
+        m_MethodName: PlayFeedback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDead:
     m_PersistentCalls:
       m_Calls: []
@@ -324,7 +384,7 @@ MonoBehaviour:
           m_Value0: 15394646901424463464
           m_Value1: 13930352482894011036
         Name: AttackTime
-        m_Value: 0.2
+        m_Value: 5
     - rid: 2898964706085830731
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior,
         asm: Unity.Behavior}
@@ -333,7 +393,7 @@ MonoBehaviour:
           m_Value0: 4236400432823817047
           m_Value1: 8424441759805297558
         Name: AttackDelayTime
-        m_Value: 0.5
+        m_Value: 4
     - rid: 2898964737453195406
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior,
         asm: Unity.Behavior}
@@ -392,7 +452,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
@@ -588,6 +648,7 @@ MonoBehaviour:
   _currentHealth: 0
   Hp:
     value: 0
+  hpSlider: {fileID: 0}
 --- !u!1 &7082198578466943439
 GameObject:
   m_ObjectHideFlags: 0

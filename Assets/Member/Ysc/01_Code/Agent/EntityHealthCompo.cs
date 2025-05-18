@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using Member.Ysc._01_Code.StatSystems;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Member.Ysc._01_Code.Agent
 {
@@ -15,6 +16,9 @@ namespace Member.Ysc._01_Code.Agent
         private EntityFeedbackData _feedbackData;
 
         [HideInInspector] public NotifyValue<float> Hp = new();
+
+        [SerializeField]
+        private Slider hpSlider;
 
         public void Initialize(Entity entity)
         {
@@ -38,17 +42,16 @@ namespace Member.Ysc._01_Code.Agent
 
         private void HandleHPChange(StatSO stat, float current, float previous)
         {
+            hpSlider.value = current;
             maxHealth = current;
             _currentHealth = Mathf.Clamp(_currentHealth + current - previous, 1f, maxHealth);
         }
         
-        public void ApplyDamage(float damage, Vector2 direction)
+        public void ApplyDamage(float damage)
         {
             if (_entity.IsDead || _entity.IsInvin) return;
 
-            Debug.Log(direction);
             _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, maxHealth);
-            _feedbackData.LastAttackDirection = direction.normalized;
             Hp.Value = _currentHealth;
             AfterHitFeedbacks();
         }

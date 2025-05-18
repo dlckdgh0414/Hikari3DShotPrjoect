@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public abstract class Entity : MonoBehaviour, IDamageable
 {
 
-    public delegate void OnDamageHandler(float damage, Vector2 direction);
+    public delegate void OnDamageHandler(float damage);
     public event OnDamageHandler OnDamage;
 
     public UnityEvent OnHit;
@@ -71,6 +71,6 @@ public abstract class Entity : MonoBehaviour, IDamageable
         return default(T);
     }
 
-    public void ApplyDamage(float damage, Vector2 direction)
-        => OnDamage?.Invoke(damage, direction);
+    public void ApplyDamage(float damage)
+        => OnDamage?.Invoke(damage);
 }

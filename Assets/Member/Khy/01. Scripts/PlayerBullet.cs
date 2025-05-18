@@ -11,10 +11,11 @@ public class PlayerBullet : BaseBullet, IPoolable
         line = GetComponent<TrailRenderer>();
     }
 
-    protected override void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        base.OnTriggerEnter(other);
+        if (other.CompareTag("Player") || other.CompareTag("Bullet")) return;
+        Hit(other);
+        DestroyBullet(this);
         line.Clear();
     }
-
 }
