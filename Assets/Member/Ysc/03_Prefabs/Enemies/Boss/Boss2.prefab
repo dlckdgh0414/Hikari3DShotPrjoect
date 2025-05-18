@@ -173,6 +173,53 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3655881138678736288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 360500981111955345}
+  - component: {fileID: 2941752570443187967}
+  m_Layer: 6
+  m_Name: HitFeedback
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &360500981111955345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655881138678736288}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4773703747284460261}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2941752570443187967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655881138678736288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca0e5c48e50c4b529af7ed14b7cd0181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matTarget: {fileID: 7863938724631716262}
+  blinkDuration: 0.15
+  blinkIntensity: 0.15
 --- !u!1 &3779573412451772537
 GameObject:
   m_ObjectHideFlags: 0
@@ -6443,6 +6490,7 @@ Transform:
   m_Children:
   - {fileID: 7863938724631716262}
   - {fileID: 1109964752555429220}
+  - {fileID: 360500981111955345}
   - {fileID: 6358012471588777827}
   - {fileID: 4986685546902621854}
   - {fileID: 1974693107191920999}
@@ -6595,7 +6643,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnHit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2941752570443187967}
+        m_TargetAssemblyTypeName: Member.Ysc._01_Code.Feedbacks.BlinkFeedback, Assembly-CSharp
+        m_MethodName: PlayFeedback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDead:
     m_PersistentCalls:
       m_Calls: []
@@ -7010,7 +7070,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7863938724631716262}
   m_Layer: 6
-  m_Name: Example4_Grey
+  m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7271,6 +7331,7 @@ MonoBehaviour:
   _currentHealth: 0
   Hp:
     value: 0
+  hpSlider: {fileID: 0}
 --- !u!1001 &4324022780127963701
 PrefabInstance:
   m_ObjectHideFlags: 0

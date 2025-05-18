@@ -104,6 +104,53 @@ MonoBehaviour:
   isMove: 1
   isArrive: 0
   IsCanManulMove: 0
+--- !u!1 &350770985194655816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4640003044912977534}
+  - component: {fileID: 8461554361887304937}
+  m_Layer: 6
+  m_Name: HitFeedback
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4640003044912977534
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350770985194655816}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5274684168313140719}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8461554361887304937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350770985194655816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca0e5c48e50c4b529af7ed14b7cd0181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matTarget: {fileID: 8345832404426016467}
+  blinkDuration: 0.15
+  blinkIntensity: 0.15
 --- !u!1 &444068298423658665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,6 +1951,7 @@ MonoBehaviour:
   _currentHealth: 0
   Hp:
     value: 0
+  hpSlider: {fileID: 0}
 --- !u!1 &6956188509013524812
 GameObject:
   m_ObjectHideFlags: 0
@@ -2217,6 +2265,7 @@ Transform:
   m_Children:
   - {fileID: 8345832404426016467}
   - {fileID: 6060247590516247662}
+  - {fileID: 4640003044912977534}
   - {fileID: 5350478788956700135}
   - {fileID: 6422337852618681037}
   - {fileID: 8558156628916493748}
@@ -2237,7 +2286,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnHit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8461554361887304937}
+        m_TargetAssemblyTypeName: Member.Ysc._01_Code.Feedbacks.BlinkFeedback, Assembly-CSharp
+        m_MethodName: PlayFeedback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDead:
     m_PersistentCalls:
       m_Calls: []
@@ -2420,7 +2481,7 @@ GameObject:
   - component: {fileID: 4935243496128694646}
   - component: {fileID: 7176897799640726972}
   m_Layer: 0
-  m_Name: StarSparrow3
+  m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
