@@ -16,7 +16,7 @@ public class DodgeSkillUI : SkillCoolDownUI
         base.CooldownInfo(current,totalTime);
         bool isAtv = current < 0.1f ? false : true;
         text.gameObject.SetActive(isAtv);
-        text.text = current.ToString().Substring(0,1);
+        text.text = (current + 1).ToString().Substring(0,1);
         _cooltime = totalTime;
         _iconCool.fillAmount = current / _cooltime;
     }
