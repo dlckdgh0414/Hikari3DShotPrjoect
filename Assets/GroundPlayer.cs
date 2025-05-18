@@ -13,6 +13,7 @@ public class GroundPlayer : MonoBehaviour
     private Vector3 _destination;
     public bool IsArrived => Vector3.Distance(transform.position, _destination) < stopThreshold;
 
+    [SerializeField]
     private Unit currentUnit;
 
     private void Awake()
