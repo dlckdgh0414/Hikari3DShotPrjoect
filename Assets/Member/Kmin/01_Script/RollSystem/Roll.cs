@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine.UI;
 
 public class Roll : MonoBehaviour
@@ -46,16 +47,22 @@ public class Roll : MonoBehaviour
         return Random.Range(1, (int)rarity) == 1;
     }
 
+    #if UNITY_EDITOR
     [ContextMenu("Roll")]
+    #endif
     public void SkillRoll()
     {
+        if (CurrencyManager.Instance.GetCurrency(CurrencyType.Eon) < 100) return;
+        
+        CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, -100);
+
         DOTween.To(() => 0f, y => maskBackground.rectTransform.sizeDelta = 
             new Vector2(maskBackground.rectTransform.sizeDelta.x, y), 300f, 2f)
             .SetEase(Ease.InExpo).OnComplete(() => _isDecrease = true);
         
         rolledSkillText.transform.parent.gameObject.SetActive(false);
-        _isRolling = true;
         _scrollSpeed = scrollSpeed;
+        _isRolling = true;
     }
 
     private void Rolling()
