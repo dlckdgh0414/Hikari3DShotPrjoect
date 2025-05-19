@@ -471,6 +471,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2306645144870704269}
   m_LocalEulerAnglesHint: {x: 42, y: 0, z: 0}
+--- !u!1 &394179870656547690
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5767642360315348105}
+  - component: {fileID: 6408019369722320710}
+  m_Layer: 0
+  m_Name: MultiLazerVFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5767642360315348105
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394179870656547690}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1971115755109650807}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6408019369722320710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394179870656547690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfd58bb4c834bef44b7ebd71c2e41a7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <VfxName>k__BackingField: MultiLazerVFX
+  isOnPosition: 0
+  particle: {fileID: 0}
+  objParticle: {fileID: 0}
+  TrueIsObjParticle: 1
 --- !u!1 &403628903759552048
 GameObject:
   m_ObjectHideFlags: 0
@@ -5727,6 +5776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillEnabled: 1
   cooldown: 15
+  skillIcon: {fileID: 21300000, guid: ace04065a9d23af40987caa027a96601, type: 3}
   slowDuration: 5
   slowDegree: 6
   volume:
@@ -20549,7 +20599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f4da53b722b704fbd34b37d9d236e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skinSO: {fileID: 11400000, guid: e1fb617322e39824397a694bfc8e6003, type: 2}
+  skinSO: {fileID: 11400000, guid: 1f2e7325bbb6e8c4d84ebb0a43ccb5f6, type: 2}
 --- !u!1 &1039552687245387645
 GameObject:
   m_ObjectHideFlags: 0
@@ -46771,6 +46821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillEnabled: 1
   cooldown: 25
+  skillIcon: {fileID: 21300000, guid: 0ba1f4b203030b9488074b8d36eb1272, type: 3}
   duration: 7
   healAmount: 30
 --- !u!1 &2087560264569577323
@@ -117969,6 +118020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillEnabled: 1
   cooldown: 7
+  skillIcon: {fileID: 21300000, guid: 6c3f6060f3143b34fa09bdc414757ed3, type: 3}
   duration: 3
   intensity: 5
   healingCrash: 4
@@ -118738,6 +118790,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillEnabled: 1
   cooldown: 5
+  skillIcon: {fileID: 21300000, guid: 139d108b3484f6d41be408d8b189efde, type: 3}
 --- !u!1 &5471045508818592515
 GameObject:
   m_ObjectHideFlags: 0
@@ -119737,6 +119790,7 @@ Transform:
   - {fileID: 7232860285189754337}
   - {fileID: 9091611858497585273}
   - {fileID: 3400925291086581010}
+  - {fileID: 5767642360315348105}
   m_Father: {fileID: 8945804552467967111}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6234857101174188683
@@ -119838,6 +119892,53 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6336366485692849537
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8830593541826060685}
+  - component: {fileID: 2159940621282489638}
+  m_Layer: 0
+  m_Name: HelpCallSkill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8830593541826060685
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6336366485692849537}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7162704674637340825}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2159940621282489638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6336366485692849537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220e762560b599244843204ce3ebd59d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillEnabled: 1
+  cooldown: 20
+  skillIcon: {fileID: 21300000, guid: db12891397bb6c04fb3782ce918be929, type: 3}
 --- !u!1 &6476307028433293057
 GameObject:
   m_ObjectHideFlags: 0
@@ -132342,7 +132443,7 @@ MonoBehaviour:
   playerFSM: {fileID: 11400000, guid: beedab4658660544aabea7c03e315634, type: 2}
   <model>k__BackingField: {fileID: 0}
   <zPos>k__BackingField: 7.2
-  edgeThreshold: 100
+  edgeThreshold: 50
   inGameUI: {fileID: 4646535619625336352}
 --- !u!54 &5864183723995374333
 Rigidbody:
@@ -132489,6 +132590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillEnabled: 1
   cooldown: 4
+  skillIcon: {fileID: 21300000, guid: 7e552efb7a626be478bf9ae364079a56, type: 3}
   <CameraChannel>k__BackingField: {fileID: 11400000, guid: abd9c912f20296a42a41e0bb57eb6c8d,
     type: 2}
   SpinCameraEffectSec: 0.5
@@ -132554,6 +132656,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8830593541826060685}
   - {fileID: 3513367192154755607}
   - {fileID: 7485169817271112326}
   - {fileID: 7541933095825515644}
@@ -132573,7 +132676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d412b5c885c1de847be757f211ae0066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSkill: {fileID: 1459242475231197582}
+  firstSkill: {fileID: 2159940621282489638}
   secondSkill: {fileID: 2809807132453447673}
   thirdSkill: {fileID: 8928604765757848092}
   whatIsEnemy:
@@ -132591,7 +132694,6 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   colliders: []
-  entityVFX: {fileID: 0}
   maxCheckEnemy: 0
   CoolDownStat: {fileID: 11400000, guid: d2c2d6895006a304ab0f65dadd04c36d, type: 2}
 --- !u!1 &8749239157700460639
@@ -158534,22 +158636,22 @@ PrefabInstance:
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0.5882353
       objectReference: {fileID: 0}
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.41568628
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.41568628
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.41568628
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
@@ -158608,6 +158710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 3623016136925237191}
+  <InputReader>k__BackingField: {fileID: 0}
 --- !u!1001 &4394048918948389963
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -158719,7 +158822,7 @@ PrefabInstance:
     - target: {fileID: 4827444683010446743, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
       propertyPath: m_Type
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4827444683010446743, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
@@ -158759,22 +158862,22 @@ PrefabInstance:
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0.5882353
       objectReference: {fileID: 0}
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.41509432
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.41509432
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.41509432
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
@@ -158848,6 +158951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 4465563673068196958}
+  <InputReader>k__BackingField: {fileID: 0}
 --- !u!1001 &5136638667374024167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -159839,22 +159943,22 @@ PrefabInstance:
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0.5882353
       objectReference: {fileID: 0}
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.41568628
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.41568628
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.41568628
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
@@ -159895,6 +159999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 8448953724298563508}
+  <InputReader>k__BackingField: {fileID: 0}
 --- !u!224 &6246216298403711251 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2516844456097461938, guid: d143f32349d0bc241bfe2c63ead47ad6,
@@ -160029,22 +160134,22 @@ PrefabInstance:
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0.5882353
       objectReference: {fileID: 0}
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.41568628
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.41568628
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.41568628
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6894345748867010005, guid: d143f32349d0bc241bfe2c63ead47ad6,
         type: 3}
@@ -160085,6 +160190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 8495769268256363357}
+  <InputReader>k__BackingField: {fileID: 0}
 --- !u!224 &6199410667213395450 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2516844456097461938, guid: d143f32349d0bc241bfe2c63ead47ad6,

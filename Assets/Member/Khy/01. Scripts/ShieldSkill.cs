@@ -2,13 +2,11 @@ using UnityEngine;
 
 public class ShieldSkill : Skill
 {
-    private EntityVFX entityVFX;
     private readonly string shieldSkill = "ShieldVFX";
 
     public override void InitializeSkill(Entity entity, SkillCompo skillCompo)
     {
         base.InitializeSkill(entity, skillCompo);
-        entityVFX = _entity.GetCompo<EntityVFX>();
     }
 
     public override void OverSkillCooltime()

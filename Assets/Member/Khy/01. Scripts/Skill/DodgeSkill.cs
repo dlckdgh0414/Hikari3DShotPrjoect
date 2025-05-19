@@ -20,7 +20,7 @@ public class DodgeSkill : Skill
         {
             if (!DOTween.IsTweening(_player.model.transform))
             {
-                _player.GetCompo<SkillCompo>().entityVFX.PlayVfx(dodgeSkill, Vector3.zero, Quaternion.identity);
+                entityVFX.PlayVfx(dodgeSkill, Vector3.zero, Quaternion.identity);
                 _mover.StopImmediately();
                 _mover.CanManualMove = false;
                 _mover.SetAutoMovement(new Vector3(dir * 25, 0, 0));

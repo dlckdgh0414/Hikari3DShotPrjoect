@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class SelfBoomSkill : Skill
 {
-    private EntityVFX entityVFX;
     private readonly string fuseEffect = "BombFuse";
     private readonly string explosionEffect = "Explosion";
 
@@ -22,7 +21,6 @@ public class SelfBoomSkill : Skill
     public override void InitializeSkill(Entity entity, SkillCompo skillCompo)
     {
         base.InitializeSkill(entity, skillCompo);
-        entityVFX = _entity.GetCompo<EntityVFX>();
     }
 
     public override void OverSkillCooltime()

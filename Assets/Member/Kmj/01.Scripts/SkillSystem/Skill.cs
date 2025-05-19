@@ -8,6 +8,8 @@ public delegate void CooldownInfo(float current, float totalTime);
 
 public abstract class Skill : MonoBehaviour
 {
+    protected EntityVFX entityVFX;
+
     public bool skillEnabled = false;
 
     [SerializeField] protected float cooldown;
@@ -19,6 +21,7 @@ public abstract class Skill : MonoBehaviour
     protected SkillCompo _skillCompo;
     protected EntityStat _statCompo;
 
+    public Sprite skillIcon;
     public bool IsCooldown => _cooldownTimer > 0f;
     public event CooldownInfo OnCooldown;
     public virtual void InitializeSkill(Entity entity, SkillCompo skillCompo)
@@ -29,11 +32,12 @@ public abstract class Skill : MonoBehaviour
         _mover = entity.GetCompo<EntityMover>();
         _statCompo = entity.GetCompo<EntityStat>();
         _skillCompo.CoolDownStat = _statCompo.GetStat(_skillCompo.CoolDownStat);
+        entityVFX = _entity.GetCompo<EntityVFX>();
     }
 
     protected virtual void Update()
     {
-        if (_cooldownTimer > 0)
+        if (IsCooldown)
         {
             _cooldownTimer -= Time.deltaTime;
 

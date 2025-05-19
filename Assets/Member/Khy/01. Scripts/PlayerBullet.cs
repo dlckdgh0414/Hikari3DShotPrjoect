@@ -12,14 +12,11 @@ public class PlayerBullet : BaseBullet, IPoolable
     }
     protected override void FixedUpdate()
     {
-        if (isSlowy)
-            RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed / SlowyDegree;
-        else
-            RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
+        RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
         Quaternion quaternion = Quaternion.LookRotation(fireDirection);
         transform.rotation = Quaternion.Euler(-90, 0, quaternion.z);
     }
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") || other.CompareTag("Bullet")) return;
         Hit(other);
