@@ -3,9 +3,8 @@ using Member.Ysc._01_Code.Agent;
 using System.Collections;
 using UnityEngine;
 
-public class SelfBoomSkill : Skill
+public class SelfBoomSkill : ActiveSkill
 {
-    private EntityVFX entityVFX;
     private readonly string fuseEffect = "BombFuse";
     private readonly string explosionEffect = "Explosion";
 
@@ -22,7 +21,6 @@ public class SelfBoomSkill : Skill
     public override void InitializeSkill(Entity entity, SkillCompo skillCompo)
     {
         base.InitializeSkill(entity, skillCompo);
-        entityVFX = _entity.GetCompo<EntityVFX>();
     }
 
     public override void OverSkillCooltime()

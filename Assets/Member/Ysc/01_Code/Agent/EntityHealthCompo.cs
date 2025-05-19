@@ -50,7 +50,7 @@ namespace Member.Ysc._01_Code.Agent
         public void ApplyDamage(float damage)
         {
             if (_entity.IsDead || _entity.IsInvin) return;
-
+            Debug.Log("어플라이");
             _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, maxHealth);
             Hp.Value = _currentHealth;
             AfterHitFeedbacks();
@@ -82,6 +82,7 @@ namespace Member.Ysc._01_Code.Agent
 
         private void AfterHitFeedbacks()
         {
+            Debug.Log("피드백끝");
             _entity.OnHit?.Invoke();
 
             if (_currentHealth <= 0)

@@ -39,7 +39,6 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
         private Image _image;
         
         public SkillSO _selectedSkill { get; set; }
-        public SkillSO _staticSkill { get; set; }
         
 
         private string path;
@@ -47,7 +46,6 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
         private void Awake()
         {
             _skillInvenEvent.AddListener<SkillSelectEvent>(HandleSkillSelect);
-            _skillInvenEvent.AddListener<StaticSelectEvent>(HandleStaticSkillSelect);
             _inventorySO.invenSkillList.Add(tempSO1);
             _inventorySO.invenSkillList.Add(tempSO2);
             _inventorySO.invenSkillList.Add(tempSO3);
@@ -56,7 +54,6 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
 
         private void Start()
         {
-            _staticButton.onClick.AddListener(HandleStaticSkillEquip);
             equipBtns.ForEach(btn => btn.onClick.AddListener(HandleSkillEquip));
 
             
@@ -85,17 +82,22 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
                     clickedImage.sprite = _selectedSkill.icon;
 
                     img.sprite = _baseImage;
+                    
+                    print("삭제됨");
                     if (child.name.Contains("2"))
                     {
                         PlayerSendInfo.Instance.skillName[0] = string.Empty;
+                        child.GetComponent<EqumentBtn>()._thisSkill = null;
                     }
                     else if (child.name.Contains("3"))
                     {
                         PlayerSendInfo.Instance.skillName[1] = string.Empty;
+                        child.GetComponent<EqumentBtn>()._thisSkill = null;
                     }
                     else if (child.name.Contains("4"))
                     {
                         PlayerSendInfo.Instance.skillName[2] = string.Empty;
+                        child.GetComponent<EqumentBtn>()._thisSkill = null;
                     }
                 }
             }
@@ -121,29 +123,6 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
             
             clickedImage = null;
             _selectedSkill = null;
-            
-        }
-        
-
-        private void HandleStaticSkillEquip()
-        {  
-            if (_staticSkill == null || _staticSkill.icon == null)
-                return;
-            
-            if (EventSystem.current.currentSelectedGameObject == null)
-                return;
-
-            Image clickedImage = EventSystem.current.currentSelectedGameObject.GetComponent<Image>();
-            if (clickedImage == null)
-                return;
-            
-            clickedImage.sprite = _staticSkill.icon;
-            //_staticSkilEvent.staticSkill = _staticSkill.name;
-            //_skillSendEvent.RaiseEvent(_skillEvent);
-            
-            clickedImage = null;
-            _staticSkill = null;
-            
         }
         
 
@@ -151,11 +130,5 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
         {
             _selectedSkill = evt.selectedSkill;
         }
-        
-        private void HandleStaticSkillSelect(StaticSelectEvent evt)
-        {
-            _staticSkill = evt.staticSkill;
-        }
-        
     }
 }

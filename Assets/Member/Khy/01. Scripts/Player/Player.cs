@@ -33,8 +33,12 @@ public class Player : Entity
     private void Update()
     {
         _stateMachine.UpdateStateMachine();
+        UIFade();
+    }
 
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+    private void UIFade()
+    {
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(model.transform.position);
         Vector2 screenSize = new(Screen.width, Screen.height);
 
         Vector2 edgeDirection = Vector2.zero;

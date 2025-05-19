@@ -29,7 +29,7 @@ public class ControlRoom : MonoBehaviour,IEntityComponent
         {
 
         });
-        s.Append(model.transform.DOLocalRotate(new Vector3(model.transform.localEulerAngles.x, model.transform.localEulerAngles.y, 20 * -dir), .4f).SetEase(Ease.InOutExpo))
+        s.Append(model.transform.DOLocalRotate(new Vector3(model.transform.localEulerAngles.x, model.transform.localEulerAngles.y, 20 * dir), .4f).SetEase(Ease.InOutExpo))
         .Append(model.transform.DOLocalRotate(new Vector3(model.transform.localEulerAngles.x, model.transform.localEulerAngles.y, 0), .4f).SetEase(Ease.OutSine));
     }
 

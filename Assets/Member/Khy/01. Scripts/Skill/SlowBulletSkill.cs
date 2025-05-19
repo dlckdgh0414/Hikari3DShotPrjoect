@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class SlowBulletSkill : Skill
+public class SlowBulletSkill : ActiveSkill
 {
     [Header("지속시간")]
     public float slowDuration;

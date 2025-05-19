@@ -22,6 +22,7 @@ namespace Member.Ysc._01_Code.Agent.Enemies.BT
 
         protected override void HandleHit()
         {
+            Debug.Log("쳐맞음");
             if (IsDead) return;
         }
 
