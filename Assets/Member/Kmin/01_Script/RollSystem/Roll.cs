@@ -7,15 +7,19 @@ using UnityEngine.UI;
 
 public class Roll : MonoBehaviour
 {
+    [Header("------------------------Assignment------------------------")]
     [SerializeField] private GameEventChannelSO rollEventChannel;
     [SerializeField] private Image maskBackground;
     [SerializeField] private TextMeshProUGUI rolledSkillText;
     [SerializeField] private RectTransform contentPanel;
     [SerializeField] private SkillSOList skillListSO;
-    [SerializeField] private float scrollSpeed;
     [SerializeField] private UseSkillDataSO skillData;
-
     public List<RollItem> rollItems = new List<RollItem>();
+
+    [Header("------------------------Setting------------------------")]
+    [SerializeField] private int price;
+    [SerializeField] private float scrollSpeed;
+    
     private Dictionary<string, SkillSO> _skillDic/*k*/ = new Dictionary<string, SkillSO>();
     
     private readonly RollEndEvent _rollEndEvent = new RollEndEvent();
@@ -97,7 +101,7 @@ public class Roll : MonoBehaviour
         }
         else
         {
-            Debug.Log("중복");
+            CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, 50);
         } 
         
         rolledSkillText.transform.parent.gameObject.SetActive(true);
