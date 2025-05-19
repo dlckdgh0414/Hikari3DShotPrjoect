@@ -5,7 +5,7 @@ public class EnemyMovement : MonoBehaviour,IEntityComponent
 {
     [SerializeField] private float speed = 300f;
     [SerializeField] private float playerDistance = 20;
-    [SerializeField] private int zPos =45;
+    [SerializeField] private int zPos;
     [SerializeField] private Rigidbody rb;
     public bool isMove = true;
     public bool isArrive = false;
@@ -39,7 +39,7 @@ public class EnemyMovement : MonoBehaviour,IEntityComponent
 
     public void PatrolMove(Vector3 Dir)
     {
-        Vector3 movDir = new Vector3(Random.Range(-20f,20f), Random.Range(-10f, 10f), zPos);
+        Vector3 movDir = new Vector3(Random.Range(-8f,8f), Random.Range(-5f, 5f), zPos);
         rb.DOMove(movDir,1.5f).OnComplete(()=>isArrive =true);
 
     }

@@ -10,6 +10,7 @@ public class PlayerState : EntityState
     protected readonly float _inputThreshold = 0.1f;
     private AutoAimCompo _aimCompo;
 
+
     public PlayerState(Entity entity) : base(entity)
     {
         _player = entity as Player;
@@ -65,7 +66,7 @@ public class PlayerState : EntityState
         Vector3 targetEulerAngels = _player.model.transform.localEulerAngles;
         Vector3 playerRotateDir;
 
-        if (_aimCompo.IsAutoAim)
+        if (_aimCompo.IsAutoAim || _aimCompo.target != null)
             playerRotateDir = _aimCompo.target.transform.position - _player.transform.position;
         else
             playerRotateDir = _player.InputReader.GetWorldPosition(out RaycastHit hitInfo) - _player.transform.position;
