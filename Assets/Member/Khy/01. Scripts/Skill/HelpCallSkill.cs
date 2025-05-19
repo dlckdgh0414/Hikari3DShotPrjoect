@@ -1,26 +1,22 @@
 using UnityEngine;
 
-public class ShieldSkill : Skill
+public class HelpCallSkill : ActiveSkill
 {
-    private EntityVFX entityVFX;
-    private readonly string shieldSkill = "ShieldVFX";
+    private readonly string CallSkill = "MultiLazerVFX";
 
     public override void InitializeSkill(Entity entity, SkillCompo skillCompo)
     {
         base.InitializeSkill(entity, skillCompo);
-        entityVFX = _entity.GetCompo<EntityVFX>();
     }
 
     public override void OverSkillCooltime()
     {
         base.OverSkillCooltime();
-        _entity.IsInvin = false;
     }
 
     public override void UseSkill()
     {
         base.UseSkill();
-        _entity.IsInvin = true;
-        entityVFX.PlayVfx(shieldSkill,Vector3.zero,Quaternion.identity);
+        entityVFX.PlayVfx(CallSkill, Vector3.zero, Quaternion.identity);
     }
 }

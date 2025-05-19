@@ -3,21 +3,19 @@ using Member.Ysc._01_Code.Agent;
 using System.Collections;
 using UnityEngine;
 
-public class HealingSkill : Skill
+public class HealingSkill : ActiveSkill
 {
     [Header("지속시간")]
     public float duration;
     [Header("힐량")]
     public float healAmount;
 
-    private EntityVFX entityVFX;
     private EntityHealthCompo healthCompo;
     private readonly string healSkill = "HealVFX";
 
     public override void InitializeSkill(Entity entity, SkillCompo skillCompo)
     {
         base.InitializeSkill(entity, skillCompo);
-        entityVFX = _entity.GetCompo<EntityVFX>();
         healthCompo = _entity.GetCompo<EntityHealthCompo>();
     }
 

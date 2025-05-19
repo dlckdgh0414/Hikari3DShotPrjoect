@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+    //½Ã°£ ¾ø´Ù¤¿¤¿¤¿¤¿¤¿¤¿¤¿¤¿ÀÌ³«¤¾‘§¹Â¤Ó¤¤´Ý·ùÇÏ´ö¤¸µð»Ø¤Ó¤©
 public class GroundPlayer : MonoBehaviour
 {
     [SerializeField]
@@ -49,7 +50,7 @@ public class GroundPlayer : MonoBehaviour
             }
 
             Quaternion look = Quaternion.LookRotation(worldPosition);
-            transform.rotation = Quaternion.Lerp(transform.rotation , look,0.2f);
+            transform.rotation = Quaternion.Lerp(transform.rotation , look,0.1f);
 
             _movement.isStopped = false;
             _movement.SetDestination(worldPosition);
