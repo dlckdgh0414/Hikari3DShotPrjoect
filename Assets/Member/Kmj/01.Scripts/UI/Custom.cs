@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -11,6 +12,8 @@ public class Custom : MonoBehaviour
     [field: SerializeField]  public List<PlayerSkinSO> Skin = new List<PlayerSkinSO>();
 
     [field : SerializeField] public GameObject _playerSkin {get; private set;}
+
+    [SerializeField] private ThisAirplaneType _airPlaneType;
 
     [SerializeField] public int currentMaterial;
 
@@ -34,6 +37,8 @@ public class Custom : MonoBehaviour
         {
             PlayerSendInfo.Instance.ThisSkill = null;
         }
+        _airPlaneType.airPlane.ToList().ForEach(plane => plane.SetActive(false));
+        _airPlaneType.airPlane[currentMaterial].SetActive(true);
         
         PlayerSendInfo.Instance.ThisSkill = Skin[currentMaterial];
     }
@@ -49,6 +54,8 @@ public class Custom : MonoBehaviour
         {
             PlayerSendInfo.Instance.ThisSkill = null;
         }
+        _airPlaneType.airPlane.ToList().ForEach(plane => plane.SetActive(false));
+        _airPlaneType.airPlane[currentMaterial].SetActive(true);
         
         PlayerSendInfo.Instance.ThisSkill = Skin[currentMaterial];
     }
