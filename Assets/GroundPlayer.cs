@@ -50,7 +50,7 @@ public class GroundPlayer : MonoBehaviour
             }
 
             Quaternion look = Quaternion.LookRotation(worldPosition);
-            transform.rotation = Quaternion.Lerp(transform.rotation , look,0.2f);
+            transform.rotation = Quaternion.Lerp(transform.rotation , look,0.1f);
 
             _movement.isStopped = false;
             _movement.SetDestination(worldPosition);
