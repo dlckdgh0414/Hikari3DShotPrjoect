@@ -52,17 +52,19 @@ public class Roll : MonoBehaviour
     #endif
     public void SkillRoll()
     {
-        if (CurrencyManager.Instance.GetCurrency(CurrencyType.Eon) < 100) return;
+        if (CurrencyManager.Instance.GetCurrency(CurrencyType.Eon) < price) return;
         
-        CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, -100);
+        CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, -price);
 
         DOTween.To(() => 0f, y => maskBackground.rectTransform.sizeDelta = 
-            new Vector2(maskBackground.rectTransform.sizeDelta.x, y), 300f, 2f)
+            new Vector2(maskBackground.rectTransform.sizeDelta.x, y), 600f, 2.25f)
             .SetEase(Ease.InExpo).OnComplete(() => _isDecrease = true);
         
         rolledSkillText.transform.parent.gameObject.SetActive(false);
         _scrollSpeed = scrollSpeed;
         _isRolling = true;
+        
+        Debug.Log("dkdkdkadshla;hla");
     }
 
     private void Rolling()
@@ -108,7 +110,7 @@ public class Roll : MonoBehaviour
         }
         else
         {
-            CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, 50);
+            CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, price / 2);
         } 
         
         rolledSkillText.transform.parent.gameObject.SetActive(true);
