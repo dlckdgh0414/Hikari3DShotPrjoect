@@ -15,16 +15,18 @@ public class Custom : MonoBehaviour
 
     [SerializeField] private ThisAirplaneType _airPlaneType;
 
-    [SerializeField] public int currentMaterial;
+    [SerializeField] public int currentMaterial = 0;
 
     private string path;
 
     private string skilPath;
     
+    
 
-    private void Awake()
+    private void Start()
     {
-        path = AssetDatabase.GetAssetPath(_playerSkin);
+        _airPlaneType.airPlane[currentMaterial].SetActive(true);
+        PlayerSendInfo.Instance.ThisSkill = Skin[currentMaterial];
     }
 
     public void NextMaterial()
