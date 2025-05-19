@@ -1,17 +1,24 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Collections.Generic;
 using System;
 using DG.Tweening;
+
 public class MainMenuState : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler, IPointerExitHandler
 {
     public Action OnUIEvent;
-    public float size;
-    public float dur;
-    public int vid;
-    private static bool flag;
+    public float size = 0.1f;
+    public float dur = 0.2f;
+    public int vid = 5;
 
-    private Vector3 Oldsize;
+    private bool isPointerOver = false;
+    private Tween punchTween;
+
+    private Vector3 originalScale;
+
+    private void Awake()
+    {
+        originalScale = transform.localScale;
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -20,28 +27,36 @@ public class MainMenuState : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (flag)
-        {
-            flag = false;
-            Oldsize = gameObject.transform.localScale;
-            gameObject.transform.DOPunchScale(transform.localScale * size, dur, vid);
-        }
-      
+        if (isPointerOver) return;
+        isPointerOver = true;
+
+
+        punchTween?.Kill();
+
+
+        originalScale = transform.localScale;
+
+ 
+        punchTween = transform.DOPunchScale(originalScale * size, dur, vid)
+            .SetUpdate(true)
+            .OnComplete(() => {
+                transform.localScale = originalScale;
+            });
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!flag)
-        {
-            flag = true;
-            Oldsize = gameObject.transform.localScale;
-            gameObject.transform.localScale = Oldsize;
-         
-        }
+        if (!isPointerOver) return;
+        isPointerOver = false;
+
+        punchTween?.Kill();
+        transform.localScale = originalScale;
     }
 
-    public void OnDisable()
+    private void OnDisable()
     {
-        gameObject.transform.DOKill();
+        punchTween?.Kill();
+        transform.localScale = originalScale;
+        isPointerOver = false;
     }
 }
