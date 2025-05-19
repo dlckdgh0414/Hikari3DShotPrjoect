@@ -14,8 +14,8 @@ namespace Member.Kmin._01_Script.SkillTree
     
         [field: SerializeField] public List<SkillTreeNode> ConnectedNodes;
         [field: SerializeField] public bool IsRootNode { get; private set; }
-        [field: SerializeField, HideInInspector] public List<Image> ConnectedBranch { get; private set; }
-        [field: SerializeField, HideInInspector] public List<Image> FillBranch { get; private set; }
+        [field: SerializeField] public List<Image> ConnectedBranch { get; private set; }
+        [field: SerializeField] public List<Image> FillBranch { get; private set; }
         public SkillTreeNode ParentNode { get; private set; }
         public Button NodeButton { get; private set; }
         public Image NodeIcon { get; private set; }
