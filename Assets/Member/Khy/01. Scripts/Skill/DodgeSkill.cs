@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class DodgeSkill : Skill
+public class DodgeSkill : ActiveSkill
 {
     [field: SerializeField] public GameEventChannelSO CameraChannel { get; private set; }
     [field: SerializeField] public float SpinCameraEffectSec;

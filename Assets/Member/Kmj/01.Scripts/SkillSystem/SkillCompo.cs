@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Member.Kmin._01_Script.Core.EventChannel;
@@ -9,10 +10,9 @@ using UnityEngine;
 
 public class SkillCompo : MonoBehaviour, IEntityComponent
 {
-
-    public Skill firstSkill; 
-    public Skill secondSkill;
-    public Skill thirdSkill; 
+    public ActiveSkill firstSkill; 
+    public ActiveSkill secondSkill;
+    public ActiveSkill thirdSkill; 
     public ContactFilter2D whatIsEnemy;
     public Collider2D[] colliders;
 
@@ -22,20 +22,30 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
 
     private Entity _entity;
 
-    private Dictionary<Type, Skill> _skills;
-
+    private Dictionary<Type, ActiveSkill> _skills;
+    private List<PassiveSkill> _passiveSkills;
 
     public void Initialize(Entity entity)
     {
         _entity = entity;
         colliders = new Collider2D[maxCheckEnemy];
-        _skills = new Dictionary<Type, Skill>();
-        GetComponentsInChildren<Skill>().ToList().ForEach(skill => _skills.Add(skill.GetType(), skill));
+        _skills = new Dictionary<Type, ActiveSkill>();
+        _passiveSkills = new();
+        GetComponentsInChildren<ActiveSkill>().ToList().ForEach(skill => _skills.Add(skill.GetType(), skill));
         _skills.Values.ToList().ForEach(skill => skill.InitializeSkill(_entity, this));
+
+        GetComponentsInChildren<PassiveSkill>().Where(t => t.skillEnabled = true).ToList().ForEach(skill => _passiveSkills.Add(skill));
     }
-    
-    
-    
+
+    private void Update()
+    {
+        for (int i = 0; i < _passiveSkills.Count; i++)
+        {
+            if (_passiveSkills[i].IsPassiveCool) continue;
+            _passiveSkills[i].PassiveAbility();
+        }
+    }
+
     public T GetSkill<T>() where T : Skill
     {
         Type type = typeof(T);
