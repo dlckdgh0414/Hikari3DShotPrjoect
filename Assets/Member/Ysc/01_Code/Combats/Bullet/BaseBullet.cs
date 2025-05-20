@@ -10,7 +10,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         [field: SerializeField] protected BulletSettingSO BulletSO; // 총알 데이터 받기
 
         [SerializeField] private string itemName;
-        [HideInInspector] public PlayerAttackCompo _attackCompo;
+        [HideInInspector] public AttackCompo _attackCompo;
 
         protected bool isRotModle;
 

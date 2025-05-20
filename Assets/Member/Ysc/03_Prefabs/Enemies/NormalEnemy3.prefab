@@ -809,6 +809,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5094790904632680094}
   - component: {fileID: 737506696023749337}
+  - component: {fileID: 2977133270478015212}
   m_Layer: 0
   m_Name: Attack
   m_TagString: Untagged
@@ -852,6 +853,19 @@ MonoBehaviour:
   - {fileID: 229426565946543609}
   - {fileID: 2429584258906251065}
   - {fileID: 8744597410062577625}
+--- !u!114 &2977133270478015212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580933909108102943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b452a8cc316b1e54ca223ff1584890d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atkStat: {fileID: 11400000, guid: 35a101e5fd548ba40bec64a86fa30457, type: 2}
 --- !u!1 &2338040706708097698
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,7 +964,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpStat: {fileID: 11400000, guid: 606f03b3110d15a4e9bfc5c679420afd, type: 2}
   maxHealth: 100
-  _currentHealth: 0
   Hp:
     value: 0
   hpSlider: {fileID: 0}
