@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using TMPro;
+using System.IO;
+using Member.Kmin._01_Script.Core.Save;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public enum CurrencyType
 {
@@ -18,9 +17,10 @@ public enum ModifyType
     Divine
 }
 
+[Serializable]
 public class CurrencyManager : MonoBehaviour
 {
-    private Dictionary<CurrencyType, int> _currencyDic;
+    public Dictionary<CurrencyType, int> currencyDic;
     
     public static CurrencyManager Instance;
 
@@ -30,7 +30,7 @@ public class CurrencyManager : MonoBehaviour
 
     private void Awake()
     {
-        _currencyDic = new Dictionary<CurrencyType, int>
+        currencyDic = new Dictionary<CurrencyType, int>
         {
             { CurrencyType.Eon, 0 },
         };
@@ -46,31 +46,48 @@ public class CurrencyManager : MonoBehaviour
         ModifyCurrency(CurrencyType.Eon, ModifyType.Add, 1000);
     }
 
-    public int GetCurrency(CurrencyType currencyType) => _currencyDic[currencyType];
+    public int GetCurrency(CurrencyType currencyType) => currencyDic[currencyType];
 
     public void ModifyCurrency(CurrencyType currencyType, ModifyType modifyType, int amount)
     {
         switch (modifyType)
         {
             case ModifyType.Set:
-                _currencyDic[currencyType] = amount;
+                currencyDic[currencyType] = amount;
                 break;
             case ModifyType.Add:
-                _currencyDic[currencyType] += amount;
+                currencyDic[currencyType] += amount;
                 break;
             case ModifyType.Multiply:
-                _currencyDic[currencyType] *= amount;
+                currencyDic[currencyType] *= amount;
                 break;
             case ModifyType.Divine:
-                _currencyDic[currencyType] /= amount;
+                currencyDic[currencyType] /= amount;
                 break;
         }
         
-        OnValueChanged?.Invoke(currencyType, _currencyDic[currencyType]);
+        OnValueChanged?.Invoke(currencyType, currencyDic[currencyType]);
     }
 
     public void SaveData()
     {
-        
+        string jsonData = DictionaryJsonUtility.ToJson(currencyDic, true);
+
+        string path = Application.dataPath + "/Data";
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+        File.WriteAllText(path + "/CurrencyData.txt", jsonData);
+    }
+
+    public void LoadData()
+    {
+        string path = Application.dataPath + "/Data";
+        string fromJsonData = File.ReadAllText(path + "/MonsterData.txt");
+
+        CurrencyManager MonsterFromJson = new CurrencyManager();
+        MonsterFromJson.monsters = DictionaryJsonUtility.FromJson<string, Monster>(fromJsonData);
+        print(MonsterFromJson.monsters);
     }
 }
