@@ -47,6 +47,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
                 {
                     if (isSlowy)
                         RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed / SlowyDegree;
+                    
                 }
                 else
                 {
@@ -56,6 +57,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
                 }
 
                 RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
+                LoockTarget();
             }
             else
             {
@@ -77,6 +79,21 @@ namespace Member.Ysc._01_Code.Combat.Bullet
 
             }
 
+        }
+
+        protected void LoockTarget()
+        {
+            if (isRotModle)
+            {
+                Quaternion quaternion = Quaternion.LookRotation(fireDirection);
+                float anglez = quaternion.eulerAngles.z;
+                transform.rotation = Quaternion.Euler(90, quaternion.eulerAngles.y, anglez);
+            }
+            else
+            {
+                Quaternion quaternion = Quaternion.LookRotation(fireDirection);
+                transform.rotation = quaternion;
+            }
         }
         protected virtual void DestroyBullet(IPoolable pool)
         {
