@@ -1036,7 +1036,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4189954525041188060}
   - component: {fileID: 609890316375528565}
-  - component: {fileID: 8172411647101531420}
   m_Layer: 0
   m_Name: Attack
   m_TagString: Untagged
@@ -1076,19 +1075,6 @@ MonoBehaviour:
     type: 3}
   <FirePos>k__BackingField:
   - {fileID: 5048100779388919905}
---- !u!114 &8172411647101531420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5257491359533344686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b452a8cc316b1e54ca223ff1584890d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  atkStat: {fileID: 11400000, guid: 14ac20cc4684dec4fb0307db2bf3b96f, type: 2}
 --- !u!1 &5402368381705576355
 GameObject:
   m_ObjectHideFlags: 0
@@ -2287,11 +2273,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyHP
       objectReference: {fileID: 0}
-    - target: {fileID: 3730917100937918317, guid: cac193e2ac3181f449145c0b3fcd19d5,
+    - target: {fileID: 1222225801361362610, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
-      propertyPath: entityhealth
-      value: 
-      objectReference: {fileID: 8892661753111330236}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222225801361362610, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2345,12 +2336,12 @@ PrefabInstance:
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.28
       objectReference: {fileID: 0}
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.0000015348194
       objectReference: {fileID: 0}
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
@@ -2360,7 +2351,7 @@ PrefabInstance:
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
@@ -2370,12 +2361,12 @@ PrefabInstance:
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 5.27
       objectReference: {fileID: 0}
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -1.71
       objectReference: {fileID: 0}
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
@@ -2385,17 +2376,22 @@ PrefabInstance:
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4492378086106924510, guid: cac193e2ac3181f449145c0b3fcd19d5,
+    - target: {fileID: 4513655338196686787, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4513655338196686787, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

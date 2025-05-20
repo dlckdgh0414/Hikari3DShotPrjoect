@@ -5,8 +5,10 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerAttackCompo : AttackCompo,IEntityComponent, IAfterInit
+public class PlayerAttackCompo : MonoBehaviour,IEntityComponent,IAfterInit
 {
+    [SerializeField]
+    private BaseBullet _bullet;
     private Player _player;
 
     private bool isAttack;
@@ -16,9 +18,6 @@ public class PlayerAttackCompo : AttackCompo,IEntityComponent, IAfterInit
     [SerializeField]
     private float fireRate = 1f;
     private float fireTimer = 0.8f;
-
-
-
 
     private EntityVFX entityVFX;
     private readonly string vfxName = "ShootVFX";
@@ -32,7 +31,8 @@ public class PlayerAttackCompo : AttackCompo,IEntityComponent, IAfterInit
 
     [SerializeField]
     private StatSO attackSpeedStat;
-    
+
+    private EntityStat _statCompo;
 
     public void Initialize(Entity entity)
     {
@@ -43,13 +43,6 @@ public class PlayerAttackCompo : AttackCompo,IEntityComponent, IAfterInit
         aimCompo = entity.GetCompo<AutoAimCompo>();
         muzzle = GetComponentsInChildren<MuzzleSetting>();
         _statCompo ??= entity.GetCompo<EntityStat>();
-    }
-
-    public void AfterInit()
-    {
-        atkStat = _statCompo.GetStat(atkStat);
-
-        attackSpeedStat = _statCompo.GetStat(attackSpeedStat);
     }
 
     private void OnDestroy()
@@ -99,5 +92,10 @@ public class PlayerAttackCompo : AttackCompo,IEntityComponent, IAfterInit
     private void Debug(bool isClick)
     {
         isAttack = isClick;
+    }
+
+    public void AfterInit()
+    {
+        attackSpeedStat = _statCompo.GetStat(attackSpeedStat);
     }
 }

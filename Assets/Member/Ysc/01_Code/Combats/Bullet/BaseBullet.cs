@@ -8,9 +8,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
     public abstract class BaseBullet : MonoBehaviour, IPoolable
     {
         [field: SerializeField] protected BulletSettingSO BulletSO; // 총알 데이터 받기
-
         [SerializeField] private string itemName;
-        [HideInInspector] public AttackCompo _attackCompo;
 
         protected bool isRotModle;
 
@@ -91,7 +89,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
             Debug.Log(hitable.gameObject);
             if (hitable.TryGetComponent(out IDamageable damageable))
             {
-                damageable.ApplyDamage(_attackCompo.BulletDamage);
+                damageable.ApplyDamage(BulletSO.BulletDamage);
             }
         }
 
