@@ -23,6 +23,10 @@ public class CurrencyManager : MonoBehaviour
     
     public static CurrencyManager Instance;
 
+    public delegate void ValueChangedHanlder(CurrencyType type, int value);
+    
+    public event ValueChangedHanlder OnValueChanged;
+
     private void Awake()
     {
         _currencyDic = new Dictionary<CurrencyType, int>
@@ -37,6 +41,8 @@ public class CurrencyManager : MonoBehaviour
         }
         else
             Destroy(gameObject);
+        
+        ModifyCurrency(CurrencyType.Eon, ModifyType.Add, 1000);
     }
 
     public int GetCurrency(CurrencyType currencyType) => _currencyDic[currencyType];
@@ -58,5 +64,7 @@ public class CurrencyManager : MonoBehaviour
                 _currencyDic[currencyType] /= amount;
                 break;
         }
+        
+        OnValueChanged?.Invoke(currencyType, _currencyDic[currencyType]);
     }
 }
