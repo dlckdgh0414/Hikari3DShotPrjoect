@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 250608076889880626}
   - component: {fileID: 589041899060987113}
   - component: {fileID: 3705254718939435585}
-  - component: {fileID: 231497253367724975}
+  - component: {fileID: 682707896750936144}
   m_Layer: 6
   m_Name: RocketEnemy1
   m_TagString: Untagged
@@ -394,8 +394,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!64 &231497253367724975
-MeshCollider:
+--- !u!65 &682707896750936144
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -412,10 +412,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4948130667794465799, guid: 888d949f49a3bde42a660d5d295edbaf, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.4188105, z: 10.074176}
+  m_Center: {x: 0, y: 0.20940453, z: 0.016002059}
 --- !u!1 &4697855441645609523
 GameObject:
   m_ObjectHideFlags: 0
