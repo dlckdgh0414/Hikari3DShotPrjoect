@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public enum CurrencyType
 {
@@ -66,5 +67,10 @@ public class CurrencyManager : MonoBehaviour
         }
         
         OnValueChanged?.Invoke(currencyType, _currencyDic[currencyType]);
+    }
+
+    public void SaveData()
+    {
+        
     }
 }
