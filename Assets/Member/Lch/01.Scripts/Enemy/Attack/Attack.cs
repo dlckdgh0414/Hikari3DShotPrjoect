@@ -3,6 +3,7 @@ using System.Collections;
 using Member.Ysc._01_Code.Combat.Bullet;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public abstract class Attack : MonoBehaviour
 {
@@ -41,7 +42,17 @@ public abstract class Attack : MonoBehaviour
             bulletPrefab = PoolManager.Instance.Pop(bulletPrefab.name) as BaseBullet;
             bulletPrefab.transform.position = FirePos[0].position;
             IsAttackEnd = true;
-            bulletPrefab.SetDirection(target.position);
+            int Range = Random.Range(0, 10);
+            if ( Range<= 7)
+            {
+                Debug.Log("힣");
+                bulletPrefab.SetDirection(target.position);
+                bulletPrefab.IsPlayerFollow = true;
+            }
+            else
+            {
+                bulletPrefab.IsPlayerFollow = false;
+            }
         }
         else
         {
