@@ -5,7 +5,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerAttackCompo : MonoBehaviour,IEntityComponent, IAfterInit
+public class PlayerAttackCompo : AttackCompo,IEntityComponent, IAfterInit
 {
     private Player _player;
 
@@ -17,13 +17,8 @@ public class PlayerAttackCompo : MonoBehaviour,IEntityComponent, IAfterInit
     private float fireRate = 1f;
     private float fireTimer = 0.8f;
 
-    [SerializeField]
-    private BaseBullet _bullet;
 
-    public float BulletDamage
-    {
-        get => atkStat.Value;
-    }
+
 
     private EntityVFX entityVFX;
     private readonly string vfxName = "ShootVFX";
@@ -37,10 +32,7 @@ public class PlayerAttackCompo : MonoBehaviour,IEntityComponent, IAfterInit
 
     [SerializeField]
     private StatSO attackSpeedStat;
-    [SerializeField]
-    private StatSO atkStat;
-
-    private EntityStat _statCompo;
+    
 
     public void Initialize(Entity entity)
     {
@@ -51,7 +43,6 @@ public class PlayerAttackCompo : MonoBehaviour,IEntityComponent, IAfterInit
         aimCompo = entity.GetCompo<AutoAimCompo>();
         muzzle = GetComponentsInChildren<MuzzleSetting>();
         _statCompo ??= entity.GetCompo<EntityStat>();
-        _bullet._attackCompo = this;
     }
 
     public void AfterInit()
@@ -81,7 +72,7 @@ public class PlayerAttackCompo : MonoBehaviour,IEntityComponent, IAfterInit
     }
     private Vector3 FireTarget(bool isAuto)
     {
-        if (isAuto)
+        if (isAuto && aimCompo.target != null)
             return aimCompo.target.transform.position;
         else
             return _player.InputReader.GetWorldPosition(out RaycastHit hitInfo);
