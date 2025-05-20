@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 250608076889880626}
   - component: {fileID: 589041899060987113}
   - component: {fileID: 3705254718939435585}
-  - component: {fileID: 231497253367724975}
+  - component: {fileID: 682707896750936144}
   m_Layer: 6
   m_Name: RocketEnemy1
   m_TagString: Untagged
@@ -394,8 +394,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!64 &231497253367724975
-MeshCollider:
+--- !u!65 &682707896750936144
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -412,10 +412,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4948130667794465799, guid: 888d949f49a3bde42a660d5d295edbaf, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.4188105, z: 10.074176}
+  m_Center: {x: 0, y: 0.20940453, z: 0.016002059}
 --- !u!1 &4697855441645609523
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,7 +578,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpStat: {fileID: 11400000, guid: 089ab1b41302fdc4380904f3f834dcc9, type: 2}
   maxHealth: 100
-  _currentHealth: 0
   Hp:
     value: 0
   hpSlider: {fileID: 0}
@@ -643,6 +641,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.051926285
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.051926285
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.051926285
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -654,12 +667,12 @@ PrefabInstance:
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2.38
       objectReference: {fileID: 0}
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.0000028461216
       objectReference: {fileID: 0}
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
@@ -669,7 +682,7 @@ PrefabInstance:
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
@@ -679,12 +692,12 @@ PrefabInstance:
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 7.21
       objectReference: {fileID: 0}
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -1.32
       objectReference: {fileID: 0}
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
@@ -694,7 +707,7 @@ PrefabInstance:
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}

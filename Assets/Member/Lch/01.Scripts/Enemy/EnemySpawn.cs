@@ -14,7 +14,10 @@ public class EnemySpawn : MonoBehaviour
     {
         mainCamera = Camera.main;
     }
-
+    private void Start()
+    {
+        SpawnEnemy();
+    }
     private void Update()
     {
         _currentSpawnTime += Time.deltaTime;

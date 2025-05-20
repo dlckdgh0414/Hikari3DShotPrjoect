@@ -29,7 +29,7 @@ public class SkillTree : MonoBehaviour
                 ChangeNodeColor(f);
         });
         
-        _fruitsList.ForEach(f => f.NodeButton.onClick.AddListener(() => SelectFruits(f)));
+        _fruitsList.ForEach(f => f.NodeButton.onClick.AddListener(() => SelectNode(f)));
         eventChannelSO.AddListener<SkillTreePurchaseEvent>(HandleNodePurchase);
         eventChannelSO.AddListener<SkillTreeActiveEvent>(HandleNodeActive);
     }
@@ -39,14 +39,15 @@ public class SkillTree : MonoBehaviour
     private void HandleNodePurchase(SkillTreePurchaseEvent evt)
     {
         NodeSO nodeSO = evt.node.GetNodeSO();
-        nodeSO.isPurchase = true;
         StatSO targetStat = statCompo.GetStat(nodeSO.statSO);
         targetStat.AddModifier(this, nodeSO.upgradeValue);
+        nodeSO.isPurchase = true;
         
+        CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, -nodeSO.price);
         ConnectColor(evt.node);
     }
 
-    private void SelectFruits(SkillTreeNode selectedNode)
+    private void SelectNode(SkillTreeNode selectedNode)
     {
         _selectedNode = selectedNode;
         _skillTreeSelectEvent.node = selectedNode;

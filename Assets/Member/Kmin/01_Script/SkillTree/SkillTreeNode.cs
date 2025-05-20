@@ -29,8 +29,6 @@ namespace Member.Kmin._01_Script.SkillTree
             NodeIcon = NodeButton.transform.Find("Icon").GetComponent<Image>();
             NodeOutline = NodeButton.transform.Find("Outline").GetComponent<Image>();
             
-            Debug.Log(NodeOutline);
-
             nodeSO.isPurchase = false;
 
             ConnectedNodes.ForEach(f => { f.ParentNode = this; });

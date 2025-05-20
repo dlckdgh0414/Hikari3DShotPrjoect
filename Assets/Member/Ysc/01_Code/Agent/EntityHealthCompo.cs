@@ -9,7 +9,7 @@ namespace Member.Ysc._01_Code.Agent
     {
         [SerializeField] private StatSO hpStat;
         public float maxHealth;
-        [SerializeField] private float _currentHealth;
+        [SerializeField] public float CurrentHealth { get; private set; }
 
         private Entity _entity;
         private EntityStat _statCompo;
@@ -19,6 +19,12 @@ namespace Member.Ysc._01_Code.Agent
 
         [SerializeField]
         private Slider hpSlider;
+
+        [ContextMenu("Test")]
+        public void Test()
+        {
+            ApplyDamage(20);
+        }
 
         public void Initialize(Entity entity)
         {
@@ -30,7 +36,7 @@ namespace Member.Ysc._01_Code.Agent
         public void AfterInit()
         {
             _statCompo.GetStat(hpStat).OnValueChange += HandleHPChange;
-            _currentHealth = maxHealth = _statCompo.GetStat(hpStat).Value;
+            CurrentHealth = maxHealth = _statCompo.GetStat(hpStat).Value;
             _entity.OnDamage += ApplyDamage;
         }
 
@@ -42,38 +48,37 @@ namespace Member.Ysc._01_Code.Agent
 
         private void HandleHPChange(StatSO stat, float current, float previous)
         {
-            hpSlider.value = current;
             maxHealth = current;
-            _currentHealth = Mathf.Clamp(_currentHealth + current - previous, 1f, maxHealth);
+            CurrentHealth = Mathf.Clamp(CurrentHealth + current - previous, 1f, maxHealth);
         }
         
         public void ApplyDamage(float damage)
         {
             if (_entity.IsDead || _entity.IsInvin) return;
-
-            _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, maxHealth);
-            Hp.Value = _currentHealth;
+            Debug.Log("어플라이");
+            CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, maxHealth);
+            Hp.Value = CurrentHealth;
             AfterHitFeedbacks();
         }
 
         public float GetCurrentHp()
         {
-            return _currentHealth;
+            return CurrentHealth;
         }
 
         public void ApplyHeal(float heal,float duration)
         {
             if (_entity.IsDead) return;
 
-            float startValue = _currentHealth;
-            float endValue = Mathf.Clamp(_currentHealth + heal, 0, maxHealth);
+            float startValue = CurrentHealth;
+            float endValue = Mathf.Clamp(CurrentHealth + heal, 0, maxHealth);
 
             DOTween.To(
                 () => startValue,
                 value =>
                 {
-                    _currentHealth = Mathf.Clamp(value, 0, maxHealth);
-                    Hp.Value = _currentHealth;
+                    CurrentHealth = Mathf.Clamp(value, 0, maxHealth);
+                    Hp.Value = CurrentHealth;
                 },
                 endValue,
                 duration
@@ -82,9 +87,10 @@ namespace Member.Ysc._01_Code.Agent
 
         private void AfterHitFeedbacks()
         {
+            Debug.Log("피드백끝");
             _entity.OnHit?.Invoke();
 
-            if (_currentHealth <= 0)
+            if (CurrentHealth <= 0)
             {
                 _entity.OnDead?.Invoke();
             }

@@ -9,6 +9,7 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
 {
     public Action<bool> OnAttackEvent;
     public Action<bool> OnAutoAimEvent;
+    public Action<bool> OnChargingEvent;
 
     public Action OnStartChargeAttackEvent;
     public Action OnEndChargeAttackEvent;
@@ -127,5 +128,13 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
             OnAutoAimEvent?.Invoke(true);
         if (context.canceled)
             OnAutoAimEvent?.Invoke(false);
+    }
+
+    public void OnCharging(InputAction.CallbackContext context)
+    {
+        if (context.started)
+            OnChargingEvent?.Invoke(true);
+        if(context.canceled)
+            OnChargingEvent?.Invoke(false);
     }
 }
