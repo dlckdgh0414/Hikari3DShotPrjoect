@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using Member.Kmin._06_SO.Skin;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.UI;
@@ -13,7 +14,7 @@ public class Roll : MonoBehaviour
     [SerializeField] private Image maskBackground;
     [SerializeField] private TextMeshProUGUI rolledSkillText;
     [SerializeField] private RectTransform contentPanel;
-    [SerializeField] private SkillSOList skillListSO;
+    [SerializeField] private PlayerSkinSOList playerSkinSO;
     [SerializeField] private UseSkillDataSO skillData;
     public List<RollItem> rollItems = new List<RollItem>();
 
@@ -21,7 +22,7 @@ public class Roll : MonoBehaviour
     [SerializeField] private int price;
     [SerializeField] private float scrollSpeed;
     
-    private Dictionary<string, SkillSO> _skillDic/*k*/ = new Dictionary<string, SkillSO>();
+    private Dictionary<string, PlayerSkinSO> _skillDic = new Dictionary<string, PlayerSkinSO>();
     
     private readonly RollEndEvent _rollEndEvent = new RollEndEvent();
 
@@ -33,7 +34,7 @@ public class Roll : MonoBehaviour
     {
         rolledSkillText.transform.parent.gameObject.SetActive(false);
 
-        skillListSO.skillList.ForEach(s =>  _skillDic.Add(s.name, s));
+        playerSkinSO.skinList.ForEach(s =>  _skillDic.Add(s.name, s));
         rollItems.ForEach(item => item.SettingItem(SelectedSkill()));
     }
 
@@ -97,14 +98,14 @@ public class Roll : MonoBehaviour
         string rolledName = rollItems.OrderBy(x => 
             Vector3.Distance(contentPanel.parent.position, x.gameObject.transform.position)).First().name;
 
-        SkillSO rolledSkill = _skillDic
+        PlayerSkinSO rolledSkin = _skillDic
             .Where(x => x.Key == rolledName)
             .Select(x => x.Value)
             .FirstOrDefault();
 
-        if (skillData.invenSkillList.Contains(rolledSkill) == false)
+        if (skillData.invenSkillList.Contains(rolledSkin) == false)
         {
-            skillData.invenSkillList.Add(rolledSkill);
+            skillData.invenSkillList.Add(rolledSkin);
         }
         else
         {
@@ -112,23 +113,23 @@ public class Roll : MonoBehaviour
         } 
         
         rolledSkillText.transform.parent.gameObject.SetActive(true);
-        rolledSkillText.text = $"{rolledSkill.name}({rolledSkill.rarity}분의 1)";
+        rolledSkillText.text = $"{rolledSkin.name}({rolledSkin.rarity}분의 1)";
         
         _isRolling = false;
         _isDecrease = false;
-        _rollEndEvent.rolledSkill = rolledSkill;
+        _rollEndEvent.rolledSkill = rolledSkin;
         rollEventChannel.RaiseEvent(_rollEndEvent);
     }
 
-    private SkillSO SelectedSkill()
+    private PlayerSkinSO SelectedSkill()
     {
         RollStartEvent rollStartEvent = RollEventChannel.rollStartEvent;
 
-        foreach (SkillSO skill in _skillDic.Values.Reverse())
+        foreach (PlayerSkinSO skin in _skillDic.Values.Reverse())
         {
-            if (IsPicked(skill.rarity / 1))
+            if (IsPicked(skin.rarity / 1))
             {
-                return skill;
+                return skin;
             }
         }
 
