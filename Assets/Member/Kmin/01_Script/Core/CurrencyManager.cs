@@ -6,14 +6,13 @@ using UnityEngine;
 
 public enum CurrencyType
 {
-    Eon, Test1
+    Eon
 }
 
 public enum ModifyType
 {
     Set,
     Add,
-    Substract,
     Multiply,
     Divine
 }
@@ -29,7 +28,6 @@ public class CurrencyManager : MonoBehaviour
         _currencyDic = new Dictionary<CurrencyType, int>
         {
             { CurrencyType.Eon, 0 },
-            { CurrencyType.Test1, 0 }
         };
 
         if (Instance == null)
@@ -39,8 +37,6 @@ public class CurrencyManager : MonoBehaviour
         }
         else
             Destroy(gameObject);
-        
-        CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Set, 10000);
     }
 
     public int GetCurrency(CurrencyType currencyType) => _currencyDic[currencyType];
@@ -54,9 +50,6 @@ public class CurrencyManager : MonoBehaviour
                 break;
             case ModifyType.Add:
                 _currencyDic[currencyType] += amount;
-                break;
-            case ModifyType.Substract:
-                _currencyDic[currencyType] -= amount;
                 break;
             case ModifyType.Multiply:
                 _currencyDic[currencyType] *= amount;

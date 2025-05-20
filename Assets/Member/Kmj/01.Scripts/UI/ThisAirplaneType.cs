@@ -6,7 +6,7 @@ public class ThisAirplaneType : MonoBehaviour
 {
     [SerializeField] private Custom _customCompo;
 
-    [SerializeField] private List<GameObject> airPlane;
+    public List<GameObject> airPlane;
 
     private void Awake()
     {
@@ -15,9 +15,5 @@ public class ThisAirplaneType : MonoBehaviour
 
     private void Update()
     {
-        foreach (var Obj in airPlane)
-        {
-            
-        }
     }
 }

@@ -107,6 +107,15 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Charging"",
+                    ""type"": ""Button"",
+                    ""id"": ""5efe556f-9fa6-47ce-b4c0-caea75a0bdff"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -252,6 +261,17 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
                     ""action"": ""ThrSkill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9e3dae68-bd51-4041-accd-749e20623bf7"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Charging"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -269,6 +289,7 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
         m_PlayerMap_FirSkill = m_PlayerMap.FindAction("FirSkill", throwIfNotFound: true);
         m_PlayerMap_SecSkill = m_PlayerMap.FindAction("SecSkill", throwIfNotFound: true);
         m_PlayerMap_ThrSkill = m_PlayerMap.FindAction("ThrSkill", throwIfNotFound: true);
+        m_PlayerMap_Charging = m_PlayerMap.FindAction("Charging", throwIfNotFound: true);
     }
 
     ~@InputControlls()
@@ -344,6 +365,7 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMap_FirSkill;
     private readonly InputAction m_PlayerMap_SecSkill;
     private readonly InputAction m_PlayerMap_ThrSkill;
+    private readonly InputAction m_PlayerMap_Charging;
     public struct PlayerMapActions
     {
         private @InputControlls m_Wrapper;
@@ -357,6 +379,7 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
         public InputAction @FirSkill => m_Wrapper.m_PlayerMap_FirSkill;
         public InputAction @SecSkill => m_Wrapper.m_PlayerMap_SecSkill;
         public InputAction @ThrSkill => m_Wrapper.m_PlayerMap_ThrSkill;
+        public InputAction @Charging => m_Wrapper.m_PlayerMap_Charging;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -393,6 +416,9 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
             @ThrSkill.started += instance.OnThrSkill;
             @ThrSkill.performed += instance.OnThrSkill;
             @ThrSkill.canceled += instance.OnThrSkill;
+            @Charging.started += instance.OnCharging;
+            @Charging.performed += instance.OnCharging;
+            @Charging.canceled += instance.OnCharging;
         }
 
         private void UnregisterCallbacks(IPlayerMapActions instance)
@@ -424,6 +450,9 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
             @ThrSkill.started -= instance.OnThrSkill;
             @ThrSkill.performed -= instance.OnThrSkill;
             @ThrSkill.canceled -= instance.OnThrSkill;
+            @Charging.started -= instance.OnCharging;
+            @Charging.performed -= instance.OnCharging;
+            @Charging.canceled -= instance.OnCharging;
         }
 
         public void RemoveCallbacks(IPlayerMapActions instance)
@@ -452,5 +481,6 @@ public partial class @InputControlls: IInputActionCollection2, IDisposable
         void OnFirSkill(InputAction.CallbackContext context);
         void OnSecSkill(InputAction.CallbackContext context);
         void OnThrSkill(InputAction.CallbackContext context);
+        void OnCharging(InputAction.CallbackContext context);
     }
 }

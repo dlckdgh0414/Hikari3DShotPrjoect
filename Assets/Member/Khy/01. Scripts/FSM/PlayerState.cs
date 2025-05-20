@@ -10,6 +10,7 @@ public class PlayerState : EntityState
     protected readonly float _inputThreshold = 0.1f;
     private AutoAimCompo _aimCompo;
 
+
     public PlayerState(Entity entity) : base(entity)
     {
         _player = entity as Player;
@@ -62,8 +63,6 @@ public class PlayerState : EntityState
 
     void HorizontalLean()
     {
-        if (_aimCompo.target == null) return;
-
         Vector3 targetEulerAngels = _player.model.transform.localEulerAngles;
         Vector3 playerRotateDir;
 

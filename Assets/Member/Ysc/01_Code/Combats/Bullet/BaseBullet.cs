@@ -7,7 +7,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
 {
     public abstract class BaseBullet : MonoBehaviour, IPoolable
     {
-        [field: SerializeField] private BulletSettingSO BulletSO; // 총알 데이터 받기
+        [field: SerializeField] protected BulletSettingSO BulletSO; // 총알 데이터 받기
 
         [SerializeField] private string itemName;
         [HideInInspector] public PlayerAttackCompo _attackCompo;
@@ -88,6 +88,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
 
         protected virtual void Hit(Collider hitable)
         {
+            Debug.Log(hitable.gameObject);
             if (hitable.TryGetComponent(out IDamageable damageable))
             {
                 damageable.ApplyDamage(_attackCompo.BulletDamage);

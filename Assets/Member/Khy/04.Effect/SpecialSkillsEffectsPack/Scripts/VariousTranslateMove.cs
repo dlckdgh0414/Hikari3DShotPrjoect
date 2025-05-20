@@ -17,7 +17,7 @@ public class VariousTranslateMove : MonoBehaviour {
         m_Time = Time.time;
     }
 
-	void Update () {
+	void FixedUpdate () {
         m_changedFactor = VariousEffectsScene.m_gaph_scenesizefactor;
 
         if (m_fowardMove)
