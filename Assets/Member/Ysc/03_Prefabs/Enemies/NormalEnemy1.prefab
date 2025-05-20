@@ -1215,7 +1215,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6235001875386207609}
   - component: {fileID: 2957062440586142409}
-  - component: {fileID: 4897719419934516634}
   m_Layer: 0
   m_Name: Attack
   m_TagString: Untagged
@@ -1255,19 +1254,6 @@ MonoBehaviour:
     type: 3}
   <FirePos>k__BackingField:
   - {fileID: 6057845310971203038}
---- !u!114 &4897719419934516634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9164897666556607404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b452a8cc316b1e54ca223ff1584890d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  atkStat: {fileID: 11400000, guid: 35a101e5fd548ba40bec64a86fa30457, type: 2}
 --- !u!1001 &8676869125516391764
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1323,6 +1309,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.027168669
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.027168669
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.027168669
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1359,12 +1360,12 @@ PrefabInstance:
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -3.82
       objectReference: {fileID: 0}
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.86939
       objectReference: {fileID: 0}
     - target: {fileID: 3995003348598698883, guid: cac193e2ac3181f449145c0b3fcd19d5,
         type: 3}

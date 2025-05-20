@@ -87,7 +87,7 @@ public class Player : Entity
 
     protected override void HandleHit()
     {
-        throw new System.NotImplementedException();
+
     }
 
 

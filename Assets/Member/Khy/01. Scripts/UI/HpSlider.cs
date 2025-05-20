@@ -36,7 +36,7 @@ public class HpSlider : MonoBehaviour, IEntityComponent, IAfterInit
         if (_backSlider != null && _backSlider.value > _hpSlider.value)
         {
             DOTween.Sequence()
-                .AppendInterval(1f)
+                .AppendInterval(0.2f)
                 .Append(_backSlider.DOValue(_entityHealth.CurrentHealth, 0.5f).SetEase(Ease.OutCubic));
         }
         else if (_backSlider != null && _backSlider.value < _hpSlider.value)
