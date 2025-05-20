@@ -17,6 +17,8 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         public string PoolingName => itemName;
         
         protected Vector3 fireDirection;
+
+        public bool IsPlayerFollow;
         
         public Rigidbody RbCompo { get; protected set; }
         public int GetBulletCount => BulletSO.BulletCount;
@@ -41,39 +43,43 @@ namespace Member.Ysc._01_Code.Combat.Bullet
 
         protected virtual void FixedUpdate()
         {
-            if (isRotModle)
+            if (IsPlayerFollow)
             {
-                if (isSlowy)
-                    RbCompo.linearVelocity = -Vector3.forward * BulletSO.BulletSpeed / SlowyDegree;
+                if (isRotModle)
+                {
+                    if (isSlowy)
+                        RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed / SlowyDegree;
+                }
                 else
-                    RbCompo.linearVelocity = -Vector3.forward * BulletSO.BulletSpeed;
+                {
+                    if (isSlowy)
+                        RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed / SlowyDegree;
+
+                }
+
+                RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
             }
             else
             {
-                if(isSlowy) 
-                    RbCompo.linearVelocity = transform.forward * BulletSO.BulletSpeed/SlowyDegree;
+                if (isRotModle)
+                {
+                    if (isSlowy)
+                        RbCompo.linearVelocity = -Vector3.forward * BulletSO.BulletSpeed / SlowyDegree;
+                    else
+                        RbCompo.linearVelocity = -Vector3.forward * BulletSO.BulletSpeed;
+                }
                 else
-                    RbCompo.linearVelocity = transform.forward * BulletSO.BulletSpeed;
+                {
+                    if (isSlowy)
+                        RbCompo.linearVelocity = transform.forward * BulletSO.BulletSpeed / SlowyDegree;
+                    else
+                        RbCompo.linearVelocity = transform.forward * BulletSO.BulletSpeed;
+
+                }
 
             }
 
         }
-
-        protected void LoockTarget()
-        {
-            if (isRotModle)
-            {
-                Quaternion quaternion = Quaternion.LookRotation(fireDirection);
-                float anglez = quaternion.eulerAngles.z;
-                transform.rotation = Quaternion.Euler(90, quaternion.eulerAngles.y, anglez);
-            }
-            else
-            {
-                Quaternion quaternion = Quaternion.LookRotation(fireDirection);
-                transform.rotation = quaternion;
-            }
-        }
-
         protected virtual void DestroyBullet(IPoolable pool)
         {
             PoolManager.Instance.Push(pool);
