@@ -63,8 +63,6 @@ public class Roll : MonoBehaviour
         rolledSkillText.transform.parent.gameObject.SetActive(false);
         _scrollSpeed = scrollSpeed;
         _isRolling = true;
-        
-        Debug.Log("dkdkdkadshla;hla");
     }
 
     private void Rolling()
