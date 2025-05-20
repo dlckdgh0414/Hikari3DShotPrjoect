@@ -13,7 +13,7 @@ public class ModelChanger : MonoBehaviour,IEntityComponent
     {
         _player = entity as Player;
         GetComponentsInChildren<Model>(true).ToList().ForEach(compo => models.Add(compo.gameObject.name, compo));
-        _currentSkin = models[skinSO.planeName];
+        _currentSkin = models[skinSO.name];
         _currentSkin.gameObject.SetActive(true);
         _player.ModelChange(_currentSkin.gameObject);
     }
