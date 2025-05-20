@@ -25,7 +25,7 @@ public class Custom : MonoBehaviour
 
     private void Start()
     {
-        _airPlaneType.airPlane[currentMaterial].SetActive(true);
+        _airPlaneType.airplane.GetValueOrDefault(Skin[currentMaterial].planeName).SetActive(true);
         PlayerSendInfo.Instance.ThisSkill = Skin[currentMaterial];
     }
 
@@ -39,8 +39,8 @@ public class Custom : MonoBehaviour
         {
             PlayerSendInfo.Instance.ThisSkill = null;
         }
-        _airPlaneType.airPlane.ToList().ForEach(plane => plane.SetActive(false));
-        _airPlaneType.airPlane[currentMaterial].SetActive(true);
+        _airPlaneType.airplane.ToList().ForEach(plane => plane.Value.SetActive(false));
+        _airPlaneType.airplane.GetValueOrDefault(Skin[currentMaterial].planeName).SetActive(true);
         
         PlayerSendInfo.Instance.ThisSkill = Skin[currentMaterial];
     }
@@ -56,8 +56,8 @@ public class Custom : MonoBehaviour
         {
             PlayerSendInfo.Instance.ThisSkill = null;
         }
-        _airPlaneType.airPlane.ToList().ForEach(plane => plane.SetActive(false));
-        _airPlaneType.airPlane[currentMaterial].SetActive(true);
+        _airPlaneType.airplane.ToList().ForEach(plane => plane.Value.SetActive(false));
+        _airPlaneType.airplane.GetValueOrDefault(Skin[currentMaterial].planeName).SetActive(true);
         
         PlayerSendInfo.Instance.ThisSkill = Skin[currentMaterial];
     }
