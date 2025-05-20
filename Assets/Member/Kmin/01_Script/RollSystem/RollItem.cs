@@ -8,7 +8,7 @@ public class RollItem : MonoBehaviour
     [SerializeField] private Image itemIcon;
     [SerializeField] private Image itemNamebg;
 
-    public void SettingItem(SkillSO skillSO)
+    public void SettingItem(PlayerSkinSO skillSO)
     {
         gameObject.name = skillSO.name;
         itemName.text = skillSO.name;

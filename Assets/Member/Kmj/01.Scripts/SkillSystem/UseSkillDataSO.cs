@@ -6,8 +6,8 @@ using UnityEngine.Serialization;
 [CreateAssetMenu (fileName = "SkillSO/SkillList",menuName = "SO/Skill/UseSKillDataSO")]
 public class UseSkillDataSO : ScriptableObject
 {
-    public List<SkillSO> invenSkillList = new List<SkillSO>();
-    public List<SkillSO> useSkillList = new List<SkillSO>();
+    public List<PlayerSkinSO> invenSkillList = new List<PlayerSkinSO>();
+    public List<PlayerSkinSO> useSkillList = new List<PlayerSkinSO>();
     
     public void Save()
     {
@@ -22,7 +22,7 @@ public class UseSkillDataSO : ScriptableObject
         SaveLoadManager.Save(saveData);
     }
 
-    public void Load(List<SkillSO> allSkills)
+    public void Load(List<PlayerSkinSO> allSkills)
     {
         UseSkillSaveData loadData = SaveLoadManager.Load<UseSkillSaveData>();
 
@@ -31,16 +31,16 @@ public class UseSkillDataSO : ScriptableObject
 
         foreach (string id in loadData.invenSkillID)
         {
-            SkillSO skill = allSkills.Find(s => s.name == id);
-            if (skill != null)
-                invenSkillList.Add(skill);
+            PlayerSkinSO skin = allSkills.Find(s => s.name == id);
+            if (skin != null)
+                invenSkillList.Add(skin);
         }
 
         foreach (string id in loadData.useSkillID)
         {
-            SkillSO skill = allSkills.Find(s => s.name == id);
-            if (skill != null)
-                useSkillList.Add(skill);
+            PlayerSkinSO skin = allSkills.Find(s => s.name == id);
+            if (skin != null)
+                useSkillList.Add(skin);
         }
     }
 }
