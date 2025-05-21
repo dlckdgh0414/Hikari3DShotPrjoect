@@ -48,7 +48,7 @@ public class EnemySpawn : MonoBehaviour
             {
                 break;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.8f);
         }
     }
 }
