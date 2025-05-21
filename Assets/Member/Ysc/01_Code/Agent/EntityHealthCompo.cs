@@ -87,7 +87,6 @@ namespace Member.Ysc._01_Code.Agent
 
         private void AfterHitFeedbacks()
         {
-            Debug.Log("피드백끝");
             _entity.OnHit?.Invoke();
 
             if (CurrentHealth <= 0)

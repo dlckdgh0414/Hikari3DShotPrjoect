@@ -103,7 +103,6 @@ namespace Member.Ysc._01_Code.Combat.Bullet
 
         protected virtual void Hit(Collider hitable)
         {
-            Debug.Log(hitable.gameObject);
             if (hitable.TryGetComponent(out IDamageable damageable))
             {
                 damageable.ApplyDamage(BulletSO.BulletDamage);
