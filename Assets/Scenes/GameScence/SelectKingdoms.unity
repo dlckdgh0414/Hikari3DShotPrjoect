@@ -4347,8 +4347,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -2134852941
+  m_SortingOrder: 15
   m_TargetDisplay: 0
 --- !u!1 &571348010
 GameObject:
@@ -4760,6 +4760,10 @@ PrefabInstance:
       value: Shell
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 9dfe209c43ed1a94cbe59ec43325d9a6, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9dfe209c43ed1a94cbe59ec43325d9a6, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -4789,7 +4793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9dfe209c43ed1a94cbe59ec43325d9a6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0000000031599
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9dfe209c43ed1a94cbe59ec43325d9a6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4806,6 +4810,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 9dfe209c43ed1a94cbe59ec43325d9a6, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 9dfe209c43ed1a94cbe59ec43325d9a6, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 9dfe209c43ed1a94cbe59ec43325d9a6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -5428,7 +5436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 771540737}
   - component: {fileID: 771540736}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: KingdomSelect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8726,8 +8734,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -2134852941
+  m_SortingOrder: 15
   m_TargetDisplay: 0
 --- !u!1 &1066968296
 GameObject:
@@ -10542,6 +10550,10 @@ PrefabInstance:
       value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 9dfe209c43ed1a94cbe59ec43325d9a6, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9dfe209c43ed1a94cbe59ec43325d9a6, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -10551,7 +10563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9dfe209c43ed1a94cbe59ec43325d9a6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9dfe209c43ed1a94cbe59ec43325d9a6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10588,6 +10600,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 9dfe209c43ed1a94cbe59ec43325d9a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -17.266
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 9dfe209c43ed1a94cbe59ec43325d9a6, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 9dfe209c43ed1a94cbe59ec43325d9a6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -10774,16 +10790,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a0df8218c81db47850363ed04b1a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Skin:
-  - {fileID: 11400000, guid: b7ccaab71f3655f4ca19545d8db88479, type: 2}
-  - {fileID: 11400000, guid: 76bcfa1bf279b50448e6d6ba5961b222, type: 2}
-  - {fileID: 11400000, guid: 6dfe59117994cc64a91fbc06365085b5, type: 2}
-  - {fileID: 11400000, guid: 20bba09137d33044791ee9310eb43e8a, type: 2}
-  - {fileID: 11400000, guid: 60e8825dda37f7f4bbc3d4bd9ad05ac2, type: 2}
   <_playerSkin>k__BackingField: {fileID: 8608821372656261494, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
     type: 3}
   _airPlaneType: {fileID: 919969951}
+  skinListSO: {fileID: 0}
   currentMaterial: 0
+  _planeTxt: {fileID: 0}
 --- !u!222 &1284691155
 CanvasRenderer:
   m_ObjectHideFlags: 0
