@@ -7,11 +7,24 @@ public class DeadUI : MonoBehaviour
 {
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private Button lobbyButton;
+    [SerializeField] private GameEventChannelSO deadUIChannel;
 
     private void Awake()
     {
         mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
         lobbyButton.onClick.AddListener(OnLobbyButtonClicked);
+        gameObject.SetActive(false);
+        deadUIChannel.AddListener<DeadEvent>(OnDeadUIShow);
+    }
+
+    private void OnDestroy()
+    {
+        deadUIChannel.RemoveListener<DeadEvent>(OnDeadUIShow);
+    }
+
+    private void OnDeadUIShow(DeadEvent evt)
+    {
+        gameObject.SetActive(evt.isDead);
     }
 
     private void OnMainMenuButtonClicked()
