@@ -7,19 +7,16 @@ public class ThisAirplaneType : MonoBehaviour
 {
     [SerializeField] private Custom _customCompo;
 
-    public Dictionary<string, GameObject> airplane;
+    public Dictionary<string, GameObject> airplane = new Dictionary<string, GameObject>();
 
     private void Awake()
     {
-        GetComponentsInChildren<SkillCompo>().ToList().ForEach(child => print(child.gameObject.name));
-        GetComponentsInChildren<SkillCompo>().ToList().ForEach(child => airplane.Add(child.gameObject.name, child.gameObject));
-
-        ;   
+        GetComponentsInChildren<SkinCompo>().ToList().ForEach(child => airplane.Add(child.gameObject.name, child.gameObject));
     }
 
     private void Start()
     {
-        airplane.ToList().ForEach(Air => Air.Value.SetActive(false));
+        //airplane.ToList().ForEach(Air => Air.Value.SetActive(false));
     }
 
     private void Update()

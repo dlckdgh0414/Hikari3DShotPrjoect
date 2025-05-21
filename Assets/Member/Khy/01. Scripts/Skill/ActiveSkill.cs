@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using MoreMountains.Feedbacks;
+using UnityEngine;
 
 public delegate void CooldownInfo(float current, float totalTime);
 
@@ -43,6 +44,7 @@ public class ActiveSkill : Skill
 
     public virtual void UseSkill()
     {
+        GetComponentInChildren<MMF_Player>()?.PlayFeedbacks();
     }
 
     public virtual void UseSkillWithoutCooltimeAndEffect()

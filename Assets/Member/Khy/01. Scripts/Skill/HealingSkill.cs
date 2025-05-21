@@ -27,6 +27,7 @@ public class HealingSkill : ActiveSkill
     public override void UseSkill()
     {
         base.UseSkill();
+        entityVFX.PlayVfx(healSkill, Vector3.zero, Quaternion.identity);
         healthCompo.ApplyHeal(healAmount,duration);
         //entityVFX.PlayVfx(healSkill, Vector3.zero, Quaternion.identity);
     }

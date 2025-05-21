@@ -8,7 +8,6 @@ using UnityEngine.InputSystem;
 public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
 {
     public Action<bool> OnAttackEvent;
-    public Action<bool> OnAutoAimEvent;
     public Action<bool> OnChargingEvent;
 
     public Action OnStartChargeAttackEvent;
@@ -79,14 +78,6 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
             OnWingEvent?.Invoke(1);
     }
 
-    public void OnChargeAttack(InputAction.CallbackContext context)
-    {
-        if (context.started)
-            OnStartChargeAttackEvent?.Invoke();
-        if (context.canceled)
-            OnEndChargeAttackEvent?.Invoke();
-    }
-
     public Vector3 GetWorldPosition(out RaycastHit hit)
     {
         Camera mainCam = Camera.main;
@@ -122,19 +113,11 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
             OnThrSkillEvent?.Invoke();
     }
 
-    public void OnAutoAim(InputAction.CallbackContext context)
-    {
-        if (context.started)
-            OnAutoAimEvent?.Invoke(true);
-        if (context.canceled)
-            OnAutoAimEvent?.Invoke(false);
-    }
-
     public void OnCharging(InputAction.CallbackContext context)
     {
         if (context.started)
             OnChargingEvent?.Invoke(true);
-        if(context.canceled)
+        if (context.canceled)
             OnChargingEvent?.Invoke(false);
     }
 }

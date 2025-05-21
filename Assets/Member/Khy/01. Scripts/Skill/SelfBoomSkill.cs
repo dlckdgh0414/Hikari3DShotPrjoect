@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Member.Ysc._01_Code.Agent;
+using MoreMountains.Feedbacks;
 using System.Collections;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ public class SelfBoomSkill : ActiveSkill
     public float healingCrash = 1f;
 
     [SerializeField]
-    private GameEventChannelSO cameraSO;
+    private MMF_Player cameraFeel;
 
     public override void InitializeSkill(Entity entity, SkillCompo skillCompo)
     {
@@ -40,9 +41,7 @@ public class SelfBoomSkill : ActiveSkill
         yield return new WaitForSeconds(duration);
         entityVFX.StopVfx(fuseEffect);
         entityVFX.PlayVfx(explosionEffect, Vector3.zero, Quaternion.identity);
-        ShakeEvent shakeEvent = CamaraEvents.CameraShakeEvent;
-        shakeEvent.intensity = intensity;
-        cameraSO.RaiseEvent(shakeEvent);
+        cameraFeel.PlayFeedbacks();
 
         float prevSpeed = _mover.MoveSpeed;
 
