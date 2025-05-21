@@ -18,11 +18,5 @@ public class SkillInInventory : MonoBehaviour
 
     private void Update()
     {
-        if (useSkillList.invenSkillList.Contains(skillso))
-        {
-            Thisbutton.interactable = true;
-        }
-        else 
-            Thisbutton.interactable = false;
     }
 }

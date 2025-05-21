@@ -46,9 +46,6 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
         private void Awake()
         {
             _skillInvenEvent.AddListener<SkillSelectEvent>(HandleSkillSelect);
-            _inventorySO.invenSkillList.Add(tempSO1);
-            _inventorySO.invenSkillList.Add(tempSO2);
-            _inventorySO.invenSkillList.Add(tempSO3);
             
         }
 
