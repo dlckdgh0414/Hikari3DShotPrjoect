@@ -9,12 +9,11 @@ using UnityEngine.UI;
 
 public class Custom : MonoBehaviour
 {
-    [field: SerializeField]  public List<PlayerSkinSO> Skin = new List<PlayerSkinSO>();
-
     [field : SerializeField] public GameObject _playerSkin {get; private set;}
 
     [SerializeField] private ThisAirplaneType _airPlaneType;
 
+    [SerializeField] private UseSkillDataSO skinListSO;
     [SerializeField] public int currentMaterial = 0;
 
     private string path;
@@ -25,14 +24,15 @@ public class Custom : MonoBehaviour
 
     private void Start()
     {
-        PlayerSendInfo.Instance.ThisSkill = Skin[currentMaterial];
-        _airPlaneType.airplane.GetValueOrDefault(Skin[currentMaterial].name).SetActive(true);
+        PlayerSendInfo.Instance.ThisSkill = skinListSO.invenSkillList[currentMaterial];
+        _airPlaneType.airplane.ToList().ForEach(plane => plane.Value.SetActive(false));
+        _airPlaneType.airplane.GetValueOrDefault(skinListSO.invenSkillList[currentMaterial].name).SetActive(true);
     }
 
     public void NextMaterial()
     {
         currentMaterial++;
-        if (currentMaterial >= Skin.Count)
+        if (currentMaterial >= skinListSO.invenSkillList.Count)
             currentMaterial = 0;
         
         if (PlayerSendInfo.Instance.ThisSkill != null)
@@ -40,9 +40,9 @@ public class Custom : MonoBehaviour
             PlayerSendInfo.Instance.ThisSkill = null;
         }
         _airPlaneType.airplane.ToList().ForEach(plane => plane.Value.SetActive(false));
-        _airPlaneType.airplane.GetValueOrDefault(Skin[currentMaterial].name).SetActive(true);
+        _airPlaneType.airplane.GetValueOrDefault(skinListSO.invenSkillList[currentMaterial].name).SetActive(true);
         
-        PlayerSendInfo.Instance.ThisSkill = Skin[currentMaterial];
+        PlayerSendInfo.Instance.ThisSkill = skinListSO.invenSkillList[currentMaterial];
     }
 
     public void MinusMaterial()
@@ -50,16 +50,16 @@ public class Custom : MonoBehaviour
         currentMaterial--;
 
         if (currentMaterial < 0)
-            currentMaterial = Skin.Count - 1;
+            currentMaterial = skinListSO.invenSkillList.Count - 1;
 
         if (PlayerSendInfo.Instance.ThisSkill != null)
         {
             PlayerSendInfo.Instance.ThisSkill = null;
         }
         _airPlaneType.airplane.ToList().ForEach(plane => plane.Value.SetActive(false));
-        _airPlaneType.airplane.GetValueOrDefault(Skin[currentMaterial].name).SetActive(true);
+        _airPlaneType.airplane.GetValueOrDefault(skinListSO.invenSkillList[currentMaterial].name).SetActive(true);
         
-        PlayerSendInfo.Instance.ThisSkill = Skin[currentMaterial];
+        PlayerSendInfo.Instance.ThisSkill = skinListSO.invenSkillList[currentMaterial];
     }
 }
  
