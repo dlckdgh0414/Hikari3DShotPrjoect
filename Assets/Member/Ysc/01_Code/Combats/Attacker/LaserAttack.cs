@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,41 +9,66 @@ namespace Member.Ysc._01_Code.Combat.Attacker
 {
     public class LaserAttack : Attack
     {
-        [SerializeField] private GameObject shotFrame;
+        [SerializeField] private List<GameObject> shotFrameList;
         
-        [SerializeField] private float coolTime = 1.5f;
-
+        [SerializeField] private float coolTime;
         
-        private float _currentTime = 0;
+        private bool _isCooltime = false;
+        private List<Quaternion> _originRotations;
 
-        private void Start()
+        private void OnEnable()
         {
-            shotFrame.SetActive(false);
+            shotFrameList.ForEach(obj => FrameControl(false));
+            _originRotations = shotFrameList.Select(obj => obj.transform.rotation).ToList();
         }
 
         public override void EnemyAttack(Transform target, float timer)
         {
-            if (!Mathf.Approximately(_currentTime, 0)) return;
-            shotFrame.SetActive(true);
+            if (_isCooltime) return;
+            FrameControl(true);
             bool isGuided = Random.value <= 0.7f;
-
             if (true)
             {
-                Quaternion lookRotation = Quaternion.LookRotation(target.position);
-                shotFrame.transform.rotation = lookRotation;
-            }
-            
-            while (true)
-            {
-                _currentTime += Time.deltaTime;
-                if (_currentTime >= coolTime)
+                Debug.Log($"<color=red>타겟 : {target}</color>");
+                foreach (var shotFrame in shotFrameList)
                 {
-                    _currentTime = 0;
-                    shotFrame.SetActive(false);
-                    break;
+                    Quaternion lookRotation = Quaternion.LookRotation(target.position - shotFrame.transform.position);
+                    shotFrame.transform.rotation = lookRotation;
                 }
             }
-            SpawnBullet(target, timer, isGuided);
+            StartCoroutine(ShotDelayCoroutine(coolTime, target, timer));
+        }
+
+        private void FrameControl(bool isActive = false)
+        {
+            foreach (var shotFrame in shotFrameList)
+            {
+                shotFrame.SetActive(isActive);
+            }
+        }
+        
+        private IEnumerator ShotDelayCoroutine(float time, Transform target, float timer, bool isGuided = false)
+        {
+            _isCooltime = true;
+            while (true)
+            {
+                if (time > 0)
+                {
+                    time -= Time.deltaTime;
+                    yield return null;
+                }
+                else
+                {
+                    FrameControl(false);
+                    for (int i = 0; i < shotFrameList.Count; i++)
+                    {
+                        shotFrameList[i].transform.rotation = _originRotations[i];
+                    }
+                    SpawnBullet(target, timer, isGuided);
+                    _isCooltime = false;
+                    yield break;
+                }
+            }
         }
     }
 }
