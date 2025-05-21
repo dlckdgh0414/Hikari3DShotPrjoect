@@ -1,8 +1,15 @@
+using Member.Ysc._01_Code.Combat.Bullet;
+using System;
 using UnityEngine;
 
 public class ChargingPassiveSkill : PassiveSkill
 {
     private float _pressTime;
+    [Header("차징 시간")]
+    public float maxChargingTime;
+    private bool isPress;
+    private readonly string chargeVfx = "ChargingVFX";
+    public event Action OnChargeShoot;
 
     public override void InitializeSkill(Entity entity, SkillCompo skillCompo)
     {
@@ -10,22 +17,32 @@ public class ChargingPassiveSkill : PassiveSkill
         _player.InputReader.OnChargingEvent += ChargingHandle;
     }
 
-    private void ChargingHandle(bool isPress)
+    private void ChargingHandle(bool isclick)
+     =>   isPress = isclick;
+        
+    public override void PassiveAbility()
     {
-        if(isPress)
+        base.PassiveAbility();
+        if (isPress)
         {
-            _pressTime += Time.deltaTime;
+            if (!(_pressTime > maxChargingTime))
+            {
+                entityVFX.PlayVfx(chargeVfx,Vector3.zero,Quaternion.identity);
+                _pressTime += Time.deltaTime;
+            }
         }
-        else if(!isPress && _pressTime >= 0)
+        else if (!isPress && _pressTime >= 0)
         {
+            if (_pressTime > maxChargingTime)
+            {
+                Shoot();
+            }
             _pressTime -= Time.deltaTime;
         }
     }
 
-    public override void PassiveAbility()
+    private void Shoot()
     {
-        base.PassiveAbility();
-        //_player.InputReader.
-        //Debug.Log("패시브");
+        OnChargeShoot?.Invoke();
     }
 }

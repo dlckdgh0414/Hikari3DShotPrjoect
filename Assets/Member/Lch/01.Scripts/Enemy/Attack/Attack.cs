@@ -45,7 +45,6 @@ public abstract class Attack : MonoBehaviour
             int Range = Random.Range(0, 10);
             if (Range<= 7)
             {
-                Debug.Log("힣");
                 bulletPrefab.SetDirection(target.position);
                 bulletPrefab.IsPlayerFollow = true;
             }
@@ -69,7 +68,6 @@ public abstract class Attack : MonoBehaviour
                 int Range = Random.Range(0, 10);
                 if (Range <= 7)
                 {
-                    Debug.Log("힣");
                     bulletPrefab.SetDirection(target.position);
                     bulletPrefab.IsPlayerFollow = true;
                 }
