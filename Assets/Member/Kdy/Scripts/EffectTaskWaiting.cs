@@ -6,6 +6,7 @@ public class EffectTaskWaiting : MonoBehaviour
 {
     private static bool Flag = false;
     [SerializeField] MinimalWait waitcanvas;
+    [SerializeField] List<GameObject> obj;
     private void Awake()
     {
         DontDestroyOnLoad(this);
@@ -20,6 +21,10 @@ public class EffectTaskWaiting : MonoBehaviour
         else
         {
             waitcanvas.wait = 0.1f;
+            foreach (GameObject item in obj)
+            {
+                item.SetActive(false);
+            }
         }
     }
 
