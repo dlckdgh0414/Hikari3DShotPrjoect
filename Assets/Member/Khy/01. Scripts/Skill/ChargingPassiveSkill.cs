@@ -1,6 +1,7 @@
 using Member.Ysc._01_Code.Combat.Bullet;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChargingPassiveSkill : PassiveSkill
 {
@@ -10,18 +11,22 @@ public class ChargingPassiveSkill : PassiveSkill
     private bool isPress;
     private readonly string chargeVfx = "ChargingVFX";
     public event Action OnChargeShoot;
+    [Header("차징 슬라이더")]
+    public Slider chargeSlider;
 
     public override void InitializeSkill(Entity entity, SkillCompo skillCompo)
     {
         base.InitializeSkill(entity, skillCompo);
         _player.InputReader.OnChargingEvent += ChargingHandle;
+        chargeSlider.maxValue = maxChargingTime;
     }
 
     private void ChargingHandle(bool isclick)
-     =>   isPress = isclick;
+     => isPress = isclick;
         
     public override void PassiveAbility()
     {
+        chargeSlider.value = _pressTime;
         base.PassiveAbility();
         if (isPress)
         {
@@ -36,6 +41,7 @@ public class ChargingPassiveSkill : PassiveSkill
             if (_pressTime > maxChargingTime)
             {
                 Shoot();
+                _pressTime = 0f;
             }
             _pressTime -= Time.deltaTime;
         }
