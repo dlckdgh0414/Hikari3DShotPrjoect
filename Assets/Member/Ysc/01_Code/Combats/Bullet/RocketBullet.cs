@@ -13,7 +13,6 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         {
             if (other.CompareTag("Player"))
             {
-                Debug.Log("앙 플레이어띠");
                 Hit(other);
                 DestroyBullet(this);
             }

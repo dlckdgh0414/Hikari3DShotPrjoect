@@ -8,7 +8,9 @@ using UnityEngine;
 public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
 {
     [SerializeField]
-    private BaseBullet _bullet;
+    private BaseBullet _defalutBullet;
+    [SerializeField]
+    private BaseBullet _chargeBullet;
     private Player _player;
 
     private bool isAttack;
@@ -41,6 +43,11 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
         aimCompo = entity.GetCompo<AutoAimCompo>();
         muzzle = GetComponentsInChildren<MuzzleSetting>();
         _statCompo ??= entity.GetCompo<EntityStat>();
+    }
+    public void AfterInit()
+    {
+        attackSpeedStat = _statCompo.GetStat(attackSpeedStat);
+        _player.GetCompo<SkillCompo>().GetSkill<ChargingPassiveSkill>().OnChargeShoot += ChargeShoot;
     }
 
     private void OnDestroy()
@@ -75,7 +82,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
         for(int i =0; i< muzzle.Length; i++)
         {
             yield return new WaitForSeconds(muzzle[i].shootDelay* attackSpeedStat.Value);
-            BaseBullet bullet = PoolManager.Instance.Pop(_bullet.name) as BaseBullet;
+            BaseBullet bullet = PoolManager.Instance.Pop(_defalutBullet.name) as BaseBullet;
             bullet.transform.position = muzzle[i].transform.position;
             entityVFX.PlayVfx(vfxName, muzzle[i].transform.position, Quaternion.identity);
             bullet.SetDirection(firePoint);
@@ -88,8 +95,23 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
         isAttack = isClick;
     }
 
-    public void AfterInit()
+
+    private void ChargeShoot()
     {
-        attackSpeedStat = _statCompo.GetStat(attackSpeedStat);
+        FireChargeBullet();
+    }
+
+    private void FireChargeBullet()
+    {
+        Vector3 firePoint = FireTarget();
+        isShootDelay = true;
+        for (int i = 0; i < muzzle.Length; i++)
+        {
+            BaseBullet bullet = PoolManager.Instance.Pop(_chargeBullet.name) as BaseBullet;
+            bullet.transform.position = muzzle[i].transform.position;
+            entityVFX.PlayVfx(vfxName, muzzle[i].transform.position, Quaternion.identity);
+            bullet.SetDirection(firePoint);
+        }
+        isShootDelay = false;
     }
 }

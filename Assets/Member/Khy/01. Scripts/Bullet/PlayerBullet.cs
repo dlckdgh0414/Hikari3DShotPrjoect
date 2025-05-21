@@ -3,12 +3,15 @@ using UnityEngine;
 
 public class PlayerBullet : BaseBullet, IPoolable
 {
-    private TrailRenderer line;
-
+    private ParticleSystem bullet;
     protected override void Awake()
     {
         base.Awake();
-        line = GetComponent<TrailRenderer>();
+        bullet = GetComponentInChildren<ParticleSystem>();
+    }
+    private void OnEnable()
+    {
+        bullet.Play();
     }
     protected override void FixedUpdate()
     {
@@ -21,6 +24,5 @@ public class PlayerBullet : BaseBullet, IPoolable
         if (other.CompareTag("Player") || other.CompareTag("Bullet")) return;
         Hit(other);
         DestroyBullet(this);
-        line.Clear();
     }
 }
