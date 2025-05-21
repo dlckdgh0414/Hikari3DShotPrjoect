@@ -5,7 +5,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerAttackCompo : MonoBehaviour,IEntityComponent,IAfterInit
+public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
 {
     [SerializeField]
     private BaseBullet _bullet;
@@ -16,13 +16,12 @@ public class PlayerAttackCompo : MonoBehaviour,IEntityComponent,IAfterInit
     private MuzzleSetting[] muzzle;
 
     [SerializeField]
-    private float fireRate = 1f;
+    public float FireRate { get; set; } = 3f;
     private float fireTimer = 0.8f;
 
     private EntityVFX entityVFX;
     private readonly string vfxName = "ShootVFX";
 
-    private bool isAutoAim;
     private AutoAimCompo aimCompo;
 
     private Coroutine coroutine;
@@ -38,7 +37,6 @@ public class PlayerAttackCompo : MonoBehaviour,IEntityComponent,IAfterInit
     {
         _player = entity as Player;
         _player.InputReader.OnAttackEvent += Debug;
-        _player.InputReader.OnAutoAimEvent += IsAutoAim;
         entityVFX = entity.GetCompo<EntityVFX>();
         aimCompo = entity.GetCompo<AutoAimCompo>();
         muzzle = GetComponentsInChildren<MuzzleSetting>();
@@ -48,7 +46,6 @@ public class PlayerAttackCompo : MonoBehaviour,IEntityComponent,IAfterInit
     private void OnDestroy()
     {
         _player.InputReader.OnAttackEvent -= Debug;
-        _player.InputReader.OnAutoAimEvent -= IsAutoAim;
     }
 
     private void Update()
@@ -56,16 +53,16 @@ public class PlayerAttackCompo : MonoBehaviour,IEntityComponent,IAfterInit
         if(isAttack && !isShootDelay)
         {
             fireTimer += Time.deltaTime;
-            if (fireTimer >= attackSpeedStat.Value / fireRate)
+            if (fireTimer >= attackSpeedStat.Value / FireRate)
             {
                 coroutine = StartCoroutine(FireBullet());
                 fireTimer = 0f;
             }
         }
     }
-    private Vector3 FireTarget(bool isAuto)
+    private Vector3 FireTarget()
     {
-        if (isAuto && aimCompo.target != null)
+        if (aimCompo.target != null && aimCompo.IsAutoAim)
             return aimCompo.target.transform.position;
         else
             return _player.InputReader.GetWorldPosition(out RaycastHit hitInfo);
@@ -73,7 +70,7 @@ public class PlayerAttackCompo : MonoBehaviour,IEntityComponent,IAfterInit
     private IEnumerator FireBullet()
     {
         isShootDelay = true;
-        Vector3 firePoint = FireTarget(isAutoAim);
+        Vector3 firePoint = FireTarget();
 
         for(int i =0; i< muzzle.Length; i++)
         {
@@ -85,9 +82,6 @@ public class PlayerAttackCompo : MonoBehaviour,IEntityComponent,IAfterInit
         }
         isShootDelay = false;
     }
-
-    void IsAutoAim(bool click)
-        => isAutoAim = click;
 
     private void Debug(bool isClick)
     {

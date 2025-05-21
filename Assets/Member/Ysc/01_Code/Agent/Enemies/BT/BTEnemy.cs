@@ -38,6 +38,7 @@ namespace Member.Ysc._01_Code.Agent.Enemies.BT
             if (IsDead) return;
             IsDead = true;
             gameObject.layer = DeadBodyLayer;
+            GetComponentInChildren<EntityVFX>().PlayVfx("DeathVFX", Vector3.zero, Quaternion.identity);
             _stateChannel.SendEventMessage(BTEnemyState.DEATH);
         }
     }

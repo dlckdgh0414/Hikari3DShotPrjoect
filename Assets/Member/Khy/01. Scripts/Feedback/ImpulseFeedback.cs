@@ -12,6 +12,7 @@ public class ImpulseFeedback : Feedback
     {
         _source = GetComponent<CinemachineImpulseSource>();
     }
+    [ContextMenu("PlayFeedback")]
     public override void PlayFeedback()
     {
         _source.GenerateImpulse(_impulsePower);
