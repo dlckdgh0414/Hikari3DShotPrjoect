@@ -36,7 +36,6 @@ public abstract class Enemy :Entity, IPoolable
     private void OnDisable()
     {
         EnemyManager.Unregister(this);
-        
         _sequence?.Kill();
         _sequence = null;
         OnRealDead?.Invoke();
