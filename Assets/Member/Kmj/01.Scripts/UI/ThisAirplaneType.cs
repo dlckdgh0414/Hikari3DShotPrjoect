@@ -11,10 +11,19 @@ public class ThisAirplaneType : MonoBehaviour
 
     private void Awake()
     {
+        GetComponentsInChildren<SkillCompo>().ToList().ForEach(child => print(child.gameObject.name));
+        GetComponentsInChildren<SkillCompo>().ToList().ForEach(child => airplane.Add(child.gameObject.name, child.gameObject));
+
+        ;   
+    }
+
+    private void Start()
+    {
         airplane.ToList().ForEach(Air => Air.Value.SetActive(false));
     }
 
     private void Update()
     {
+        
     }
 }
