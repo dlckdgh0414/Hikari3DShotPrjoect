@@ -35,16 +35,22 @@ public abstract class Attack : MonoBehaviour
         // 얘는 재정의 그대로 쓸거에요 :>
     }
 
-    protected void SpawnBullet(Transform target,float timer)
+    protected void SpawnBullet(Transform target,float timer, bool isGuided = false)
     {
         if (bulletPrefab.GetBulletCount <= 1)
         {
+            int range = 10;
             bulletPrefab = PoolManager.Instance.Pop(bulletPrefab.name) as BaseBullet;
             bulletPrefab.transform.position = FirePos[0].position;
             IsAttackEnd = true;
-            int Range = Random.Range(0, 10);
-            if (Range<= 7)
+            if (isGuided == false)
             {
+                range = Random.Range(0, 10);
+            }
+            
+            if ( isGuided || range<= 7)
+            {
+                Debug.Log("힣");
                 bulletPrefab.SetDirection(target.position);
                 bulletPrefab.IsPlayerFollow = true;
             }
@@ -65,16 +71,6 @@ public abstract class Attack : MonoBehaviour
         {
             if(_shotCount == FirePos.Length)
             {
-                int Range = Random.Range(0, 10);
-                if (Range <= 7)
-                {
-                    bulletPrefab.SetDirection(target.position);
-                    bulletPrefab.IsPlayerFollow = true;
-                }
-                else
-                {
-                    bulletPrefab.IsPlayerFollow = false;
-                }
                 IsAttackEnd = true;
                 _shotCount = 0;
             }
