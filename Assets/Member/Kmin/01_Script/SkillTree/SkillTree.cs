@@ -43,7 +43,7 @@ public class SkillTree : MonoBehaviour
         targetStat.AddModifier(this, nodeSO.upgradeValue);
         nodeSO.isPurchase = true;
         
-        CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, nodeSO.price);
+        CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, -nodeSO.price);
         ConnectColor(evt.node);
     }
 

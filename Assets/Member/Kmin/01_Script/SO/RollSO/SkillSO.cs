@@ -14,5 +14,4 @@
         public Sprite icon;
         [TextArea] public string description = string.Empty;
         public Color itemColor;
-        public TextMeshProUGUI skillText;
     }   
