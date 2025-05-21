@@ -1,4 +1,5 @@
 using Member.Ysc._01_Code.UI;
+using System.Collections;
 using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
@@ -16,19 +17,19 @@ public class EnemySpawn : MonoBehaviour
     }
     private void Start()
     {
-        SpawnEnemy();
+       StartCoroutine(SpawnEnemy());
     }
     private void Update()
     {
         _currentSpawnTime += Time.deltaTime;
         if (_currentSpawnTime >= enemySpawnSO.SpawnTimer && _currentSpawnEnemy != enemySpawnSO.StageEnemyCount)
         {
-            SpawnEnemy();
+            StartCoroutine(SpawnEnemy());
             _currentSpawnTime = 0;
         }
     }
 
-    public void SpawnEnemy()
+    private IEnumerator SpawnEnemy()
     {
         for (int i = 0; i < enemySpawnSO.SpawnCount; i++)
         {
@@ -47,6 +48,7 @@ public class EnemySpawn : MonoBehaviour
             {
                 break;
             }
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }
