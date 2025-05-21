@@ -39,7 +39,7 @@ namespace Member.Ysc._01_Code.Combat.Attacker
             StartCoroutine(ShotDelayCoroutine(coolTime, target, timer));
         }
 
-        private void FrameControl(bool isActive = false)
+        public void FrameControl(bool isActive = false)
         {
             foreach (var shotFrame in shotFrameList)
             {
