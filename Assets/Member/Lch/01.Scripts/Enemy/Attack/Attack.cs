@@ -43,7 +43,7 @@ public abstract class Attack : MonoBehaviour
             bulletPrefab.transform.position = FirePos[0].position;
             IsAttackEnd = true;
             int Range = Random.Range(0, 10);
-            if ( Range<= 7)
+            if (Range<= 7)
             {
                 Debug.Log("힣");
                 bulletPrefab.SetDirection(target.position);
@@ -66,6 +66,17 @@ public abstract class Attack : MonoBehaviour
         {
             if(_shotCount == FirePos.Length)
             {
+                int Range = Random.Range(0, 10);
+                if (Range <= 7)
+                {
+                    Debug.Log("힣");
+                    bulletPrefab.SetDirection(target.position);
+                    bulletPrefab.IsPlayerFollow = true;
+                }
+                else
+                {
+                    bulletPrefab.IsPlayerFollow = false;
+                }
                 IsAttackEnd = true;
                 _shotCount = 0;
             }
