@@ -55,6 +55,7 @@ public class PlayerState : EntityState
 
     private void ClampPosition()
     {
+        if (_mover.CanManualMove == false) return;
         float clampedX = Mathf.Clamp(_player.transform.position.x, -9f, 9f);
         float clampedY = Mathf.Clamp(_player.transform.position.y, -5f, 5f);
 
@@ -63,10 +64,11 @@ public class PlayerState : EntityState
 
     void HorizontalLean()
     {
+        if (_mover.CanManualMove == false) return;
         Vector3 targetEulerAngels = _player.model.transform.localEulerAngles;
         Vector3 playerRotateDir;
 
-        if (_aimCompo.IsAutoAim)
+        if (_aimCompo.IsAutoAim && _aimCompo.target != null)
             playerRotateDir = _aimCompo.target.transform.position - _player.transform.position;
         else
             playerRotateDir = _player.InputReader.GetWorldPosition(out RaycastHit hitInfo) - _player.transform.position;

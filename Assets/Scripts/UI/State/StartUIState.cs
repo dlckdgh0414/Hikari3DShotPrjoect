@@ -19,6 +19,6 @@ public class StartUIState : MainMenuState,IMENUUILIB
     {
         uds.ShowUIEffect();
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }

@@ -30,10 +30,7 @@ public class SkillCoolDownUI : MonoBehaviour,IEntityComponent
         InputAction secSkillInput = InputReader._controlls.FindAction("SecSkill");
         InputAction thrSkillInput = InputReader._controlls.FindAction("ThrSkill");
 
-        foreach(var d in firSkillInput.bindings)
-        {
-            Debug.Log(d);
-        }
+        
     }
 
     protected virtual void InitializeCooldownUI()

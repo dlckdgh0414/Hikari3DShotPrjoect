@@ -16,6 +16,14 @@ public class EnemyMovement : MonoBehaviour,IEntityComponent
         rb.DOMove(targetZPos,1.5f).OnComplete(()=>isArrive = true);
     }
 
+    private void Update()
+    {
+        if (transform.position.z < zPos || transform.position.z > zPos)
+        {
+            transform.DOMoveZ(zPos, 0.4f);
+        }
+    }
+
     public void StopMover()
     {
         rb.linearVelocity = Vector3.zero;
