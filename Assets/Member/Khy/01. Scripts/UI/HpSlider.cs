@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Member.Ysc._01_Code.Agent;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class HpSlider : MonoBehaviour, IEntityComponent, IAfterInit
     private float _maxHp;
     [SerializeField] private Slider _hpSlider;
     [SerializeField] private Slider _backSlider;
+    [SerializeField] private TextMeshProUGUI text;
 
     public void AfterInit()
     {
@@ -32,6 +34,7 @@ public class HpSlider : MonoBehaviour, IEntityComponent, IAfterInit
     private void ChangeHp(float prev, float next)
     {
         _hpSlider.value = _entityHealth.CurrentHealth;
+        text.text = $"{Math.Truncate(_entityHealth.CurrentHealth)}";
 
         if (_backSlider != null && _backSlider.value > _hpSlider.value)
         {
