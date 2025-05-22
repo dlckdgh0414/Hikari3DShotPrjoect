@@ -22,19 +22,18 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
 
     private Entity _entity;
 
-    private Dictionary<Type, ActiveSkill> _skills;
+    private Dictionary<Type, Skill> _skills;
     private List<PassiveSkill> _passiveSkills;
 
     public void Initialize(Entity entity)
     {
         _entity = entity;
         colliders = new Collider2D[maxCheckEnemy];
-        _skills = new Dictionary<Type, ActiveSkill>();
+        _skills = new Dictionary<Type, Skill>();
         _passiveSkills = new();
-        GetComponentsInChildren<ActiveSkill>().ToList().ForEach(skill => _skills.Add(skill.GetType(), skill));
-        _skills.Values.ToList().ForEach(skill => skill.InitializeSkill(_entity, this));
-
+        GetComponentsInChildren<Skill>().ToList().ForEach(skill => _skills.Add(skill.GetType(), skill));
         GetComponentsInChildren<PassiveSkill>().Where(t => t.skillEnabled = true).ToList().ForEach(skill => _passiveSkills.Add(skill));
+        _skills.Values.ToList().ForEach(skill => skill.InitializeSkill(_entity, this));
     }
 
     private void Update()
