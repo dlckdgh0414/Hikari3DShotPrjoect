@@ -52,8 +52,6 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
         private void Start()
         {
             equipBtns.ForEach(btn => btn.onClick.AddListener(HandleSkillEquip));
-
-            
         }
 
         private void HandleSkillEquip()
