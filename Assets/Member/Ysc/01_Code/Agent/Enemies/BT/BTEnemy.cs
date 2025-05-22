@@ -42,7 +42,7 @@ namespace Member.Ysc._01_Code.Agent.Enemies.BT
             IsDead = true;
             gameObject.layer = DeadBodyLayer;
             GetComponentInChildren<EntityVFX>().PlayVfx("DeathVFX", Vector3.zero, Quaternion.identity);
-            CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, Random.Range(minCurrency, maxCurrency+1));
+            //CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, Random.Range(minCurrency, maxCurrency+1));
             _stateChannel.SendEventMessage(BTEnemyState.DEATH);
         }
     }
