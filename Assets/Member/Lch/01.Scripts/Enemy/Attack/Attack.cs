@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using Member.Ysc._01_Code.Combat.Bullet;
-using Unity.VisualScripting;
+using Ami.BroAudio;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,6 +9,8 @@ public abstract class Attack : MonoBehaviour
 {
     [field: SerializeField] public BaseBullet bulletPrefab { get; protected set; }
     [field: SerializeField] public Transform[] FirePos { get; protected set; }
+
+    [SerializeField] private SoundID enemyAttackSFX;
 
     public bool IsAttackEnd { get; set; }
 
@@ -42,7 +44,7 @@ public abstract class Attack : MonoBehaviour
             int range = 10;
             bulletPrefab = PoolManager.Instance.Pop(bulletPrefab.name) as BaseBullet;
             bulletPrefab.transform.position = FirePos[0].position;
-            IsAttackEnd = true;
+            BroAudio.Play(enemyAttackSFX);
             if (isGuided == false)
             {
                 range = Random.Range(0, 10);
@@ -61,11 +63,12 @@ public abstract class Attack : MonoBehaviour
         }
         else
         {
-            StartCoroutine(ManyBulletAttack(timer,target));
+            StartCoroutine(ManyBulletAttack(timer,target,isGuided));
         }
+        IsAttackEnd = true;
     }
 
-    private IEnumerator ManyBulletAttack(float timer,Transform target)
+    private IEnumerator ManyBulletAttack(float timer,Transform target, bool isGuided = false)
     {
         while (!IsAttackEnd)
         {
@@ -76,7 +79,27 @@ public abstract class Attack : MonoBehaviour
             }
             bulletPrefab = PoolManager.Instance.Pop(bulletPrefab.name) as BaseBullet;
             bulletPrefab.transform.position = FirePos[_shotCount].position;
-            bulletPrefab.SetDirection(target.position);
+            BroAudio.Play(enemyAttackSFX);
+            int range = 10;
+            if (isGuided == false)
+            {
+                range = Random.Range(0, 10);
+            }
+            if (isGuided == false)
+            {
+                range = Random.Range(0, 10);
+            }
+
+            if (isGuided || range <= 7)
+            {
+                Debug.Log("힣");
+                bulletPrefab.SetDirection(target.position);
+                bulletPrefab.IsPlayerFollow = true;
+            }
+            else
+            {
+                bulletPrefab.IsPlayerFollow = false;
+            }
             yield return new WaitForSeconds(timer);
             _shotCount++;
         }
