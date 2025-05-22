@@ -27,8 +27,8 @@ public class SkillTree : MonoBehaviour
     {
         _nodesDic = new Dictionary<SkillTreeNode, NodeSO>();
         _nodes = transform.GetComponentsInChildren<SkillTreeNode>(true).ToList();
-        SaveLoadManager.SetFilePath(Application.persistentDataPath, "node.json");
-        nodeSOList.Load(nodeSOList.nodeSOList);
+        //SaveLoadManager.SetFilePath(Application.persistentDataPath, "node.json");
+        //nodeSOList.Load(nodeSOList.nodeSOList);
         
         _nodes.ForEach(f =>
         {
@@ -57,7 +57,7 @@ public class SkillTree : MonoBehaviour
 
     private void HandleNodePurchase(SkillTreePurchaseEvent evt)
     {
-        NodeSO nodeSO = _nodesDic[_selectedNode];
+        NodeSO nodeSO = _selectedNode.GetNodeSO();
         StatSO targetStat = statCompo.GetStat(nodeSO.statSO);
         targetStat.AddModifier(this, nodeSO.upgradeValue);
         nodeSO.isPurchase = true;
