@@ -164,7 +164,7 @@ namespace Member.Kmin._01_Script.SkillTree
             if (nodeImage == null)
                 nodeImage = GetComponent<Image>();
             
-            nodeImage.sprite = nodeSO.SkillSO == null ? nodeSO.statSO.Icon : nodeSO.SkillSO.icon;
+            nodeImage.sprite = nodeSO.icon == null ? nodeSO.statSO.Icon : nodeSO.icon;
 
             if (FillBranch == null)
                 return;
