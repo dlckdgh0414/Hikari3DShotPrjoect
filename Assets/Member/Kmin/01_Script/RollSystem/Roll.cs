@@ -22,7 +22,7 @@ public class Roll : MonoBehaviour
     [SerializeField] private int price;
     [SerializeField] private float scrollSpeed;
     
-    private Dictionary<string, PlayerSkinSO> _skillDic = new Dictionary<string, PlayerSkinSO>();
+    private Dictionary<string, PlayerSkinSO> _skinDic = new Dictionary<string, PlayerSkinSO>();
     
     private readonly RollEndEvent _rollEndEvent = new RollEndEvent();
 
@@ -34,7 +34,7 @@ public class Roll : MonoBehaviour
     {
         rolledSkillText.transform.parent.gameObject.SetActive(false);
 
-        playerSkinSO.skinList.ForEach(s =>  _skillDic.Add(s.name, s));
+        playerSkinSO.skinList.ForEach(s =>  _skinDic.Add(s.name, s));
         rollItems.ForEach(item => item.SettingItem(SelectedSkill()));
     }
 
@@ -98,7 +98,7 @@ public class Roll : MonoBehaviour
         string rolledName = rollItems.OrderBy(x => 
             Vector3.Distance(contentPanel.parent.position, x.gameObject.transform.position)).First().name;
 
-        PlayerSkinSO rolledSkin = _skillDic
+        PlayerSkinSO rolledSkin = _skinDic
             .Where(x => x.Key == rolledName)
             .Select(x => x.Value)
             .FirstOrDefault();
@@ -125,7 +125,7 @@ public class Roll : MonoBehaviour
     {
         RollStartEvent rollStartEvent = RollEventChannel.rollStartEvent;
 
-        foreach (PlayerSkinSO skin in _skillDic.Values.Reverse())
+        foreach (PlayerSkinSO skin in _skinDic.Values.Reverse())
         {
             if (IsPicked(skin.rarity / 1))
             {
