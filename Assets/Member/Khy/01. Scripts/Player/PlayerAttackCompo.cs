@@ -8,7 +8,9 @@ using UnityEngine;
 public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
 {
     [SerializeField]
-    private BaseBullet _bullet;
+    private BaseBullet _defalutBullet;
+    [SerializeField]
+    private BaseBullet _chargeBullet;
     private Player _player;
 
     private bool isAttack;
@@ -33,6 +35,8 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
 
     private EntityStat _statCompo;
 
+    public event Action OnAttack;
+
     public void Initialize(Entity entity)
     {
         _player = entity as Player;
@@ -42,6 +46,11 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
         muzzle = GetComponentsInChildren<MuzzleSetting>();
         _statCompo ??= entity.GetCompo<EntityStat>();
     }
+    public void AfterInit()
+    {
+        attackSpeedStat = _statCompo.GetStat(attackSpeedStat);
+        _player.GetCompo<SkillCompo>().GetSkill<ChargingPassiveSkill>().OnChargeShoot += ChargeShoot;
+    }
 
     private void OnDestroy()
     {
@@ -50,6 +59,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
 
     private void Update()
     {
+        if (_player.IsDead) return;
         if(isAttack && !isShootDelay)
         {
             fireTimer += Time.deltaTime;
@@ -60,7 +70,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
             }
         }
     }
-    private Vector3 FireTarget()
+    public Vector3 FireTarget()
     {
         if (aimCompo.target != null && aimCompo.IsAutoAim)
             return aimCompo.target.transform.position;
@@ -75,12 +85,13 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
         for(int i =0; i< muzzle.Length; i++)
         {
             yield return new WaitForSeconds(muzzle[i].shootDelay* attackSpeedStat.Value);
-            BaseBullet bullet = PoolManager.Instance.Pop(_bullet.name) as BaseBullet;
+            BaseBullet bullet = PoolManager.Instance.Pop(_defalutBullet.name) as BaseBullet;
             bullet.transform.position = muzzle[i].transform.position;
             entityVFX.PlayVfx(vfxName, muzzle[i].transform.position, Quaternion.identity);
             bullet.SetDirection(firePoint);
         }
         isShootDelay = false;
+        OnAttack?.Invoke();
     }
 
     private void Debug(bool isClick)
@@ -88,8 +99,23 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
         isAttack = isClick;
     }
 
-    public void AfterInit()
+
+    private void ChargeShoot()
     {
-        attackSpeedStat = _statCompo.GetStat(attackSpeedStat);
+        FireChargeBullet();
+    }
+
+    private void FireChargeBullet()
+    {
+        Vector3 firePoint = FireTarget();
+        isShootDelay = true;
+        for (int i = 0; i < muzzle.Length; i++)
+        {
+            BaseBullet bullet = PoolManager.Instance.Pop(_chargeBullet.name) as BaseBullet;
+            bullet.transform.position = muzzle[i].transform.position;
+            entityVFX.PlayVfx(vfxName, muzzle[i].transform.position, Quaternion.identity);
+            bullet.SetDirection(firePoint);
+        }
+        isShootDelay = false;
     }
 }

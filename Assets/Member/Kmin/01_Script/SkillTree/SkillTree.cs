@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 using Member.Kmin._01_Script.SkillTree;
+using Member.Kmin._01_Script.SO;
 using Member.Ysc._01_Code.Agent;
 using Member.Ysc._01_Code.StatSystems;
 using UnityEngine.UI;
@@ -11,39 +13,57 @@ public class SkillTree : MonoBehaviour
 {
     public SkillTreeSO skillTreeSO;
     [SerializeField] private GameEventChannelSO eventChannelSO;
+    [SerializeField] private NodeSOList nodeSOList;
     [SerializeField] private EntityStat statCompo;
     //[SerializeField] private EntitySkillCompo skillCompo;
     
-    private List<SkillTreeNode> _fruitsList;
+    private List<SkillTreeNode> _nodes;
     private SkillTreeNode _selectedNode;
+    private Dictionary<SkillTreeNode, NodeSO> _nodesDic;
+    
     private SkillTreeSelectEvent _skillTreeSelectEvent = SkillTreeEventChannel.SkillTreeSelectEvent;
 
     private void Awake()
     {
-        _fruitsList = transform.GetComponentsInChildren<SkillTreeNode>(true).ToList();
-        _fruitsList.ForEach(f =>
+        _nodesDic = new Dictionary<SkillTreeNode, NodeSO>();
+        _nodes = transform.GetComponentsInChildren<SkillTreeNode>(true).ToList();
+        SaveLoadManager.SetFilePath(Application.persistentDataPath, "node.json");
+        nodeSOList.Load(nodeSOList.nodeSOList);
+        
+        _nodes.ForEach(f =>
         {
             f.Initialize();
+            _nodesDic.Add(f, nodeSOList.nodeSOList.Find(n => n.name == f.GetNodeSO().name));
 
             if (f.IsRootNode)
                 ChangeNodeColor(f);
+            
+            if (f.GetNodeSO().isPurchase)
+                ConnectColor(f, true);
         });
         
-        _fruitsList.ForEach(f => f.NodeButton.onClick.AddListener(() => SelectNode(f)));
+        _nodes.ForEach(f => f.NodeButton.onClick.AddListener(() => SelectNode(f)));
         eventChannelSO.AddListener<SkillTreePurchaseEvent>(HandleNodePurchase);
         eventChannelSO.AddListener<SkillTreeActiveEvent>(HandleNodeActive);
+    }
+
+    private void OnDestroy()
+    {
+        eventChannelSO.RemoveListener<SkillTreePurchaseEvent>(HandleNodePurchase);
+        eventChannelSO.RemoveListener<SkillTreeActiveEvent>(HandleNodeActive);
     }
 
     private void HandleNodeActive(SkillTreeActiveEvent evt) => ActiveNodeColor(_selectedNode, evt.isActive);
 
     private void HandleNodePurchase(SkillTreePurchaseEvent evt)
     {
-        NodeSO nodeSO = evt.node.GetNodeSO();
+        NodeSO nodeSO = _nodesDic[_selectedNode];
         StatSO targetStat = statCompo.GetStat(nodeSO.statSO);
         targetStat.AddModifier(this, nodeSO.upgradeValue);
         nodeSO.isPurchase = true;
         
         CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, -nodeSO.price);
+        nodeSOList.Save();
         ConnectColor(evt.node);
     }
 
@@ -55,8 +75,10 @@ public class SkillTree : MonoBehaviour
     }
 
 
-    private void ConnectColor(SkillTreeNode f)
+    private void ConnectColor(SkillTreeNode f, bool isInstance = false)
     {
+        if (f.IsRootNode) return;
+        
         f.transform.SetSiblingIndex(f.ParentNode.transform.GetSiblingIndex() - 1);
 
         Sequence seq = DOTween.Sequence();
@@ -64,25 +86,26 @@ public class SkillTree : MonoBehaviour
         for (int i = 0; i < 3; i++) {
             int idx = i;
             seq.Append(DOTween.To(() => 0f, amount
-                    => f.FillBranch[idx].fillAmount = amount, 1f, 0.2f));
+                    => f.FillBranch[idx].fillAmount = amount, 1f, 
+                isInstance ? 0f : 0.2f));
         }
 
-        seq.OnComplete(() => ChangeNodeColor(f));
+        seq.OnComplete(() => ChangeNodeColor(f, isInstance ? true : false));
     }
 
-    public void ChangeNodeColor(SkillTreeNode f)
+    public void ChangeNodeColor(SkillTreeNode f, bool isInstance = false)
     {
         Sequence seq = DOTween.Sequence();
         Outline outline = f.GetComponentInChildren<Outline>();
 
-        seq.Join(f.NodeOutline.DOColor(f.branchColor, 1f))
-            .Join(f.NodeIcon.DOColor(f.branchColor, 1f))
-            .Join(f.NodeIcon.DOFade(1f, 1f));
+        seq.Join(f.NodeOutline.DOColor(f.branchColor, isInstance ? 0f : 1f))
+            .Join(f.NodeIcon.DOColor(f.branchColor, isInstance ? 0f : 1f))
+            .Join(f.NodeIcon.DOFade(1f, isInstance ? 0f : 1f));
 
         seq.OnComplete(() => {
             f.ConnectedNodes.ForEach(n => {
-                n.NodeIcon.DOColor(Color.white, 1f);
-                n.NodeIcon.DOFade(1f, 1f);
+                n.NodeIcon.DOColor(Color.white, isInstance ? 0f : 1f);
+                n.NodeIcon.DOFade(1f, isInstance ? 0f : 1f);
                 n.NodeButton.interactable = true;
             });
         });
