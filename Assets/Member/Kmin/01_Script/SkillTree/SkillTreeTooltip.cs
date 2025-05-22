@@ -42,7 +42,7 @@ public class SkillTreeTooltip : MonoBehaviour
         NodeSO node = evt.node.GetNodeSO();
 
         _purchaseText.text = node.isPurchase ? "소유중" : "구매하기";
-        _icon.sprite = node.SkillSO ==null ? node.statSO.Icon : node.SkillSO.icon;
+        _icon.sprite = node.icon ==null ? node.statSO.Icon : node.icon;
 
         _description.text = node.description;
         _priceText.text = $"{node.price}원";
@@ -54,7 +54,8 @@ public class SkillTreeTooltip : MonoBehaviour
 
     private void HandleFruitsPurchase(SkillTreeNode node)
     {
-        if (node.GetNodeSO().isPurchase) return;
+        if (node.GetNodeSO().isPurchase || CurrencyManager.Instance.
+                GetCurrency(CurrencyType.Eon) < node.GetNodeSO().price) return;
         
         _purchaseText.text = "소유중";
         _treePurchaseEvent.node = node;

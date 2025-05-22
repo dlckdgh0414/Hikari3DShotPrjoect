@@ -9,10 +9,11 @@ using UnityEngine.Serialization;
 [CreateAssetMenu(fileName = "NodeSO", menuName = "SO/NodeSO")]
 public class NodeSO : ScriptableObject
 {
+    public Sprite icon;
     public string nodeName;
     public int price;
     public float upgradeValue;
-    public SkillSO SkillSO;
+    public string passiveSkill;
     public StatSO statSO;
     [TextArea] public string description;
     public bool isPurchase = false;
