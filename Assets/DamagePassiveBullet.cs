@@ -30,14 +30,11 @@ public class DamagePassiveBullet : MonoBehaviour,IPoolable
         startPoint = transform.position;
         endPoint = target.position;
 
-        // 중간 지점 + 랜덤 방향으로 휘는 곡선
         Vector3 mid = (startPoint + endPoint) / 2f;
 
-        // 🎯 모든 방향으로 랜덤하게 휘게 하기!
         Vector3 offset = Random.onUnitSphere * curveVariance;
         controlPoint = mid + offset;
 
-        // 경로 만들기 (중간 제어점 + 끝점)
         Vector3[] path = new Vector3[] { controlPoint, endPoint };
 
         transform.DOPath(path, flightDuration, PathType.CatmullRom)
