@@ -31,7 +31,7 @@ public class HpSlider : MonoBehaviour, IEntityComponent, IAfterInit
         _entityHealth = entity.GetCompo<EntityHealthCompo>();
         _entityHealth.Hp.OnValueChanged += ChangeHp;
         if (isText)
-            text = GetComponent<TextMeshProUGUI>();
+            text = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void ChangeHp(float prev, float next)
