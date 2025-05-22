@@ -36,8 +36,22 @@ public class Player : Entity
         UIFade();
     }
 
+    public void SetGameUI(bool isActive)
+    {
+        int fade = isActive ? 1 : 0;
+        DOTween.To(() => inGameUI.alpha, x => inGameUI.alpha = x, fade, 0.2f);
+    }
+
+    public void SetGameUI(bool isActive,Ease ease)
+    {
+        int fade = isActive ? 1 : 0;
+        DOTween.To(() => inGameUI.alpha, x => inGameUI.alpha = x, fade, 0.2f).SetEase(ease);
+    }
+
     private void UIFade()
     {
+        if (!IsGameStart) return;
+
         Vector3 screenPos = Camera.main.WorldToScreenPoint(model.transform.position);
         Vector2 screenSize = new(Screen.width, Screen.height);
 
@@ -54,9 +68,9 @@ public class Player : Entity
         //    edgeDirection.y = 1;  // Top
 
         if (edgeDirection != Vector2.zero)
-            inGameUI.DOFade(0.2f, 0.2f).SetEase(Ease.OutQuart);
+            SetGameUI(true,Ease.OutQuart);
         else
-            inGameUI.DOFade(1f, 0.2f).SetEase(Ease.OutSine);
+            SetGameUI(true, Ease.OutSine);
     }
 
     private void FixedUpdate()

@@ -38,6 +38,8 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
 
     private void Update()
     {
+        if (!_entity.IsGameStart) return;
+
         for (int i = 0; i < _passiveSkills.Count; i++)
         {
             if (_passiveSkills[i].IsPassiveCool) continue;

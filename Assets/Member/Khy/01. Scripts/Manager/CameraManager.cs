@@ -59,5 +59,6 @@ public class CameraManager : MonoBehaviour
     {
         cameraChannel.RemoveListener<ShakeEvent>(HandleShakeCamera);
         cameraChannel.RemoveListener<SwapCameraEvent>(HandleSwapCamera);
+        cameraChannel.RemoveListener<CameraEffectEvent>(HandleEffectCamera);
     }
 }

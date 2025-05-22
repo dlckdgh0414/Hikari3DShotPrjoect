@@ -14,11 +14,16 @@ public class StartUIState : MainMenuState,IMENUUILIB
         StartCoroutine(StartGame());
        
     }
+    
+    private void OnDestroy()
+    {
+        OnUIEvent -= UIEVENTHANDLER;
+    }
 
-   IEnumerator StartGame()
+    IEnumerator StartGame()
     {
         uds.ShowUIEffect();
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("SpaceShip");
     }
 }

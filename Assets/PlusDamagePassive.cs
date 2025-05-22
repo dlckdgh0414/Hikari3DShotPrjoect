@@ -32,7 +32,7 @@ public class PlusDamagePassive : PassiveSkill
 
     private bool CalculatePercent()
     {
-        Debug.Log("¤§¤¡¤§¤¡");
+        if (_aim.target == false) return false;
         int i = Random.Range(1,10);
         if (i <= 2) return true;
         else return false;

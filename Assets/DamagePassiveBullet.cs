@@ -52,6 +52,7 @@ public class DamagePassiveBullet : MonoBehaviour,IPoolable
     }
     protected virtual void DestroyBullet(IPoolable pool)
     {
+        Debug.Log("나 들어간다");
         PoolManager.Instance.Push(pool);
     }
 //    void OnDrawGizmos()

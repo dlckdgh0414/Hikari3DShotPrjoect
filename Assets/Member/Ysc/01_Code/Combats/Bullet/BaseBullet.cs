@@ -97,6 +97,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         }
         protected virtual void DestroyBullet(IPoolable pool)
         {
+            Debug.Log("히히 들어간당");
             PoolManager.Instance.Push(pool);
         }
 
