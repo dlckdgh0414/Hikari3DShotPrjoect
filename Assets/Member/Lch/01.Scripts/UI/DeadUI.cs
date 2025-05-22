@@ -1,39 +1,45 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
+[RequireComponent(typeof(CanvasGroup))]
 public class DeadUI : MonoBehaviour
 {
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private Button lobbyButton;
-    [SerializeField] private GameEventChannelSO deadUIChannel;
+    private CanvasGroup _canvasGroup;
 
     private void Awake()
     {
         mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
         lobbyButton.onClick.AddListener(OnLobbyButtonClicked);
-        gameObject.SetActive(false);
-        deadUIChannel.AddListener<DeadEvent>(OnDeadUIShow);
+        _canvasGroup = GetComponent<CanvasGroup>();
+        _canvasGroup.interactable = false;
+        _canvasGroup.alpha = 0f;
     }
 
     private void OnDestroy()
     {
-        deadUIChannel.RemoveListener<DeadEvent>(OnDeadUIShow);
+        mainMenuButton.onClick.RemoveListener(OnMainMenuButtonClicked);
+        lobbyButton.onClick.RemoveListener(OnLobbyButtonClicked);
     }
 
-    private void OnDeadUIShow(DeadEvent evt)
-    {
-        gameObject.SetActive(evt.isDead);
+    public void OnDeadUIShow()
+    {//너무 비효율 적이라 바꿈, 구르기 했을때 화면 휘는 것도 SO 이벤트로 만들었습니다
+        DOTween.To(()=>_canvasGroup.alpha,x=>_canvasGroup.alpha=x,1f,0.2f).OnComplete(()=>
+        {
+            _canvasGroup.interactable = true;
+        });
     }
 
     private void OnMainMenuButtonClicked()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MainMenu");
     }
     private void OnLobbyButtonClicked()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        SceneManager.LoadScene("ShipStation");
     }
 
 }

@@ -35,6 +35,8 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
 
     private EntityStat _statCompo;
 
+    public event Action OnAttack;
+
     public void Initialize(Entity entity)
     {
         _player = entity as Player;
@@ -57,6 +59,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
 
     private void Update()
     {
+        if (_player.IsDead) return;
         if(isAttack && !isShootDelay)
         {
             fireTimer += Time.deltaTime;
@@ -67,7 +70,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
             }
         }
     }
-    private Vector3 FireTarget()
+    public Vector3 FireTarget()
     {
         if (aimCompo.target != null && aimCompo.IsAutoAim)
             return aimCompo.target.transform.position;
@@ -88,6 +91,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
             bullet.SetDirection(firePoint);
         }
         isShootDelay = false;
+        OnAttack?.Invoke();
     }
 
     private void Debug(bool isClick)

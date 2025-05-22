@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Member.Ysc._01_Code.StatSystems;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,10 @@ namespace Member.Ysc._01_Code.Agent
         [SerializeField]
         private Slider hpSlider;
 
+        public bool IsRevived { get; set; }
+
+        private SkillCompo _skillCompo;
+
         [ContextMenu("Test")]
         public void Test()
         {
@@ -31,6 +36,7 @@ namespace Member.Ysc._01_Code.Agent
             _entity = entity;
             _statCompo ??= _entity.GetCompo<EntityStat>();
             _feedbackData ??= _entity.GetCompo<EntityFeedbackData>();
+            _skillCompo = entity.GetCompo<SkillCompo>();
         }
 
         public void AfterInit()
@@ -91,9 +97,15 @@ namespace Member.Ysc._01_Code.Agent
 
             if (CurrentHealth <= 0)
             {
+                if(IsRevived)
+                {
+                    _skillCompo.GetSkill<RevivedPassive>().Revived();
+                }
+                else
                 _entity.OnDead?.Invoke();
             }
                 
         }
+
     }
 }
