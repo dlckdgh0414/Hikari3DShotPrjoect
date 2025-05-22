@@ -163,6 +163,7 @@ MonoBehaviour:
   - rid: 2898964706085830730
   - rid: 2898964706085830731
   - rid: 2898964737453195413
+  - rid: 8106306113000702237
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
@@ -195,6 +196,15 @@ MonoBehaviour:
           m_Value1: 13344511115664401555
         Name: ShotDelay
         m_Value: 0.3
+    - rid: 8106306113000702237
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Transform, UnityEngine.CoreModule]]',
+        ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1737310099543467459
+          m_Value1: 4545649250860370371
+        Name: AttackTrm
+        m_Value: {fileID: 4189954525041188060}
     - rid: 9000330145074249805
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]',
         ns: Unity.Behavior, asm: Unity.Behavior}
@@ -1092,7 +1102,7 @@ MonoBehaviour:
   <FirePos>k__BackingField:
   - {fileID: 5048100779388919905}
   shotFrameList:
-  - {fileID: 3509176372546319562}
+  - {fileID: 5957465463305198383}
   coolTime: 3
 --- !u!1 &5402368381705576355
 GameObject:
@@ -2422,9 +2432,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f11450fa192bca64180b941e93fb4687, type: 3}
---- !u!1 &3509176372546319562 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7947852415887425116, guid: f11450fa192bca64180b941e93fb4687,
+--- !u!120 &5957465463305198383 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 887846561849332153, guid: f11450fa192bca64180b941e93fb4687,
     type: 3}
   m_PrefabInstance: {fileID: 6845305373723855510}
   m_PrefabAsset: {fileID: 0}
