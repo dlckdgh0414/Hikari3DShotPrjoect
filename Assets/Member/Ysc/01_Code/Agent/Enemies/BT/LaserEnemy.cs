@@ -7,8 +7,6 @@ namespace Member.Ysc._01_Code.Agent.Enemies.BT
     {
         protected override void HandleDead()
         {
-            base.HandleDead();
-
             LaserAttack attack = GetComponentInChildren<LaserAttack>();
             if (attack == null)
             {
@@ -16,7 +14,8 @@ namespace Member.Ysc._01_Code.Agent.Enemies.BT
                 return;
             }
 
-            attack.FrameControl(false);
+            attack.LineControl(false);
+            base.HandleDead();
         }
     }
 }
