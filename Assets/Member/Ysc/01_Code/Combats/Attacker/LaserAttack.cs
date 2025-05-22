@@ -9,41 +9,60 @@ namespace Member.Ysc._01_Code.Combat.Attacker
 {
     public class LaserAttack : Attack
     {
-        [SerializeField] private List<GameObject> shotFrameList;
+        [SerializeField] private List<LineRenderer> shotFrameList;
         
         [SerializeField] private float coolTime;
         
         private bool _isCooltime = false;
-        private List<Quaternion> _originRotations;
+        private List<Vector3> _originPoints;
+
 
         private void OnEnable()
         {
-            shotFrameList.ForEach(obj => FrameControl(false));
-            _originRotations = shotFrameList.Select(obj => obj.transform.rotation).ToList();
+            foreach (var shotFrame in shotFrameList)
+            {
+                shotFrame.SetPosition(0, transform.position);
+                LineControl();
+            }
         }
+
+        public void InitLaser()
+        {
+
+            foreach (var shotFrame in shotFrameList)
+            {
+                shotFrame.SetPosition(0, transform.position);
+                shotFrame.SetPosition(1, new Vector3(shotFrame.GetPosition(0).x, shotFrame.GetPosition(0).y, shotFrame.GetPosition(1).z));
+                LineControl();
+            }
+            
+            _originPoints = shotFrameList.Select(x => x.GetPosition(1)).ToList();
+        }
+
 
         public override void EnemyAttack(Transform target, float timer)
         {
             if (_isCooltime) return;
-            FrameControl(true);
             bool isGuided = Random.value <= 0.7f;
-            if (true)
+            if (isGuided)
             {
                 Debug.Log($"<color=red>타겟 : {target}</color>");
                 foreach (var shotFrame in shotFrameList)
                 {
-                    Quaternion lookRotation = Quaternion.LookRotation(target.position - shotFrame.transform.position);
-                    shotFrame.transform.rotation = lookRotation;
+                    Vector3 targetPos = target.position;
+                    targetPos.z = 0;
+                    shotFrame.SetPosition(1, targetPos);
                 }
             }
+            LineControl(true);
             StartCoroutine(ShotDelayCoroutine(coolTime, target, timer));
         }
 
-        public void FrameControl(bool isActive = false)
+        public void LineControl(bool isActive = false)
         {
             foreach (var shotFrame in shotFrameList)
             {
-                shotFrame.SetActive(isActive);
+                shotFrame.enabled = isActive;
             }
         }
         
@@ -59,10 +78,10 @@ namespace Member.Ysc._01_Code.Combat.Attacker
                 }
                 else
                 {
-                    FrameControl(false);
+                    LineControl(false);
                     for (int i = 0; i < shotFrameList.Count; i++)
                     {
-                        shotFrameList[i].transform.rotation = _originRotations[i];
+                        shotFrameList[i].SetPosition(1, _originPoints[i]);
                     }
                     SpawnBullet(target, timer, isGuided);
                     _isCooltime = false;
