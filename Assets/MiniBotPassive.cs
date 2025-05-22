@@ -22,6 +22,7 @@ public class MiniBotPassive : PassiveSkill
     public override void InitializeSkill(Entity entity, SkillCompo skillCompo)
     {
         base.InitializeSkill(entity, skillCompo);
+        Debug.Log("¿Ã¥œº»");
         _attackCompo = entity.GetCompo<PlayerAttackCompo>();
         miniBot.gameObject.SetActive(true);
     }
