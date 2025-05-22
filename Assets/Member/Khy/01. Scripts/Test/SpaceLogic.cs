@@ -1,8 +1,10 @@
 using DG.Tweening;
+using MoreMountains.Feedbacks;
 using System;
 using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class SpaceLogic : MonoBehaviour
@@ -28,12 +30,20 @@ public class SpaceLogic : MonoBehaviour
     [SerializeField]
     private CinemachineCamera cinemachine;
 
+    [SerializeField]
+    private MMF_Player mmf_Player;
+    [SerializeField]
+    private Image _black;
+
     //½Ã°£ ¾ø´Ù¤¿¤¿¤¿¤¿¤¿¤¿¤¿¤¿ÀÌ³«¤¾‘§¹Â¤Ó¤¤´Ý·ùÇÏ´ö¤¸µð»Ø¤Ó¤©
     private void Awake()
     {
         InputReader.OnWingEvent += MoveStage;
     }
-
+    private void Start()
+    {
+        _black.DOFade(0f,0.2f);
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -41,7 +51,7 @@ public class SpaceLogic : MonoBehaviour
             if(StageField == 0)
             {
                 Sequence seq = DOTween.Sequence();
-
+                mmf_Player.PlayFeedbacks();
                 seq.Append(DOTween.To(
                     () => cinemachine.Lens.FieldOfView,
                     x =>
@@ -52,9 +62,7 @@ public class SpaceLogic : MonoBehaviour
                     },
                     180f,
                     1f
-                ));
-
-                seq.Append(DOTween.To(
+                )).Append(DOTween.To(
                     () => cinemachine.Lens.FieldOfView,
                     x =>
                     {
@@ -73,7 +81,8 @@ public class SpaceLogic : MonoBehaviour
                         cinemachine.Lens = lens;
                     },
                     360f,
-                    0.3f)).OnComplete(() => SceneManager.LoadScene("ShipStation"));
+                    0.3f)).Join(_black.DOFade(1, 0.3f))
+                    .OnComplete(() => SceneManager.LoadScene("ShipStation"));
             }
             else if(StageField == 1)
             {

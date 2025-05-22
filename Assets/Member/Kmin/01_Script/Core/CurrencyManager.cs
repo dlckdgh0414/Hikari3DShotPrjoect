@@ -61,13 +61,19 @@ public class CurrencyManager : MonoBehaviour
 
         if (SaveLoadManager.CheckFile())
         {
-            LoadCurrencyData();
+            try
+            {
+                LoadCurrencyData();
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Failed to load currency data, resetting. " + e);
+                SaveCurrencyData();
+            }
         }
-        else
-        {
+
+        if (GetCurrency(CurrencyType.Eon) == 0)
             ModifyCurrency(CurrencyType.Eon, ModifyType.Add, 1000);
-            SaveCurrencyData();
-        }
     }
 
     public int GetCurrency(CurrencyType currencyType) => currencyDic[currencyType];
@@ -113,11 +119,22 @@ public class CurrencyManager : MonoBehaviour
 
     public void LoadCurrencyData()
     {
-        CurrencyData data = SaveLoadManager.Load<CurrencyData>();
-
         currencyDic.Clear();
-        
-        data.currencyList.ForEach(data => currencyDic[data.type] = data.amount);
-        currencyDic.ForEach(data => OnValueChanged?.Invoke(data.Key, data.Value));
+
+        foreach (CurrencyType type in Enum.GetValues(typeof(CurrencyType)))
+        {
+            currencyDic[type] = 0;
+        }
+
+        CurrencyData data = SaveLoadManager.Load<CurrencyData>();
+        foreach (var entry in data.currencyList)
+        {
+            currencyDic[entry.type] = entry.amount;
+        }
+
+        foreach (var pair in currencyDic)
+        {
+            OnValueChanged?.Invoke(pair.Key, pair.Value);
+        }
     }
 }
