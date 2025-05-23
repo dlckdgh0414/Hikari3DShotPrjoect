@@ -941,14 +941,14 @@ RectTransform:
   m_GameObject: {fileID: 739071153}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.23748142, y: 0.23748142, z: 0.23748142}
+  m_LocalScale: {x: 1.1070206, y: 1.1070206, z: 1.1070206}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1958835944}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -121.84999, y: 72.024}
+  m_AnchoredPosition: {x: -862.1699, y: 489.85004}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &739071155
@@ -1753,7 +1753,7 @@ PrefabInstance:
     - target: {fileID: 6137437826361094435, guid: c33452a4715040647b7b38cc71750a8e,
         type: 3}
       propertyPath: OnEndDialogueEvent.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-      value: DelayCallDownText
+      value: DownText
       objectReference: {fileID: 0}
     - target: {fileID: 6137437826361094435, guid: c33452a4715040647b7b38cc71750a8e,
         type: 3}
@@ -7458,14 +7458,14 @@ RectTransform:
   m_GameObject: {fileID: 1723804567}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.10384002, y: 0.10384002, z: 0.10384002}
+  m_LocalScale: {x: 0.48405072, y: 0.48405072, z: 0.48405072}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1958835944}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -134.9, y: 72.7}
+  m_AnchoredPosition: {x: -923, y: 493}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1723804569
@@ -7543,11 +7543,12 @@ MonoBehaviour:
     helpMeassage: "<Space>\uB97C \uB20C\uB7EC \uC2DC\uC791"
     skipKey: 32
   - dialogue:
+    - "\uC624..."
     - "<bounce>\uC798\uD588\uC5B4!</bounce>"
-    - "\uADF8\uB7FC \uC774\uBC88\uC5D0\uB294<shake>\uAE30\uC220</shake>\\n\uC744
-      \uBA87\uAC1C \uBC30\uC6CC\uBCFC\uAE4C?"
-    - "\uC790\uD310\uC744 \uB20C\uB7EC\uC11C\\n\uAE30\uC220\uC744 \uC368\uBCF4\uC790"
-    - "(\uD0A4\uB294 \uB098\uC911\uC5D0 \uBC14\uAFC0 \uC218 \uC788\uC2B5\uB2C8\uB2E4)"
+    - "\uADF8\uB7FC \uC774\uBC88\uC5D0\uB294\\n\uC801\uB4E4\uC744<shake> \uC0C1\uB300\uD560
+      \uC218 \uC788\uB294</shake>\\n\uAE30\uC220\uC744 \uC54C\uB824\uC904\uAC8C"
+    - "\uBC11\uC5D0 \uC790\uD310\\n\uBCF4\uC774\uC9C0?\\n\uD55C\uBC88 \uB20C\uB7EC\uBD10"
+    - "(\uD0A4\uB294 \uB098\uC911\uC5D0\\n\uBC14\uAFC0 \uC218\\n\uC788\uC2B5\uB2C8\uB2E4)"
     helpMeassage: "'\uD074\uB9AD'\uC73C\uB85C \uACF5\uACA9\uD558\uAE30"
     skipKey: 323
   - dialogue:

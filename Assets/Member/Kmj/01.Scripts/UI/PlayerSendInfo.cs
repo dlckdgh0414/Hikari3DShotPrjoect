@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerSendInfo : MonoSingleton<PlayerSendInfo>
 {
     public PlayerSkinSO ThisSkill;
-
     public List<string> skillName;
 
     protected override void Awake()
@@ -23,5 +22,14 @@ public class PlayerSendInfo : MonoSingleton<PlayerSendInfo>
 
         else
             return;
+    }
+    public bool CanStart()
+    {
+        foreach(string s in skillName)
+        {
+            if (s.Length < 1)
+                return false;
+        }
+        return true;
     }
 }
