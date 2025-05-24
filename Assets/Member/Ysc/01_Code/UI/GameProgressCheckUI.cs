@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,11 +12,15 @@ namespace Member.Ysc._01_Code.UI
         [SerializeField] private EnemySpawnListSO enemyCountData;
 
         [SerializeField] private Slider _slider;
+        [SerializeField] private Slider _backSlider;
 
         public UnityEvent OnClear;
 
         private Coroutine _coroutine;
-        
+        private int currentEnemyCount;
+        private int maxEnemyCount;
+
+
         private void Awake()
         {
             SliderInit();
@@ -23,35 +28,47 @@ namespace Member.Ysc._01_Code.UI
 
         private void SliderInit()
         {
+            maxEnemyCount = enemyCountData.StageEnemyCount;
+            currentEnemyCount = 0;
+            _slider.maxValue = maxEnemyCount;
             _slider.minValue = 0;
-            _slider.maxValue = enemyCountData.StageEnemyCount;
             _slider.value = 0;
+            if (_backSlider != null)
+            {
+                _backSlider.maxValue = enemyCountData.StageEnemyCount;
+                _backSlider.minValue = 0;
+                _backSlider.value = 0;
+            }
         }
 
 
         public void HandleEnemyDeadCount()
         {
-            if (_coroutine != null)
-                StopCoroutine(_coroutine);
-            
-            _coroutine = StartCoroutine(UpProgress());
-        }
-
-        public IEnumerator UpProgress()
-        {
-            float percent = 0.01f;
-            float target = _slider.value + 1;
-            while (percent < 1)
+            if(currentEnemyCount + 1 == maxEnemyCount)
             {
-                _slider.value = Mathf.Lerp(_slider.value, target, (percent += 0.01f));
-                yield return null;
-            }
-            
-            if (_slider.value >= _slider.maxValue)
-            {
-                Debug.Log("클리어!");
                 OnClear?.Invoke();
                 Time.timeScale = 0;
+            }
+            else
+            {
+                currentEnemyCount += 1;
+                UpProgress();
+            }
+        }
+
+        public void UpProgress()
+        {
+            _slider.value = currentEnemyCount;
+
+            if (_backSlider != null && _backSlider.value > _slider.value)
+            {
+                DOTween.Sequence()
+                    .AppendInterval(0.2f)
+                    .Append(_backSlider.DOValue(currentEnemyCount, 0.5f).SetEase(Ease.OutCubic));
+            }
+            else if (_backSlider != null && _backSlider.value < _slider.value)
+            {
+                _backSlider.value = currentEnemyCount;
             }
         }
     }
