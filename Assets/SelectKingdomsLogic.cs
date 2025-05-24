@@ -18,6 +18,7 @@ public class SelectKingdomsLogic : MonoBehaviour
     [SerializeField]
     private Image _image;
 
+    
     private void Awake()
     {
         Hide();
