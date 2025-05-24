@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class StageLogic : MonoBehaviour
@@ -33,6 +34,11 @@ public class StageLogic : MonoBehaviour
         _player.SetZpos(7.2f,5f);
         Entity.IsGameStart = true;
         StartCoroutine(StartCutSceneRoutine());
+    }
+
+    public void ReturnMenuScene()
+    {
+        SceneManager.LoadScene("ShipStation");
     }
 
     public void ChangeAnimation(string newAnim)

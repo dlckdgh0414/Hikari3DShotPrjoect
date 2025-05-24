@@ -6,6 +6,7 @@ using DG.Tweening;
 using UnityEngine.EventSystems;
 using System;
 using UnityEngine.SceneManagement;
+using Ami.BroAudio;
 
 public class KingdomButton : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler,IPointerClickHandler
 {
@@ -19,6 +20,9 @@ public class KingdomButton : MonoBehaviour,IPointerEnterHandler, IPointerExitHan
     public string WoldName;
     private bool IsTweening = false;
     private bool hasTweened = false; // 트윈이 실행되었는지 여부
+
+    [SerializeField]
+    private SoundID mouseInSFX;
 
     //맵 일치하는지 확인(보안용도및 버그 가능성 베제)
 
@@ -42,7 +46,7 @@ public class KingdomButton : MonoBehaviour,IPointerEnterHandler, IPointerExitHan
         {
             IsTweening = true;
 
-       
+            BroAudio.Play(mouseInSFX);
             rect.DOColor(Color.white, .1f);
             text.DOColor(textColorWhenSelected, .1f);
             circle.DOColor(Color.red, .1f);
