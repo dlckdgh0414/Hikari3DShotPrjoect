@@ -16,6 +16,7 @@ public class PlusDamagePassive : PassiveSkill
     }
     private void OnDestroy()
     {
+        if(skillEnabled)
         _attackCompo.OnAttack -= PlusDamage;
     }
 

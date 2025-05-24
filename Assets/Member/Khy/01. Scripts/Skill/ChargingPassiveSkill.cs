@@ -14,13 +14,20 @@ public class ChargingPassiveSkill : PassiveSkill
     [Header("차징 슬라이더")]
     public Slider chargeSlider;
 
+    private PlayerAttackCompo _attackCompo;
+
     public override void InitializeSkill(Entity entity, SkillCompo skillCompo)
     {
         base.InitializeSkill(entity, skillCompo);
+        _attackCompo = entity.GetCompo<PlayerAttackCompo>();
         _player.InputReader.OnChargingEvent += ChargingHandle;
         chargeSlider.maxValue = maxChargingTime;
     }
-
+    private void OnDestroy()
+    {
+        if (skillEnabled)
+            _player.InputReader.OnChargingEvent -= ChargingHandle;
+    }
     private void ChargingHandle(bool isclick)
      => isPress = isclick;
         
@@ -49,6 +56,6 @@ public class ChargingPassiveSkill : PassiveSkill
 
     private void Shoot()
     {
-        OnChargeShoot?.Invoke();
+        _attackCompo.ChargeShoot();
     }
 }

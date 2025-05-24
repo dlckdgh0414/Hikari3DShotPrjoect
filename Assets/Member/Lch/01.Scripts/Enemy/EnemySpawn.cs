@@ -8,7 +8,8 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] private EnemySpawnListSO enemySpawnSO;
     private float _currentSpawnTime;
     private int _currentSpawnEnemy;
-    
+    private bool _isSpwaning = false;
+
     [SerializeField] private GameProgressCheckUI gameProgressCheckUI;
 
     private void Awake()
@@ -22,10 +23,11 @@ public class EnemySpawn : MonoBehaviour
     private void Update()
     {
         _currentSpawnTime += Time.deltaTime;
-        if (_currentSpawnTime >= enemySpawnSO.SpawnTimer && _currentSpawnEnemy != enemySpawnSO.StageEnemyCount)
+        if (_currentSpawnTime >= enemySpawnSO.SpawnTimer && _currentSpawnEnemy != enemySpawnSO.StageEnemyCount && !_isSpwaning)
         {
             StartCoroutine(SpawnEnemy());
             _currentSpawnTime = 0;
+            _isSpwaning = true;
         }
     }
 
@@ -50,5 +52,7 @@ public class EnemySpawn : MonoBehaviour
             }
             yield return new WaitForSeconds(1f);
         }
+
+        _isSpwaning = false;
     }
 }
