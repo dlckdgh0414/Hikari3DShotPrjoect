@@ -48,6 +48,12 @@ MonoBehaviour:
   - stat: {fileID: 11400000, guid: 894e44d49a02c0f4f9dc78a843e325b0, type: 2}
     isUseOverride: 1
     overrideValue: 350
+  - stat: {fileID: 11400000, guid: 0123199e2d25ecd46b57456435b24e6f, type: 2}
+    isUseOverride: 1
+    overrideValue: 30
+  - stat: {fileID: 11400000, guid: 4139ce6c51066f54fa1d966c49d5cd6f, type: 2}
+    isUseOverride: 1
+    overrideValue: 15
 --- !u!1 &698218101322419329
 GameObject:
   m_ObjectHideFlags: 0
@@ -7287,7 +7293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   playerDistance: 50
-  zPos: 45
+  zPos: 80
   rb: {fileID: 6776544430331641507}
   isMove: 1
   isArrive: 0
@@ -7934,7 +7940,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpStat: {fileID: 11400000, guid: 894e44d49a02c0f4f9dc78a843e325b0, type: 2}
   maxHealth: 0
-  _currentHealth: 0
   Hp:
     value: 0
   hpSlider: {fileID: 0}
@@ -7984,6 +7989,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <bulletPrefab>k__BackingField: {fileID: 0}
   <FirePos>k__BackingField: []
+  enemyAttackSFX:
+    ID: 0
+    _sourceAsset: {fileID: 0}
+    <DebugObject>k__BackingField: {fileID: 0}
 --- !u!1 &8446353957883503642
 GameObject:
   m_ObjectHideFlags: 0

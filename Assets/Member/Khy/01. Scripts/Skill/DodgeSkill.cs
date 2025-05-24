@@ -22,13 +22,17 @@ public class DodgeSkill : ActiveSkill
             {
                 entityVFX.PlayVfx(dodgeSkill, Vector3.zero, Quaternion.identity);
                 _mover.StopImmediately();
+                _player.IsInvin = true;
                 _mover.CanManualMove = false;
                 _mover.SetAutoMovement(new Vector3(dir * 25, 0, 0));
                 CameraDutchEffect(dir);
 
 
                 _player.model.transform.DOLocalRotate(new Vector3(_player.transform.localEulerAngles.x, _player.transform.localEulerAngles.y, 360 * -dir), .4f, RotateMode.LocalAxisAdd)
-                    .SetEase(Ease.OutSine).OnComplete(() => _mover.CanManualMove = true);
+                    .SetEase(Ease.OutSine).OnComplete(() => {
+                        _mover.CanManualMove = true;
+                        _player.IsInvin = false;
+                    });
             }
         }
     }

@@ -61,7 +61,7 @@ namespace Member.Ysc._01_Code.Agent
         public void ApplyDamage(float damage)
         {
             if (_entity.IsDead || _entity.IsInvin) return;
-            Debug.Log("어플라이");
+
             CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, maxHealth);
             Hp.Value = CurrentHealth;
             AfterHitFeedbacks();

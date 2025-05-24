@@ -44,10 +44,8 @@ public class CameraManager : MonoBehaviour
 
     private void HandleSwapCamera(SwapCameraEvent swapEvt)
     {
-        if (currentCamera == swapEvt.leftCamera)
-            ChangeCamera(swapEvt.rightCamera);
-        else if (currentCamera == swapEvt.rightCamera)
-            ChangeCamera(swapEvt.leftCamera);
+        if (currentCamera != swapEvt.changeCamera)
+            ChangeCamera(swapEvt.changeCamera);
     }
     public void ChangeCamera(CinemachineCamera newCamera)
     {
@@ -59,5 +57,6 @@ public class CameraManager : MonoBehaviour
     {
         cameraChannel.RemoveListener<ShakeEvent>(HandleShakeCamera);
         cameraChannel.RemoveListener<SwapCameraEvent>(HandleSwapCamera);
+        cameraChannel.RemoveListener<CameraEffectEvent>(HandleEffectCamera);
     }
 }

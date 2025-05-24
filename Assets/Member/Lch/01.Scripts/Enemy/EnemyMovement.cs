@@ -20,7 +20,7 @@ public class EnemyMovement : MonoBehaviour,IEntityComponent
     {
         if (transform.position.z < zPos || transform.position.z > zPos)
         {
-            transform.DOMoveZ(zPos, 0.4f);
+            transform.position = new Vector3(transform.position.x, transform.position.y, zPos);
         }
     }
 

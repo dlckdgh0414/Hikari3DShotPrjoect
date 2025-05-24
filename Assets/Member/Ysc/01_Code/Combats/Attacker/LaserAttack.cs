@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Member.Ysc._01_Code.Containers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Member.Ysc._01_Code.Combat.Attacker
 {
-    public class LaserAttack : Attack
+    public class LaserAttack : Attack,IEntityComponent
     {
         [SerializeField] private List<LineRenderer> shotFrameList;
         
@@ -15,7 +16,13 @@ namespace Member.Ysc._01_Code.Combat.Attacker
         
         private bool _isCooltime = false;
         private List<Vector3> _originPoints;
+        private readonly string warningVFXName = "Warning";
+        private EntityVFX _entityVFX;
 
+        public void Initialize(Entity entity)
+        {
+            _entityVFX = entity.GetCompo<EntityVFX>();
+        }
 
         private void OnEnable()
         {
@@ -44,18 +51,18 @@ namespace Member.Ysc._01_Code.Combat.Attacker
         {
             if (_isCooltime) return;
             bool isGuided = Random.value <= 0.7f;
+            Transform targetTrm = target;
             if (isGuided)
             {
                 Debug.Log($"<color=red>타겟 : {target}</color>");
                 foreach (var shotFrame in shotFrameList)
                 {
-                    Vector3 targetPos = target.position;
-                    targetPos.z = 0;
-                    shotFrame.SetPosition(1, targetPos);
+                    shotFrame.SetPosition(1, targetTrm.position);
                 }
             }
             LineControl(true);
-            StartCoroutine(ShotDelayCoroutine(coolTime, target, timer));
+            _entityVFX.PlayVfx(warningVFXName, new Vector3(0, 0, 0), Quaternion.identity);
+            StartCoroutine(ShotDelayCoroutine(coolTime, targetTrm, timer, isGuided));
         }
 
         public void LineControl(bool isActive = false)
@@ -68,9 +75,16 @@ namespace Member.Ysc._01_Code.Combat.Attacker
         
         private IEnumerator ShotDelayCoroutine(float time, Transform target, float timer, bool isGuided = false)
         {
+            TargetContainer targetContainer = new TargetContainer
+            {
+                targetTrm = target,
+                targetPos = target.position
+            };
+
             _isCooltime = true;
             while (true)
             {
+                Debug.Log($"<color=red>{targetContainer.targetPos}</color>");
                 if (time > 0)
                 {
                     time -= Time.deltaTime;
@@ -78,16 +92,19 @@ namespace Member.Ysc._01_Code.Combat.Attacker
                 }
                 else
                 {
+                    _entityVFX.StopVfx(warningVFXName);
                     LineControl(false);
                     for (int i = 0; i < shotFrameList.Count; i++)
                     {
                         shotFrameList[i].SetPosition(1, _originPoints[i]);
                     }
-                    SpawnBullet(target, timer, isGuided);
+                    SpawnBullet(targetContainer, timer, isGuided);
                     _isCooltime = false;
                     yield break;
                 }
             }
         }
+
+        
     }
 }

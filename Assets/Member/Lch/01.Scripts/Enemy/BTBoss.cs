@@ -29,17 +29,4 @@ public abstract class BTBoss : Enemy
         IsDead = true;
         _stateChannel.SendEventMessage(BTEnemyState.DEATH);
     }
-    
-    public void EnemyDead()
-    {
-
-        // movement.isMove = false;
-        transform.DORotate(new Vector3(-35f, 0f, 0f), 0.5f, RotateMode.Fast)
-            .OnUpdate(() =>
-            {
-                Vector3 pos = new Vector3(transform.position.x, transform.forward.y, transform.forward.z * -0.4f);
-                transform.DOMove(pos, 10f);
-            }).OnComplete(() => IsDeadEnd = true);
-    }
-
 }

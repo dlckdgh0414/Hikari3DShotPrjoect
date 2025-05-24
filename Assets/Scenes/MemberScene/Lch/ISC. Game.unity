@@ -391,9 +391,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 699729024}
-  - component: {fileID: 699729023}
   - component: {fileID: 699729025}
   - component: {fileID: 699729026}
+  - component: {fileID: 699729027}
   m_Layer: 0
   m_Name: testPlayer
   m_TagString: Player
@@ -401,24 +401,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &699729023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 699729022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd536bdfe317f3641a43866aaa1bcfb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnHit:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDead:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &699729024
 Transform:
   m_ObjectHideFlags: 0
@@ -484,6 +466,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &699729027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699729022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd536bdfe317f3641a43866aaa1bcfb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDead:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &746588821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1460,7 +1460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 605493002}
-  enemySpawnSO: {fileID: 11400000, guid: cb062416bdaf41c4da870035ff3f43d8, type: 2}
+  enemySpawnSO: {fileID: 11400000, guid: 1916fd9fbfcca324c8a496c41e127dcd, type: 2}
   gameProgressCheckUI: {fileID: 2039769740}
 --- !u!4 &2104112319
 Transform:

@@ -12,6 +12,11 @@ public class InfinityFloatMotion : MonoBehaviour
     private Vector3 initialPosition;
     private Quaternion initialRotation;
 
+    public static bool isStop;
+
+    public static void AnimaStop(bool isStoped)
+    => isStop = isStoped;
+
     void Start()
     {
         initialPosition = transform.position;
@@ -20,6 +25,7 @@ public class InfinityFloatMotion : MonoBehaviour
     }
     void Update()
     {
+        if (isStop) return;
         float t = Time.time * speed;
 
      
