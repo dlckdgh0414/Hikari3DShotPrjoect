@@ -56,6 +56,7 @@ public class KeyRebinder : MonoBehaviour
 
     private void StartRebind()
     {
+        _inputreader._isKeyPressed = false;
         if (_actionToRebind == null) return;
 
       
@@ -68,14 +69,18 @@ public class KeyRebinder : MonoBehaviour
         _actionToRebind.PerformInteractiveRebinding(bindingIndex)
             .OnComplete(operation =>
             {
-                if (IsBindingDuplicate(path))
+                string newBindingPath = _actionToRebind.bindings[bindingIndex].effectivePath;
+
+                if (IsBindingDuplicate(newBindingPath))
                 {
-                    Debug.LogWarning($"'{path}'는 이미 다른 액션에 사용 중입니다.");
-                    bindingDisplayName.text = "중복된 키입니다!";  
+                    bindingDisplayName.text = "중복된 키입니다! 다시 시도하세요.";
+                    rebindButton.interactable = true;
+                    
+                    _actionToRebind.RemoveBindingOverride(bindingIndex);
+                    _actionToRebind.Enable();
                     return;
                 }
                 
-                UpdateBindingDisplay();
                 operation.Dispose();
                 _actionToRebind.Enable();
                 
@@ -91,6 +96,7 @@ public class KeyRebinder : MonoBehaviour
                 UpdateBindingDisplay();
                 SaveBindingOverride();
                 
+                _inputreader._isKeyPressed = true;
                 print("실행됨");
                 
             })
@@ -153,4 +159,5 @@ public class KeyRebinder : MonoBehaviour
         }
         return false;
     }
+    
 }
