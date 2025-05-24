@@ -14,8 +14,8 @@ public class SkillTree : MonoBehaviour
     public SkillTreeSO skillTreeSO;
     [SerializeField] private GameEventChannelSO eventChannelSO;
     [SerializeField] private NodeSOList nodeSOList;
-    [SerializeField] private EntityStat statCompo;
     [SerializeField] private SkillCompo skillCompo;
+    [SerializeField] private SaveNodeStat saveNodeStat;
     
     private List<SkillTreeNode> _nodes;
     private SkillTreeNode _selectedNode;
@@ -27,8 +27,6 @@ public class SkillTree : MonoBehaviour
     {
         _nodesDic = new Dictionary<SkillTreeNode, NodeSO>();
         _nodes = transform.GetComponentsInChildren<SkillTreeNode>(true).ToList();
-        //SaveLoadManager.SetFilePath(Application.persistentDataPath, "node.json");
-        //nodeSOList.Load(nodeSOList.nodeSOList);
         
         _nodes.ForEach(f =>
         {
@@ -58,12 +56,13 @@ public class SkillTree : MonoBehaviour
     private void HandleNodePurchase(SkillTreePurchaseEvent evt)
     {
         NodeSO nodeSO = _selectedNode.GetNodeSO();
-        StatSO targetStat = statCompo.GetStat(nodeSO.statSO);
-        targetStat.AddModifier(this, nodeSO.upgradeValue);
         nodeSO.isPurchase = true;
+
+        saveNodeStat.statData[nodeSO.statSO] += nodeSO.upgradeValue;
 
         if (!string.IsNullOrEmpty(nodeSO.passiveSkill))
         {
+            saveNodeStat.skillData.Add(nodeSO.passiveSkill);
             PassiveSkill skill = skillCompo.transform.Find(nodeSO.passiveSkill).GetComponent<PassiveSkill>();
             skill.skillEnabled = true;
         }
