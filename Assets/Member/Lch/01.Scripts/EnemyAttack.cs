@@ -5,12 +5,16 @@ public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] private float damage;
     public Entity _entity;
-    private void OnTriggerEnter(Collider other)
+
+    private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.TryGetComponent(out Player player))
+        if(other.TryGetComponent(out Player player))
         {
-            IDamageable damageable = player.GetComponentInChildren<IDamageable>();
-            damageable.ApplyDamage(damage);
+            if (other.gameObject.TryGetComponent(out IDamageable damageable))
+            {
+                Debug.Log("데미지받아라");
+                damageable.ApplyDamage(damage);
+            }
         }
     }
 }

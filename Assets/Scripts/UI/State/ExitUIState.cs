@@ -7,7 +7,10 @@ public class ExitUIState : MainMenuState, IMENUUILIB
         OnUIEvent += UIEVENTHANDLER;
     }
 
-
+    private void OnDestroy()
+    {
+        OnUIEvent -= UIEVENTHANDLER;
+    }
     public void UIEVENTHANDLER()
     {
         Debug.Log("게임 나가짐");

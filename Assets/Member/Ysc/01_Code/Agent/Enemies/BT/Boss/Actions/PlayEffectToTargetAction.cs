@@ -14,8 +14,9 @@ public partial class PlayEffectToTargetAction : Action
     [SerializeReference] public BlackboardVariable<Transform> StartPos;
     [SerializeReference] public BlackboardVariable<bool> CanTargetPos;
     [SerializeReference] public BlackboardVariable<GameObject> PatternEffect;
+    [SerializeReference] public BlackboardVariable<bool> IsSetParent;
 
-    
+
     protected override Status OnStart()
     {
         if (CanTargetPos.Value)
@@ -29,7 +30,11 @@ public partial class PlayEffectToTargetAction : Action
             Effect.Value._entity = _boss.Value;
 
         }
-        
+        if(IsSetParent.Value)
+        {
+            PatternEffect.Value.transform.SetParent(StartPos.Value);
+        }
+
         return Status.Success;
     }
 }

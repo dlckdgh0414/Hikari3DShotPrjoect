@@ -10,7 +10,11 @@ namespace Member.Ysc._01_Code.Combat.Bullet
             base.BulletInit();
             isRotModle = true;
         }
-
+        public void TriggerPointer(Collider other)
+        {
+            Hit(other);
+            DestroyBullet(this);
+        }
         protected override void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))

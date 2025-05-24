@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    [field : SerializeField]
+
+    [field: SerializeField]
     public InputReader InputReader { get; private set; }
+
+
 
     [SerializeField] private StateListSO playerFSM;
 
@@ -29,15 +32,28 @@ public class Player : Entity
     {
         _stateMachine.ChangeState("IDLE");
     }
-
+    
     private void Update()
     {
         _stateMachine.UpdateStateMachine();
         UIFade();
     }
 
+    public void SetGameUI(bool isActive)
+    {
+        int fade = isActive ? 1 : 0;
+        DOTween.To(() => inGameUI.alpha, x => inGameUI.alpha = x, fade, 0.2f);
+    }
+
+    public void SetGameUI(float fade,Ease ease)
+    {
+        DOTween.To(() => inGameUI.alpha, x => inGameUI.alpha = x, fade, 0.2f).SetEase(ease);
+    }
+
     private void UIFade()
     {
+        if (!IsGameStart) return;
+
         Vector3 screenPos = Camera.main.WorldToScreenPoint(model.transform.position);
         Vector2 screenSize = new(Screen.width, Screen.height);
 
@@ -54,9 +70,9 @@ public class Player : Entity
         //    edgeDirection.y = 1;  // Top
 
         if (edgeDirection != Vector2.zero)
-            inGameUI.DOFade(0.2f, 0.2f).SetEase(Ease.OutQuart);
+            SetGameUI(0.1f,Ease.OutQuart);
         else
-            inGameUI.DOFade(1f, 0.2f).SetEase(Ease.OutSine);
+            SetGameUI(1, Ease.OutSine);
     }
 
     private void FixedUpdate()
@@ -82,8 +98,8 @@ public class Player : Entity
         _stateMachine.ChangeState("DEAD");
     }
 
-    public void SetZpos(float changeZPos)
-    => DOTween.To(()=> zPos,x=> zPos=x, changeZPos, 0.2f);
+    public void SetZpos(float changeZPos,float second)
+    => DOTween.To(()=> zPos,x=> zPos=x, changeZPos, second);
 
     protected override void HandleHit()
     {

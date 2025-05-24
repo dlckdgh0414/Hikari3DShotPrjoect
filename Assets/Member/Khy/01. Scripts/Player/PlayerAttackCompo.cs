@@ -11,6 +11,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
     private BaseBullet _defalutBullet;
     [SerializeField]
     private BaseBullet _chargeBullet;
+    private Entity _entity;
     private Player _player;
 
     private bool isAttack;
@@ -39,6 +40,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
 
     public void Initialize(Entity entity)
     {
+        _entity = entity;
         _player = entity as Player;
         _player.InputReader.OnAttackEvent += Debug;
         entityVFX = entity.GetCompo<EntityVFX>();
@@ -49,7 +51,6 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
     public void AfterInit()
     {
         attackSpeedStat = _statCompo.GetStat(attackSpeedStat);
-        _player.GetCompo<SkillCompo>().GetSkill<ChargingPassiveSkill>().OnChargeShoot += ChargeShoot;
     }
 
     private void OnDestroy()
@@ -59,7 +60,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
 
     private void Update()
     {
-        if (_player.IsDead) return;
+        if (_player.IsDead || !Entity.IsGameStart) return;
         if(isAttack && !isShootDelay)
         {
             fireTimer += Time.deltaTime;
@@ -100,7 +101,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
     }
 
 
-    private void ChargeShoot()
+    public void ChargeShoot()
     {
         FireChargeBullet();
     }

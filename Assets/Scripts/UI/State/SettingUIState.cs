@@ -13,6 +13,9 @@ public class SettingUIState : MainMenuState, IMENUUILIB
         SettingObj.transform.DOPunchScale(SettingObj.transform.localScale * 0.2f, 0.5f, 10, 1);
         SettingObj.SetActive(true);
     }
-
+    private void OnDestroy()
+    {
+        OnUIEvent -= UIEVENTHANDLER;
+    }
 
 }
