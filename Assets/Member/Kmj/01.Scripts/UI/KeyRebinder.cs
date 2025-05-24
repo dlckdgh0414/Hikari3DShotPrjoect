@@ -80,6 +80,8 @@ public class KeyRebinder : MonoBehaviour
                     return;
                 }
                 
+                _inputreader._controlls.Disable();
+                
                 operation.Dispose();
                 _actionToRebind.Enable();
                 
@@ -105,7 +107,7 @@ public class KeyRebinder : MonoBehaviour
 
                 rebindButton.interactable = true;
                 UpdateBindingDisplay();
-                
+                _inputreader._controlls.Enable();
             })
             .Start();
     }

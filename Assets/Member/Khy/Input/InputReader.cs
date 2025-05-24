@@ -15,8 +15,6 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
     public Action<int> OnWingEvent;
     public Action<float> OnXMoveEvent;
 
-    public bool _isKeyPressed { get; set; }
-
     public Action OnFirSkillEvent;
     public Action OnSecSkillEvent;
     public Action OnThrSkillEvent;
