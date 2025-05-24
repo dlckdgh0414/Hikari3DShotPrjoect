@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-using VHierarchy.Libs;
 
 public enum CurrencyType
 {
@@ -27,7 +25,7 @@ public class CurrencyEntry
 [Serializable]
 public class CurrencyData
 {
-    public List<CurrencyEntry> currencyList = new();
+    public List<CurrencyEntry> currencies = new();
 }
 
 public class CurrencyManager : MonoBehaviour
@@ -57,29 +55,43 @@ public class CurrencyManager : MonoBehaviour
             return;
         }
 
-        SaveLoadManager.SetFilePath(Application.persistentDataPath, "currency.json");
+        SaveLoadManager.SetFilePath(Application.persistentDataPath, "currencies.json");
 
         if (SaveLoadManager.CheckFile())
         {
-            try
-            {
-                LoadCurrencyData();
-            }
-            catch (Exception e)
-            {
-                Debug.LogWarning("Failed to load currency data, resetting. " + e);
-                SaveCurrencyData();
-            }
+            Debug.Log("있음");
+            LoadCurrencyData();
         }
+        else
+        {
+            Debug.Log("없음");
+            SaveCurrencyData();
+        }
+        
+        Debug.Log(Application.persistentDataPath);
 
-        if (GetCurrency(CurrencyType.Eon) == 0)
-            ModifyCurrency(CurrencyType.Eon, ModifyType.Add, 1000);
     }
 
-    public int GetCurrency(CurrencyType currencyType) => currencyDic[currencyType];
+    [ContextMenu("Test")]
+    public void Test()
+    {
+        ModifyCurrency(CurrencyType.Eon, ModifyType.Add, 1000);
+    }
+
+    public int GetCurrency(CurrencyType currencyType)
+    {
+        if (!currencyDic.ContainsKey(currencyType))
+            return 0;
+        return currencyDic[currencyType];
+    }
 
     public void ModifyCurrency(CurrencyType currencyType, ModifyType modifyType, int amount)
     {
+        if (!currencyDic.ContainsKey(currencyType))
+        {
+            currencyDic[currencyType] = 0;
+        }
+        
         switch (modifyType)
         {
             case ModifyType.Set:
@@ -107,34 +119,30 @@ public class CurrencyManager : MonoBehaviour
 
         foreach (var pair in currencyDic)
         {
-            data.currencyList.Add(new CurrencyEntry
+            data.currencies.Add(new CurrencyEntry
             {
                 type = pair.Key,
                 amount = pair.Value
             });
         }
-
+        
         SaveLoadManager.Save(data);
     }
 
     public void LoadCurrencyData()
     {
-        currencyDic.Clear();
-
-        foreach (CurrencyType type in Enum.GetValues(typeof(CurrencyType)))
-        {
-            currencyDic[type] = 0;
-        }
-
         CurrencyData data = SaveLoadManager.Load<CurrencyData>();
-        foreach (var entry in data.currencyList)
+
+        foreach (var entry in data.currencies)
         {
             currencyDic[entry.type] = entry.amount;
         }
 
-        foreach (var pair in currencyDic)
+        foreach (var entry in currencyDic)
         {
-            OnValueChanged?.Invoke(pair.Key, pair.Value);
+            Debug.Log(entry.Key);
+            Debug.Log(entry.Value);
+            OnValueChanged?.Invoke(entry.Key, entry.Value);
         }
     }
 }
