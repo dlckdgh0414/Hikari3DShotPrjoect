@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Member.Ysc._01_Code.Combat.Bullet;
 using Ami.BroAudio;
+using Member.Ysc._01_Code.Containers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -37,23 +38,30 @@ public abstract class Attack : MonoBehaviour
         // 얘는 재정의 그대로 쓸거에요 :>
     }
 
-    protected void SpawnBullet(Transform target,float timer, bool isGuided = false)
+    protected void SpawnBullet(TargetContainer container,float timer, bool? isGuided = null)
     {
         if (bulletPrefab.GetBulletCount <= 1)
         {
             int range = 10;
             bulletPrefab = PoolManager.Instance.Pop(bulletPrefab.name) as BaseBullet;
             bulletPrefab.transform.position = FirePos[0].position;
+            bulletPrefab.SetTransform();
             BroAudio.Play(enemyAttackSFX);
-            if (isGuided == false)
+            if (isGuided == null)
             {
                 range = Random.Range(0, 10);
             }
             
-            if ( isGuided || range<= 7)
+            if (isGuided == true)
             {
-                Debug.Log("힣");
-                bulletPrefab.SetDirection(target.position);
+                Debug.Log($"가이드 오브젝트 이름 : {transform.parent.name}");
+                bulletPrefab.SetTransform(container);
+                bulletPrefab.IsPlayerFollow = true;
+            } 
+            else if (range<= 7)
+            {
+                Debug.Log($"힣 오브젝트 이름 : {transform.parent.name}");
+                bulletPrefab.SetDirection(container.targetPos);
                 bulletPrefab.IsPlayerFollow = true;
             }
             else
@@ -63,12 +71,12 @@ public abstract class Attack : MonoBehaviour
         }
         else
         {
-            StartCoroutine(ManyBulletAttack(timer,target,isGuided));
+            StartCoroutine(ManyBulletAttack(timer,container,isGuided));
         }
         IsAttackEnd = true;
     }
 
-    private IEnumerator ManyBulletAttack(float timer,Transform target, bool isGuided = false)
+    private IEnumerator ManyBulletAttack(float timer,TargetContainer container, bool? isGuided = null)
     {
         while (!IsAttackEnd)
         {
@@ -79,21 +87,25 @@ public abstract class Attack : MonoBehaviour
             }
             bulletPrefab = PoolManager.Instance.Pop(bulletPrefab.name) as BaseBullet;
             bulletPrefab.transform.position = FirePos[_shotCount].position;
+            bulletPrefab.SetTransform();
+            
             BroAudio.Play(enemyAttackSFX);
             int range = 10;
-            if (isGuided == false)
+            if (isGuided == null)
             {
                 range = Random.Range(0, 10);
             }
-            if (isGuided == false)
+            
+            if (isGuided == true)
             {
-                range = Random.Range(0, 10);
+                Debug.Log($"가이드 오브젝트 이름 : {transform.parent.name}");
+                bulletPrefab.SetTransform(container);
+                bulletPrefab.IsPlayerFollow = true;
             }
-
-            if (isGuided || range <= 7)
+            else if (range <= 7)
             {
-                Debug.Log("힣");
-                bulletPrefab.SetDirection(target.position);
+                Debug.Log($"힣 오브젝트 이름 : {transform.parent.name}");
+                bulletPrefab.SetDirection(container.targetPos);
                 bulletPrefab.IsPlayerFollow = true;
             }
             else
