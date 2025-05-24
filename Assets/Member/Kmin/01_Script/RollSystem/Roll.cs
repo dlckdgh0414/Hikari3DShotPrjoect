@@ -22,19 +22,18 @@ public class Roll : MonoBehaviour
     [SerializeField] private int price;
     [SerializeField] private float scrollSpeed;
     
-    private Dictionary<string, PlayerSkinSO> _skillDic = new Dictionary<string, PlayerSkinSO>();
+    private Dictionary<string, PlayerSkinSO> _skinDic = new Dictionary<string, PlayerSkinSO>();
     
     private readonly RollEndEvent _rollEndEvent = new RollEndEvent();
 
     private float _scrollSpeed;
     private bool _isRolling = false;
-    private bool _isDecrease = false;
     
     private void Awake()
     {
         rolledSkillText.transform.parent.gameObject.SetActive(false);
 
-        playerSkinSO.skinList.ForEach(s =>  _skillDic.Add(s.name, s));
+        playerSkinSO.skinList.ForEach(s =>  _skinDic.Add(s.name, s));
         rollItems.ForEach(item => item.SettingItem(SelectedSkill()));
     }
 
@@ -53,23 +52,30 @@ public class Roll : MonoBehaviour
     #endif
     public void SkillRoll()
     {
+        if (_isRolling) return;
+
         if (CurrencyManager.Instance.GetCurrency(CurrencyType.Eon) < price) return;
         
         CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, -price);
 
         DOTween.To(() => 0f, y => maskBackground.rectTransform.sizeDelta = 
             new Vector2(maskBackground.rectTransform.sizeDelta.x, y), 600f, 2.25f)
-            .SetEase(Ease.InExpo).OnComplete(() => _isDecrease = true);
+            .SetEase(Ease.InExpo).OnComplete(() => DecreaseRollingSpeed());
         
         rolledSkillText.transform.parent.gameObject.SetActive(false);
         _scrollSpeed = scrollSpeed;
         _isRolling = true;
     }
 
+    private void DecreaseRollingSpeed()
+    {
+        DOTween.To(() => _scrollSpeed, x => _scrollSpeed = x, 0, 6.5f)
+            .SetEase(Ease.OutCirc);
+    }
+
     private void Rolling()
     {
         contentPanel.anchoredPosition += Vector2.left * (_scrollSpeed * Time.deltaTime);
-        if(_isDecrease) _scrollSpeed /= (1.005f);
 
         if (_scrollSpeed <= 25)
         {
@@ -78,7 +84,7 @@ public class Roll : MonoBehaviour
                 new Vector2(maskBackground.rectTransform.sizeDelta.x, y), 0f, 2f).SetEase(Ease.InExpo);
         }
 
-        if (contentPanel.anchoredPosition.x <= -215)
+        if (contentPanel.anchoredPosition.x <= -240)
         {
             RollItem item = rollItems[0];
             rollItems[0].transform.SetAsLastSibling();
@@ -98,7 +104,7 @@ public class Roll : MonoBehaviour
         string rolledName = rollItems.OrderBy(x => 
             Vector3.Distance(contentPanel.parent.position, x.gameObject.transform.position)).First().name;
 
-        PlayerSkinSO rolledSkin = _skillDic
+        PlayerSkinSO rolledSkin = _skinDic
             .Where(x => x.Key == rolledName)
             .Select(x => x.Value)
             .FirstOrDefault();
@@ -116,7 +122,6 @@ public class Roll : MonoBehaviour
         rolledSkillText.text = $"{rolledSkin.name}({rolledSkin.rarity}분의 1)";
         
         _isRolling = false;
-        _isDecrease = false;
         _rollEndEvent.rolledSkill = rolledSkin;
         rollEventChannel.RaiseEvent(_rollEndEvent);
     }
@@ -125,7 +130,7 @@ public class Roll : MonoBehaviour
     {
         RollStartEvent rollStartEvent = RollEventChannel.rollStartEvent;
 
-        foreach (PlayerSkinSO skin in _skillDic.Values.Reverse())
+        foreach (PlayerSkinSO skin in _skinDic.Values.Reverse())
         {
             if (IsPicked(skin.rarity / 1))
             {
