@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Member.Ysc._01_Code.Containers;
+using UnityEngine;
 
 namespace Member.Ysc._01_Code.Combat.Attacker
 {
@@ -6,7 +7,9 @@ namespace Member.Ysc._01_Code.Combat.Attacker
     {
         public override void EnemyAttack(Transform target, float timer)
         {
-            SpawnBullet(target, timer);
+            TargetContainer container = new TargetContainer();
+            container.targetTrm = target; 
+            SpawnBullet(container, timer);
         }
     }
 }

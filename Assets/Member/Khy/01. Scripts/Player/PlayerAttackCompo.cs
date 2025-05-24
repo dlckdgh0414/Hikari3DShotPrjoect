@@ -51,7 +51,6 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
     public void AfterInit()
     {
         attackSpeedStat = _statCompo.GetStat(attackSpeedStat);
-        _player.GetCompo<SkillCompo>().GetSkill<ChargingPassiveSkill>().OnChargeShoot += ChargeShoot;
     }
 
     private void OnDestroy()
@@ -102,7 +101,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
     }
 
 
-    private void ChargeShoot()
+    public void ChargeShoot()
     {
         FireChargeBullet();
     }
