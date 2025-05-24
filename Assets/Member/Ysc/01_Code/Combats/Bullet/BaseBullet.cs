@@ -32,7 +32,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
             fireDirection = targetPos - transform.position;
         }
 
-        public virtual void SetTransform([CanBeNull] TargetContainer? targetTrm = null)
+        public virtual void SetTransform(TargetContainer? targetTrm = null)
         {
             if (targetTrm != null)
                 fireContainer = targetTrm;

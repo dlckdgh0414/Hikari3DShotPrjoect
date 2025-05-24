@@ -35,19 +35,16 @@ namespace Member.Ysc._01_Code.Combat.Bullet
             }
         }
 
-        public override void SetTransform([CanBeNull] TargetContainer? targetTrm = null)
+        public override void SetTransform(TargetContainer? targetTrm = null)
         {
             base.SetTransform(targetTrm);
 
             Debug.Log($"{targetTrm}");
             lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.useWorldSpace = false;
             lineRenderer.SetPosition(1, Quaternion.Euler(0, 180, 0) *fireEndTrm.position);
             if (fireContainer != null)
             {
-                lineRenderer.useWorldSpace = true;
                 Vector3 pos = fireContainer.Value.targetPos;
-                pos.z += 50;
                 lineRenderer.SetPosition(1, pos);
             }
 
@@ -72,7 +69,8 @@ namespace Member.Ysc._01_Code.Combat.Bullet
             base.ResetItem();
 
             _originFireEndTrm = fireEndTrm;
-            lineRenderer.widthMultiplier = _originWidth;
+            lineRenderer.widthMultiplier = _originWidth; 
+            lineRenderer.useWorldSpace = true;
         }
     }
 }
