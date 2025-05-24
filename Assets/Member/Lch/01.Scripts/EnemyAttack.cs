@@ -7,9 +7,8 @@ public class EnemyAttack : MonoBehaviour
     public Entity _entity;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.TryGetComponent(out Player player))
+        if(other.gameObject.TryGetComponent(out IDamageable damageable))
         {
-            IDamageable damageable = player.GetComponentInChildren<IDamageable>();
             damageable.ApplyDamage(damage);
         }
     }
