@@ -17,8 +17,7 @@ public static class CamaraEvents
 
 public class SwapCameraEvent : GameEvent
 {
-    public CinemachineCamera leftCamera;
-    public CinemachineCamera rightCamera;
+    public CinemachineCamera changeCamera;
 }
 
 public class CameraEffectEvent : GameEvent

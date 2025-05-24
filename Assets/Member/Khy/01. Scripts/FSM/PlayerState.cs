@@ -64,7 +64,7 @@ public class PlayerState : EntityState
 
     void HorizontalLean()
     {
-        if (_mover.CanManualMove == false|| !_entity.IsGameStart) return;
+        if (_mover.CanManualMove == false|| !Entity.IsGameStart) return;
         Vector3 targetEulerAngels = _player.model.transform.localEulerAngles;
         Vector3 playerRotateDir;
 

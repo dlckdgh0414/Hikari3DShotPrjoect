@@ -61,7 +61,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
 
     private void Update()
     {
-        if (_player.IsDead || !_entity.IsGameStart) return;
+        if (_player.IsDead || !Entity.IsGameStart) return;
         if(isAttack && !isShootDelay)
         {
             fireTimer += Time.deltaTime;

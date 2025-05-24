@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 namespace Member.Ysc._01_Code.Combat.Attacker
 {
-    public class LaserAttack : Attack
+    public class LaserAttack : Attack,IEntityComponent
     {
         [SerializeField] private List<LineRenderer> shotFrameList;
         
@@ -15,7 +15,13 @@ namespace Member.Ysc._01_Code.Combat.Attacker
         
         private bool _isCooltime = false;
         private List<Vector3> _originPoints;
+        private readonly string warningVFXName = "Warning";
+        private EntityVFX _entityVFX;
 
+        public void Initialize(Entity entity)
+        {
+            _entityVFX = entity.GetCompo<EntityVFX>();
+        }
 
         private void OnEnable()
         {
@@ -55,6 +61,7 @@ namespace Member.Ysc._01_Code.Combat.Attacker
                 }
             }
             LineControl(true);
+            _entityVFX.PlayVfx(warningVFXName, new Vector3(0, 0, 0), Quaternion.identity);
             StartCoroutine(ShotDelayCoroutine(coolTime, target, timer));
         }
 
@@ -78,6 +85,7 @@ namespace Member.Ysc._01_Code.Combat.Attacker
                 }
                 else
                 {
+                    _entityVFX.StopVfx(warningVFXName);
                     LineControl(false);
                     for (int i = 0; i < shotFrameList.Count; i++)
                     {
@@ -89,5 +97,7 @@ namespace Member.Ysc._01_Code.Combat.Attacker
                 }
             }
         }
+
+        
     }
 }

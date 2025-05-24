@@ -38,7 +38,7 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
 
     private void Update()
     {
-        if (!_entity.IsGameStart) return;
+        if (!Entity.IsGameStart) return;
 
         for (int i = 0; i < _passiveSkills.Count; i++)
         {

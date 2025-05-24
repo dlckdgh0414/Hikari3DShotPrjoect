@@ -42,7 +42,7 @@ public class SpaceLogic : MonoBehaviour
     }
     private void Start()
     {
-        _black.DOFade(0f,0.2f);
+        
     }
     private void Update()
     {

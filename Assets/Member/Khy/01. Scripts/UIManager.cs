@@ -75,7 +75,7 @@ public class UIManager : MonoBehaviour
             OnClickEventKey?.Invoke();
         }
 
-        if(Input.GetMouseButtonDown(0) && isDialogue)
+        if(Input.GetMouseButtonDown(0) && isDialogue && !isShowText)
         {
             if (textNum+1 == currentDialogue.Length)
             {

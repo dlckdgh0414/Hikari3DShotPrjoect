@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    [field : SerializeField]
+
+    [field: SerializeField]
     public InputReader InputReader { get; private set; }
+
+
 
     [SerializeField] private StateListSO playerFSM;
 
@@ -29,7 +32,7 @@ public class Player : Entity
     {
         _stateMachine.ChangeState("IDLE");
     }
-
+    
     private void Update()
     {
         _stateMachine.UpdateStateMachine();
@@ -42,9 +45,8 @@ public class Player : Entity
         DOTween.To(() => inGameUI.alpha, x => inGameUI.alpha = x, fade, 0.2f);
     }
 
-    public void SetGameUI(bool isActive,Ease ease)
+    public void SetGameUI(float fade,Ease ease)
     {
-        int fade = isActive ? 1 : 0;
         DOTween.To(() => inGameUI.alpha, x => inGameUI.alpha = x, fade, 0.2f).SetEase(ease);
     }
 
@@ -68,9 +70,9 @@ public class Player : Entity
         //    edgeDirection.y = 1;  // Top
 
         if (edgeDirection != Vector2.zero)
-            SetGameUI(true,Ease.OutQuart);
+            SetGameUI(0.1f,Ease.OutQuart);
         else
-            SetGameUI(true, Ease.OutSine);
+            SetGameUI(1, Ease.OutSine);
     }
 
     private void FixedUpdate()

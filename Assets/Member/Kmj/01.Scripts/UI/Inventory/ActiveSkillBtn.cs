@@ -1,9 +1,10 @@
 using Member.Kmin._01_Script.Core.EventChannel;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
-public class ActiveSkillBtn : MonoBehaviour
+public class ActiveSkillBtn : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
     [SerializeField] private GameEventChannelSO _skillEventChannel;
     [field : SerializeField] public SkillSO thisSkill { get; set; }
@@ -12,6 +13,8 @@ public class ActiveSkillBtn : MonoBehaviour
     
     private Button thisBtn;
     private Image thisImg;
+
+    public bool isDontSelect;
 
     private void Awake()
     {
@@ -23,7 +26,18 @@ public class ActiveSkillBtn : MonoBehaviour
 
     private void ClickThis()
     {
+        if (isDontSelect) return;
         _skillEvent.selectedSkill = thisSkill;
         _skillEventChannel.RaiseEvent(_skillEvent);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        FindAnyObjectByType<SelectKingdomsLogic>().Hide();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        FindAnyObjectByType<SelectKingdomsLogic>().Show(thisSkill.description);
     }
 }

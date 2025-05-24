@@ -14,7 +14,7 @@ public abstract class Entity : MonoBehaviour, IDamageable
     public UnityEvent OnHit;
     public UnityEvent OnDead;
 
-    public bool IsGameStart { get; set; } 
+    public static bool IsGameStart { get; set; } 
     public bool IsDead { get; set; } 
     public bool IsInvin { get; set; }
     public int DeadBodyLayer { get; private set; }
