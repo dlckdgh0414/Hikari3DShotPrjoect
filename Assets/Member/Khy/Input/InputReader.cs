@@ -15,7 +15,7 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
     public Action<int> OnWingEvent;
     public Action<float> OnXMoveEvent;
 
-    public bool _isKeyPressed { get; set; }
+    //public bool _isKeyPressed { get; set; } = true;
 
     public Action OnFirSkillEvent;
     public Action OnSecSkillEvent;
@@ -54,42 +54,31 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (_isKeyPressed == true)
-        {
             if (context.started)
                 OnAttackEvent?.Invoke(true);
             if (context.canceled)
                 OnAttackEvent?.Invoke(false);
-        }
+        
     }
 
     public void OnLeftWing(InputAction.CallbackContext context)
     {
-        if (_isKeyPressed == true)
-        {
             if (context.performed)
                 OnWingEvent?.Invoke(-1);
-        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (_isKeyPressed == true)
-        {
             InputDirection = context.ReadValue<Vector2>();
 
             if (context.started)
                 OnXMoveEvent?.Invoke(InputDirection.x);
-        }
     }
 
     public void OnRightWing(InputAction.CallbackContext context)
     {
-        if (_isKeyPressed == true)
-        {
             if (context.performed)
                 OnWingEvent?.Invoke(1);
-        }
     }
 
     public Vector3 GetWorldPosition(out RaycastHit hit)
@@ -106,10 +95,7 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
 
     public void OnAim(InputAction.CallbackContext context)
     {
-        if (_isKeyPressed == true)
-        {
             MousePosition = context.ReadValue<Vector2>();
-        }
     }
 
     public void OnFirSkill(InputAction.CallbackContext context)
@@ -132,16 +118,12 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
 
     public void OnCharging(InputAction.CallbackContext context)
     {
-        if (_isKeyPressed == true)
-        {
             if (context.started)
             {
                 Debug.Log("�ƴ�");
                 OnChargingEvent?.Invoke(true);
             }
-
             if (context.canceled)
                 OnChargingEvent?.Invoke(false);
-        }
     }
 }
