@@ -31,14 +31,12 @@ public class KeyRebinder : MonoBehaviour
         var map = inputActions.FindActionMap(actionMapName);
         if (map == null)
         {
-            Debug.LogError($"ActionMap '{actionMapName}' not found.");
             return;
         }
 
         _actionToRebind = map.FindAction(actionName);
         if (_actionToRebind == null)
         {
-            Debug.LogError($"Action '{actionName}' not found in map '{actionMapName}'.");
             return;
         }
 
@@ -58,8 +56,11 @@ public class KeyRebinder : MonoBehaviour
 
     private void StartRebind()
     {
+        _inputreader._isKeyPressed = false;
         if (_actionToRebind == null) return;
 
+      
+        
         _actionToRebind.Disable();
 
         bindingDisplayName.text = "입력 대기중...";
@@ -68,9 +69,21 @@ public class KeyRebinder : MonoBehaviour
         _actionToRebind.PerformInteractiveRebinding(bindingIndex)
             .OnComplete(operation =>
             {
+                string newBindingPath = _actionToRebind.bindings[bindingIndex].effectivePath;
+
+                if (IsBindingDuplicate(newBindingPath))
+                {
+                    bindingDisplayName.text = "중복된 키입니다! 다시 시도하세요.";
+                    rebindButton.interactable = true;
+                    
+                    _actionToRebind.RemoveBindingOverride(bindingIndex);
+                    _actionToRebind.Enable();
+                    return;
+                }
+                
                 operation.Dispose();
                 _actionToRebind.Enable();
-
+                
                 string json = PlayerPrefs.GetString("rebinds", string.Empty);
                 if (!string.IsNullOrEmpty(json))
                 {
@@ -81,9 +94,10 @@ public class KeyRebinder : MonoBehaviour
 
                 rebindButton.interactable = true;
                 UpdateBindingDisplay();
-                print(_actionToRebind.ToString());
                 SaveBindingOverride();
-               
+                
+                _inputreader._isKeyPressed = true;
+                print("실행됨");
                 
             })
             .OnCancel(operation =>
@@ -125,4 +139,25 @@ public class KeyRebinder : MonoBehaviour
             inputActions.LoadBindingOverridesFromJson(rebindJson);
         }
     }
+    
+    private bool IsBindingDuplicate(string path)
+    {
+        foreach (var map in inputActions.actionMaps)
+        {
+            foreach (var action in map.actions)
+            {
+                if (action == _actionToRebind) continue;
+
+                foreach (var binding in action.bindings)
+                {
+                    if (binding.effectivePath == path)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
 }
