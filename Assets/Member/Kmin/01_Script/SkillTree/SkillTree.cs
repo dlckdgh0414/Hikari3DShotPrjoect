@@ -14,7 +14,6 @@ public class SkillTree : MonoBehaviour
     public SkillTreeSO skillTreeSO;
     [SerializeField] private GameEventChannelSO eventChannelSO;
     [SerializeField] private NodeSOList nodeSOList;
-    [SerializeField] private SkillCompo skillCompo;
     [SerializeField] private SaveNodeStat saveNodeStat;
     
     private List<SkillTreeNode> _nodes;
@@ -58,13 +57,12 @@ public class SkillTree : MonoBehaviour
         NodeSO nodeSO = _selectedNode.GetNodeSO();
         nodeSO.isPurchase = true;
 
-        saveNodeStat.statData[nodeSO.statSO] += nodeSO.upgradeValue;
+        saveNodeStat.AddStat(nodeSO.statSO, nodeSO.upgradeValue);
 
         if (!string.IsNullOrEmpty(nodeSO.passiveSkill))
         {
+            //PassiveSkill skill = skillCompo.transform.Find(nodeSO.passiveSkill).GetComponent<PassiveSkill>();
             saveNodeStat.skillData.Add(nodeSO.passiveSkill);
-            PassiveSkill skill = skillCompo.transform.Find(nodeSO.passiveSkill).GetComponent<PassiveSkill>();
-            skill.skillEnabled = true;
         }
         
         CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, -nodeSO.price);

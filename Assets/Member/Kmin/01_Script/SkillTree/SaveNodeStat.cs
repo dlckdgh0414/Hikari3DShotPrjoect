@@ -26,6 +26,17 @@ namespace Member.Kmin._01_Script.SkillTree
             }
         }
 
+        public void AddStat(StatSO stat, float value)
+        {
+            if (!statData.ContainsKey(stat))
+            {
+                statData.Add(stat, value);
+                return;
+            }
+            
+            statData[stat] += value;
+        }
+
         [ContextMenu("LOG")]
         private void Test()
         {
