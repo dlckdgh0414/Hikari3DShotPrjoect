@@ -13,11 +13,14 @@ public class SkillCoolDownUI : MonoBehaviour,IEntityComponent
     protected SkillCompo _skillCompo;
 
     public TextMeshProUGUI text;
+    public TextMeshProUGUI whatKeyText;
 
     private bool isEndCool;
 
     [field:SerializeField]
     public InputReader InputReader { get; private set; }
+    [field:SerializeField]
+    protected InputActionReference _skillInputKey;
 
     public void Initialize(Entity entity)
     {
@@ -26,11 +29,6 @@ public class SkillCoolDownUI : MonoBehaviour,IEntityComponent
         text.gameObject.SetActive(false);
         _skillCompo = entity.GetCompo<SkillCompo>();
         InitializeCooldownUI();
-        InputAction firSkillInput = InputReader._controlls.FindAction("FirSkill");
-        InputAction secSkillInput = InputReader._controlls.FindAction("SecSkill");
-        InputAction thrSkillInput = InputReader._controlls.FindAction("ThrSkill");
-
-        
     }
 
     protected virtual void InitializeCooldownUI()
