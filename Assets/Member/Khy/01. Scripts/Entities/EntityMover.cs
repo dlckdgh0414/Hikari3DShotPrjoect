@@ -35,8 +35,7 @@ public class EntityMover : MonoBehaviour,IEntityComponent
 
     private void FixedUpdate()
     {
-        if (_rbCompo == null)
-            print("야이쓰방");
+        if (_rbCompo == null || !Entity.IsGameStart) return;
         if (CanManualMove)
             _rbCompo.linearVelocity = _velocity * MoveSpeed * _moveSpeedMultiplier;
         else
