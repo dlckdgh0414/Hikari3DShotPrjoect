@@ -14,6 +14,8 @@ public class SelectKingdomsLogic : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _text;
     [SerializeField]
+    private TextMeshProUGUI _warningText;
+    [SerializeField]
     private Image _image;
 
     private void Awake()
@@ -56,10 +58,11 @@ public class SelectKingdomsLogic : MonoBehaviour
     }
     public void NoSelectSkillFadeTooltip()
     {
-        _text.DOFade(1f, 0.5f).OnComplete(() => _text.DOFade(0f, 0.5f));
+        _warningText.DOFade(1f, 0.5f).OnComplete(() => _warningText.DOFade(0f, 0.5f));
     }
     public void SceneStart()
     {
+        Debug.Log("님 스킬 안 고름");
         if (PlayerSendInfo.Instance.CanStart())
             SceneManager.LoadScene(sceneNum);
         else

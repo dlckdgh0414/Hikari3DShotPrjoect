@@ -98,8 +98,8 @@ public class Player : Entity
         _stateMachine.ChangeState("DEAD");
     }
 
-    public void SetZpos(float changeZPos)
-    => DOTween.To(()=> zPos,x=> zPos=x, changeZPos, 0.2f);
+    public void SetZpos(float changeZPos,float second)
+    => DOTween.To(()=> zPos,x=> zPos=x, changeZPos, second);
 
     protected override void HandleHit()
     {
