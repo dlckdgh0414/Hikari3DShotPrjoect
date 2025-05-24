@@ -86,9 +86,7 @@ public class Player : Entity
     }
 
     public void ModelChange(GameObject newSkin)
-    {
-        model = newSkin;
-    }
+        => model = newSkin;
 
     protected override void HandleDead()
     {
