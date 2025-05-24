@@ -14,7 +14,7 @@ public partial class TargetSetRotateAction : Action
 
     protected override Status OnStart()
     {
-        Target.Value.rotation = Quaternion.Euler(Rotate);
+        Target.Value.rotation = Quaternion.Euler(Vector3.zero);
         return Status.Success;
     }
 }
