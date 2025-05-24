@@ -13,15 +13,20 @@ public class SelfBoomSkill : ActiveSkill
     public float duration;
     [Header("흔들림 강도")]
     public float intensity;
+    [Header("자폭 데미지")]
+    public float crashDamage= 20f;
     [Header("폭발 후 회복 속도")]
     public float healingCrash = 1f;
 
     [SerializeField]
     private MMF_Player cameraFeel;
 
+    private EntityHealthCompo healthCompo;
+
     public override void InitializeSkill(Entity entity, SkillCompo skillCompo)
     {
         base.InitializeSkill(entity, skillCompo);
+        healthCompo = entity.GetCompo<EntityHealthCompo>();
     }
 
     public override void OverSkillCooltime()
@@ -33,6 +38,7 @@ public class SelfBoomSkill : ActiveSkill
     {
         base.UseSkill();
         entityVFX.PlayVfx(fuseEffect, Vector3.zero, Quaternion.identity);
+        
         StartCoroutine(SlowBulletRoutine());
     }
 
@@ -42,6 +48,9 @@ public class SelfBoomSkill : ActiveSkill
         entityVFX.StopVfx(fuseEffect);
         entityVFX.PlayVfx(explosionEffect, Vector3.zero, Quaternion.identity);
         cameraFeel.PlayFeedbacks();
+
+
+        healthCompo.ApplyDamage(crashDamage);
 
         float prevSpeed = _mover.MoveSpeed;
 

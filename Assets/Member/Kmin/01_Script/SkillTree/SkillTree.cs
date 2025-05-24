@@ -15,7 +15,7 @@ public class SkillTree : MonoBehaviour
     [SerializeField] private GameEventChannelSO eventChannelSO;
     [SerializeField] private NodeSOList nodeSOList;
     [SerializeField] private EntityStat statCompo;
-    //[SerializeField] private EntitySkillCompo skillCompo;
+    [SerializeField] private SkillCompo skillCompo;
     
     private List<SkillTreeNode> _nodes;
     private SkillTreeNode _selectedNode;
@@ -27,8 +27,8 @@ public class SkillTree : MonoBehaviour
     {
         _nodesDic = new Dictionary<SkillTreeNode, NodeSO>();
         _nodes = transform.GetComponentsInChildren<SkillTreeNode>(true).ToList();
-        SaveLoadManager.SetFilePath(Application.persistentDataPath, "node.json");
-        nodeSOList.Load(nodeSOList.nodeSOList);
+        //SaveLoadManager.SetFilePath(Application.persistentDataPath, "node.json");
+        //nodeSOList.Load(nodeSOList.nodeSOList);
         
         _nodes.ForEach(f =>
         {
@@ -57,10 +57,16 @@ public class SkillTree : MonoBehaviour
 
     private void HandleNodePurchase(SkillTreePurchaseEvent evt)
     {
-        NodeSO nodeSO = _nodesDic[_selectedNode];
+        NodeSO nodeSO = _selectedNode.GetNodeSO();
         StatSO targetStat = statCompo.GetStat(nodeSO.statSO);
         targetStat.AddModifier(this, nodeSO.upgradeValue);
         nodeSO.isPurchase = true;
+
+        if (!string.IsNullOrEmpty(nodeSO.passiveSkill))
+        {
+            PassiveSkill skill = skillCompo.transform.Find(nodeSO.passiveSkill).GetComponent<PassiveSkill>();
+            skill.skillEnabled = true;
+        }
         
         CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, -nodeSO.price);
         nodeSOList.Save();

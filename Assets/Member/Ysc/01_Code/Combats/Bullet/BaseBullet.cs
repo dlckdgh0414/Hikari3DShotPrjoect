@@ -1,6 +1,8 @@
 ﻿using System;
+using JetBrains.Annotations;
 using Member.Ysc._01_Code.Agent;
 using Member.Ysc._01_Code.Combats;
+using Member.Ysc._01_Code.Containers;
 using UnityEngine;
 
 namespace Member.Ysc._01_Code.Combat.Bullet
@@ -15,6 +17,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         public string PoolingName => itemName;
         
         protected Vector3 fireDirection;
+        protected TargetContainer? fireContainer;
 
         public bool IsPlayerFollow;
         
@@ -24,11 +27,17 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         public static bool isSlowy;
         public static float SlowyDegree;
 
-        public void SetDirection(Vector3 direction)
-        {
-            fireDirection = direction - transform.position;
+        public void SetDirection(Vector3 targetPos)
+        { 
+            fireDirection = targetPos - transform.position;
         }
 
+        public virtual void SetTransform([CanBeNull] TargetContainer? targetTrm = null)
+        {
+            if (targetTrm != null)
+                fireContainer = targetTrm;
+        }
+        
         protected virtual void Awake()
         {
             BulletInit();
@@ -97,6 +106,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         }
         protected virtual void DestroyBullet(IPoolable pool)
         {
+            Debug.Log("히히 들어간당");
             PoolManager.Instance.Push(pool);
         }
 
@@ -120,8 +130,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
         {
             return gameObject;
         }
-
-        public void ResetItem()
+        public virtual void ResetItem()
         {
         }
 

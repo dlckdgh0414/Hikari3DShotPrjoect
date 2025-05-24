@@ -14,7 +14,6 @@ public class KingdomButton : MonoBehaviour,IPointerEnterHandler, IPointerExitHan
     public Image rect;
     public Image circle;
     public Action On_IPointer_World_LookAT_Event;
-    public Action<string> WorldName;
     public Color textColorWhenSelected;
     public Color rectColorMouseOver;
     public string WoldName;
@@ -82,8 +81,7 @@ public class KingdomButton : MonoBehaviour,IPointerEnterHandler, IPointerExitHan
         Debug.Log(WoldName);
         if (worldSceneMap.TryGetValue(WoldName, out int sceneName))
         {
-            WorldName?.Invoke(WoldName);
-            SceneManager.LoadScene(sceneName);
+            GetComponentInParent<SelectKingdomsLogic>().SceneSetting(sceneName);
         }
 
         else

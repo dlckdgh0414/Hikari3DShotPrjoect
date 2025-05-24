@@ -45,7 +45,6 @@ namespace Member.Ysc._01_Code.GameSystem
         {
             if (other.CompareTag("Player"))
             {
-                Debug.Log("닿았어요");
                 transform.position = targetTrm.position + new Vector3(0, 0, zOffset);
                 CreateObj();
             }

@@ -85,8 +85,6 @@ public abstract class Enemy :Entity, IPoolable
         
         Debug.Assert(deadPoint != null, $"This GameObject deadPoint is null : {gameObject.name}");
         
-        Debug.Log(IsDead);
-        
         Tween tween = transform.DORotate(new Vector3(-35f, 0f, 0f), 0.2f, RotateMode.Fast);
         Tween tween2 = transform.DOMove(deadPoint.position, 3f).OnComplete(() => IsDeadEnd = true);
 

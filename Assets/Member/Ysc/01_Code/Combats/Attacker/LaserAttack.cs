@@ -2,56 +2,89 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Member.Ysc._01_Code.Containers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Member.Ysc._01_Code.Combat.Attacker
 {
-    public class LaserAttack : Attack
+    public class LaserAttack : Attack,IEntityComponent
     {
-        [SerializeField] private List<GameObject> shotFrameList;
+        [SerializeField] private List<LineRenderer> shotFrameList;
         
         [SerializeField] private float coolTime;
         
         private bool _isCooltime = false;
-        private List<Quaternion> _originRotations;
+        private List<Vector3> _originPoints;
+        private readonly string warningVFXName = "Warning";
+        private EntityVFX _entityVFX;
+
+        public void Initialize(Entity entity)
+        {
+            _entityVFX = entity.GetCompo<EntityVFX>();
+        }
 
         private void OnEnable()
         {
-            shotFrameList.ForEach(obj => FrameControl(false));
-            _originRotations = shotFrameList.Select(obj => obj.transform.rotation).ToList();
+            foreach (var shotFrame in shotFrameList)
+            {
+                shotFrame.SetPosition(0, transform.position);
+                LineControl();
+            }
         }
+
+        public void InitLaser()
+        {
+
+            foreach (var shotFrame in shotFrameList)
+            {
+                shotFrame.SetPosition(0, transform.position);
+                shotFrame.SetPosition(1, new Vector3(shotFrame.GetPosition(0).x, shotFrame.GetPosition(0).y, shotFrame.GetPosition(1).z));
+                LineControl();
+            }
+            
+            _originPoints = shotFrameList.Select(x => x.GetPosition(1)).ToList();
+        }
+
 
         public override void EnemyAttack(Transform target, float timer)
         {
             if (_isCooltime) return;
-            FrameControl(true);
             bool isGuided = Random.value <= 0.7f;
-            if (true)
+            Transform targetTrm = target;
+            if (isGuided)
             {
                 Debug.Log($"<color=red>타겟 : {target}</color>");
                 foreach (var shotFrame in shotFrameList)
                 {
-                    Quaternion lookRotation = Quaternion.LookRotation(target.position - shotFrame.transform.position);
-                    shotFrame.transform.rotation = lookRotation;
+                    shotFrame.SetPosition(1, targetTrm.position);
                 }
             }
-            StartCoroutine(ShotDelayCoroutine(coolTime, target, timer));
+            LineControl(true);
+            _entityVFX.PlayVfx(warningVFXName, new Vector3(0, 0, 0), Quaternion.identity);
+            StartCoroutine(ShotDelayCoroutine(coolTime, targetTrm, timer, isGuided));
         }
 
-        public void FrameControl(bool isActive = false)
+        public void LineControl(bool isActive = false)
         {
             foreach (var shotFrame in shotFrameList)
             {
-                shotFrame.SetActive(isActive);
+                shotFrame.enabled = isActive;
             }
         }
         
         private IEnumerator ShotDelayCoroutine(float time, Transform target, float timer, bool isGuided = false)
         {
+            TargetContainer targetContainer = new TargetContainer
+            {
+                targetTrm = target,
+                targetPos = target.position
+            };
+
             _isCooltime = true;
             while (true)
             {
+                Debug.Log($"<color=red>{targetContainer.targetPos}</color>");
                 if (time > 0)
                 {
                     time -= Time.deltaTime;
@@ -59,16 +92,19 @@ namespace Member.Ysc._01_Code.Combat.Attacker
                 }
                 else
                 {
-                    FrameControl(false);
+                    _entityVFX.StopVfx(warningVFXName);
+                    LineControl(false);
                     for (int i = 0; i < shotFrameList.Count; i++)
                     {
-                        shotFrameList[i].transform.rotation = _originRotations[i];
+                        shotFrameList[i].SetPosition(1, _originPoints[i]);
                     }
-                    SpawnBullet(target, timer, isGuided);
+                    SpawnBullet(targetContainer, timer, isGuided);
                     _isCooltime = false;
                     yield break;
                 }
             }
         }
+
+        
     }
 }
