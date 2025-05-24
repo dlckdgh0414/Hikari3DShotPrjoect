@@ -19,7 +19,10 @@ namespace Member.Ysc._01_Code.UI
         private Coroutine _coroutine;
         private int currentEnemyCount;
         private int maxEnemyCount;
-
+        [SerializeField]
+        private string[] _clearDialogue;
+        [SerializeField]
+        private GameEventChannelSO uiManager;
 
         private void Awake()
         {
@@ -46,8 +49,11 @@ namespace Member.Ysc._01_Code.UI
         {
             if(currentEnemyCount + 1 == maxEnemyCount)
             {
+                StartDialogueEvent dialogueEvent = UIEvents.StartDialogueEvent;
+                dialogueEvent.dialogue = _clearDialogue;
+                uiManager.RaiseEvent(dialogueEvent);
+
                 OnClear?.Invoke();
-                Time.timeScale = 0;
             }
             else
             {

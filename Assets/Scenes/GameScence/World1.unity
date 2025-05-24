@@ -1565,7 +1565,7 @@ PrefabInstance:
     - target: {fileID: 1272332864841812320, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1272332864841812320, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
         type: 3}
@@ -1599,9 +1599,40 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3835354611028530397, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
         type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 11400000, guid: b906378c7b89ee64e88532d4a3ccbfac,
+        type: 2}
+    - target: {fileID: 3835354611028530397, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
+        type: 3}
       propertyPath: _backSlider
       value: 
       objectReference: {fileID: 1785323720}
+    - target: {fileID: 3835354611028530397, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
+        type: 3}
+      propertyPath: _clearDialogue.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3835354611028530397, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
+        type: 3}
+      propertyPath: '_clearDialogue.Array.data[0]'
+      value: "<bounce>\uC81C\uBC95\uC778\uB370??</bounce>"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3835354611028530397, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
+        type: 3}
+      propertyPath: '_clearDialogue.Array.data[1]'
+      value: "\uCC98\uC74C\uD558\uB294 \uAC70\\n\uB9DE\uC544?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3835354611028530397, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
+        type: 3}
+      propertyPath: '_clearDialogue.Array.data[2]'
+      value: "<bounce>\uC88B\uC544.</bounce>\uBCF8\uBD80\uB85C\\n\uB3CC\uC544\uAC00\uC790"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3835354611028530397, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
+        type: 3}
+      propertyPath: OnClear.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4034847691128874584, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -1700,7 +1731,7 @@ PrefabInstance:
     - target: {fileID: 6199410667213395450, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 240
       objectReference: {fileID: 0}
     - target: {fileID: 6199410667213395450, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
         type: 3}
@@ -1725,7 +1756,7 @@ PrefabInstance:
     - target: {fileID: 6246216298403711251, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 360
       objectReference: {fileID: 0}
     - target: {fileID: 6246216298403711251, guid: 70e4b4e9ac6b9344f9d29f4a21f035e4,
         type: 3}
@@ -14717,6 +14748,61 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137437826361094435, guid: c33452a4715040647b7b38cc71750a8e,
+        type: 3}
+      propertyPath: _animtor.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137437826361094435, guid: c33452a4715040647b7b38cc71750a8e,
+        type: 3}
+      propertyPath: '_animtor.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1463798173}
+    - target: {fileID: 6137437826361094435, guid: c33452a4715040647b7b38cc71750a8e,
+        type: 3}
+      propertyPath: '_animtor.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1417657791}
+    - target: {fileID: 6137437826361094435, guid: c33452a4715040647b7b38cc71750a8e,
+        type: 3}
+      propertyPath: OnEndDialogueEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137437826361094435, guid: c33452a4715040647b7b38cc71750a8e,
+        type: 3}
+      propertyPath: OnEndDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137437826361094435, guid: c33452a4715040647b7b38cc71750a8e,
+        type: 3}
+      propertyPath: OnEndDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1809008172}
+    - target: {fileID: 6137437826361094435, guid: c33452a4715040647b7b38cc71750a8e,
+        type: 3}
+      propertyPath: OnEndDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137437826361094435, guid: c33452a4715040647b7b38cc71750a8e,
+        type: 3}
+      propertyPath: OnEndDialogueEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137437826361094435, guid: c33452a4715040647b7b38cc71750a8e,
+        type: 3}
+      propertyPath: OnEndDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnMenuScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137437826361094435, guid: c33452a4715040647b7b38cc71750a8e,
+        type: 3}
+      propertyPath: OnEndDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StageLogic, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137437826361094435, guid: c33452a4715040647b7b38cc71750a8e,
+        type: 3}
+      propertyPath: OnEndDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 9168302482558063059, guid: c33452a4715040647b7b38cc71750a8e,
         type: 3}
@@ -31315,6 +31401,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1272067919}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1417657791 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7041967088276961459, guid: c33452a4715040647b7b38cc71750a8e,
+    type: 3}
+  m_PrefabInstance: {fileID: 576631344}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1419412010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31844,6 +31936,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e554b1ced7e574e68b01a47c95fa9ad9,
     type: 3}
   m_PrefabInstance: {fileID: 778429789}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1463798173 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1887691005422593952, guid: c33452a4715040647b7b38cc71750a8e,
+    type: 3}
+  m_PrefabInstance: {fileID: 576631344}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1465409673
 PrefabInstance:
