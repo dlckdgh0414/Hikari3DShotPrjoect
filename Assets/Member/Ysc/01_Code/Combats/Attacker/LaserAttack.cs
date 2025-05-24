@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Member.Ysc._01_Code.Containers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -50,19 +51,18 @@ namespace Member.Ysc._01_Code.Combat.Attacker
         {
             if (_isCooltime) return;
             bool isGuided = Random.value <= 0.7f;
+            Transform targetTrm = target;
             if (isGuided)
             {
                 Debug.Log($"<color=red>타겟 : {target}</color>");
                 foreach (var shotFrame in shotFrameList)
                 {
-                    Vector3 targetPos = target.position;
-                    targetPos.z = 0;
-                    shotFrame.SetPosition(1, targetPos);
+                    shotFrame.SetPosition(1, targetTrm.position);
                 }
             }
             LineControl(true);
             _entityVFX.PlayVfx(warningVFXName, new Vector3(0, 0, 0), Quaternion.identity);
-            StartCoroutine(ShotDelayCoroutine(coolTime, target, timer));
+            StartCoroutine(ShotDelayCoroutine(coolTime, targetTrm, timer, isGuided));
         }
 
         public void LineControl(bool isActive = false)
@@ -75,9 +75,16 @@ namespace Member.Ysc._01_Code.Combat.Attacker
         
         private IEnumerator ShotDelayCoroutine(float time, Transform target, float timer, bool isGuided = false)
         {
+            TargetContainer targetContainer = new TargetContainer
+            {
+                targetTrm = target,
+                targetPos = target.position
+            };
+
             _isCooltime = true;
             while (true)
             {
+                Debug.Log($"<color=red>{targetContainer.targetPos}</color>");
                 if (time > 0)
                 {
                     time -= Time.deltaTime;
@@ -91,7 +98,7 @@ namespace Member.Ysc._01_Code.Combat.Attacker
                     {
                         shotFrameList[i].SetPosition(1, _originPoints[i]);
                     }
-                    SpawnBullet(target, timer, isGuided);
+                    SpawnBullet(targetContainer, timer, isGuided);
                     _isCooltime = false;
                     yield break;
                 }
