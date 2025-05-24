@@ -56,16 +56,16 @@ namespace Member.Ysc._01_Code.Combat.Bullet
                 {
                     if (isSlowy)
                         RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed / SlowyDegree;
-                    
+                    else
+                        RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
                 }
                 else
                 {
                     if (isSlowy)
                         RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed / SlowyDegree;
-
+                    else
+                        RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
                 }
-
-                RbCompo.linearVelocity = fireDirection.normalized * BulletSO.BulletSpeed;
                 LoockTarget();
             }
             else

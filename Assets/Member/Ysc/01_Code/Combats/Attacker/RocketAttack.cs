@@ -8,7 +8,7 @@ namespace Member.Ysc._01_Code.Combat.Attacker
         public override void EnemyAttack(Transform target, float timer)
         {
             TargetContainer container = new TargetContainer();
-            container.targetTrm = target; 
+            container.targetPos = target.position; 
             SpawnBullet(container, timer);
         }
     }
