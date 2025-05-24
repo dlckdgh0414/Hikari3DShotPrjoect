@@ -60,7 +60,7 @@ namespace Member.Ysc._01_Code.Combat.Bullet
             Vector3 p1 = lineRenderer.GetPosition(0);
             Vector3 p2 = lineRenderer.GetPosition(1);
             Ray ray = new Ray(p1, (p2 - p1).normalized);
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, 200, whatIsPlayer))
+            if (Physics.SphereCast(ray, 3f, out RaycastHit hitInfo, 200, whatIsPlayer))
             {
                 Hit(hitInfo.collider);
             }
