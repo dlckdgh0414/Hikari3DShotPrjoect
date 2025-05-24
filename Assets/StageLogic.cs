@@ -46,5 +46,6 @@ public class StageLogic : MonoBehaviour
         map.SetActive(false);
         _player.SetGameUI(1f,Ease.InOutQuad);
         enemySpawner.SetActive(true);
+        mapCreator.SetActive(true);
     }
 }
