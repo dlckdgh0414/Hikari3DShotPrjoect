@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +11,6 @@ public class EqumentBtn : MonoBehaviour
     private Image thisImg;
 
     [SerializeField] private Sprite _baseImage;
-    
 
     [field: SerializeField] public SkillSO _thisSkill { get; set; }
     private string path;
@@ -45,11 +46,12 @@ public class EqumentBtn : MonoBehaviour
             }
             else
                 return;
-            
+
             thisImg.sprite = _baseImage;
-            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+
+           
         }
-        
+
     }
     
     

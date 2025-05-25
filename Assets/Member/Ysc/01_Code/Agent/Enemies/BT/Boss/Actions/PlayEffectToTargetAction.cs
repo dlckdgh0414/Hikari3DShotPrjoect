@@ -22,6 +22,7 @@ public partial class PlayEffectToTargetAction : Action
         if (CanTargetPos.Value)
         {
             PatternEffect.Value = GameObject.Instantiate(Effect.Value.gameObject, Target.Value.position, Quaternion.identity);
+            PatternEffect.Value.transform.position = Vector3.zero;
             Effect.Value._entity = _boss.Value;
         }
         else

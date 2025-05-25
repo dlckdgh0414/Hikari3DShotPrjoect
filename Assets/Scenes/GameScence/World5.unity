@@ -11845,6 +11845,93 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292901878}
   m_Mesh: {fileID: 4300000, guid: bb01b9278a1b047a796cd1810d13fa84, type: 3}
+--- !u!1001 &295768841
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 358977057}
+    m_Modifications:
+    - target: {fileID: 4320880397854126818, guid: 50c4d9ab34888b242b4b619e6c5b7e9b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320880397854126818, guid: 50c4d9ab34888b242b4b619e6c5b7e9b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -23.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320880397854126818, guid: 50c4d9ab34888b242b4b619e6c5b7e9b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 52.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320880397854126818, guid: 50c4d9ab34888b242b4b619e6c5b7e9b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320880397854126818, guid: 50c4d9ab34888b242b4b619e6c5b7e9b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320880397854126818, guid: 50c4d9ab34888b242b4b619e6c5b7e9b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320880397854126818, guid: 50c4d9ab34888b242b4b619e6c5b7e9b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320880397854126818, guid: 50c4d9ab34888b242b4b619e6c5b7e9b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320880397854126818, guid: 50c4d9ab34888b242b4b619e6c5b7e9b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320880397854126818, guid: 50c4d9ab34888b242b4b619e6c5b7e9b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8168833377986296641, guid: 50c4d9ab34888b242b4b619e6c5b7e9b,
+        type: 3}
+      propertyPath: m_Name
+      value: Effect_15_MassiveCardRelease
+      objectReference: {fileID: 0}
+    - target: {fileID: 8168833377986296641, guid: 50c4d9ab34888b242b4b619e6c5b7e9b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3327396235221383039, guid: 50c4d9ab34888b242b4b619e6c5b7e9b, type: 3}
+    - {fileID: 8189372109439071277, guid: 50c4d9ab34888b242b4b619e6c5b7e9b, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 50c4d9ab34888b242b4b619e6c5b7e9b, type: 3}
+--- !u!4 &295768842 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4320880397854126818, guid: 50c4d9ab34888b242b4b619e6c5b7e9b,
+    type: 3}
+  m_PrefabInstance: {fileID: 295768841}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &295768843 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8168833377986296641, guid: 50c4d9ab34888b242b4b619e6c5b7e9b,
+    type: 3}
+  m_PrefabInstance: {fileID: 295768841}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &299150254
 GameObject:
   m_ObjectHideFlags: 0
@@ -13313,6 +13400,7 @@ Transform:
   - {fileID: 1841457333}
   - {fileID: 1319169681}
   - {fileID: 332191654}
+  - {fileID: 295768842}
   m_Father: {fileID: 2046562296}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &362182140
@@ -58427,7 +58515,7 @@ PlayableDirector:
   - key: {fileID: -8563009749938046693, guid: 13a3b4a3a528be348816dad645ad46b6, type: 2}
     value: {fileID: 1326960879}
   - key: {fileID: -8795630457983800350, guid: 13a3b4a3a528be348816dad645ad46b6, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 295768843}
   - key: {fileID: 4775482009353924613, guid: 13a3b4a3a528be348816dad645ad46b6, type: 2}
     value: {fileID: 607550091}
   - key: {fileID: 7012480791475043190, guid: 13a3b4a3a528be348816dad645ad46b6, type: 2}
