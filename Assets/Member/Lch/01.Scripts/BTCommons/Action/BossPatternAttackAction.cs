@@ -30,7 +30,8 @@ public partial class BossPatternAttackAction : Action
         }
         else
         {
-            EffectObj.Value = GameObject.Instantiate(PlayEffect.Value.gameObject,StartPos.Value.position, Quaternion.Euler(0, 180f, 0));
+            GameObject effectobj = PlayEffect.Value.gameObject;
+            EffectObj.Value =GameObject.Instantiate(effectobj,StartPos.Value);
             PlayEffect.Value._entity = boss.Value;
         }
         if(IsSetParent.Value)
