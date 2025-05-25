@@ -10,6 +10,7 @@ public class ActiveSkill : Skill
     protected float _cooldownTimer;
     public bool IsCooldown => _cooldownTimer > 0f;
     public event CooldownInfo OnCooldown;
+    public static bool isUsingSkill=false;
 
     protected virtual void Update()
     {
@@ -25,7 +26,7 @@ public class ActiveSkill : Skill
 
     public virtual bool AttemptUseSkill()
     {
-        if (_cooldownTimer <= 0 && skillEnabled)
+        if (_cooldownTimer <= 0 && skillEnabled && isUsingSkill == false)
         {
             _cooldownTimer = cooldown / _skillCompo.CoolDownStat.Value;
             UseSkill();
@@ -38,12 +39,14 @@ public class ActiveSkill : Skill
     public virtual void OverSkillCooltime()
     {
         _cooldownTimer = 0;
+        isUsingSkill = false;
         Debug.Log("Skill enable");
     }
 
 
     public virtual void UseSkill()
     {
+        isUsingSkill = true;
         GetComponentInChildren<MMF_Player>()?.PlayFeedbacks();
     }
 
