@@ -47,6 +47,7 @@ public class EqumentBtn : MonoBehaviour
                 return;
             
             thisImg.sprite = _baseImage;
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
         
     }
