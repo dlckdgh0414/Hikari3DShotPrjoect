@@ -8,11 +8,12 @@ public class ClearGame : MonoBehaviour
     public bool isClear = false;
     [SerializeField] scenSO scenOnComplete;
     public static ClearGame instance;
+    
     private void Awake()
     {
         if (instance != null && instance != this)
         {
-            Destroy(gameObject); // Áßº¹ÀÌ¸é Á¦°Å
+            Destroy(gameObject); // ï¿½ßºï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
             return;
         }
 
@@ -21,13 +22,13 @@ public class ClearGame : MonoBehaviour
 
     }
     private void Update()
-    { // ÀÌ ½ºÅ©¸³Æ® ´ëÃæ ¾Æ¹« °´Ã¼¿¡ ¶§·Á³Ö°í ClearMethod »ç¿ëÇÏ¸éµÊ
-      // ¿©±â ¾÷µ¥ÀÌÆ® ¹®Àº °Á Å×½ºÆ®¿ëÀÌ´Ï±î Áö¿öµµ µÅ.
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            isClear = true;
-            ClearMethod();
-        }
+    { // ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¹ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½ ClearMethod ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½
+      // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½ï¿½Ì´Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
+          if (Input.GetKeyDown(KeyCode.F))
+          {
+              isClear = true;
+              ClearMethod();
+          }  
     }
 
     public void ClearMethod()
@@ -36,17 +37,17 @@ public class ClearGame : MonoBehaviour
         {
             
             isClear = false;
-            StartCoroutine(ClearCO());      // 1ÇÁ·¹ÀÓ ±â´Ù¸² (¾À ÀüÈ¯ ¸¶¹«¸®)
-            // ±× ÈÄ Raise
+            StartCoroutine(ClearCO());      // 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¸ï¿½ (ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+            // ï¿½ï¿½ ï¿½ï¿½ Raise
         }
     }
 
   IEnumerator ClearCO()
     {
-        SceneManager.LoadScene(0); // ¾À º¯°æ
+        SceneManager.LoadScene(0); // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         yield return new WaitForSecondsRealtime(1f);
         scenOnComplete.Raise();
-        Debug.Log("Å¬¸®¾îµÊ");
+        Debug.Log("Å¬ï¿½ï¿½ï¿½ï¿½ï¿½");
     }
 
 

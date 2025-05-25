@@ -18,7 +18,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
 
     private MuzzleSetting[] muzzle;
 
-    [SerializeField]
+    [field : SerializeField]
     public float FireRate { get; set; } = 3f;
     private float fireTimer = 0.8f;
 
@@ -42,7 +42,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
     {
         _entity = entity;
         _player = entity as Player;
-        _player.InputReader.OnAttackEvent += Debug;
+        _player.InputReader.OnAttackEvent += AttackBool;
         entityVFX = entity.GetCompo<EntityVFX>();
         aimCompo = entity.GetCompo<AutoAimCompo>();
         muzzle = GetComponentsInChildren<MuzzleSetting>();
@@ -55,7 +55,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
 
     private void OnDestroy()
     {
-        _player.InputReader.OnAttackEvent -= Debug;
+        _player.InputReader.OnAttackEvent -= AttackBool;
     }
 
     private void Update()
@@ -95,7 +95,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
         OnAttack?.Invoke();
     }
 
-    private void Debug(bool isClick)
+    private void AttackBool(bool isClick)
     {
         isAttack = isClick;
     }

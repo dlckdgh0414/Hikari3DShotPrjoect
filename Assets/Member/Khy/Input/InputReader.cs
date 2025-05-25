@@ -117,9 +117,10 @@ public class InputReader : ScriptableObject, InputControlls.IPlayerMapActions
     {
         if (context.started)
         {
-            Debug.Log("¾Æ´Ï");
+            Debug.Log("ï¿½Æ´ï¿½");
             OnChargingEvent?.Invoke(true);
         }
+
         if (context.canceled)
             OnChargingEvent?.Invoke(false);
     }
