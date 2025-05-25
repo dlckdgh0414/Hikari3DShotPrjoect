@@ -28,6 +28,10 @@ public class CameraManager : MonoBehaviour
 
     private void HandleEffectCamera(CameraEffectEvent obj)
     {
+        if(obj.cameraEffect == CameraEffectEnum.FOV)
+        {
+            DOTween.To(() => currentCamera.Lens.FieldOfView, x => currentCamera.Lens.FieldOfView = x, obj.value, obj.second).SetEase(obj.effectEase);
+        }    
         if(obj.cameraEffect == CameraEffectEnum.DUTCH)
         {
             DOTween.To(() => currentCamera.Lens.Dutch, x => currentCamera.Lens.Dutch = x, obj.value, obj.second).SetEase(Ease.InFlash).OnComplete(() => 

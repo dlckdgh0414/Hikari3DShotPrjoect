@@ -22,10 +22,26 @@ namespace Member.Ysc._01_Code.UI
         private string[] _clearDialogue;
         [SerializeField]
         private GameEventChannelSO uiManager;
+        [SerializeField]
+        public UnityEvent OnArriveMiddlePoint;
+        private bool isOneTime;
+
+        private TestBoss currentBoss;
 
         private void Awake()
         {
             SliderInit();
+            if(TryGetComponent(out TestBoss boss))
+            {
+                currentBoss = boss;
+                boss.OnDead.AddListener(CheatClear);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            currentBoss.OnDead.RemoveListener(CheatClear);
+            currentBoss = null;
         }
 
         private void SliderInit()
@@ -42,7 +58,22 @@ namespace Member.Ysc._01_Code.UI
                 _backSlider.value = 0;
             }
         }
+        private void Update()
+        {
+            if(Input.GetKey(KeyCode.Space) && Input.GetKeyDown(KeyCode.P))
+            {
+                CheatClear();
+            }
+        }
 
+        private void CheatClear()
+        {
+            StartDialogueEvent dialogueEvent = UIEvents.StartDialogueEvent;
+            dialogueEvent.dialogue = _clearDialogue;
+            uiManager.RaiseEvent(dialogueEvent);
+
+            OnClear?.Invoke();
+        }
 
         public void HandleEnemyDeadCount()
         {
@@ -53,6 +84,12 @@ namespace Member.Ysc._01_Code.UI
                 uiManager.RaiseEvent(dialogueEvent);
 
                 OnClear?.Invoke();
+            }
+            //else if(currentEnemyCount == maxEnemyCount / 2)
+            else if(currentEnemyCount == maxEnemyCount / 2 && !isOneTime)
+            {
+                isOneTime = true;
+                OnArriveMiddlePoint?.Invoke();
             }
             else
             {

@@ -113,9 +113,12 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
                 PlayerSendInfo.Instance.skillName[2] = _selectedSkill.name;
                 EventSystem.current.currentSelectedGameObject.GetComponent<EqumentBtn>()._thisSkill = _selectedSkill;
             }
-            
+            GameObject obj = EventSystem.current.currentSelectedGameObject;
             clickedImage.sprite = _selectedSkill.icon;
-            
+            if (clickedImage.sprite != null)
+            {
+                obj.transform.GetChild(0).gameObject.SetActive(true);
+            }
             clickedImage = null;
             _selectedSkill = null;
         }
