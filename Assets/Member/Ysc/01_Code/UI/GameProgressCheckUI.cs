@@ -23,6 +23,8 @@ namespace Member.Ysc._01_Code.UI
         private string[] _clearDialogue;
         [SerializeField]
         private GameEventChannelSO uiManager;
+        [SerializeField]
+        public UnityEvent OnArriveMiddlePoint;
 
         private void Awake()
         {
@@ -54,6 +56,11 @@ namespace Member.Ysc._01_Code.UI
                 uiManager.RaiseEvent(dialogueEvent);
 
                 OnClear?.Invoke();
+            }
+            //else if(currentEnemyCount == maxEnemyCount / 2)
+            else if(currentEnemyCount == 2)
+            {
+                OnArriveMiddlePoint?.Invoke();
             }
             else
             {

@@ -3,6 +3,8 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using UnityEngine.Video;
+using UnityEngine.UI;
 
 public class StageLogic : MonoBehaviour
 {
@@ -12,10 +14,15 @@ public class StageLogic : MonoBehaviour
     private GameObject mapCreator;
     [SerializeField]
     private GameObject map;
+    [SerializeField]
+    private GameObject grassMap;
     private Player _player;
 
     [SerializeField]
     private Animator Animator;
+
+    [SerializeField]
+    private VideoPlayer video;
 
     private void Awake()
     {
@@ -34,6 +41,21 @@ public class StageLogic : MonoBehaviour
         _player.SetZpos(7.2f,5f);
         Entity.IsGameStart = true;
         StartCoroutine(StartCutSceneRoutine());
+    }
+
+    public void GrassChange()
+    {
+        StartCoroutine(WaitRoutine());
+    }
+    private IEnumerator WaitRoutine()
+    {
+        video.Play();
+        yield return new WaitForSeconds(4f);
+        video.GetComponentInChildren<RawImage>().DOFade(0.9f, 2f);
+        yield return new WaitForSeconds(9f);
+        grassMap.SetActive(true);
+        mapCreator.SetActive(false);
+        video.GetComponentInChildren<RawImage>().DOFade(0f, 2f);
     }
 
     public void ReturnMenuScene()
