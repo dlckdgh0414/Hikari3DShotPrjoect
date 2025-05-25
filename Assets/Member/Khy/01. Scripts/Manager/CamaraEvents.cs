@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -23,6 +24,7 @@ public class SwapCameraEvent : GameEvent
 public class CameraEffectEvent : GameEvent
 {
     public CameraEffectEnum cameraEffect;
+    public Ease effectEase;
     public float value;
     public float second;
 }
