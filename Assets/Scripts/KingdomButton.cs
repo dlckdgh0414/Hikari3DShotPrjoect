@@ -31,7 +31,8 @@ public class KingdomButton : MonoBehaviour,IPointerEnterHandler, IPointerExitHan
         { "World 1", 2 },
         { "World 2", 3 },
         { "World 3", 4 },
-        { "World 4", 5 }
+        { "World 4", 5 },
+        { "World 5", 6 }
     };
     private void Start()
     {
