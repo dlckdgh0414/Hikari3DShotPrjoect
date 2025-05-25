@@ -26,12 +26,13 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
         [SerializeField] private UseSkillDataSO _inventorySO;
         [SerializeField] private List<Button> equipBtns;
         [SerializeField] private Button _staticButton;
-
+        [SerializeField] private List<GameObject> obj;
         [SerializeField] private SkillSO tempSO1;
         [SerializeField] private SkillSO tempSO2;
         [SerializeField] private SkillSO tempSO3;
 
         [SerializeField] private List<Transform> childTransform;
+ 
 
         [SerializeField] private Transform _skillTransform;
         
@@ -113,11 +114,11 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
                 PlayerSendInfo.Instance.skillName[2] = _selectedSkill.name;
                 EventSystem.current.currentSelectedGameObject.GetComponent<EqumentBtn>()._thisSkill = _selectedSkill;
             }
-            GameObject obj = EventSystem.current.currentSelectedGameObject;
+         
             clickedImage.sprite = _selectedSkill.icon;
-            if (clickedImage.sprite != null)
+            foreach (GameObject item in obj)
             {
-                obj.transform.GetChild(0).gameObject.SetActive(true);
+                item.SetActive(false);
             }
             clickedImage = null;
             _selectedSkill = null;
