@@ -44,6 +44,7 @@ public class EnemySpawn : MonoBehaviour
             if (enemy.GetGameObject().TryGetComponent(out Enemy e))
             {
                 e.OnRealDead.AddListener(gameProgressCheckUI.HandleEnemyDeadCount);
+                e.InitObject();
             }
             _currentSpawnEnemy++;
             if (_currentSpawnEnemy == enemySpawnSO.StageEnemyCount)
