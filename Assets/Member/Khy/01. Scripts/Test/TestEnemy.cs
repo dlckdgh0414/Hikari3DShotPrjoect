@@ -9,4 +9,8 @@ public class TestEnemy : Enemy
     protected override void HandleHit()
     {
     }
+
+    public override void InitObject()
+    {
+    }
 }
