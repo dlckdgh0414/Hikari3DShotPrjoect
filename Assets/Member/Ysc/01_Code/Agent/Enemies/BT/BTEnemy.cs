@@ -21,7 +21,11 @@ namespace Member.Ysc._01_Code.Agent.Enemies.BT
             _state = GetBlackboardVariable<BTEnemyState>("EnemyState");
         }
 
-        
+        public override void InitObject()
+        {
+            if (_stateChannel == null) return;
+            _stateChannel.SendEventMessage(BTEnemyState.SPAWN);
+        }
 
         protected override void HandleHit()
         {
