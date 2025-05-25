@@ -35,6 +35,7 @@ public abstract class Enemy :Entity, IPoolable
 
     private void OnDisable()
     {
+        Debug.Log($"나 삭제되요오");
         EnemyManager.Unregister(this);
         _sequence?.Kill();
         _sequence = null;
@@ -50,6 +51,8 @@ public abstract class Enemy :Entity, IPoolable
     {
         IsDeadEnd = false;
         IsDead = false;
+        transform.rotation = Quaternion.identity;
+        gameObject.layer = LayerMask.NameToLayer("Enemy");
     }
 
     public void LookTarget(Transform target)
@@ -77,6 +80,8 @@ public abstract class Enemy :Entity, IPoolable
         PoolManager.Instance.Push(this);
     }
 
+    public abstract void InitObject();
+
     public void EnemyDead()
     {
         // movement.isMove = false;
@@ -86,7 +91,7 @@ public abstract class Enemy :Entity, IPoolable
         Debug.Assert(deadPoint != null, $"This GameObject deadPoint is null : {gameObject.name}");
         
         Tween tween = transform.DORotate(new Vector3(-35f, 0f, 0f), 0.2f, RotateMode.Fast);
-        Tween tween2 = transform.DOMove(deadPoint.position, 3f).OnComplete(() => IsDeadEnd = true);
+        Tween tween2 = transform.DOMove(deadPoint.position, 1.4f).OnComplete(() => IsDeadEnd = true);
 
         _sequence = DOTween.Sequence()
             .Append(tween)
