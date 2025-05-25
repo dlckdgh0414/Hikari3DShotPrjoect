@@ -56,7 +56,6 @@ public class KeyRebinder : MonoBehaviour
 
     private void StartRebind()
     {
-        _inputreader._isKeyPressed = false;
         if (_actionToRebind == null) return;
 
       
@@ -81,6 +80,8 @@ public class KeyRebinder : MonoBehaviour
                     return;
                 }
                 
+                _inputreader._controlls.Disable();
+                
                 operation.Dispose();
                 _actionToRebind.Enable();
                 
@@ -96,8 +97,6 @@ public class KeyRebinder : MonoBehaviour
                 UpdateBindingDisplay();
                 SaveBindingOverride();
                 
-                _inputreader._isKeyPressed = true;
-                print("실행됨");
                 
             })
             .OnCancel(operation =>
@@ -108,7 +107,7 @@ public class KeyRebinder : MonoBehaviour
 
                 rebindButton.interactable = true;
                 UpdateBindingDisplay();
-                
+                _inputreader._controlls.Enable();
             })
             .Start();
     }
@@ -120,6 +119,7 @@ public class KeyRebinder : MonoBehaviour
             bindingDisplayName.text = InputControlPath.ToHumanReadableString(
                 _actionToRebind.bindings[bindingIndex].effectivePath,
                 InputControlPath.HumanReadableStringOptions.OmitDevice
+                
             );
         }
     }
