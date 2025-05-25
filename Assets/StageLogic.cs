@@ -5,9 +5,13 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using UnityEngine.Video;
 using UnityEngine.UI;
+using UnityEngine.Playables;
 
 public class StageLogic : MonoBehaviour
 {
+    [SerializeField]
+    private PlayableDirector _director;
+
     [SerializeField]
     private GameObject enemySpawner;
     [SerializeField]
@@ -22,7 +26,12 @@ public class StageLogic : MonoBehaviour
     private Animator Animator;
 
     [SerializeField]
+    private bool isCutScene;
+
+    [SerializeField]
     private VideoPlayer video;
+
+    [SerializeField] private GameEventChannelSO CameraChannel;
 
     private void Awake()
     {
@@ -39,9 +48,33 @@ public class StageLogic : MonoBehaviour
     {
         map.transform.DOMoveZ(-300f,4f);
         _player.SetZpos(7.2f,5f);
+        if (isCutScene) StartCoroutine(BossCutScene());
+        else
+            RealStageStart();
+    }
+
+    public void RealStageStart()
+    {
         Entity.IsGameStart = true;
         StartCoroutine(StartCutSceneRoutine());
     }
+    public void ZoomBoss(float value)
+    {
+        CameraEffectEvent effectCamera = CamaraEvents.CameraEffectEvent;
+        effectCamera.cameraEffect = CameraEffectEnum.FOV;
+        effectCamera.second = 1f;
+        effectCamera.value = value;
+        effectCamera.effectEase = Ease.InOutQuad;
+
+        CameraChannel.RaiseEvent(effectCamera);
+    }
+    private IEnumerator BossCutScene()
+    {
+        yield return new WaitForSeconds(3f);
+        _director.Play();
+    }
+
+
 
     public void GrassChange()
     {
@@ -60,13 +93,10 @@ public class StageLogic : MonoBehaviour
 
     public void ReturnMenuScene()
     {
+        ClearGame.instance.ClearMethod();
         SceneManager.LoadScene("ShipStation");
     }
 
-    public void ChangeAnimation(string newAnim)
-    {
-        Animator.Play(newAnim);
-    }
 
     private IEnumerator StartCutSceneRoutine()
     {
