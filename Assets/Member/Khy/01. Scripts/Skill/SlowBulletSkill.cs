@@ -12,7 +12,6 @@ public class SlowBulletSkill : ActiveSkill
     public float slowDegree;
 
     public Volume[] volume;
-    [SerializeField] private Ami.BroAudio.SoundID ticktackSFX;
 
     public override void InitializeSkill(Entity entity, SkillCompo skillCompo)
     {
@@ -28,7 +27,6 @@ public class SlowBulletSkill : ActiveSkill
     public override void UseSkill()
     {
         base.UseSkill();
-        Ami.BroAudio.BroAudio.Play(ticktackSFX);
         for(int i=0; i< volume.Length;i++)
         {
             volume[i].gameObject.SetActive(true);
@@ -45,6 +43,5 @@ public class SlowBulletSkill : ActiveSkill
         {
             volume[i].gameObject.SetActive(false);
         }
-        Ami.BroAudio.BroAudio.Stop(ticktackSFX);
     }
 }

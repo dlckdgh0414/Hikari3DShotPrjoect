@@ -21,9 +21,8 @@ public class PlayerBullet : BaseBullet, IPoolable
     }
     protected override void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Bullet") || other.CompareTag("Map")) return;
+        if (other.CompareTag("Player") || other.CompareTag("Bullet")) return;
         Hit(other);
-        Debug.Log($"{other.name}");
         DestroyBullet(this);
     }
 }

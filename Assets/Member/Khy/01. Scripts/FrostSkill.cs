@@ -1,4 +1,3 @@
-using Ami.BroAudio;
 using DG.Tweening;
 using Member.Ysc._01_Code.Agent;
 using UnityEngine;
@@ -11,13 +10,12 @@ public class FrostSkill : ActiveSkill
     public float damage = 3f;
     private readonly string frostEffect = "FrostVFX";
     private readonly string enemyFrostEffect = "Iceing";
-    [SerializeField] private SoundID iceSound;
 
     public override void UseSkill()
     {
         base.UseSkill();
         entityVFX.PlayVfx(frostEffect, Vector3.zero, Quaternion.identity);
-        BroAudio.Play(iceSound);
+
         foreach (Enemy obj in EnemyManager.Enemies)
         {
             Debug.Log(obj);

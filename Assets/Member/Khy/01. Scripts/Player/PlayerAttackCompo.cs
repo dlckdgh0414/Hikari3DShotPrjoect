@@ -18,7 +18,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
 
     private MuzzleSetting[] muzzle;
 
-    [field : SerializeField]
+    [SerializeField]
     public float FireRate { get; set; } = 3f;
     private float fireTimer = 0.8f;
 

@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using TMPro;
-using Ami.BroAudio;
 
 public class SelectKingdomsLogic : MonoBehaviour
 {
@@ -18,17 +17,11 @@ public class SelectKingdomsLogic : MonoBehaviour
     private TextMeshProUGUI _warningText;
     [SerializeField]
     private Image _image;
-    [SerializeField] private SoundID selectBGM;
-    [SerializeField] private SoundID noSelectSkillSFX;
 
+    
     private void Awake()
     {
         Hide();
-    }
-
-    private void Start()
-    {
-        BroAudio.Play(selectBGM);
     }
 
     public void SetText(string text)
@@ -66,7 +59,6 @@ public class SelectKingdomsLogic : MonoBehaviour
     }
     public void NoSelectSkillFadeTooltip()
     {
-        BroAudio.Play(noSelectSkillSFX);
         _warningText.DOFade(1f, 0.5f).OnComplete(() => _warningText.DOFade(0f, 0.5f));
     }
     public void SceneStart()
