@@ -8,8 +8,7 @@ public class ClearGame : MonoBehaviour
     public bool isClear = false;
     [SerializeField] scenSO scenOnComplete;
     public static ClearGame instance;
-
-    [SerializeField] private InputReader _inputReader;
+    
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -25,14 +24,11 @@ public class ClearGame : MonoBehaviour
     private void Update()
     { // �� ��ũ��Ʈ ���� �ƹ� ��ü�� �����ְ� ClearMethod ����ϸ��
       // ���� ������Ʈ ���� �� �׽�Ʈ���̴ϱ� ������ ��.
-      if (_inputReader._isKeyPressed)
-      {
           if (Input.GetKeyDown(KeyCode.F))
           {
               isClear = true;
               ClearMethod();
           }  
-      }
     }
 
     public void ClearMethod()

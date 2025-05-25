@@ -18,7 +18,7 @@ namespace Member.Kmj._01.Scripts.UI.Inventory
         {
             thisBtn = GetComponent<Button>();
             thisImg = thisBtn.GetComponent<Image>();
-            thisImg.sprite = thisSkill.icon;
+            thisImg.sprite = thisSkill.icon;    
             thisBtn.onClick.AddListener(ClickThis);
         }
 
