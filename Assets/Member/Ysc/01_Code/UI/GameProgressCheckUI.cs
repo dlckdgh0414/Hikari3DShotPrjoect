@@ -15,8 +15,7 @@ namespace Member.Ysc._01_Code.UI
         [SerializeField] private Slider _backSlider;
 
         public UnityEvent OnClear;
-
-        private Coroutine _coroutine;
+        
         private int currentEnemyCount;
         private int maxEnemyCount;
         [SerializeField]
