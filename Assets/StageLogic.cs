@@ -41,6 +41,7 @@ public class StageLogic : MonoBehaviour
     {
         Animator.Play("Floating");
         _player.zPos = -3.6f;
+
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

@@ -27,9 +27,22 @@ namespace Member.Ysc._01_Code.UI
         public UnityEvent OnArriveMiddlePoint;
         private bool isOneTime;
 
+        private TestBoss currentBoss;
+
         private void Awake()
         {
             SliderInit();
+            if(TryGetComponent(out TestBoss boss))
+            {
+                currentBoss = boss;
+                boss.OnDead.AddListener(CheatClear);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            currentBoss.OnDead.RemoveListener(CheatClear);
+            currentBoss = null;
         }
 
         private void SliderInit()
