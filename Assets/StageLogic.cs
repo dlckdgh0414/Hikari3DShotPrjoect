@@ -55,7 +55,7 @@ public class StageLogic : MonoBehaviour
         yield return new WaitForSeconds(9f);
         grassMap.SetActive(true);
         mapCreator.SetActive(false);
-        video.GetComponentInChildren<RawImage>().DOFade(0f, 2f);
+        video.GetComponentInChildren<RawImage>().DOFade(0f, 1f);
     }
 
     public void ReturnMenuScene()

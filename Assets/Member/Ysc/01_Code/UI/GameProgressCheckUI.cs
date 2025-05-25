@@ -25,6 +25,7 @@ namespace Member.Ysc._01_Code.UI
         private GameEventChannelSO uiManager;
         [SerializeField]
         public UnityEvent OnArriveMiddlePoint;
+        private bool isOneTime;
 
         private void Awake()
         {
@@ -45,7 +46,22 @@ namespace Member.Ysc._01_Code.UI
                 _backSlider.value = 0;
             }
         }
+        private void Update()
+        {
+            if(Input.GetKey(KeyCode.Space) && Input.GetKeyDown(KeyCode.P))
+            {
+                CheatClear();
+            }
+        }
 
+        private void CheatClear()
+        {
+            StartDialogueEvent dialogueEvent = UIEvents.StartDialogueEvent;
+            dialogueEvent.dialogue = _clearDialogue;
+            uiManager.RaiseEvent(dialogueEvent);
+
+            OnClear?.Invoke();
+        }
 
         public void HandleEnemyDeadCount()
         {
@@ -58,8 +74,9 @@ namespace Member.Ysc._01_Code.UI
                 OnClear?.Invoke();
             }
             //else if(currentEnemyCount == maxEnemyCount / 2)
-            else if(currentEnemyCount == 2)
+            else if(currentEnemyCount == maxEnemyCount / 2 && !isOneTime)
             {
+                isOneTime = true;
                 OnArriveMiddlePoint?.Invoke();
             }
             else
