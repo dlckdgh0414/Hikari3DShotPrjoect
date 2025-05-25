@@ -14,7 +14,7 @@ public abstract class BTBoss : Enemy
         _bossstateChannel = stateChannelVariable.Value;
         Debug.Assert(_bossstateChannel != null, $"StateChannel variable is null {gameObject.name}");
 
-        _state = GetBlackboardVariable<BTBossStat>("EnemyState");
+        _state = GetBlackboardVariable<BTBossStat>("BossState");
     }
 
     protected override void HandleHit()
@@ -27,6 +27,6 @@ public abstract class BTBoss : Enemy
         if (IsDead) return;
         gameObject.layer = DeadBodyLayer;
         IsDead = true;
-        _stateChannel.SendEventMessage(BTEnemyState.DEATH);
+        _bossstateChannel.SendEventMessage(BTBossStat.DEATH);
     }
 }
