@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Member.Ysc._01_Code.Agent;
 using Member.Ysc._01_Code.StatSystems;
 using UnityEngine;
 
@@ -37,12 +38,28 @@ namespace Member.Kmin._01_Script.SkillTree
             statData[stat] += value;
         }
 
-        [ContextMenu("LOG")]
-        private void Test()
+        public void LoadStat()
         {
-            foreach (var data in statData)
+            Player player = GameObject.Find("Player").GetComponent<Player>();
+            EntityStat statCompo = player.GetCompo<EntityStat>();
+            SkillCompo skillCompo = player.GetCompo<SkillCompo>();
+            
+            foreach (var stat in statData.Keys)
             {
-                Debug.Log(data.Key + " : " + data.Value);
+                statCompo.RemoveModifier(stat, this);
+            }
+
+            foreach (var stat in statData.Keys)
+            {
+                statCompo.AddModifier(stat, this, statData[stat]);
+            }
+
+            foreach (var skill in skillData)
+            {
+                PassiveSkill target = skillCompo.transform.Find(skill).GetComponent<PassiveSkill>();
+
+                if (target.skillEnabled == false)
+                    target.skillEnabled = true;
             }
         }
     }
