@@ -3164,7 +3164,6 @@ GameObject:
   - component: {fileID: 194491453}
   - component: {fileID: 194491452}
   - component: {fileID: 194491451}
-  - component: {fileID: 194491450}
   m_Layer: 5
   m_Name: CustomBtn
   m_TagString: Untagged
@@ -3192,23 +3191,6 @@ RectTransform:
   m_AnchoredPosition: {x: 615, y: 203}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &194491450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 194491448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76068aa4b91eda040bd46d6b828a2140, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  size: 2
-  rotationSpeed: 30
-  WaveSpeed: 1.5
-  WaveAngle: 1.5
 --- !u!114 &194491451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13040,6 +13022,10 @@ MonoBehaviour:
     x: 140
     y: -43.4
     visualPoint: {fileID: 0}
+  - name: World 5
+    x: -159
+    y: -27
+    visualPoint: {fileID: 0}
   kingdomPointPrefab: {fileID: 1548479602108504, guid: 705527c3e27633c44bf6889f8f4b2057,
     type: 3}
   kingdomButtonPrefab: {fileID: 1067111836184186, guid: 6a5cd4db0f6086a4292785ad3676401f,
@@ -17171,7 +17157,6 @@ GameObject:
   - component: {fileID: 1040850491}
   - component: {fileID: 1040850490}
   - component: {fileID: 1040850489}
-  - component: {fileID: 1040850488}
   m_Layer: 5
   m_Name: SelectSkillBtn
   m_TagString: Untagged
@@ -17199,23 +17184,6 @@ RectTransform:
   m_AnchoredPosition: {x: 621, y: 329}
   m_SizeDelta: {x: 160, y: 18.478}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1040850488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1040850486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76068aa4b91eda040bd46d6b828a2140, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  size: 2
-  rotationSpeed: 30
-  WaveSpeed: 1.5
-  WaveAngle: 1.5
 --- !u!114 &1040850489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30387,7 +30355,6 @@ GameObject:
   - component: {fileID: 1529614711}
   - component: {fileID: 1529614714}
   - component: {fileID: 1529614713}
-  - component: {fileID: 1529614712}
   m_Layer: 5
   m_Name: Image (8)
   m_TagString: Untagged
@@ -30415,23 +30382,6 @@ RectTransform:
   m_AnchoredPosition: {x: 498.7694, y: 192.68887}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1529614712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1529614710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76068aa4b91eda040bd46d6b828a2140, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  size: 2
-  rotationSpeed: 30
-  WaveSpeed: 1
-  WaveAngle: 2
 --- !u!114 &1529614713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34965,7 +34915,6 @@ GameObject:
   - component: {fileID: 1765382592}
   - component: {fileID: 1765382595}
   - component: {fileID: 1765382594}
-  - component: {fileID: 1765382593}
   m_Layer: 5
   m_Name: Image (9)
   m_TagString: Untagged
@@ -34993,23 +34942,6 @@ RectTransform:
   m_AnchoredPosition: {x: 610.9364, y: 192.68887}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1765382593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1765382591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76068aa4b91eda040bd46d6b828a2140, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  size: 2
-  rotationSpeed: 30
-  WaveSpeed: 1
-  WaveAngle: 2
 --- !u!114 &1765382594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38028,7 +37960,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 068607be4ed24be4fb341098d8783244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zoffset: 0.38
+  Zoffset: -0.38
 --- !u!1 &1986517269
 GameObject:
   m_ObjectHideFlags: 0
@@ -40086,7 +40018,6 @@ GameObject:
   - component: {fileID: 2079661129}
   - component: {fileID: 2079661132}
   - component: {fileID: 2079661131}
-  - component: {fileID: 2079661130}
   m_Layer: 5
   m_Name: Image (10)
   m_TagString: Untagged
@@ -40114,23 +40045,6 @@ RectTransform:
   m_AnchoredPosition: {x: 715.8671, y: 192.68887}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2079661130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2079661128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76068aa4b91eda040bd46d6b828a2140, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  size: 2
-  rotationSpeed: 30
-  WaveSpeed: 1
-  WaveAngle: 2
 --- !u!114 &2079661131
 MonoBehaviour:
   m_ObjectHideFlags: 0
