@@ -66,4 +66,4 @@ namespace Member.Kmin._01_Script.SkillTree
             Debug.Log("Load Stat");
         }
     }
-}
+}   
