@@ -64,8 +64,10 @@ public class KeyRebinder : MonoBehaviour
 
         bindingDisplayName.text = "입력 대기중...";
         rebindButton.interactable = false;
-
+        
         _actionToRebind.PerformInteractiveRebinding(bindingIndex)
+            .WithControlsExcluding("Mouse")
+            .WithCancelingThrough("<Keyboard>/escape") 
             .OnComplete(operation =>
             {
                 string newBindingPath = _actionToRebind.bindings[bindingIndex].effectivePath;
@@ -77,6 +79,7 @@ public class KeyRebinder : MonoBehaviour
                     
                     _actionToRebind.RemoveBindingOverride(bindingIndex);
                     _actionToRebind.Enable();
+                    _inputreader._controlls.Enable();
                     return;
                 }
                 
