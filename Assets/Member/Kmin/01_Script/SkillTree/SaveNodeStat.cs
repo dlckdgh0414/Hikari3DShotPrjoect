@@ -41,6 +41,7 @@ namespace Member.Kmin._01_Script.SkillTree
         public void LoadStat()
         {
             Player player = GameObject.Find("Player").GetComponent<Player>();
+            Debug.Assert(player != null, $"Player has not found");
             EntityStat statCompo = player.GetCompo<EntityStat>();
             SkillCompo skillCompo = player.GetCompo<SkillCompo>();
             
@@ -61,6 +62,8 @@ namespace Member.Kmin._01_Script.SkillTree
                 if (target.skillEnabled == false)
                     target.skillEnabled = true;
             }
+
+            Debug.Log("Load Stat");
         }
     }
 }
