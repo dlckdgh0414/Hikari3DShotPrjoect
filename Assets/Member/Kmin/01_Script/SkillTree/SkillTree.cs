@@ -15,6 +15,7 @@ public class SkillTree : MonoBehaviour
     [SerializeField] private GameEventChannelSO eventChannelSO;
     [SerializeField] private NodeSOList nodeSOList;
     [SerializeField] private SaveNodeStat saveNodeStat;
+    [SerializeField] private GameObject background;
     
     private List<SkillTreeNode> _nodes;
     private SkillTreeNode _selectedNode;
@@ -122,5 +123,5 @@ public class SkillTree : MonoBehaviour
         node.NodeIcon.DOColor(targetColor, 0.2f);
     }
     
-    public void ChangeActive() => gameObject.SetActive(!gameObject.activeSelf);
+    public void ChangeActive() => background.SetActive(!background.activeSelf);
 }

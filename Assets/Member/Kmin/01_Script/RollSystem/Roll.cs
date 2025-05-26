@@ -16,6 +16,7 @@ public class Roll : MonoBehaviour
     [SerializeField] private RectTransform contentPanel;
     [SerializeField] private PlayerSkinSOList playerSkinSO;
     [SerializeField] private UseSkillDataSO skillData;
+    [SerializeField] private GameObject background;
     public List<RollItem> rollItems = new List<RollItem>();
 
     [Header("------------------------Setting------------------------")]
@@ -140,4 +141,6 @@ public class Roll : MonoBehaviour
 
         return null;
     }
+    
+    public void ChangeActive() => background.SetActive(!background.activeSelf);
 }
