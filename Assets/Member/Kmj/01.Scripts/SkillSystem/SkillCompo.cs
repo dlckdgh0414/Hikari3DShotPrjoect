@@ -37,7 +37,7 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
         GetComponentsInChildren<ActiveSkill>().Where(t => t.skillEnabled == true).ToList().ForEach(skill => _canSelectSkills.Add(skill.gameObject.name, skill));
         _skills.Values.ToList().ForEach(skill => skill.InitializeSkill(_entity, this));
 
-        if(PlayerSendInfo.Instance != null)
+        if(PlayerSendInfo.Instance.skillName.Count > 1)
         {
             firstSkill = _canSelectSkills[PlayerSendInfo.Instance.skillName[0]];
             secondSkill = _canSelectSkills[PlayerSendInfo.Instance.skillName[1]];

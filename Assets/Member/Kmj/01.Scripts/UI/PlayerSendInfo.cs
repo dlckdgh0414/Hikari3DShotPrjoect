@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerSendInfo : MonoSingleton<PlayerSendInfo>
 {
     public PlayerSkinSO ThisSkill;
-    public List<string> skillName;
+    public List<string> skillName=new();
 
     protected override void Awake()
     {
