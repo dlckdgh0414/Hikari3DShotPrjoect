@@ -39,6 +39,7 @@ public class SlowBulletSkill : ActiveSkill
         BaseBullet.isSlowy = true;
         yield return new WaitForSeconds(slowDuration);
         BaseBullet.isSlowy = false;
+        isUsingSkill = false;
         for (int i = 0; i < volume.Length; i++)
         {
             volume[i].gameObject.SetActive(false);

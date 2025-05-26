@@ -36,9 +36,9 @@ public class SelectKingdomsLogic : MonoBehaviour
         _text.SetText(text);               //텍스트를 입력
         _text.ForceMeshUpdate();
 
-        Vector2 preferredSize = _text.GetPreferredValues(text);
+        Vector2 preferredSize = _text.GetRenderedValues();
         Vector2 padding = new Vector2(2f, 2f);
-
+        Debug.Log($"{preferredSize.x}/{preferredSize.y}");
         _image.GetComponent<RectTransform>().sizeDelta = preferredSize + padding;
     }
 
