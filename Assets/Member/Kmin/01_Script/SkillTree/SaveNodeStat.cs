@@ -9,6 +9,7 @@ namespace Member.Kmin._01_Script.SkillTree
     {
         public Dictionary<StatSO, float> statData = new Dictionary<StatSO, float>();
         public List<string> skillData;
+        public List<string> purchaseNodeList;
         public static SaveNodeStat Instance;
 
         private void Awake()

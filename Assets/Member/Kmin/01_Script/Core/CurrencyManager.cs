@@ -65,9 +65,6 @@ public class CurrencyManager : MonoBehaviour
         {
             SaveCurrencyData();
         }
-        
-        Debug.Log(Application.persistentDataPath);
-
     }
 
     [ContextMenu("Test")]
