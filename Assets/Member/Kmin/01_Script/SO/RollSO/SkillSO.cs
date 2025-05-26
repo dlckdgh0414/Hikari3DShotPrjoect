@@ -12,6 +12,6 @@
         public string name;
         public int rarity;
         public Sprite icon;
-        [TextArea] public string description = string.Empty;
+        public string description = string.Empty;
         public Color itemColor;
     }   

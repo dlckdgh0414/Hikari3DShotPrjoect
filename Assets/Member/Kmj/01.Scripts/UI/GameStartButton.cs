@@ -87,7 +87,6 @@ public class GameStartButton : MonoBehaviour
     private void CloseSetting()
     {
         ClearSetting();
-        Time.timeScale = 1f;
         StartCoroutine(Clear());
 
         if (SceneManager.GetActiveScene().name != "TitleScreen")
@@ -120,7 +119,6 @@ public class GameStartButton : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         _isOpenBase = false;
-        Time.timeScale = 0;
     }
 
     private IEnumerator Clear()

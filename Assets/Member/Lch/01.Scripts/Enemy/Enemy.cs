@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using Member.Ysc._01_Code.Agent;
+using Member.Ysc._01_Code.UI;
 using NUnit.Framework;
 using Unity.Behavior;
 using UnityEngine;
@@ -28,14 +29,14 @@ public abstract class Enemy :Entity, IPoolable
         Debug.Assert(btAgent != null, $"{gameObject.name} does not have an BehaviorGraphAgent");
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         EnemyManager.Register(this);
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
-        Debug.Log($"나 삭제되요오");
+
         EnemyManager.Unregister(this);
         _sequence?.Kill();
         _sequence = null;

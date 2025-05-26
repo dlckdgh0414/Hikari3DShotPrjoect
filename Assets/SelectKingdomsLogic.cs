@@ -36,9 +36,10 @@ public class SelectKingdomsLogic : MonoBehaviour
         _text.SetText(text);               //텍스트를 입력
         _text.ForceMeshUpdate();
 
-        Vector2 textSize = _text.GetRenderedValues(false);   //띄어쓰기도 포함된 (렌더링 된) 텍스트의 너비
-        Vector2 offset = new Vector2(-4f, -4f); //여백의 크기
-        _image.transform.GetComponent<RectTransform>().sizeDelta = textSize + offset;
+        Vector2 preferredSize = _text.GetPreferredValues(text);
+        Vector2 padding = new Vector2(2f, 2f);
+
+        _image.GetComponent<RectTransform>().sizeDelta = preferredSize + padding;
     }
 
     private void Update()
@@ -67,14 +68,23 @@ public class SelectKingdomsLogic : MonoBehaviour
     public void NoSelectSkillFadeTooltip()
     {
         BroAudio.Play(noSelectSkillSFX);
+        _warningText.text = "모든 스킬을 선택해 주세요.";
+        _warningText.DOFade(1f, 0.5f).OnComplete(() => _warningText.DOFade(0f, 0.5f));
+    }
+    public void EqulsBind()
+    {
+        BroAudio.Play(noSelectSkillSFX);
+        _warningText.text = "키를 변경해주세요.";
         _warningText.DOFade(1f, 0.5f).OnComplete(() => _warningText.DOFade(0f, 0.5f));
     }
     public void SceneStart()
     {
         Debug.Log("님 스킬 안 고름");
-        if (PlayerSendInfo.Instance.CanStart())
-            SceneManager.LoadScene(sceneNum);
-        else
+        if (PlayerSendInfo.Instance.DontSelectAllSkills())
             NoSelectSkillFadeTooltip();
+        else if (KeyRebinder.isDuplicate)
+            EqulsBind();
+        else
+            SceneManager.LoadScene(sceneNum);
     }
 }

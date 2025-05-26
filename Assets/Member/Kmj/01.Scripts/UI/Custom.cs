@@ -90,11 +90,11 @@ public class Custom : MonoBehaviour
         
         if (skinListSO.invenSkillList[currentMaterial].name == "BigSparrow")
         {
-            _planeTxt.text = "빅 스패로우"; 
+            _planeTxt.text = "메가"; 
         }
         else if (skinListSO.invenSkillList[currentMaterial].name == "BombardiroCrocodilo")
         {
-            _planeTxt.text = "붐바르딜로 크로커딜로"; 
+            _planeTxt.text = "봄바르딜로 크로커딜로"; 
         }
         else if (skinListSO.invenSkillList[currentMaterial].name == "Defalut")
         {
@@ -106,27 +106,27 @@ public class Custom : MonoBehaviour
         }
         else if (skinListSO.invenSkillList[currentMaterial].name == "ManyMuzzle")
         {
-            _planeTxt.text = "메니머질"; 
+            _planeTxt.text = "빨간 비행선"; 
         }
         else if (skinListSO.invenSkillList[currentMaterial].name == "Miner")
         {
-            _planeTxt.text = "마이너"; 
+            _planeTxt.text = "정찰봇"; 
         }
         else if (skinListSO.invenSkillList[currentMaterial].name == "Black")
         {
-            _planeTxt.text = "블랙"; 
+            _planeTxt.text = "까만 비행선"; 
         }
         else if (skinListSO.invenSkillList[currentMaterial].name == "Mint")
         {
-            _planeTxt.text = "민트"; 
+            _planeTxt.text = "민트 비행선"; 
         }
         else if (skinListSO.invenSkillList[currentMaterial].name == "SpeedSparrow")
         {
-            _planeTxt.text = "스피드 스패로우"; 
+            _planeTxt.text = "경량화 비행선"; 
         }
         else if (skinListSO.invenSkillList[currentMaterial].name == "Grin")
         {
-            _planeTxt.text = "그린 스패로우"; 
+            _planeTxt.text = "초록 비행선"; 
         }
         
         
@@ -153,43 +153,43 @@ public class Custom : MonoBehaviour
         PlayerSendInfo.Instance.ThisSkill = skinListSO.invenSkillList[currentMaterial];
         if (skinListSO.invenSkillList[currentMaterial].name == "BigSparrow")
         {
-            _planeTxt.text = "빅 스패로우"; 
+            _planeTxt.text = "메가";
         }
         else if (skinListSO.invenSkillList[currentMaterial].name == "BombardiroCrocodilo")
         {
-            _planeTxt.text = "붐바르딜로 크로커딜로"; 
+            _planeTxt.text = "봄바르딜로 크로커딜로";
         }
         else if (skinListSO.invenSkillList[currentMaterial].name == "Defalut")
         {
-            _planeTxt.text = "기본"; 
+            _planeTxt.text = "기본";
         }
         else if (skinListSO.invenSkillList[currentMaterial].name == "Flyer")
         {
-            _planeTxt.text = "파리"; 
+            _planeTxt.text = "파리";
         }
         else if (skinListSO.invenSkillList[currentMaterial].name == "ManyMuzzle")
         {
-            _planeTxt.text = "메니머질"; 
+            _planeTxt.text = "빨간 함선";
         }
         else if (skinListSO.invenSkillList[currentMaterial].name == "Miner")
         {
-            _planeTxt.text = "마이너"; 
+            _planeTxt.text = "정찰봇";
         }
         else if (skinListSO.invenSkillList[currentMaterial].name == "Black")
         {
-            _planeTxt.text = "블랙"; 
+            _planeTxt.text = "까만 함선";
         }
         else if (skinListSO.invenSkillList[currentMaterial].name == "Mint")
         {
-            _planeTxt.text = "민트"; 
+            _planeTxt.text = "민트 함선";
         }
         else if (skinListSO.invenSkillList[currentMaterial].name == "SpeedSparrow")
         {
-            _planeTxt.text = "스피드 스패로우"; 
+            _planeTxt.text = "경량화 함선";
         }
         else if (skinListSO.invenSkillList[currentMaterial].name == "Grin")
         {
-            _planeTxt.text = "그린 스패로우"; 
+            _planeTxt.text = "초록 함선";
         }
     }
 }
