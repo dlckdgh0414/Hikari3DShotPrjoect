@@ -23,6 +23,8 @@ public class SkillTree : MonoBehaviour
     
     private SkillTreeSelectEvent _skillTreeSelectEvent = SkillTreeEventChannel.SkillTreeSelectEvent;
 
+    public static SkillTree Instance { get; private set; }
+
     private void Awake()
     {
         _nodesDic = new Dictionary<SkillTreeNode, NodeSO>();
@@ -43,6 +45,18 @@ public class SkillTree : MonoBehaviour
         _nodes.ForEach(f => f.NodeButton.onClick.AddListener(() => SelectNode(f)));
         eventChannelSO.AddListener<SkillTreePurchaseEvent>(HandleNodePurchase);
         eventChannelSO.AddListener<SkillTreeActiveEvent>(HandleNodeActive);
+
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
     }
 
     private void OnDestroy()
