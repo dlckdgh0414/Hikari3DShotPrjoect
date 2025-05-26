@@ -83,7 +83,7 @@ public class Roll : MonoBehaviour
         if (_scrollSpeed <= 25)
         {
             RollEnd();
-            DOTween.To(() => 300f, y => maskBackground.rectTransform.sizeDelta =
+            DOTween.To(() => 600f, y => maskBackground.rectTransform.sizeDelta =
                 new Vector2(maskBackground.rectTransform.sizeDelta.x, y), 0f, 2f).SetEase(Ease.InExpo);
         }
 
