@@ -102,7 +102,10 @@ namespace Member.Ysc._01_Code.Agent
                     _skillCompo.GetSkill<RevivedPassive>().Revived();
                 }
                 else
-                _entity.OnDead?.Invoke();
+                {
+                    _entity.OnDead?.Invoke();
+                    Entity.IsGameStart = false;
+                }
             }
                 
         }
