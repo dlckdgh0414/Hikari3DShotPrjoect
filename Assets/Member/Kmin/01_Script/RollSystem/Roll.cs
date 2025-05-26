@@ -16,11 +16,13 @@ public class Roll : MonoBehaviour
     [SerializeField] private RectTransform contentPanel;
     [SerializeField] private PlayerSkinSOList playerSkinSO;
     [SerializeField] private UseSkillDataSO skillData;
+    [SerializeField] private GameObject background;
     public List<RollItem> rollItems = new List<RollItem>();
 
     [Header("------------------------Setting------------------------")]
     [SerializeField] private int price;
     [SerializeField] private float scrollSpeed;
+    [SerializeField] private float luck;
     
     private Dictionary<string, PlayerSkinSO> _skinDic = new Dictionary<string, PlayerSkinSO>();
     
@@ -132,7 +134,7 @@ public class Roll : MonoBehaviour
 
         foreach (PlayerSkinSO skin in _skinDic.Values.Reverse())
         {
-            if (IsPicked(skin.rarity / 1))
+            if (IsPicked(skin.rarity / 1 * luck))
             {
                 return skin;
             }
@@ -140,4 +142,12 @@ public class Roll : MonoBehaviour
 
         return null;
     }
+
+    [ContextMenu("ClearSkin")]
+    private void ClearSkin()
+    {
+        skillData.invenSkillList.Clear();
+    }
+    
+    public void ChangeActive() => background.SetActive(!background.activeSelf);
 }
