@@ -54,15 +54,6 @@ public class GameStartButton : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (_isOpenBase)
-            {
-                OpenCustomBtn();
-            }
-            else
-                CloseSetting();
-        }
     }
     private void SetUI()
     {
