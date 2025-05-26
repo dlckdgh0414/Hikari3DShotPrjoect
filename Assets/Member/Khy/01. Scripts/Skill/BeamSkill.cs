@@ -8,5 +8,6 @@ public class BeamSkill : ActiveSkill
         base.UseSkill();
         _entity.IsInvin = true;
         entityVFX.PlayVfx(beamSkill, Vector3.zero, Quaternion.identity);
+        isUsingSkill = false;
     }
 }

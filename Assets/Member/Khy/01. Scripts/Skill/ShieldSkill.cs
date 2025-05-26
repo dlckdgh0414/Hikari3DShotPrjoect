@@ -32,7 +32,7 @@ public class ShieldSkill : ActiveSkill
         yield return new WaitForSeconds(invinTime);
         entityVFX.StopVfx(shieldSkill);
         _entity.IsInvin = false;
-
+        isUsingSkill = false;
         entityVFX.PlayVfx(shieldSkillDelete,Vector3.zero,Quaternion.identity);
     }
 }
