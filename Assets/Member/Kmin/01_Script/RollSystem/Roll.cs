@@ -17,6 +17,7 @@ public class Roll : MonoBehaviour
     [SerializeField] private PlayerSkinSOList playerSkinSO;
     [SerializeField] private UseSkillDataSO skillData;
     [SerializeField] private GameObject background;
+    [SerializeField] private Image rolledSkillBackground;
     public List<RollItem> rollItems = new List<RollItem>();
 
     [Header("------------------------Setting------------------------")]
@@ -101,7 +102,6 @@ public class Roll : MonoBehaviour
     private void RollEnd()
     {
         _scrollSpeed = 0;
-        maskBackground.rectTransform.sizeDelta = new Vector2(maskBackground.rectTransform.sizeDelta.x, 0);
         
         string rolledName = rollItems.OrderBy(x => 
             Vector3.Distance(contentPanel.parent.position, x.gameObject.transform.position)).First().name;
@@ -122,6 +122,7 @@ public class Roll : MonoBehaviour
         
         rolledSkillText.transform.parent.gameObject.SetActive(true);
         rolledSkillText.text = $"{rolledSkin.name}({rolledSkin.rarity}분의 1)";
+        rolledSkillBackground.color = rolledSkin.itemColor;
         
         _isRolling = false;
         _rollEndEvent.rolledSkill = rolledSkin;
@@ -141,12 +142,6 @@ public class Roll : MonoBehaviour
         }
 
         return null;
-    }
-
-    [ContextMenu("ClearSkin")]
-    private void ClearSkin()
-    {
-        skillData.invenSkillList.Clear();
     }
     
     public void ChangeActive() => background.SetActive(!background.activeSelf);
