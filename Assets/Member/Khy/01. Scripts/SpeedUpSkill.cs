@@ -38,6 +38,5 @@ public class SpeedUpSkill : ActiveSkill
             DOTween.To(() => _attackCompo.FireRate, x => _attackCompo.FireRate = x, prevAtk,duration);
         })
             .OnComplete(()=> _speedTrail.gameObject.SetActive(false));
-        isUsingSkill = false;
     }
 }

@@ -80,11 +80,13 @@ public class KeyRebinder : MonoBehaviour
                     
                     _actionToRebind.RemoveBindingOverride(bindingIndex);
                     _actionToRebind.Enable();
+                    _inputreader._controlls.Enable();
                     return;
                 }
                 else
                     isDuplicate = false;
 
+                _inputreader._controlls.Disable();
                 
                 operation.Dispose();
                 _actionToRebind.Enable();
@@ -106,10 +108,12 @@ public class KeyRebinder : MonoBehaviour
             .OnCancel(operation =>
             {
                 operation.Dispose();
+                _inputreader._controlls.Enable();
                 _inputreader.Initialize(_inputreader._controlls);
 
                 rebindButton.interactable = true;
                 UpdateBindingDisplay();
+                _inputreader._controlls.Enable();
             })
             .Start();
     }

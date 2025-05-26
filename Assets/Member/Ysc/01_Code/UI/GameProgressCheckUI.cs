@@ -69,7 +69,6 @@ namespace Member.Ysc._01_Code.UI
             StartDialogueEvent dialogueEvent = UIEvents.StartDialogueEvent;
             dialogueEvent.dialogue = _clearDialogue;
             uiManager.RaiseEvent(dialogueEvent);
-            Entity.IsGameStart = false;
 
             OnClear?.Invoke();
         }
@@ -81,7 +80,6 @@ namespace Member.Ysc._01_Code.UI
                 StartDialogueEvent dialogueEvent = UIEvents.StartDialogueEvent;
                 dialogueEvent.dialogue = _clearDialogue;
                 uiManager.RaiseEvent(dialogueEvent);
-                Entity.IsGameStart = false;
 
                 OnClear?.Invoke();
             }
