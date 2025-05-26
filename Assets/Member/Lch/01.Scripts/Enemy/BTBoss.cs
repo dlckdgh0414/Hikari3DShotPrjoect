@@ -6,7 +6,8 @@ public abstract class BTBoss : Enemy
 {
     private BossStateChangeEvent _bossstateChannel;
     private BlackboardVariable<BTBossStat> _state;
-    
+    [SerializeField] private int minCurrency = 50;
+    [SerializeField] private int maxCurrency = 100;
     protected override void Start()
     {
         BlackboardVariable<BossStateChangeEvent> stateChannelVariable =
@@ -27,6 +28,7 @@ public abstract class BTBoss : Enemy
         if (IsDead) return;
         gameObject.layer = DeadBodyLayer;
         IsDead = true;
+        CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, Random.Range(minCurrency, maxCurrency + 1));
         _bossstateChannel.SendEventMessage(BTBossStat.DEATH);
     }
 }
