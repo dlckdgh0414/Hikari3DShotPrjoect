@@ -77,6 +77,7 @@ public class KeyRebinder : MonoBehaviour
                     
                     _actionToRebind.RemoveBindingOverride(bindingIndex);
                     _actionToRebind.Enable();
+                    _inputreader._controlls.Enable();
                     return;
                 }
                 
