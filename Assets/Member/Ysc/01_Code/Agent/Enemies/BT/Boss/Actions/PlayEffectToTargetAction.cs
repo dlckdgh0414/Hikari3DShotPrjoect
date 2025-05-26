@@ -31,7 +31,7 @@ public partial class PlayEffectToTargetAction : Action
             Effect.Value._entity = _boss.Value;
 
         }
-        if(IsSetParent.Value)
+        if(IsSetParent != null && IsSetParent.Value)
         {
             PatternEffect.Value.transform.SetParent(StartPos.Value);
         }
