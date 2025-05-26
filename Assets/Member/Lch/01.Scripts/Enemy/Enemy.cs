@@ -1,14 +1,16 @@
 using System;
 using DG.Tweening;
 using Member.Ysc._01_Code.Agent;
-using Member.Ysc._01_Code.UI;
-using NUnit.Framework;
 using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public abstract class Enemy :Entity, IPoolable
 {
+    [SerializeField] private int minCurrency = 5;
+    [SerializeField] private int maxCurrency = 10;
+    
     [SerializeField] private Transform deadPoint;
     
     protected BehaviorGraphAgent btAgent;
@@ -99,5 +101,6 @@ public abstract class Enemy :Entity, IPoolable
             .Append(tween2);
 
         _sequence.Play();
+        CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, Random.Range(minCurrency, maxCurrency+1));
     }
 }
