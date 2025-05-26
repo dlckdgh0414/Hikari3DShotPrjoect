@@ -121,4 +121,6 @@ public class SkillTree : MonoBehaviour
         node.NodeOutline.DOColor(targetColor, 0.2f);
         node.NodeIcon.DOColor(targetColor, 0.2f);
     }
+    
+    public void ChangeActive() => gameObject.SetActive(!gameObject.activeSelf);
 }
