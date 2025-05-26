@@ -40091,6 +40091,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1501849535}
   - component: {fileID: 1501849534}
+  - component: {fileID: 1501849536}
   m_Layer: 0
   m_Name: EnemySpawn
   m_TagString: Untagged
@@ -40128,6 +40129,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1501849536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501849533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02b66253c17e4094bb3908fc7304c81b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1181222289}
+  enemySpawnSO: {fileID: 11400000, guid: 9754a182325b8254797fdf6956bb2102, type: 2}
+  gameProgressCheckUI: {fileID: 1806785071}
 --- !u!1 &1505980179
 GameObject:
   m_ObjectHideFlags: 0
