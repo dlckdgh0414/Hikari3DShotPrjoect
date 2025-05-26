@@ -32,16 +32,13 @@ namespace Member.Ysc._01_Code.UI
         private void Awake()
         {
             SliderInit();
-            if(TryGetComponent(out TestBoss boss))
-            {
-                currentBoss = boss;
-                boss.OnDead.AddListener(CheatClear);
-            }
+            
         }
 
         private void OnDestroy()
         {
-            currentBoss.OnDead.RemoveListener(CheatClear);
+            if(currentBoss != null)
+                currentBoss.OnDead.RemoveListener(CheatClear);
             currentBoss = null;
         }
 
@@ -67,7 +64,7 @@ namespace Member.Ysc._01_Code.UI
             }
         }
 
-        private void CheatClear()
+        public void CheatClear()
         {
             StartDialogueEvent dialogueEvent = UIEvents.StartDialogueEvent;
             dialogueEvent.dialogue = _clearDialogue;
@@ -114,5 +111,7 @@ namespace Member.Ysc._01_Code.UI
                 _backSlider.value = currentEnemyCount;
             }
         }
+
+        
     }
 }
