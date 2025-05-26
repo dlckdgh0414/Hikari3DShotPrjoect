@@ -19011,12 +19011,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c95c0cc8a8750844582145c8166379fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _director: {fileID: 977952972}
   enemySpawner: {fileID: 840712146}
   mapCreator: {fileID: 1008115812}
   map: {fileID: 1450604539}
   grassMap: {fileID: 1238640848}
   Animator: {fileID: 865804414}
+  isCutScene: 0
   video: {fileID: 1268060731}
+  CameraChannel: {fileID: 11400000, guid: abd9c912f20296a42a41e0bb57eb6c8d, type: 2}
 --- !u!4 &977952970
 Transform:
   m_ObjectHideFlags: 0
@@ -19114,6 +19117,10 @@ PlayableDirector:
     value: {fileID: 977952971}
   - key: {fileID: -481283603702150987, guid: 40e005ebe6db10640ba7ec5f572b378f, type: 2}
     value: {fileID: 460312451}
+  - key: {fileID: 4829627901680883933, guid: 40e005ebe6db10640ba7ec5f572b378f, type: 2}
+    value: {fileID: 865804414}
+  - key: {fileID: -883752018747413988, guid: 40e005ebe6db10640ba7ec5f572b378f, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!1 &980717308
@@ -39650,6 +39657,7 @@ PrefabInstance:
     - {fileID: 6884287770262672009, guid: c33452a4715040647b7b38cc71750a8e, type: 3}
     - {fileID: 9084051057010916186, guid: c33452a4715040647b7b38cc71750a8e, type: 3}
     - {fileID: 1517872885874559728, guid: c33452a4715040647b7b38cc71750a8e, type: 3}
+    - {fileID: 8532012031205192033, guid: c33452a4715040647b7b38cc71750a8e, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5882070368022637094, guid: c33452a4715040647b7b38cc71750a8e,
         type: 3}

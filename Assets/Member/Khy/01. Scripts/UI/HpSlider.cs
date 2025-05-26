@@ -34,6 +34,11 @@ public class HpSlider : MonoBehaviour, IEntityComponent, IAfterInit
             text = GetComponentInChildren<TextMeshProUGUI>();
     }
 
+    private void Start()
+    {
+        _maxHp = _entityHealth.maxHealth;
+    }
+
     private void ChangeHp(float prev, float next)
     {
         _hpSlider.value = _entityHealth.CurrentHealth;
