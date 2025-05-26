@@ -24,13 +24,9 @@ public class ClearGame : MonoBehaviour
 
     public void ClearMethod()
     {
-        if (isClear)
-        {
-            
-            isClear = false;
-            StartCoroutine(ClearCO());      // 1������ ��ٸ� (�� ��ȯ ������)
-            // �� �� Raise
-        }
+        isClear = false;
+        StartCoroutine(ClearCO());      // 1������ ��ٸ� (�� ��ȯ ������)
+        // �� �� Raise
     }
 
   IEnumerator ClearCO()
