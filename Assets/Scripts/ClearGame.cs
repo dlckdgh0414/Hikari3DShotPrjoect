@@ -21,15 +21,6 @@ public class ClearGame : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
     }
-    private void Update()
-    { // �� ��ũ��Ʈ ���� �ƹ� ��ü�� �����ְ� ClearMethod ����ϸ��
-      // ���� ������Ʈ ���� �� �׽�Ʈ���̴ϱ� ������ ��.
-          if (Input.GetKeyDown(KeyCode.F))
-          {
-              isClear = true;
-              ClearMethod();
-          }  
-    }
 
     public void ClearMethod()
     {

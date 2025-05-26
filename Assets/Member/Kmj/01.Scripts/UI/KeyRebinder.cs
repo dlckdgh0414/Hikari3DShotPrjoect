@@ -18,7 +18,7 @@ public class KeyRebinder : MonoBehaviour
     [SerializeField] private string actionMapName = "PlayerMap";
     [SerializeField] private string actionName;
     [SerializeField] private int bindingIndex = 0;
-
+    public static bool isDuplicate;
     private InputAction _actionToRebind;
 
     private void Awake()
@@ -74,12 +74,15 @@ public class KeyRebinder : MonoBehaviour
                 {
                     bindingDisplayName.text = "중복된 키입니다! 다시 시도하세요.";
                     rebindButton.interactable = true;
+                    isDuplicate = true;
                     
                     _actionToRebind.RemoveBindingOverride(bindingIndex);
                     _actionToRebind.Enable();
                     return;
                 }
-                
+                else
+                    isDuplicate = false;
+
                 _inputreader._controlls.Disable();
                 
                 operation.Dispose();

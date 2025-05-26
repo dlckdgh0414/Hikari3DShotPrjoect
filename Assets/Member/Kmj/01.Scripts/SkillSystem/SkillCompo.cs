@@ -24,6 +24,7 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
 
     private Dictionary<Type, Skill> _skills;
     private List<PassiveSkill> _passiveSkills;
+    private Dictionary<string,ActiveSkill> _canSelectSkills = new();
 
     public void Initialize(Entity entity)
     {
@@ -33,7 +34,15 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
         _passiveSkills = new();
         GetComponentsInChildren<Skill>().Where(t => t.skillEnabled == true).ToList().ForEach(skill => _skills.Add(skill.GetType(), skill));
         GetComponentsInChildren<PassiveSkill>().Where(t => t.skillEnabled == true).ToList().ForEach(skill => _passiveSkills.Add(skill));
+        GetComponentsInChildren<ActiveSkill>().Where(t => t.skillEnabled == true).ToList().ForEach(skill => _canSelectSkills.Add(skill.gameObject.name, skill));
         _skills.Values.ToList().ForEach(skill => skill.InitializeSkill(_entity, this));
+
+        if(PlayerSendInfo.Instance != null)
+        {
+            firstSkill = _canSelectSkills[PlayerSendInfo.Instance.skillName[0]];
+            secondSkill = _canSelectSkills[PlayerSendInfo.Instance.skillName[1]];
+            thirdSkill = _canSelectSkills[PlayerSendInfo.Instance.skillName[2]];
+        }
     }
 
     private void Update()

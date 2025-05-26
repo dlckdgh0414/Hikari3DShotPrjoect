@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Member.Kmin._01_Script.SkillTree;
 using UnityEngine;
 
 public class Player : Entity
@@ -30,6 +31,7 @@ public class Player : Entity
 
     private void Start()
     {
+        SaveNodeStat.Instance.LoadStat();
         _stateMachine.ChangeState("IDLE");
     }
     
