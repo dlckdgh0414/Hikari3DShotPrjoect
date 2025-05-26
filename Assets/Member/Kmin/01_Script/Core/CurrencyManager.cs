@@ -59,12 +59,10 @@ public class CurrencyManager : MonoBehaviour
 
         if (SaveLoadManager.CheckFile())
         {
-            Debug.Log("있음");
             LoadCurrencyData();
         }
         else
         {
-            Debug.Log("없음");
             SaveCurrencyData();
         }
         
@@ -140,8 +138,6 @@ public class CurrencyManager : MonoBehaviour
 
         foreach (var entry in currencyDic)
         {
-            Debug.Log(entry.Key);
-            Debug.Log(entry.Value);
             OnValueChanged?.Invoke(entry.Key, entry.Value);
         }
     }
