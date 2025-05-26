@@ -49,7 +49,7 @@ public class SelfBoomSkill : ActiveSkill
         entityVFX.PlayVfx(explosionEffect, Vector3.zero, Quaternion.identity);
         cameraFeel.PlayFeedbacks();
 
-
+        isUsingSkill = false;
         healthCompo.ApplyDamage(crashDamage);
 
         float prevSpeed = _mover.MoveSpeed;

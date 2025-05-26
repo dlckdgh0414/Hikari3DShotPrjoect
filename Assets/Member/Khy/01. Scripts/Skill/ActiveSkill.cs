@@ -39,7 +39,6 @@ public class ActiveSkill : Skill
     public virtual void OverSkillCooltime()
     {
         _cooldownTimer = 0;
-        isUsingSkill = false;
         Debug.Log("Skill enable");
     }
 

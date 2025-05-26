@@ -29,6 +29,7 @@ public class HealingSkill : ActiveSkill
         base.UseSkill();
         entityVFX.PlayVfx(healSkill, Vector3.zero, Quaternion.identity);
         healthCompo.ApplyHeal(healAmount,duration);
+        isUsingSkill = false;
         //entityVFX.PlayVfx(healSkill, Vector3.zero, Quaternion.identity);
     }
 }
