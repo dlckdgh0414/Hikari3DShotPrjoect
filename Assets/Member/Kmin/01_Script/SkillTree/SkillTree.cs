@@ -105,7 +105,7 @@ public class SkillTree : MonoBehaviour
             int idx = i;
             seq.Append(DOTween.To(() => 0f, amount
                     => f.FillBranch[idx].fillAmount = amount, 1f, 
-                isInstance ? 0f : 0.2f));
+                isInstance ? 0f : 0.3f));
         }
 
         seq.OnComplete(() => ChangeNodeColor(f, isInstance ? true : false));
