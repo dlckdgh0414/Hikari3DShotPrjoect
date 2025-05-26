@@ -11,15 +11,10 @@ public class PlayerSendInfo : MonoSingleton<PlayerSendInfo>
         base.Awake();
         DontDestroyOnLoad(gameObject);
 
-        if (gameObject == null)
+        if (Instance == null)
         {
-            GameObject.FindAnyObjectByType<SettingManager>();
-            if (gameObject == null)
-            {
-                Instantiate(gameObject);
-            }
+            Instantiate(Instance);
         }
-
         else
             return;
     }
