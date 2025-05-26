@@ -13,6 +13,7 @@ namespace Member.Kmin._01_Script.SkillTree
         private void Awake()
         {
             CurrencyManager.Instance.OnValueChanged += HandleValueChanged;
+            CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, 0);
         }
 
         private void OnDestroy()

@@ -17,11 +17,13 @@ public class Roll : MonoBehaviour
     [SerializeField] private PlayerSkinSOList playerSkinSO;
     [SerializeField] private UseSkillDataSO skillData;
     [SerializeField] private GameObject background;
+    [SerializeField] private Image rolledSkillBackground;
     public List<RollItem> rollItems = new List<RollItem>();
 
     [Header("------------------------Setting------------------------")]
     [SerializeField] private int price;
     [SerializeField] private float scrollSpeed;
+    [SerializeField] private float luck;
     
     private Dictionary<string, PlayerSkinSO> _skinDic = new Dictionary<string, PlayerSkinSO>();
     
@@ -81,7 +83,7 @@ public class Roll : MonoBehaviour
         if (_scrollSpeed <= 25)
         {
             RollEnd();
-            DOTween.To(() => 300f, y => maskBackground.rectTransform.sizeDelta =
+            DOTween.To(() => 600f, y => maskBackground.rectTransform.sizeDelta =
                 new Vector2(maskBackground.rectTransform.sizeDelta.x, y), 0f, 2f).SetEase(Ease.InExpo);
         }
 
@@ -100,7 +102,6 @@ public class Roll : MonoBehaviour
     private void RollEnd()
     {
         _scrollSpeed = 0;
-        maskBackground.rectTransform.sizeDelta = new Vector2(maskBackground.rectTransform.sizeDelta.x, 0);
         
         string rolledName = rollItems.OrderBy(x => 
             Vector3.Distance(contentPanel.parent.position, x.gameObject.transform.position)).First().name;
@@ -121,6 +122,7 @@ public class Roll : MonoBehaviour
         
         rolledSkillText.transform.parent.gameObject.SetActive(true);
         rolledSkillText.text = $"{rolledSkin.name}({rolledSkin.rarity}분의 1)";
+        rolledSkillBackground.color = rolledSkin.itemColor;
         
         _isRolling = false;
         _rollEndEvent.rolledSkill = rolledSkin;
@@ -133,7 +135,7 @@ public class Roll : MonoBehaviour
 
         foreach (PlayerSkinSO skin in _skinDic.Values.Reverse())
         {
-            if (IsPicked(skin.rarity / 1))
+            if (IsPicked(skin.rarity / 1 * luck))
             {
                 return skin;
             }

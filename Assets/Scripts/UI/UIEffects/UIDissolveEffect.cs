@@ -11,7 +11,6 @@ public class UIDissolveEffect : MonoBehaviour
     public float time = 12f;
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
         vid = GetComponent<VideoPlayer>();
         vid.Prepare();
         vid.prepareCompleted += Cutscene;
