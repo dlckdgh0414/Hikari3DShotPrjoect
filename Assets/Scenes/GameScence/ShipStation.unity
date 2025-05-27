@@ -5005,6 +5005,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5497571923557606930}
     m_Modifications:
+    - target: {fileID: 2125913057561625480, guid: 7c8f0ccc19877234dad34f8d00edc079,
+        type: 3}
+      propertyPath: price
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4573798916251221148, guid: 7c8f0ccc19877234dad34f8d00edc079,
         type: 3}
       propertyPath: m_Name
@@ -6750,6 +6755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillData: []
+  purchaseNodeList: []
 --- !u!4 &339248666
 Transform:
   m_ObjectHideFlags: 0
@@ -9004,8 +9010,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba5af7e4a5c97d429f3da6e019ef913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isClear: 0
-  scenOnComplete: {fileID: 11400000, guid: 52d2d8f5f89ede44cb84fff3c386a804, type: 2}
 --- !u!4 &449549360
 Transform:
   m_ObjectHideFlags: 0
