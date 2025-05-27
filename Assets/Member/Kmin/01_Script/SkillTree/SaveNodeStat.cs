@@ -62,6 +62,8 @@ namespace Member.Kmin._01_Script.SkillTree
 
                 if (target.skillEnabled == false)
                     target.skillEnabled = true;
+                
+                target.InitializeSkill(player, skillCompo);
             }
 
             Debug.Log("Load Stat");
