@@ -22,6 +22,5 @@ public class TestBoss : BTBoss
     {
         base.OnDisable();
         OnDead.RemoveListener(FindAnyObjectByType<GameProgressCheckUI>().CheatClear);
-        BroAudio.Stop(bossSound);
     }
 }
