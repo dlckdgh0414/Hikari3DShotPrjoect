@@ -11,13 +11,12 @@ public class FrostSkill : ActiveSkill
     public float damage = 3f;
     private readonly string frostEffect = "FrostVFX";
     private readonly string enemyFrostEffect = "Iceing";
-    [SerializeField] private SoundID iceSound;
 
     public override void UseSkill()
     {
         base.UseSkill();
         entityVFX.PlayVfx(frostEffect, Vector3.zero, Quaternion.identity);
-        BroAudio.Play(iceSound);
+        BroAudio.Play(skillSound);
         foreach (Enemy obj in EnemyManager.Enemies)
         {
             Debug.Log(obj);
