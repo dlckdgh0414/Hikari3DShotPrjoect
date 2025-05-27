@@ -1,4 +1,6 @@
-public abstract class EntityState
+using UnityEngine;
+
+public class EntityState : MonoBehaviour
 {
     protected Entity _entity;
 

@@ -26,6 +26,13 @@ public class PlayerState : EntityState
         _player.InputReader.OnThrSkillEvent += OnThrSkillHandle;
     }
 
+    private void OnDestroy()
+    {
+        _player.InputReader.OnFirSkillEvent -= OnFirSkillHandle;
+        _player.InputReader.OnSecSkillEvent -= OnSecSkillHandle;
+        _player.InputReader.OnThrSkillEvent -= OnThrSkillHandle;
+    }
+
     private void OnFirSkillHandle()
     {
         _player.GetCompo<SkillCompo>().firstSkill.AttemptUseSkill();
