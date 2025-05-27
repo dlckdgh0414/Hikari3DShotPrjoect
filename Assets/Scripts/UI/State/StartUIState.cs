@@ -6,12 +6,11 @@ using UnityEngine.Playables;
 
 public class StartUIState : MainMenuState, IMENUUILIB
 {
-    [SerializeField] UIDissolveEffect1 uds;
+
 
     private CanvasGroup group;
     private PlayableDirector director;
     private bool hasStarted = false;
-    [SerializeField] GameObject obj;
     private void Awake()
     {
         // ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ® Ä³½Ì
@@ -46,7 +45,7 @@ public class StartUIState : MainMenuState, IMENUUILIB
     {
 
 
-        obj.SetActive(true);
+      
 
         if (director != null)
             director.Play();
@@ -54,11 +53,7 @@ public class StartUIState : MainMenuState, IMENUUILIB
         if (group != null)
             DOTween.To(() => group.alpha, x => group.alpha = x, 0, 0.2f);
 
-        yield return new WaitForSeconds(1f);
-      
-
-        uds.ShowUIEffect();
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
 
         SceneManager.LoadScene("SpaceShip");
     }
