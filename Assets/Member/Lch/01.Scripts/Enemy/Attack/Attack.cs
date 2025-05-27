@@ -98,13 +98,11 @@ public abstract class Attack : MonoBehaviour
             
             if (isGuided == true)
             {
-                Debug.Log($"가이드 오브젝트 이름 : {transform.parent.name}");
                 bulletPrefab.SetTransform(container);
                 bulletPrefab.IsPlayerFollow = true;
             }
             else if (range <= 7)
             {
-                Debug.Log($"힣 오브젝트 이름 : {transform.parent.name}");
                 bulletPrefab.SetDirection(container.targetPos);
                 bulletPrefab.IsPlayerFollow = true;
             }

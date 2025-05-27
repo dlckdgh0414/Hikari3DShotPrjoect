@@ -69,6 +69,7 @@ namespace Member.Ysc._01_Code.UI
             dialogueEvent.dialogue = _clearDialogue;
             uiManager.RaiseEvent(dialogueEvent);
             Entity.IsGameStart = false;
+            ClearGame.IsCLEAR = true;
 
             OnClear?.Invoke();
         }
@@ -77,12 +78,7 @@ namespace Member.Ysc._01_Code.UI
         {
             if(currentEnemyCount + 1 == maxEnemyCount)
             {
-                StartDialogueEvent dialogueEvent = UIEvents.StartDialogueEvent;
-                dialogueEvent.dialogue = _clearDialogue;
-                uiManager.RaiseEvent(dialogueEvent);
-                Entity.IsGameStart = false;
-
-                OnClear?.Invoke();
+                CheatClear();
             }
             //else if(currentEnemyCount == maxEnemyCount / 2)
             else if(currentEnemyCount == maxEnemyCount / 2 && !isOneTime)

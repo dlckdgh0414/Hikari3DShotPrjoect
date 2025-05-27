@@ -18,6 +18,13 @@ public class PlayerSendInfo : MonoSingleton<PlayerSendInfo>
         else
             return;
     }
+    public void ResetSkills()
+    {
+        for(int i =0;i<skillName.Count;i++)
+        {
+            skillName[i] = "";
+        }
+    }
     public bool DontSelectAllSkills()
     {
         foreach(string s in skillName)
