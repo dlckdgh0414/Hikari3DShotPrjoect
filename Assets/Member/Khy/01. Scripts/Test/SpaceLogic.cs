@@ -6,9 +6,12 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Ami.BroAudio;
 
 public class SpaceLogic : MonoBehaviour
 {
+    [SerializeField]
+    private SoundID mainmenuBGM;
     [SerializeField]
     private CinemachineCamera camera;
     [SerializeField] private InputReader InputReader;
@@ -42,7 +45,7 @@ public class SpaceLogic : MonoBehaviour
     }
     private void Start()
     {
-        
+        BroAudio.Play(mainmenuBGM);
     }
     private void Update()
     {
@@ -82,7 +85,10 @@ public class SpaceLogic : MonoBehaviour
                     },
                     360f,
                     0.3f)).Join(_black.DOFade(1, 0.3f))
-                    .OnComplete(() => SceneManager.LoadScene("ShipStation"));
+                    .OnComplete(() => {
+                        SceneManager.LoadScene("ShipStation");
+                        BroAudio.Stop(mainmenuBGM);
+                    });
             }
             else if(StageField == 1)
             {

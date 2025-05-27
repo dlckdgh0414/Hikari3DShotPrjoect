@@ -2,9 +2,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
 using DG.Tweening;
+using Ami.BroAudio;
 
 public class MainMenuState : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler, IPointerExitHandler
 {
+    [SerializeField]
+    private SoundID clickSound;
     public Action OnUIEvent;
     public float size = 0.1f;
     public float dur = 0.2f;
@@ -32,7 +35,7 @@ public class MainMenuState : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
 
 
         punchTween?.Kill();
-
+        BroAudio.Play(clickSound);
 
         originalScale = transform.localScale;
 
