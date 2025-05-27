@@ -16,6 +16,7 @@ public class SkillTree : MonoBehaviour
     [SerializeField] private NodeSOList nodeSOList;
     [SerializeField] private SaveNodeStat saveNodeStat;
     [SerializeField] private GameObject background;
+    [SerializeField] private Transform nodeParent;
     
     private List<SkillTreeNode> _nodes;
     private SkillTreeNode _selectedNode;
@@ -25,6 +26,7 @@ public class SkillTree : MonoBehaviour
 
     private void Awake()
     {
+        saveNodeStat = GameObject.Find("NodeData").GetComponent<SaveNodeStat>();
         _nodesDic = new Dictionary<SkillTreeNode, NodeSO>();
         _nodes = transform.GetComponentsInChildren<SkillTreeNode>(true).ToList();
         
@@ -45,10 +47,26 @@ public class SkillTree : MonoBehaviour
         eventChannelSO.AddListener<SkillTreeActiveEvent>(HandleNodeActive);
     }
 
+    private void Start()
+    {
+         LoadSkillTree();
+    }
+
     private void OnDestroy()
     {
         eventChannelSO.RemoveListener<SkillTreePurchaseEvent>(HandleNodePurchase);
         eventChannelSO.RemoveListener<SkillTreeActiveEvent>(HandleNodeActive);
+    }
+
+    [ContextMenu("Load Skill Tree")]
+    private void LoadSkillTree()
+    {
+        foreach (string node in saveNodeStat.purchaseNodeList)
+        {
+            SkillTreeNode target = nodeParent.Find(node).GetComponent<SkillTreeNode>();
+            target.GetNodeSO().isPurchase = true;
+            ConnectColor(target, true);
+        }
     }
 
     private void HandleNodeActive(SkillTreeActiveEvent evt) => ActiveNodeColor(_selectedNode, evt.isActive);
@@ -68,6 +86,7 @@ public class SkillTree : MonoBehaviour
         
         CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, -nodeSO.price);
         nodeSOList.Save();
+        saveNodeStat.purchaseNodeList.Add(nodeSO.name);
         ConnectColor(evt.node);
     }
 
