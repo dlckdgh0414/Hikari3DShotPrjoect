@@ -21,7 +21,7 @@ public class TutorialLogic : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Tab))
             SceneManager.LoadScene("ShipStation");
     }
     public void DownText()
