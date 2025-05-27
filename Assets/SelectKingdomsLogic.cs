@@ -41,7 +41,7 @@ public class SelectKingdomsLogic : MonoBehaviour
     
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             PlayerSendInfo.Instance.ResetSkills();
             SceneManager.LoadScene("ShipStation");
