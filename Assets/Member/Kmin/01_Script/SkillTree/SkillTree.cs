@@ -80,7 +80,6 @@ public class SkillTree : MonoBehaviour
 
         if (!string.IsNullOrEmpty(nodeSO.passiveSkill))
         {
-            //PassiveSkill skill = skillCompo.transform.Find(nodeSO.passiveSkill).GetComponent<PassiveSkill>();
             saveNodeStat.skillData.Add(nodeSO.passiveSkill);
         }
         
@@ -95,6 +94,7 @@ public class SkillTree : MonoBehaviour
         _selectedNode = selectedNode;
         _skillTreeSelectEvent.node = selectedNode;
         eventChannelSO.RaiseEvent(_skillTreeSelectEvent);
+        
     }
 
 
@@ -112,12 +112,15 @@ public class SkillTree : MonoBehaviour
                     => f.FillBranch[idx].fillAmount = amount, 1f, 
                 isInstance ? 0f : 0.3f));
         }
+        
+        f.ConnectedNodes.ForEach(n => n.NodeButton.interactable = true);
 
         seq.OnComplete(() => ChangeNodeColor(f, isInstance ? true : false));
     }
 
     public void ChangeNodeColor(SkillTreeNode f, bool isInstance = false)
     {
+        
         Sequence seq = DOTween.Sequence();
         Outline outline = f.GetComponentInChildren<Outline>();
 
@@ -129,7 +132,6 @@ public class SkillTree : MonoBehaviour
             f.ConnectedNodes.ForEach(n => {
                 n.NodeIcon.DOColor(Color.white, isInstance ? 0f : 1f);
                 n.NodeIcon.DOFade(1f, isInstance ? 0f : 1f);
-                n.NodeButton.interactable = true;
             });
         });
     }

@@ -21,6 +21,5 @@ public class TestBoss : BTBoss
     protected override void OnDisable()
     {
         base.OnDisable();
-        OnDead.RemoveListener(FindAnyObjectByType<GameProgressCheckUI>().CheatClear);
     }
 }
