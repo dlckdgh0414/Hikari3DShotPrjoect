@@ -95,7 +95,6 @@ public class UIManager : MonoBehaviour
 
     private void EndTalk()
     {
-        Time.timeScale = 1f;
         isDialogue = false;
         textNum = 0;
         for (int i = 0; i < _animtor.Length; i++)

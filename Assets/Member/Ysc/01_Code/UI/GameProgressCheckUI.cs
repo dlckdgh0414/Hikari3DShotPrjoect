@@ -65,7 +65,6 @@ namespace Member.Ysc._01_Code.UI
 
         public void CheatClear()
         {
-            Time.timeScale = 0f;
             StartDialogueEvent dialogueEvent = UIEvents.StartDialogueEvent;
             dialogueEvent.dialogue = _clearDialogue;
             uiManager.RaiseEvent(dialogueEvent);
