@@ -46,7 +46,7 @@ public class ActiveSkill : Skill
     public virtual void UseSkill()
     {
         isUsingSkill = true;
-        GetComponentInChildren<MMF_Player>()?.PlayFeedbacks();
+        //GetComponentInChildren<MMF_Player>()?.PlayFeedbacks();
     }
 
     public virtual void UseSkillWithoutCooltimeAndEffect()
