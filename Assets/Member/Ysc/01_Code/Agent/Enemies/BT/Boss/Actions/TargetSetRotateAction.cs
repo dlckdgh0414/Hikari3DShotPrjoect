@@ -15,6 +15,7 @@ public partial class TargetSetRotateAction : Action
 
     protected override Status OnStart()
     {
+        if (Pattern1Effect.Value == null) return Status.Failure;
         Target.Value.rotation = Quaternion.Euler(Vector3.zero);
         Pattern1Effect.Value.transform.rotation = Quaternion.Euler(Vector3.zero);
         return Status.Success;
