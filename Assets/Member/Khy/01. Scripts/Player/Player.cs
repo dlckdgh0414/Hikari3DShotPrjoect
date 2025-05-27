@@ -18,7 +18,7 @@ public class Player : Entity
     private StateMachine _stateMachine;
     [field: SerializeField] public float zPos { get; set; }
 
-    #region ¿¹Çà
+    #region ï¿½ï¿½ï¿½ï¿½
     public float edgeThreshold = 100f;
     public CanvasGroup inGameUI;
     #endregion
@@ -31,13 +31,12 @@ public class Player : Entity
 
     private void Start()
     {
-        SaveNodeStat.Instance.LoadStat();
         _stateMachine.ChangeState("IDLE");
     }
     
     private void Update()
     {
-        Debug.Log($"¿ëÀÇÀÚ ->{IsGameStart}");
+        Debug.Log($"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ->{IsGameStart}");
         _stateMachine.UpdateStateMachine();
         UIFade();
     }
