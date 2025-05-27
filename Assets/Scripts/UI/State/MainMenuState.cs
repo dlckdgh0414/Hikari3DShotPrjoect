@@ -15,14 +15,21 @@ public class MainMenuState : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
 
     private Vector3 originalScale;
 
+   
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        OnUIEvent?.Invoke();
+    }
     private void Awake()
     {
         originalScale = transform.localScale;
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    private void OnEnable()
     {
-        OnUIEvent?.Invoke();
+        transform.localScale = originalScale;
+        isPointerOver = false;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -30,14 +37,9 @@ public class MainMenuState : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
         if (isPointerOver) return;
         isPointerOver = true;
 
-
         punchTween?.Kill();
 
-
-        originalScale = transform.localScale;
-
- 
-        punchTween = transform.DOPunchScale(originalScale * size, dur, vid)
+        punchTween = transform.DOPunchScale(Vector3.one * size, dur, vid)
             .SetUpdate(true)
             .OnComplete(() => {
                 transform.localScale = originalScale;

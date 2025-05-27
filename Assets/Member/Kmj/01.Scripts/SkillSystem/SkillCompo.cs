@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Member.Kmin._01_Script.Core.EventChannel;
+using Member.Kmin._01_Script.SkillTree;
 using Member.Kmj._01.Scripts.Core.EventChannel;
 using Member.Ysc._01_Code.StatSystems;
 using UnityEditor.Experimental.GraphView;
@@ -35,6 +36,8 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
         GetComponentsInChildren<Skill>().Where(t => t.skillEnabled == true).ToList().ForEach(skill => _skills.Add(skill.GetType(), skill));
         GetComponentsInChildren<PassiveSkill>().Where(t => t.skillEnabled == true).ToList().ForEach(skill => _passiveSkills.Add(skill));
         GetComponentsInChildren<ActiveSkill>().Where(t => t.skillEnabled == true).ToList().ForEach(skill => _canSelectSkills.Add(skill.gameObject.name, skill));
+        SaveNodeStat.Instance.LoadStat();
+        
         _skills.Values.ToList().ForEach(skill => skill.InitializeSkill(_entity, this));
 
         if(PlayerSendInfo.Instance.skillName.Count > 1)
