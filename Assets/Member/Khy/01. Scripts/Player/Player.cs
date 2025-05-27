@@ -37,6 +37,7 @@ public class Player : Entity
     
     private void Update()
     {
+        Debug.Log($"¿ëÀÇÀÚ ->{IsGameStart}");
         _stateMachine.UpdateStateMachine();
         UIFade();
     }

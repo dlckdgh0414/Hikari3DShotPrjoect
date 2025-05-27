@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using TMPro;
 using Ami.BroAudio;
+using System.Collections;
 
 public class SelectKingdomsLogic : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class SelectKingdomsLogic : MonoBehaviour
     private Image _image;
     [SerializeField] private SoundID selectBGM;
     [SerializeField] private SoundID noSelectSkillSFX;
+    Vector2 padding = new Vector2(0f, 30f);
 
     private void Awake()
     {
@@ -35,21 +37,21 @@ public class SelectKingdomsLogic : MonoBehaviour
     {
         _text.SetText(text);               //텍스트를 입력
         _text.ForceMeshUpdate();
-
-        Vector2 preferredSize = _text.GetRenderedValues();
-        Vector2 padding = new Vector2(2f, 2f);
-        Debug.Log($"{preferredSize.x}/{preferredSize.y}");
-        _image.GetComponent<RectTransform>().sizeDelta = preferredSize + padding;
     }
-
+    
     private void Update()
     {
-        _image.transform.position = Input.mousePosition;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PlayerSendInfo.Instance.ResetSkills();
+            SceneManager.LoadScene("ShipStation");
+        }
+        _image.transform.position = (Vector2)Input.mousePosition + padding;
     }
 
     public void Show(string text)
     {
-        _image.transform.position = Input.mousePosition;
+        _image.transform.position = (Vector2)Input.mousePosition + padding;
         _image.gameObject.SetActive(true);
         SetText(text);
     }

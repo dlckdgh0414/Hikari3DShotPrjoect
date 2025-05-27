@@ -3,8 +3,6 @@ using UnityEngine.InputSystem;
 
 public class FirstSkillUI : SkillCoolDownUI
 {
-    private float _cooltime;
-
     protected override void InitializeCooldownUI()
     {
         base.InitializeCooldownUI();

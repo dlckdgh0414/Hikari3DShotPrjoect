@@ -64,10 +64,10 @@ public class KingdomSelect : MonoBehaviour
 
 
 
-        if (ScenManager.instance != null)
+        if (ClearGame.IsCLEAR)
         {
-            ScenManager.instance.Oncomplete += _ClearGame;
-
+            _ClearGame();
+            ClearGame.IsCLEAR = false;
         }
 
         for (int i = 0; i < a; i++)
@@ -162,10 +162,7 @@ public class KingdomSelect : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (ScenManager.instance != null)
-        {
-            ScenManager.instance.Oncomplete -= _ClearGame;
-        }
+        
     }
 
     private void OnDrawGizmos()

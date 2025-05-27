@@ -84,10 +84,11 @@ public class StageLogic : MonoBehaviour
     private IEnumerator WaitRoutine()
     {
         video.Play();
-        video.GetComponentInChildren<RawImage>().DOFade(0.5f, 2f);
-        yield return new WaitForSeconds(14f);
+        video.GetComponentInChildren<RawImage>().DOFade(0.9f, 2f);
+        yield return new WaitForSeconds(7f);
         grassMap.SetActive(true);
         mapCreator.SetActive(false);
+        yield return new WaitForSeconds(1f);
         video.GetComponentInChildren<RawImage>().DOFade(0f, 1f);
     }
 
