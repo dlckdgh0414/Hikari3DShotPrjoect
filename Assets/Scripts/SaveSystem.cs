@@ -1,5 +1,4 @@
 using System.IO;
-using UnityEditor.Overlays;
 using UnityEngine;
 
 public static class SaveSystem
@@ -16,7 +15,8 @@ public static class SaveSystem
         string saveJson = JsonUtility.ToJson(saveData);
         string saveFilePath = SavePath + saveFileName + ".json";
         File.WriteAllText(saveFilePath, saveJson);
-        Debug.Log("ÀúÀåµÊ: " + saveFilePath);
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½: " + saveFilePath);
+        
     }
 
     public static SaveData Load(int saveFileName)
@@ -25,7 +25,7 @@ public static class SaveSystem
         Debug.Log(saveFilePath);
         if (!File.Exists(saveFilePath))
         {
-            Debug.LogError("ÀÌ°Å ÆÄÀÏ ¸øÃ£À½ z");
+            Debug.LogError("ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã£ï¿½ï¿½ z");
             return null;
         }
 
@@ -39,11 +39,11 @@ public static class SaveSystem
         if (Directory.Exists(SavePath))
         {
             Directory.Delete(SavePath, true);
-            Debug.Log("¸ðµç ÀúÀå µ¥ÀÌÅÍ »èÁ¦µÊ");
+            Debug.Log("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
         }
         else
         {
-            Debug.LogWarning("»èÁ¦ÇÒ ÀúÀå µ¥ÀÌÅÍ ¾øÀ½");
+            Debug.LogWarning("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
         }
     }
 }

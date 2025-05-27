@@ -4,9 +4,6 @@ using DG.Tweening;
 using UnityEngine.UI;
 using System;
 using System.Collections;
-using System.Net.NetworkInformation;
-using UnityEngine.LightTransport;
-using UnityEngine.Purchasing;
 
 public class KingdomSelect : MonoBehaviour
 {

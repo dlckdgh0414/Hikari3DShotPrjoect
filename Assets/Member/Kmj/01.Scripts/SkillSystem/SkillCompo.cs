@@ -1,12 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Member.Kmin._01_Script.Core.EventChannel;
 using Member.Kmin._01_Script.SkillTree;
-using Member.Kmj._01.Scripts.Core.EventChannel;
 using Member.Ysc._01_Code.StatSystems;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class SkillCompo : MonoBehaviour, IEntityComponent

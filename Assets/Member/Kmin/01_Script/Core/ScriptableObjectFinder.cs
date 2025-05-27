@@ -1,11 +1,10 @@
 using UnityEditor;
 using UnityEngine;
-public class ScriptableObjectFinder : MonoBehaviour
+
+namespace Member.Kmin._01_Script.Core
 {
-    public static T LoadScriptableObjectFromFolder<T>(string folderPath) where T : ScriptableObject
+    public class ScriptableObjectFinder : MonoBehaviour
     {
-        string[] guids = AssetDatabase.FindAssets($"t:{typeof(T).Name}", new[] { folderPath });
-        string path = AssetDatabase.GUIDToAssetPath(guids[0]);
-        return AssetDatabase.LoadAssetAtPath<T>(path);
+        
     }
 }
