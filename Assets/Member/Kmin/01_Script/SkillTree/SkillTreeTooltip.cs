@@ -42,7 +42,9 @@ public class SkillTreeTooltip : MonoBehaviour
         NodeSO node = evt.node.GetNodeSO();
 
         _purchaseText.text = node.isPurchase ? "소유중" : "구매하기";
-        _icon.sprite = node.icon ==null ? node.statSO.Icon : node.icon;
+
+        if (_icon != null)
+            _icon.sprite = node.icon == null ? node.statSO.Icon : node.icon;
 
         _description.text = node.description;
         _priceText.text = $"{node.price}원";
