@@ -1,11 +1,13 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 using Unity.Behavior;
+using Ami.BroAudio;
 
 namespace Member.Ysc._01_Code.Agent.Enemies.BT
 {
     public abstract class BTEnemy : Enemy
     {
+        public SoundID deathSound;
         private BlackboardVariable<BTEnemyState> _state;
         
         protected override void Start()
@@ -42,6 +44,7 @@ namespace Member.Ysc._01_Code.Agent.Enemies.BT
             if (IsDead) return;
             IsDead = true;
             gameObject.layer = DeadBodyLayer;
+            BroAudio.Play(deathSound);
             GetComponentInChildren<EntityVFX>().PlayVfx("DeathVFX", Vector3.zero, Quaternion.identity);
             _stateChannel.SendEventMessage(BTEnemyState.DEATH);
         }
