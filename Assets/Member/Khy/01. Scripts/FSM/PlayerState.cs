@@ -21,32 +21,9 @@ public class PlayerState : EntityState
     public override void Enter()
     {
         base.Enter();
-        _player.InputReader.OnFirSkillEvent += OnFirSkillHandle;
-        _player.InputReader.OnSecSkillEvent += OnSecSkillHandle;
-        _player.InputReader.OnThrSkillEvent += OnThrSkillHandle;
     }
 
-    private void OnDestroy()
-    {
-        _player.InputReader.OnFirSkillEvent -= OnFirSkillHandle;
-        _player.InputReader.OnSecSkillEvent -= OnSecSkillHandle;
-        _player.InputReader.OnThrSkillEvent -= OnThrSkillHandle;
-    }
-
-    private void OnFirSkillHandle()
-    {
-        _player.GetCompo<SkillCompo>().firstSkill.AttemptUseSkill();
-    }
-
-    private void OnSecSkillHandle()
-    {
-        _player.GetCompo<SkillCompo>().secondSkill.AttemptUseSkill();
-    }
-
-    private void OnThrSkillHandle()
-    {
-        _player.GetCompo<SkillCompo>().thirdSkill.AttemptUseSkill();
-    }
+    
 
     public override void Update()
     {

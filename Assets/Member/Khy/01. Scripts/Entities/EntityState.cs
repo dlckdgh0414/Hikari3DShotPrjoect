@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EntityState : MonoBehaviour
+public abstract class EntityState
 {
     protected Entity _entity;
 
