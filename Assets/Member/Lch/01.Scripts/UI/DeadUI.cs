@@ -36,10 +36,12 @@ public class DeadUI : MonoBehaviour
     private void OnMainMenuButtonClicked()
     {
         Entity.IsGameStart = false;
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
     private void OnLobbyButtonClicked()
     {
+        Time.timeScale = 1f;
         Entity.IsGameStart = false;
         SceneManager.LoadScene("ShipStation");
     }
