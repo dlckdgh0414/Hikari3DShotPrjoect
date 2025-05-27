@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,6 +41,11 @@ namespace Member.Kmin._01_Script.SkillTree
             
                 ConnectedNodes.ForEach(f => f.NodeButton.interactable = true);
             }
+        }
+
+        private void Awake()
+        {
+            Initialize();
         }
 
         public NodeSO GetNodeSO() => nodeSO;
