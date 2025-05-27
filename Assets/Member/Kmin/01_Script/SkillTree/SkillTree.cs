@@ -16,6 +16,7 @@ public class SkillTree : MonoBehaviour
     [SerializeField] private NodeSOList nodeSOList;
     [SerializeField] private SaveNodeStat saveNodeStat;
     [SerializeField] private GameObject background;
+    [SerializeField] private Transform nodeParent;
     
     private List<SkillTreeNode> _nodes;
     private SkillTreeNode _selectedNode;
@@ -44,8 +45,11 @@ public class SkillTree : MonoBehaviour
         _nodes.ForEach(f => f.NodeButton.onClick.AddListener(() => SelectNode(f)));
         eventChannelSO.AddListener<SkillTreePurchaseEvent>(HandleNodePurchase);
         eventChannelSO.AddListener<SkillTreeActiveEvent>(HandleNodeActive);
+    }
 
-        LoadSkillTree();
+    private void Start()
+    {
+         LoadSkillTree();
     }
 
     private void OnDestroy()
@@ -59,9 +63,8 @@ public class SkillTree : MonoBehaviour
     {
         foreach (string node in saveNodeStat.purchaseNodeList)
         {
-            NodeSO nodeSO = nodeSOList.nodeSOList.Find(n => n.name == node);
-            nodeSO.isPurchase = true;
-            SkillTreeNode target = _nodesDic.FirstOrDefault(x => x.Value == nodeSO).Key;
+            SkillTreeNode target = nodeParent.Find(node).GetComponent<SkillTreeNode>();
+            target.GetNodeSO().isPurchase = true;
             ConnectColor(target, true);
         }
     }
