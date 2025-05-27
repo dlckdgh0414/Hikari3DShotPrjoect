@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using UnityEngine;
 
 public class PlusDamagePassive : PassiveSkill
@@ -27,6 +28,7 @@ public class PlusDamagePassive : PassiveSkill
             Debug.Log("¥Á√∑¿Ãø‰");
             DamagePassiveBullet projectile = PoolManager.Instance.Pop(bullet.name) as DamagePassiveBullet;
             projectile.transform.position = _player.transform.position;
+            BroAudio.Play(skillSound);
             projectile.target = _aim.target.transform;
         }
     }

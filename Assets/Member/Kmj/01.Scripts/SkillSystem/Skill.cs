@@ -5,11 +5,11 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-
-
+using Ami.BroAudio;
 
 public abstract class Skill : MonoBehaviour
 {
+    public SoundID skillSound;
     protected EntityVFX entityVFX;
 
     public bool skillEnabled = false;
