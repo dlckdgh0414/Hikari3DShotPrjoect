@@ -66,7 +66,7 @@ public class KeyRebinder : MonoBehaviour
         rebindButton.interactable = false;
         
         _actionToRebind.PerformInteractiveRebinding(bindingIndex)
-            .WithControlsExcluding("Mouse")
+            .WithCancelingThrough("Mouse")
             .WithCancelingThrough("<Keyboard>/escape") 
             .OnComplete(operation =>
             {
@@ -110,6 +110,10 @@ public class KeyRebinder : MonoBehaviour
                 operation.Dispose();
                 _inputreader._controlls.Enable();
                 _inputreader.Initialize(_inputreader._controlls);
+
+                bindingDisplayName.text = InputControlPath.ToHumanReadableString(
+                    _actionToRebind.bindings[bindingIndex].effectivePath,
+                    InputControlPath.HumanReadableStringOptions.OmitDevice);
 
                 rebindButton.interactable = true;
                 UpdateBindingDisplay();
