@@ -97,7 +97,11 @@ public class SpaceLogic : MonoBehaviour
             }
         }
     }
-
+    public void BackToMainmenu()
+    {
+        BroAudio.Stop(mainmenuBGM);
+        SceneManager.LoadScene("MainMenu");
+    }
     private void MoveStage(int obj)
     {//모르것담ㅇㄶㅍ지;ㅗㅎㅁ;ㅈ
         prevStageField = StageField;
