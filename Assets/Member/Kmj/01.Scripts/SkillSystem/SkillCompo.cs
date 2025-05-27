@@ -33,10 +33,10 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
         colliders = new Collider2D[maxCheckEnemy];
         _skills = new Dictionary<Type, Skill>();
         _passiveSkills = new();
+        SaveNodeStat.Instance.LoadStat();
         GetComponentsInChildren<Skill>().Where(t => t.skillEnabled == true).ToList().ForEach(skill => _skills.Add(skill.GetType(), skill));
         GetComponentsInChildren<PassiveSkill>().Where(t => t.skillEnabled == true).ToList().ForEach(skill => _passiveSkills.Add(skill));
         GetComponentsInChildren<ActiveSkill>().Where(t => t.skillEnabled == true).ToList().ForEach(skill => _canSelectSkills.Add(skill.gameObject.name, skill));
-        SaveNodeStat.Instance.LoadStat();
         
         _skills.Values.ToList().ForEach(skill => skill.InitializeSkill(_entity, this));
 

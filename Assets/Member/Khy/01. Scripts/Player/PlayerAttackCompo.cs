@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using Member.Ysc._01_Code.Agent;
 using Member.Ysc._01_Code.Combat.Bullet;
 using Member.Ysc._01_Code.StatSystems;
@@ -37,6 +38,9 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
     private EntityStat _statCompo;
 
     public event Action OnAttack;
+
+    [SerializeField]
+    private SoundID playerBulletSound;
 
     public void Initialize(Entity entity)
     {
@@ -86,6 +90,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInit
         for(int i =0; i< muzzle.Length; i++)
         {
             yield return new WaitForSeconds(muzzle[i].shootDelay* attackSpeedStat.Value);
+            BroAudio.Play(playerBulletSound);
             BaseBullet bullet = PoolManager.Instance.Pop(_defalutBullet.name) as BaseBullet;
             bullet.transform.position = muzzle[i].transform.position;
             entityVFX.PlayVfx(vfxName, muzzle[i].transform.position, Quaternion.identity);

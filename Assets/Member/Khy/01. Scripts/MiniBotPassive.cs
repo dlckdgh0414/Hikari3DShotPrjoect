@@ -1,3 +1,4 @@
+using Ami.BroAudio;
 using Member.Ysc._01_Code.Combat.Bullet;
 using MoreMountains.Tools;
 using System;
@@ -39,6 +40,7 @@ public class MiniBotPassive : PassiveSkill
 
     private void Shoot()
     {
+        BroAudio.Play(skillSound);
         Vector3 firePoint = _attackCompo.FireTarget();
         BaseBullet bullet = PoolManager.Instance.Pop(_miniBotBullet.name) as BaseBullet;
         bullet.transform.position = miniBot.transform.position;

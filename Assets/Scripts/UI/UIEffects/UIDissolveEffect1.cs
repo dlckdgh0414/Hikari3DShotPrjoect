@@ -6,13 +6,26 @@ using UnityEngine.Video;
 public class UIDissolveEffect1 : MonoBehaviour
 {
   [SerializeField]  VideoPlayer vid;
+    [SerializeField] float wait;
     private void Awake()
     {
         vid.Prepare();
     }
 
-  public void ShowUIEffect()
+    private void OnEnable()
     {
-       vid.Play();
+        ShowUIEffect();
+    }
+
+
+    public void ShowUIEffect()
+    {
+        StartCoroutine(Wait());
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(wait);
+        vid.Play();
     }
 }
