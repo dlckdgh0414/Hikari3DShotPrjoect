@@ -43,6 +43,6 @@ public class UIDissolveEffect : MonoBehaviour
             item.SetActive(false);
         }
 
-        //vid.Play();
+        vid.Play();
     }
 }
