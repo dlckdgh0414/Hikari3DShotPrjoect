@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
 using DG.Tweening;
@@ -15,12 +15,11 @@ public class MainMenuState : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
 
     private Vector3 originalScale;
 
-   
-
     public void OnPointerDown(PointerEventData eventData)
     {
         OnUIEvent?.Invoke();
     }
+
     private void Awake()
     {
         originalScale = transform.localScale;
@@ -28,6 +27,7 @@ public class MainMenuState : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
 
     private void OnEnable()
     {
+        originalScale = transform.localScale;
         transform.localScale = originalScale;
         isPointerOver = false;
     }
@@ -37,23 +37,31 @@ public class MainMenuState : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
         if (isPointerOver) return;
         isPointerOver = true;
 
+        // StartUIState는 애니메이션 안 쓰도록 예외 처리
+        if (this is StartUIState)
+            return;
+
         punchTween?.Kill();
 
         punchTween = transform.DOPunchScale(Vector3.one * size, dur, vid)
             .SetUpdate(true)
-            .OnComplete(() => {
+            .OnComplete(() =>
+            {
                 transform.localScale = originalScale;
             });
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (!isPointerOver) return;
-        isPointerOver = false;
+  public void OnPointerExit(PointerEventData eventData)
+{
+    if (!isPointerOver) return;
+    isPointerOver = false;
 
-        punchTween?.Kill();
-        transform.localScale = originalScale;
-    }
+    if (this is StartUIState)
+        return;
+
+    punchTween?.Kill();
+    transform.localScale = originalScale;
+}
 
     private void OnDisable()
     {
