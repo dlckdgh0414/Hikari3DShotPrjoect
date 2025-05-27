@@ -33,4 +33,9 @@ public class ControlRoom : MonoBehaviour,IEntityComponent
         .Append(model.transform.DOLocalRotate(new Vector3(model.transform.localEulerAngles.x, model.transform.localEulerAngles.y, 0), .4f).SetEase(Ease.OutSine));
     }
 
+    private void OnDestroy()
+    {
+        _player.InputReader.OnWingEvent -= Roll;
+        _player.InputReader.OnXMoveEvent -= MoveHandle;
+    }
 }

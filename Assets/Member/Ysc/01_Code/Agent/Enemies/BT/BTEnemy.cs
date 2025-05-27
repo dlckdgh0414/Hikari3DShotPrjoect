@@ -6,6 +6,9 @@ namespace Member.Ysc._01_Code.Agent.Enemies.BT
 {
     public abstract class BTEnemy : Enemy
     {
+        [SerializeField] private int minCurrency = 5;
+        [SerializeField] private int maxCurrency = 50;
+        
         private BlackboardVariable<BTEnemyState> _state;
         
         protected override void Start()
@@ -43,6 +46,7 @@ namespace Member.Ysc._01_Code.Agent.Enemies.BT
             IsDead = true;
             gameObject.layer = DeadBodyLayer;
             GetComponentInChildren<EntityVFX>().PlayVfx("DeathVFX", Vector3.zero, Quaternion.identity);
+            CurrencyManager.Instance.ModifyCurrency(CurrencyType.Eon, ModifyType.Add, Random.Range(minCurrency, maxCurrency+1));
             _stateChannel.SendEventMessage(BTEnemyState.DEATH);
         }
     }
