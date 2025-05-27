@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public abstract class EntityState
 {
     protected Entity _entity;

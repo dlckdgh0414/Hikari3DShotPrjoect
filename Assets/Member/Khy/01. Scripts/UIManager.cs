@@ -128,5 +128,6 @@ public class UIManager : MonoBehaviour
     private void OnDestroy()
     {
         uiChannel.RemoveListener<StartDialogueEvent>(HandleDialogueStart);
+        uiChannel.RemoveListener<TextEvent>(HandleTextEvent);
     }
 }

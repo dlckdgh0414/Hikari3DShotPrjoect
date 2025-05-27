@@ -32,8 +32,31 @@ public class Player : Entity
     private void Start()
     {
         _stateMachine.ChangeState("IDLE");
+        InputReader.OnFirSkillEvent += OnFirSkillHandle;
+        InputReader.OnSecSkillEvent += OnSecSkillHandle;
+        InputReader.OnThrSkillEvent += OnThrSkillHandle;
     }
-    
+    private void OnDisable()
+    {
+        InputReader.OnFirSkillEvent -= OnFirSkillHandle;
+        InputReader.OnSecSkillEvent -= OnSecSkillHandle;
+        InputReader.OnThrSkillEvent -= OnThrSkillHandle;
+    }
+    private void OnFirSkillHandle()
+    {
+        GetCompo<SkillCompo>().firstSkill.AttemptUseSkill();
+    }
+
+    private void OnSecSkillHandle()
+    {
+        GetCompo<SkillCompo>().secondSkill.AttemptUseSkill();
+    }
+
+    private void OnThrSkillHandle()
+    {
+        GetCompo<SkillCompo>().thirdSkill.AttemptUseSkill();
+    }
+
     private void Update()
     {
         Debug.Log($"������ ->{IsGameStart}");
