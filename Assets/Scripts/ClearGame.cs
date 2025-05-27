@@ -5,37 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class ClearGame : MonoBehaviour
 {
-    public bool isClear = false;
-    [SerializeField] scenSO scenOnComplete;
+    public static bool IsCLEAR = false;
     public static ClearGame instance;
     
     private void Awake()
     {
-        if (instance != null && instance != this)
+        if (instance == null)
         {
-            Destroy(gameObject); // �ߺ��̸� ����
-            return;
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-
-        instance = this;
-        DontDestroyOnLoad(gameObject);
+        else
+        {
+            Destroy(gameObject);
+        }
 
     }
 
     public void ClearMethod()
     {
-        isClear = false;
-        StartCoroutine(ClearCO());      // 1������ ��ٸ� (�� ��ȯ ������)
-        // �� �� Raise
+        IsCLEAR = true;
     }
-
-  IEnumerator ClearCO()
-    {
-        SceneManager.LoadScene(0); // �� ����
-        yield return new WaitForSecondsRealtime(1f);
-        scenOnComplete.Raise();
-        Debug.Log("Ŭ�����");
-    }
-
-
 }

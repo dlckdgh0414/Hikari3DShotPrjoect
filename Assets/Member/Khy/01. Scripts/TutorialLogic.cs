@@ -15,7 +15,7 @@ public class TutorialLogic : MonoBehaviour
     private int currentDialogue;
 
 
-    private void Start()
+    private void Awake()
     {
         DownText();
     }

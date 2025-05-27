@@ -38,7 +38,6 @@ public class SkillCoolDownUI : MonoBehaviour,IEntityComponent
 
     protected virtual void CooldownInfo(float current, float totalTime)
     {
-        Debug.Log($"{current} / {totalTime}");
         TextSet(current,totalTime);
         _cooltime = totalTime;
         _iconCool.fillAmount = current / _cooltime;

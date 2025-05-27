@@ -8,8 +8,8 @@ using Random = UnityEngine.Random;
 
 public abstract class Enemy :Entity, IPoolable
 {
-    [SerializeField] private int minCurrency = 5;
-    [SerializeField] private int maxCurrency = 10;
+    [SerializeField] int minCurrency = 5;
+    [SerializeField] int maxCurrency = 10;
     
     [SerializeField] private Transform deadPoint;
     

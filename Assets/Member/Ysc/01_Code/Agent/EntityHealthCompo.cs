@@ -103,7 +103,6 @@ namespace Member.Ysc._01_Code.Agent
                 }
                 else
                 {
-                    Entity.IsGameStart = false;
                     _entity.OnDead?.Invoke();
                 }
             }
