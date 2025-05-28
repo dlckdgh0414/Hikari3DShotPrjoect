@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Member.Ysc._01_Code.UI
@@ -69,7 +70,10 @@ namespace Member.Ysc._01_Code.UI
             dialogueEvent.dialogue = _clearDialogue;
             uiManager.RaiseEvent(dialogueEvent);
             Entity.IsGameStart = false;
-            ClearGame.IsCLEAR = true;
+
+            SaveData data = SaveSystem.Load(0);
+            if(data.World + 1 == SceneManager.GetActiveScene().buildIndex && data.World < 6)
+                ClearGame.IsCLEAR = true;
 
             OnClear?.Invoke();
         }

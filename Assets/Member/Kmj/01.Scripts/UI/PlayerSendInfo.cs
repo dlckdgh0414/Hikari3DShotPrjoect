@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerSendInfo : MonoSingleton<PlayerSendInfo>
 {
     public PlayerSkinSO ThisSkill;
-    public List<string> skillName=new();
+    public string[] skillName = { "","",""};
 
     protected override void Awake()
     {
@@ -20,7 +20,7 @@ public class PlayerSendInfo : MonoSingleton<PlayerSendInfo>
     }
     public void ResetSkills()
     {
-        for(int i =0;i<skillName.Count;i++)
+        for(int i =0;i<skillName.Length;i++)
         {
             skillName[i] = "";
         }

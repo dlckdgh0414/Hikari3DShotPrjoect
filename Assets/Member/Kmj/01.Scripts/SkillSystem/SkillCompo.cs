@@ -1,12 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Member.Kmin._01_Script.Core.EventChannel;
 using Member.Kmin._01_Script.SkillTree;
-using Member.Kmj._01.Scripts.Core.EventChannel;
 using Member.Ysc._01_Code.StatSystems;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class SkillCompo : MonoBehaviour, IEntityComponent
@@ -40,7 +36,7 @@ public class SkillCompo : MonoBehaviour, IEntityComponent
         
         _skills.Values.ToList().ForEach(skill => skill.InitializeSkill(_entity, this));
 
-        if(PlayerSendInfo.Instance.skillName.Count > 1)
+        if(!PlayerSendInfo.Instance.DontSelectAllSkills())
         {
             firstSkill = _canSelectSkills[PlayerSendInfo.Instance.skillName[0]];
             secondSkill = _canSelectSkills[PlayerSendInfo.Instance.skillName[1]];

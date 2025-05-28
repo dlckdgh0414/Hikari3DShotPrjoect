@@ -13,16 +13,24 @@ public class TutorialLogic : MonoBehaviour
     [SerializeField] private Sprite spaceMan;
 
     private int currentDialogue;
-
+    private bool isStart=false;
 
     private void Awake()
     {
-        DownText();
     }
     private void Update()
     {
+        if(!isStart)
+        {
+            DownText();
+            isStart = true;
+        }
+
         if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            Entity.IsGameStart = false;
             SceneManager.LoadScene("ShipStation");
+        }
     }
     public void DownText()
     {

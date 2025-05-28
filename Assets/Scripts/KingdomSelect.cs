@@ -4,9 +4,6 @@ using DG.Tweening;
 using UnityEngine.UI;
 using System;
 using System.Collections;
-using System.Net.NetworkInformation;
-using UnityEngine.LightTransport;
-using UnityEngine.Purchasing;
 
 public class KingdomSelect : MonoBehaviour
 {
@@ -66,13 +63,22 @@ public class KingdomSelect : MonoBehaviour
 
         if (ClearGame.IsCLEAR)
         {
+          
+            
             _ClearGame();
             ClearGame.IsCLEAR = false;
         }
 
         for (int i = 0; i < a; i++)
         {
-            kingdomButtonsContainer.GetChild(i).gameObject.SetActive(true);
+            if (i <= 4)
+            {
+              kingdomButtonsContainer.GetChild(i).gameObject.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("끝이용");
+            }
         }
 
 

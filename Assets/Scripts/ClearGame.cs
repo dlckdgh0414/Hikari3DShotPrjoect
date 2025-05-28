@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ClearGame : MonoBehaviour
 {
+    public static int CLEARIDX = 0;
     public static bool IsCLEAR = false;
     public static ClearGame instance;
     

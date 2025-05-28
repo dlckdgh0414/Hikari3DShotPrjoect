@@ -15,6 +15,7 @@ public class FrostSkill : ActiveSkill
     public override void UseSkill()
     {
         base.UseSkill();
+        isUsingSkill = false;
         entityVFX.PlayVfx(frostEffect, Vector3.zero, Quaternion.identity);
         BroAudio.Play(skillSound);
         foreach (Enemy obj in EnemyManager.Enemies)
